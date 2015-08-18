@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] performance problem on video nodes | ogg/theora
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20performance%20problem%20on%20video%20nodes%20%7C%20ogg/theora&In-Reply-To=%3C17646108.1148912621284.JavaMail.root%40scalix%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000235.html">
+   <LINK REL="Next"  HREF="000238.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] performance problem on video nodes | ogg/theora</H1>
+    <B>Schmidt Martin</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20performance%20problem%20on%20video%20nodes%20%7C%20ogg/theora&In-Reply-To=%3C17646108.1148912621284.JavaMail.root%40scalix%3E"
+       TITLE="[Sotf-general] performance problem on video nodes | ogg/theora">ptmschmidt at fh-stpoelten.ac.at
+       </A><BR>
+    <I>Mon May 29 16:23:41 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000235.html">[Sotf-general] r578 - in node/branches/video_test: code/classes code/templates www
+</A></li>
+        <LI>Next message: <A HREF="000238.html">[Sotf-general] r579 - node/trunk/code/classes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#236">[ date ]</a>
+              <a href="thread.html#236">[ thread ]</a>
+              <a href="subject.html#236">[ subject ]</a>
+              <a href="author.html#236">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hello everyone,
+
+last week, i found out the reason for the massive answer times of some pages on the video node.
+surprisingly, it was getID3()'s checking process for flv-files which caused large programmes to load up to 30 seconds!
+
+so, i added a new variable, $config['skipGetID3FileTypes']. if a file's extension matches an element of this array, getID3() checking will be bypassed for this file.
+
+in the case of flv, the loss of information is not too bad, as we do not necessarily need duration, bitrate, etc. and the file is named *_flash_preview.flv anyway. resulting in super-fast server responses, i think, this is tolerable... :)
+
+furthermore, the new variable opens a way to get ogg/theora files into the system! if 'ogg' is part of $config['skipGetID3FileTypes'], ogg files are visible in the editor's console and can be converted as well. ffmpeg eats them without any problems. however, one restriction comes into effect: as no duration is known, no meaningful preview images can be created. (flash preview works fine in any case.)
+
+additionally, the original 'ogg'-file should be deleted after conversion or at least it's download access should be unchecked. else, the result would be a strange looking filename in get.php as channels, bitrate and duration are set to '0'.
+
+an example of such a ogg/theora-programme can be seen here: <A HREF="http://sotf.fh-stpoelten.ac.at/node_881/get.php?id=881pr91">http://sotf.fh-stpoelten.ac.at/node_881/get.php?id=881pr91</A>
+
+roland, i hope this is an acceptable compromise for you.
+
+greetings,
+martin
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sotf-general/attachments/20060529/7f6cd9d8/attachment.html">https://lists.berlios.de/pipermail/sotf-general/attachments/20060529/7f6cd9d8/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000235.html">[Sotf-general] r578 - in node/branches/video_test: code/classes code/templates www
+</A></li>
+	<LI>Next message: <A HREF="000238.html">[Sotf-general] r579 - node/trunk/code/classes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#236">[ date ]</a>
+              <a href="thread.html#236">[ thread ]</a>
+              <a href="subject.html#236">[ subject ]</a>
+              <a href="author.html#236">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

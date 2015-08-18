@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] suggested patch to podcast.php
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20suggested%20patch%20to%20podcast.php&In-Reply-To=%3C38531.195.177.250.3.1141410335.squirrel%40195.177.250.3%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000102.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] suggested patch to podcast.php</H1>
+    <B>roland</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20suggested%20patch%20to%20podcast.php&In-Reply-To=%3C38531.195.177.250.3.1141410335.squirrel%40195.177.250.3%3E"
+       TITLE="[Sotf-general] suggested patch to podcast.php">janki at yaya23.net
+       </A><BR>
+    <I>Fri Mar  3 19:25:35 CET 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000102.html">[Sotf-general] sotf logo for print
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#101">[ date ]</a>
+              <a href="thread.html#101">[ thread ]</a>
+              <a href="subject.html#101">[ subject ]</a>
+              <a href="author.html#101">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi everybody,
+
+down there you'll find a suggestion for a patch to node/www/podcast.php
+done by ramiro cosentino and me.
+
+the modifications have been done to fit the needs of <A HREF="http://literadio.org">http://literadio.org</A>
+and <A HREF="http://www.mediawien.at/mep/radio/archiv.htm">http://www.mediawien.at/mep/radio/archiv.htm</A>
+
+what it does:
+   * deliver 100 instead of 10 results (because we wanted to have
+     all shows in the RSS aggregator)
+   * appending the beginning of the title to the file ID to
+     have more usefull filenames on harddisk/mp3player
+   * include link to http mp3-stream and broadcast date
+   * include array of contributers (roles)
+
+the patched podcast.php has been in production use since 2005-12
+
+plz comment
+
+cheers
+roland jankowski
+
+
+--------------------------------------------------------------------------
+
+--- node/www/podcast.php	2005-09-09 14:44:49.000000000 +0200
++++ node/www/podcast-new.php	2006-03-03 19:15:26.000000000 +0100
+@@ -1,12 +1,14 @@
+ &lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+
+   /*
+-	* $Id: podcast.php,v 1.3 2005/06/22 09:09:33 wreutz Exp $
++	* $Id: podcast.php 382 2005-06-22 09:09:33Z wreutz $
+ 	* Authors: Andr&#225;s Micsik
+ 	*          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
++	* nicer filenames, stream link, broadcastdate and
++	* role supporte by rama + rjankowski
+ 	*/
+
+-define('ITEMS_IN_RSS', 10);
++define('ITEMS_IN_RSS', 100);
+
+ require(&quot;init.inc.php&quot;);
+ require_once($config['classdir'] . &quot;/sotf_AdvSearch.class.php&quot;);
+@@ -54,15 +56,46 @@
+   return $date;
+ }
+
++
++
++function selectStream(&amp;$prg) {
++  global $config;
++  $files = $prg-&gt;listAudioFiles('TRUE','kbps DESC');
++       foreach($files as $f) {
++              if($f['stream_access']=='t') {
++                $f['url'] = $config['rootUrl'] . '/listen.php?id=' .
+$prg-&gt;id . '&amp;fileid=' . $f['id']; +                return $f;
++              }
++      }
++  return NULL;
++}
++
++
++
+ function selectAudio(&amp;$prg) {
+   global $config;
+   $files = $prg-&gt;listAudioFiles('TRUE','kbps DESC');
+   foreach($files as $f) {
+ 	 if($f['download_access']=='t') {
++	 	/* sun 8.2.06 added to format properly the enclosure url --rama */
++		$station = sotf_Utils::makeValidName($prg-&gt;get('station'), 23);
++		$series = sotf_Utils::makeValidName($prg-&gt;get('series'), 23);
++  		$title = sotf_Utils::makeValidName($prg-&gt;get('title'), 30);
++		if($station != &quot;&quot; &amp;&amp; $series != &quot;&quot; &amp;&amp; $title != &quot;&quot;) {
++			$fname = &quot;$station-$series-$title&quot;;
++		} elseif($station != &quot;&quot; &amp;&amp; $title != &quot;&quot;) {
++			$fname = &quot;$station-$title&quot;;
++		} elseif($title != &quot;&quot;) {
++			$fname = $title;
++		}
++		/* end properly format enclosure url */
++
+ 		//$f['url'] = $config['rootUrl'] . '/getFile.php/' . $f['filename'] .
+'?audio=1&amp;id=' . $prg-&gt;id . '&amp;filename=' . $f['filename']; //$f['url']
+= $config['rootUrl'] . '/getFile.php?audio=1&amp;id=' . $prg-&gt;id .
+'&amp;filename=' . $f['filename']; $baseUrl =
+sotf_Node::getHomeNodeRootUrl($prg);
+-		$f['url'] = $baseUrl . '/getFile.php/fid__' . $f['id'].&quot;.mp3&quot;; //
+wreutz: very dirty hack for ipooder to work on os x +		//$f['url'] =
+$baseUrl . '/getFile.php/fid__' . $f['id'].&quot;.mp3&quot;; // wreutz: very dirty
+hack for ipooder to work on os x +		$f['url'] = $baseUrl . '/getFile.php/'
+. 'fid__' . $f['id']. '__' . $fname.&quot;.mp3&quot;; //rjankowski changed order to
+get parsed by getFile.php +		                                             
+                            // rama: included $fname as formatted name
+$station-$series-$title
+ 		return $f;
+ 	 }
+   }
+@@ -83,9 +116,23 @@
+   global $config;
+   $rss .= &quot;\n\n&lt;item&gt;&quot;;
+   writeTag($rss, &quot;title&quot;, $prog-&gt;get('title'));
++
++  /* 08.02.06 start rama hack to print roles */
++  $roleArr = $prog-&gt;getRoles();
++  $roleArrSize = count($roleArr);
++  for ($i=0 ; $i &lt; $roleArrSize ; $i++) {
++  	$role_name = $roleArr[$i][&quot;role_name&quot;];
++	$contact_name = $roleArr[$i][&quot;contact_data&quot;][&quot;name&quot;];
++	//$role_info = &quot;$contact_name, $role_name&quot;;
++	$role_info = array('contact_name' =&gt; $contact_name, 'role_name' =&gt;
+$role_name); +  	writeTag($rss, &quot;roles&quot;, NULL, NULL, $role_info);
++  }
++  /* end rama hack to print roles */
++
+   writeTag($rss, &quot;link&quot;, $config['rootUrl'] . &quot;/get.php?id=&quot;.$prog-&gt;id);
+writeTag($rss, &quot;pubDate&quot;, toW3CDate($prog-&gt;get('entry_date')));
+writeTag($rss, &quot;description&quot;, $prog-&gt;get('abstract'));
++  writeTag($rss, &quot;BroadcastDate&quot;, toW3CDate($prog-&gt;get('broadcast_date')));
+   $audioAttrs = selectAudio($prog);
+   if($audioAttrs) {
+ 	 //$filepath = $prog-&gt;getFilePath($audioAttrs);
+@@ -98,6 +145,18 @@
+ 							  );
+ 	 writeTag($rss, &quot;enclosure&quot;, NULL, NULL, $enclAttrs);
+   }
++  $streamAttrs = selectStream($prog);
++  if($streamAttrs) {
++       //$filepath = $prog-&gt;getFilePath($audioAttrs);
++       //$tmpFile = linkAudio($filepath, $audioAttrs);
++       $enclAttrs = array('type' =&gt; 'audio/mpeg',
++                                                        'length' =&gt;
+$streamAttrs['filesize'], +                                               
+        //'url' =&gt; $config['tmpUrl'] . '/' . basename($tmpFile), +        
+                                               'url' =&gt;
+$streamAttrs['url'], +                                                    
+   //'url' =&gt; $config['tmpUrl'] . '/' .
+'au_011pr105_budh1204_24kbps_1chn_22050Hz.mp3', +                         
+                              );
++       writeTag($rss, &quot;streamurl&quot;, NULL, NULL, $enclAttrs);
++  }
+   $rss .= &quot;\n&lt;/item&gt;&quot;;
+ }
+
+@@ -185,6 +244,7 @@
+   // define channel
+   $rss .= &quot;\n&lt;channel&gt;&quot;;
+   writeTag($rss, &quot;title&quot;, $station-&gt;get('name'));
++
+   writeTag($rss, &quot;link&quot;, $config['rootUrl'] . &quot;/showStation.php/&quot; .
+$station-&gt;id); writeTag($rss, &quot;language&quot;,
+$station-&gt;get2LetterLanguageCode()); writeTag($rss, &quot;description&quot;,
+$station-&gt;get('description'));
+@@ -279,4 +339,4 @@
+
+ $page-&gt;logRequest();
+
+-?&gt;
+\ No newline at end of file
++?&gt;
+
+--------------------------------------------------------------------------
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000102.html">[Sotf-general] sotf logo for print
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#101">[ date ]</a>
+              <a href="thread.html#101">[ thread ]</a>
+              <a href="subject.html#101">[ subject ]</a>
+              <a href="author.html#101">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

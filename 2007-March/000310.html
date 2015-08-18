@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] itunes once more - sotf_PlayList.class
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20itunes%20once%20more%20-%20sotf_PlayList.class&In-Reply-To=%3C45EDC80B.607%40o94.at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000311.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] itunes once more - sotf_PlayList.class</H1>
+    <B>Herbert Gnauer</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20itunes%20once%20more%20-%20sotf_PlayList.class&In-Reply-To=%3C45EDC80B.607%40o94.at%3E"
+       TITLE="[Sotf-general] itunes once more - sotf_PlayList.class">hg at o94.at
+       </A><BR>
+    <I>Tue Mar  6 20:59:07 CET 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000311.html">[Sotf-general] Fwd: Meine Podcasts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#310">[ date ]</a>
+              <a href="thread.html#310">[ thread ]</a>
+              <a href="subject.html#310">[ subject ]</a>
+              <a href="author.html#310">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>because reoccuring of troubles with itunes (playlist out of order) i've 
+modified /node/code/classes/sotf_PlayList.class (naming of audio files) 
+once again.
+
+best
+herbert
+
+
+# diff sotf_PlayList.class.php_070306 sotf_PlayList.class.php
+
+73c73
+&lt;               $this-&gt;add(array('id' =&gt; $obj-&gt;id, 'path' =&gt; $jfile, 
+'jingle' =&gt; 1, 'name' =&gt; 'jingle'));
+---
+ &gt;               $this-&gt;add(array('id' =&gt; $obj-&gt;id, 'path' =&gt; $jfile, 
+'jingle' =&gt; 1, 'name' =&gt; '_000_jingle'));
+109c109
+&lt;               $this-&gt;add(array('id' =&gt; $station-&gt;id, 'path' =&gt; $jfile, 
+'jingle' =&gt; 1, 'name' =&gt; '_station_jingle'));
+---
+ &gt;               $this-&gt;add(array('id' =&gt; $station-&gt;id, 'path' =&gt; 
+$jfile, 'jingle' =&gt; 1, 'name' =&gt; '_001_station_jingle'));
+116c116
+&lt;                 $this-&gt;add(array('id' =&gt; $series-&gt;id, 'path' =&gt; 
+$jfile, 'jingle' =&gt; 1, 'name' =&gt; '_series_jingle'));
+---
+ &gt;                 $this-&gt;add(array('id' =&gt; $series-&gt;id, 'path' =&gt; 
+$jfile, 'jingle' =&gt; 1, 'name' =&gt; '_002_series_jingle'));
+121c121
+&lt;        $this-&gt;add(array('id' =&gt; $prg-&gt;id, 'path' =&gt; $filepath, 'name' 
+=&gt; urlencode($prg-&gt;get('title')), 'length' =&gt; $prg-&gt;get('length') ));
+---
+ &gt;        $this-&gt;add(array('id' =&gt; $prg-&gt;id, 'path' =&gt; $filepath, 'name' 
+=&gt; '_003_' . urlencode($prg-&gt;get('title')), 'length' =&gt; 
+$prg-&gt;get('length') ));
+
+
+
+
+-- 
+
+
+HERBERT GNAUER
+IT-Maschinist
+
+ORANGE 94.0
+Verein Freies Radio Wien
+A-1200 Wien, Klosterneuburger Strasse 1
+
+TEL +43 - 1 319 09 99 - 12
+FAX +43 - 1 319 09 99 - 14
+E-MAIL <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">hg at o94.at</A>
+WEB o94.at
+UKW 94.0
+UPC 92.7 Telekabel
+WAP wap.o94.at
+
+public pgp key <A HREF="http://no-na.net/pgp">http://no-na.net/pgp</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000311.html">[Sotf-general] Fwd: Meine Podcasts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#310">[ date ]</a>
+              <a href="thread.html#310">[ thread ]</a>
+              <a href="subject.html#310">[ subject ]</a>
+              <a href="author.html#310">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

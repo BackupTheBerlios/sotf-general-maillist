@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r589 - in node/branches/payable/code: classes configs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-October/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r589%20-%20in%20node/branches/payable/code%3A%20classes%20configs&In-Reply-To=%3C200610030803.k9383ZP2016010%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000275.html">
+   <LINK REL="Next"  HREF="000277.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r589 - in node/branches/payable/code: classes configs</H1>
+    <B>micsik at BerliOS</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r589%20-%20in%20node/branches/payable/code%3A%20classes%20configs&In-Reply-To=%3C200610030803.k9383ZP2016010%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r589 - in node/branches/payable/code: classes configs">micsik at mail.berlios.de
+       </A><BR>
+    <I>Tue Oct  3 10:03:35 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000275.html">[Sotf-general] r588 - in node/branches/payable/code: classes	templates
+</A></li>
+        <LI>Next message: <A HREF="000277.html">[Sotf-general] station or not station
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#276">[ date ]</a>
+              <a href="thread.html#276">[ thread ]</a>
+              <a href="subject.html#276">[ subject ]</a>
+              <a href="author.html#276">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: micsik
+Date: 2006-10-03 10:03:34 +0200 (Tue, 03 Oct 2006)
+New Revision: 589
+
+Modified:
+   node/branches/payable/code/classes/sotf_Programme.class.php
+   node/branches/payable/code/configs/ger.conf
+Log:
+
+
+Modified: node/branches/payable/code/classes/sotf_Programme.class.php
+===================================================================
+--- node/branches/payable/code/classes/sotf_Programme.class.php	2006-10-02 20:38:58 UTC (rev 588)
++++ node/branches/payable/code/classes/sotf_Programme.class.php	2006-10-03 08:03:34 UTC (rev 589)
+@@ -378,9 +378,9 @@
+ 	 global $config, $db;
+ 
+ 	 if($mode==1)
++		$modeSql = &quot;i.free_content='f' AND&quot;;
++	 elseif($mode==2)
+ 		$modeSql = &quot;i.free_content='t' AND&quot;;
+-	 elseif($mode==2)
+-		$modeSql = &quot;i.free_content='f' AND&quot;;
+ 	 //$sql = &quot;SELECT i.* FROM sotf_programmes i, sotf_stations s WHERE $modeSql i.station_id = s.id AND i.published='t' AND i.entry_date &gt;= '$fromDay' ORDER BY i.entry_date DESC&quot;;
+ 	  $sql = &quot;SELECT i.* FROM sotf_programmes i, sotf_stations s WHERE $modeSql i.station_id = s.id AND i.published='t' AND i.type='sound' AND i.entry_date &gt;= '$fromDay' ORDER BY i.entry_date DESC&quot;; //MODIFIED BY Martin Schmidt
+ 	 $res =	$db-&gt;limitQuery($sql, 0, $maxItems);
+
+Modified: node/branches/payable/code/configs/ger.conf
+===================================================================
+--- node/branches/payable/code/configs/ger.conf	2006-10-02 20:38:58 UTC (rev 588)
++++ node/branches/payable/code/configs/ger.conf	2006-10-03 08:03:34 UTC (rev 589)
+@@ -70,10 +70,10 @@
+ Topics = Themen
+ 
+ #Admin tabs &amp; general
+-Network = Network &amp; General !!
+-Users = Users !!
+-Groups = Groups !!
+-Stats = Statistics !!
++Network = Netzwerk &amp; Allgemein
++Users = Nutzer
++Groups = Gruppen
++Stats = Statistik
+ admin=Node-Administratoren Kontrollfeld
+ 
+ #permissions
+@@ -97,7 +97,7 @@
+ error_close = Fenster schliessen
+ 
+ #common errors
+-not_published_yet = This programme is not yet available for the public. !!
++not_published_yet = Diese Programm wurde noch nicht freigeschaltet f&#252;r die &#214;ffentlichkeit.
+ invalid_url = Ung&#252;ltige URL
+ not_an_image = Die Datei konnte nicht als Bild verarbeitet werden.
+ not_a_number = Keine Zahl
+@@ -127,7 +127,7 @@
+ no_results = Keine Ergebnisse
+ 
+ # translations for database field names
+-free_content=Free content !!
++free_content = Freier Inhalt (gratis)
+ station = Sendername
+ production_date = Produktionsdatum
+ language = Sprache
+@@ -220,8 +220,8 @@
+ topics = Themen
+ top_topics = Topthemen:
+ 
+-Premium_shows = Premium content: !!
+-No_premium_news = No new premium content !!
++Premium_shows = Premium Inhalte:
++No_premium_news = Keine neuen Premium Inhalte
+ New_shows = Neue Sendungen:
+ No_news = Keine neuen Sendungen
+ Default_query = Standardsuche:
+@@ -405,8 +405,8 @@
+ change_permissions = Berechtigungen &#228;ndern
+ target = Ziel
+ user = Benutzer
+-listen = Listen !!
+-listen_expl = Listen to the content !!
++listen = Anh&#246;ren
++listen_expl = Diesen Inhalt anh&#246;ren
+ admin = Vollzugriff
+ admin_expl = Alle folgenden Berechtigungen
+ change = &#196;ndern
+@@ -744,7 +744,7 @@
+ Statistics = Statistik
+ no_references = Keine Referenzen
+ Comments = Kommentare
+-From = Von
++&gt;From = Von
+ Until = Bis
+ Nodes = Node-Netztwerk
+ Portals = Portale
+@@ -1087,27 +1087,27 @@
+ save = Speichern
+ 
+ [adminGroups]
+-count=Members !!
+-comments=Comments !!
+-edit=Change !!
+-delete=Delete !!
+-add=Create new group !!
++count = Mitglieder
++comments = Kommentare
++edit = &#196;ndern
++delete = L&#246;schen
++add = Neue Gruppe erstellen
+ 
+ [adminUsers]
+-groups=Groups !!
+-edit_groups=Change groups !!
+-delete=Delete !!
+-Search= Search !!
++groups = Gruppen
++edit_groups = Gruppen &#228;ndern
++delete = L&#246;schen
++Search = Suchen
+ 
+ [editGroup]
+-edit_group= Create/change group !!
+-comments=Comments !!
+-error_name_missing = The name must be given! !!
+-error_name_in_use = A group with this name already exists !!
++edit_group = Erstellen/&#196;ndern einer Gruppe
++comments = Kommentare
++error_name_missing = Der Name muss angegeben werden!
++error_name_in_use = Eine Gruppe mit diesem Namen existiert bereits.
+ 
+ [editUserGroups]
+-editUserGroups = Change group memberships for user !!
++editUserGroups = &#196;ndern der Gruppenmitgliedschaft von Nutzern
+ 
+ [adminStats]
+-Top_shows = Top listens !!
+-listenNum = Listens/Downloads !!
++Top_shows = Liste der h&#228;ufigsten H&#246;rer
++listenNum = Angeh&#246;rt/Heruntergeladen
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000275.html">[Sotf-general] r588 - in node/branches/payable/code: classes	templates
+</A></li>
+	<LI>Next message: <A HREF="000277.html">[Sotf-general] station or not station
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#276">[ date ]</a>
+              <a href="thread.html#276">[ thread ]</a>
+              <a href="subject.html#276">[ subject ]</a>
+              <a href="author.html#276">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

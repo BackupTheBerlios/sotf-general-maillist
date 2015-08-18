@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] GUI Redesign | Problem with subtopics listing (wrong	total numbers)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20GUI%20Redesign%20%7C%20Problem%20with%20subtopics%20listing%0A%20%28wrong%09total%20numbers%29&In-Reply-To=%3C44BCA0ED.8050702%40sztaki.hu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000255.html">
+   <LINK REL="Next"  HREF="000258.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] GUI Redesign | Problem with subtopics listing (wrong	total numbers)</H1>
+    <B>Andr&#225;s Micsik</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20GUI%20Redesign%20%7C%20Problem%20with%20subtopics%20listing%0A%20%28wrong%09total%20numbers%29&In-Reply-To=%3C44BCA0ED.8050702%40sztaki.hu%3E"
+       TITLE="[Sotf-general] GUI Redesign | Problem with subtopics listing (wrong	total numbers)">micsik at sztaki.hu
+       </A><BR>
+    <I>Tue Jul 18 10:50:53 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000255.html">[Sotf-general] GUI Redesign | Problem with subtopics listing (wrong	total numbers)
+</A></li>
+        <LI>Next message: <A HREF="000258.html">[Sotf-general] Hello, this is radio K&#246;lncampus and we'd like to join sotf
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#256">[ date ]</a>
+              <a href="thread.html#256">[ thread ]</a>
+              <a href="subject.html#256">[ subject ]</a>
+              <a href="author.html#256">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Clemens Peter wrote:
+&gt;<i> 
+</I>&gt;<i> Hi folks,
+</I>&gt;<i> 
+</I>&gt;<i> in recent days I completed my personal GUI redesign of the SOTF node
+</I>&gt;<i> platform for our site www.radio-gesundheit.at - this could be an inspiration
+</I>&gt;<i> for others or a start for a general GUI redesign on which I would 
+</I>&gt;<i> participate.
+</I>&gt;<i> 
+</I>&gt;<i> My design was focusing on an easily adoptable GUI in which almost all style
+</I>&gt;<i> elements are transfered into the separate stylesheet file main.css and can
+</I>&gt;<i> be edited there. Also the rounded corners of the program thumbnails are
+</I>&gt;<i> done automatically by overlaying a transparent gif with corners coloured 
+</I>&gt;<i> like
+</I>&gt;<i> the background colour (so no ImageMagick is needed).
+</I>
+It looks nice! There is also a redesign planned at St. Poelten. If you can 
+contribute (which would be great), please talk with Markus Seidl or Martin 
+Schmidt.
+Besides the cosmetics, I think some structural changes would also be useful, 
+such as placing the listening links more in the front. We can discuss that 
+on the list.
+
+&gt;<i> Since the first setup I notice a problem with the subtopics listing - 
+</I>&gt;<i> not only in
+</I>&gt;<i> my SOTF installation, but also i.e. at the new video test node (at
+</I>&gt;<i> <A HREF="http://sotf.fh-stpoelten.ac.at/node_881">http://sotf.fh-stpoelten.ac.at/node_881</A> ):
+</I>&gt;<i> the number of total subtopics in one branch isn't displayed correctly in 
+</I>&gt;<i> the right
+</I>&gt;<i> frame of topics listing (topicSearch area), but is shown properly in the 
+</I>&gt;<i> left frame
+</I>&gt;<i> (topicTree area). You can find this in both installations above, but 
+</I>&gt;<i> e.g. not at
+</I>&gt;<i> the Sztaki node.
+</I>
+Each time you run the cron.php script, it does a bunch of housekeeping in 
+your data, including the refreshing of topic counts (which are updated 
+immediately after any change, but accidentally they might go wrong).
+So running cron.php is useful, even if you do not synchronize your content 
+with other nodes.
+
+Otherwise you can do the update manually on the admin screen, as Clemens has 
+already found out.
+
+Andras
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000255.html">[Sotf-general] GUI Redesign | Problem with subtopics listing (wrong	total numbers)
+</A></li>
+	<LI>Next message: <A HREF="000258.html">[Sotf-general] Hello, this is radio K&#246;lncampus and we'd like to join sotf
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#256">[ date ]</a>
+              <a href="thread.html#256">[ thread ]</a>
+              <a href="subject.html#256">[ subject ]</a>
+              <a href="author.html#256">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

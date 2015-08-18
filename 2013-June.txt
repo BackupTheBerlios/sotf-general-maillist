@@ -1,0 +1,52 @@
+From hg at o94.at  Wed Jun 12 18:58:56 2013
+From: hg at o94.at (Herbert Gnauer)
+Date: Wed, 12 Jun 2013 18:58:56 +0200
+Subject: [Sotf-general] sendungsarchiv.o94.at says good bye
+In-Reply-To: <20110708104200.A5632481365@sheep.berlios.de>
+References: <20110708104200.A5632481365@sheep.berlios.de>
+Message-ID: <51B8A8D0.9090800@o94.at>
+
+Hi everyone,
+
+SOTF provided an extremely reliable online archive to us for nearly 6 
+years. Thanks a lot to everyone concerned, particularly to Andras, who 
+supported us instantly anytime needed. You did a great job, SOTF is 
+still a very lovely piece of code!
+
+But regrettably development of the code was finished years ago. Due to 
+this (and in fact reasons of synergistic effects) we decided to merge 
+with the official archive of VFROE (association of austrian community 
+radios) CBA.
+
+The transfer was already finished in january, SOTF's clear structure 
+made it as easy as possible. Thanks to Apache's powerful mod_rewrite and 
+it's facility to run external scripts, it was possible to redirect all 
+requests automaticaly from http://sendungsarchiv.o94.at to the adequate 
+new location at http://cba.fro.at
+
+At this moment the old archive is still running as http://sotf.o94.at - 
+but now it's it's time to take it down, we will do this tomorrow, 
+thursday 12th june.
+
+Best regards
+Herbert
+
+
+
+-- 
+
+
+HERBERT GNAUER
+IT Maschinist | BOFH
+
+ORANGE 94.0
+Verein Freies Radio Wien
+A-1200 Wien Klosterneuburger Strasse 1
+
+TEL +43 - 1 319 09 99 - 23
+FAX +43 - 1 319 09 99 - 14
+E-MAIL hg at o94.at
+WEB o94.at
+UKW 94.0
+UPC 92.7 Telekabel
+

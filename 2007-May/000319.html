@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r604 - node/branches/payable/code/classes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r604%20-%20node/branches/payable/code/classes&In-Reply-To=%3C200705231349.l4NDnVaR006437%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000318.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r604 - node/branches/payable/code/classes</H1>
+    <B>micsik at BerliOS</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r604%20-%20node/branches/payable/code/classes&In-Reply-To=%3C200705231349.l4NDnVaR006437%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r604 - node/branches/payable/code/classes">micsik at mail.berlios.de
+       </A><BR>
+    <I>Wed May 23 15:49:31 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000318.html">[Sotf-general] Community Broadcasting Workshop, May 17-18, 2007,	Budapest
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#319">[ date ]</a>
+              <a href="thread.html#319">[ thread ]</a>
+              <a href="subject.html#319">[ subject ]</a>
+              <a href="author.html#319">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: micsik
+Date: 2007-05-23 15:49:31 +0200 (Wed, 23 May 2007)
+New Revision: 604
+
+Modified:
+   node/branches/payable/code/classes/sotf_Permission.class.php
+Log:
+
+
+Modified: node/branches/payable/code/classes/sotf_Permission.class.php
+===================================================================
+--- node/branches/payable/code/classes/sotf_Permission.class.php	2007-01-23 09:52:51 UTC (rev 603)
++++ node/branches/payable/code/classes/sotf_Permission.class.php	2007-05-23 13:49:31 UTC (rev 604)
+@@ -36,7 +36,7 @@
+       }
+ 		$groups = sotf_Group::listGroupsOfUser($userid);
+ 		foreach($groups as $gid=&gt;$gname) {
+-		  $permtable = $db-&gt;getAll(&quot;SELECT sotf_group_permissions.object_id, sotf_permissions.permission FROM sotf_group_permissions, sotf_permissions WHERE sotf_group_permissions.group_id = '$gid' AND sotf_user_permissions.permission_id = sotf_permissions.id&quot;);
++		  $permtable = $db-&gt;getAll(&quot;SELECT sotf_group_permissions.object_id, sotf_permissions.permission FROM sotf_group_permissions, sotf_permissions WHERE sotf_group_permissions.group_id = '$gid' AND sotf_group_permissions.permission_id = sotf_permissions.id&quot;);
+ 		  // append to associative array containing the permissions for all objects
+ 		  while(list(,$row) = each($permtable)) {
+ 			 $permissions[$row[&quot;object_id&quot;]][] = $row[&quot;permission&quot;];	// object permission
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000318.html">[Sotf-general] Community Broadcasting Workshop, May 17-18, 2007,	Budapest
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#319">[ date ]</a>
+              <a href="thread.html#319">[ thread ]</a>
+              <a href="subject.html#319">[ subject ]</a>
+              <a href="author.html#319">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

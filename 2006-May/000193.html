@@ -1,0 +1,356 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r566 - in node/branches/video_test: code/classes code/templates www
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r566%20-%20in%20node/branches/video_test%3A%20code/classes%20code/templates%20www&In-Reply-To=%3C200605091408.k49E8FQD022865%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000192.html">
+   <LINK REL="Next"  HREF="000195.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r566 - in node/branches/video_test: code/classes code/templates www</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r566%20-%20in%20node/branches/video_test%3A%20code/classes%20code/templates%20www&In-Reply-To=%3C200605091408.k49E8FQD022865%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r566 - in node/branches/video_test: code/classes code/templates www">buddhafly at berlios.de
+       </A><BR>
+    <I>Tue May  9 16:08:15 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000192.html">[Sotf-general] r565 - node/branches/video_test/www
+</A></li>
+        <LI>Next message: <A HREF="000195.html">[Sotf-general] r567 - in node/branches/video_test: code/templates www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#193">[ date ]</a>
+              <a href="thread.html#193">[ thread ]</a>
+              <a href="subject.html#193">[ subject ]</a>
+              <a href="author.html#193">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-05-09 16:08:01 +0200 (Tue, 09 May 2006)
+New Revision: 566
+
+Modified:
+   node/branches/video_test/code/classes/sotf_VideoFile.class.php
+   node/branches/video_test/code/templates/editFiles.htm
+   node/branches/video_test/code/templates/get.htm
+   node/branches/video_test/www/editFiles.php
+   node/branches/video_test/www/get.php
+   node/branches/video_test/www/videoplayer.swf
+Log:
+new solution for flash preview
+some usability issues in editFiles.php solved
+
+
+Modified: node/branches/video_test/code/classes/sotf_VideoFile.class.php
+===================================================================
+--- node/branches/video_test/code/classes/sotf_VideoFile.class.php	2006-05-09 12:08:07 UTC (rev 565)
++++ node/branches/video_test/code/classes/sotf_VideoFile.class.php	2006-05-09 14:08:01 UTC (rev 566)
+@@ -187,8 +187,11 @@
+ 
+ 	
+ 	function searchForStill($prg){
+-	
++		
++		$id=$prg-&gt;get('id');
++		
+ 		global $config;
++		$temppath=$config['wwwdir'].&quot;/tmp/&quot;;
+ 		
+ 		$still_found=false;
+ 		
+@@ -201,8 +204,6 @@
+ 		   closedir($directory);
+ 		}
+ 		
+-		$temppath=$config['wwwdir'].&quot;/tmp/&quot;;
+-		
+ 		if ($tempdir = opendir($temppath)) {
+ 		   while (false !== ($filename = readdir($tempdir))) {
+ 				if(preg_match(&quot;/^still_&quot;.$id.&quot;_[12345]\.gif$/&quot;,$filename)){
+@@ -218,50 +219,48 @@
+ 	}
+ 	
+ 	
+-	function scanTranscodingQueue($repository, $prg, $checker){
++	function processTranscodingQueue($repository, $prg, $checker){
+ 	
+-	global $config;
++		global $config;
++		
++		$id=$prg-&gt;get('id');
++		
++		
++		$temppath=$config['wwwdir'].&quot;/tmp/&quot;;
++		$list_changed = false;
++		
++		if ($tempdir = opendir($temppath)) {
++		   while (false !== ($filename = readdir($tempdir))) {
++				if(preg_match(&quot;/^&quot;.$id.&quot;_/&quot;,$filename)){
++					if($checker-&gt;fileOK($temppath.$filename)) {
++						if(is_file($temppath.$filename.&quot;.txt&quot;)) unlink($temppath.$filename.&quot;.txt&quot;);
++						$prg-&gt;setAudio($temppath.$filename);
++						$list_changed=true;
++					}
++				
++				}if(preg_match(&quot;/^still_&quot;.$id.&quot;_[12345]\.gif$/&quot;,$filename)){
++					if(!isUnicolorImage($temppath.$filename)){ 
++						$obj_id=$prg-&gt;setOtherFile($temppath.$filename);
++						$fileInfo = &amp;$repository-&gt;getObject($obj_id);
++						$fileInfo-&gt;set('public_access', 'f');
++						$fileInfo-&gt;update();
++						if(is_file($temppath.$filename.&quot;.txt&quot;)) unlink($temppath.$filename.&quot;.txt&quot;);
+ 	
+-	$id=$prg-&gt;get('id');
+-	
+-	$obj = $repository-&gt;getObject($id);
+-	if(!$obj) raiseError(&quot;object does not exist!&quot;);
+-	
+-	$temppath=$config['wwwdir'].&quot;/tmp/&quot;;
+-	$list_changed = false;
+-	
+-	if ($tempdir = opendir($temppath)) {
+-	   while (false !== ($filename = readdir($tempdir))) {
+-			if(preg_match(&quot;/^&quot;.$id.&quot;_/&quot;,$filename)){
+-				if($checker-&gt;fileOK($temppath.$filename)) {
+-					if(is_file($temppath.$filename.&quot;.txt&quot;)) unlink($temppath.$filename.&quot;.txt&quot;);
+-					$obj-&gt;setAudio($temppath.$filename);
++					}
++					else{
++						if(is_file($temppath.$filename.&quot;.txt&quot;)) unlink($temppath.$filename.&quot;.txt&quot;);
++						unlink($temppath.$filename);
++					}
+ 					$list_changed=true;
+-				}
+-			
+-			}if(preg_match(&quot;/^still_&quot;.$id.&quot;_[12345]\.gif$/&quot;,$filename)){
+-				if(!isUnicolorImage($temppath.$filename)){ 
+-					$obj_id=$prg-&gt;setOtherFile($temppath.$filename);
+-					$fileInfo = &amp;$repository-&gt;getObject($obj_id);
+-					$fileInfo-&gt;set('public_access', 'f');
+-					$fileInfo-&gt;update();
+-					if(is_file($temppath.$filename.&quot;.txt&quot;)) unlink($temppath.$filename.&quot;.txt&quot;);
+-
+-				}
+-				else{
+-					if(is_file($temppath.$filename.&quot;.txt&quot;)) unlink($temppath.$filename.&quot;.txt&quot;);
+-					unlink($temppath.$filename);
+-				}
+-				$list_changed=true;
++			   }
+ 		   }
+-	   }
+-	   closedir($tempdir);
++		   closedir($tempdir);
++		}
++		
++		return $list_changed;
+ 	}
+ 	
+-	return $list_changed;
+-	}
+ 	
+-	
+ 
+ 	/**
+ 
+
+Modified: node/branches/video_test/code/templates/editFiles.htm
+===================================================================
+--- node/branches/video_test/code/templates/editFiles.htm	2006-05-09 12:08:07 UTC (rev 565)
++++ node/branches/video_test/code/templates/editFiles.htm	2006-05-09 14:08:01 UTC (rev 566)
+@@ -110,7 +110,7 @@
+               {if empty($item.filename) and $PRG_DATA.type!='video'}
+               &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#convert#}&quot; onClick=&quot;window.open('convert.php?id={$PRG_ID}&amp;index={$item.index}','convert_progress','menubar=no, status=no, toolbar=no, width=350, height=180')&quot; /&gt;
+               {elseif empty($item.filename) and $PRG_DATA.type=='video'}
+-			  &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#convert#}&quot; onClick=&quot;javascript:document.location.href='editFiles.php?id={$PRG_ID}&amp;convertindex={$item.index}&amp;videoconversion=1'&quot; /&gt;
++			  &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b_{$item}&quot; id=&quot;b_{$item}&quot; value=&quot;{#convert#}&quot; onClick=&quot;javascript:document.getElementById('b_{$item}').style.visibility='hidden'; document.location.href='editFiles.php?id={$PRG_ID}&amp;convertindex={$item.index}&amp;videoconversion=1'&quot; /&gt;
+ 			   {else}
+                 &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#delete#}&quot; onClick=&quot;redir(this.form, 'editFiles.php?delfile={$item.id}&amp;id={$PRG_ID}')&quot; /&gt;
+               {/if}
+@@ -128,12 +128,12 @@
+                    &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b2&quot; value=&quot;{#convert_all#}&quot; onClick=&quot;window.open('convert.php?id={$PRG_ID}&amp;all=1','convert_progress','menubar=no, status=no, toolbar=no, width=350, height=600')&quot; /&gt;
+                 
+ 				{else if $PRG_DATA.type=='video'}
+-					&lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b2&quot; value=&quot;{#convert_all#}&quot; onClick=&quot;javascript:document.location.href='editFiles.php?id={$PRG_ID}&amp;convertall=1&amp;videoconversion=1'&quot; /&gt;&lt;br&gt;
++					&lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b2&quot; id=&quot;b2&quot; value=&quot;{#convert_all#}&quot; onClick=&quot;javascript:document.getElementById('b2').style.visibility='hidden'; document.location.href='editFiles.php?id={$PRG_ID}&amp;convertall=1&amp;videoconversion=1'&quot; /&gt;&lt;br&gt;
+ 				{/if}
+ 				
+ 			  {/if}
+ 			  {if $PRG_DATA.type=='video' AND !$STILL_FOUND}
+-                   &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b2&quot; value=&quot;Create Stills&quot; onClick=&quot;javascript:document.location.href='editFiles.php?id={$PRG_ID}&amp;createstills=1'&quot; /&gt;
++                   &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b3&quot; value=&quot;Create Stills&quot; onClick=&quot;javascript:document.location.href='editFiles.php?id={$PRG_ID}&amp;createstills=1'&quot; /&gt;
+ 			{/if}
+               &lt;/td&gt;
+           &lt;/tr&gt;  
+
+Modified: node/branches/video_test/code/templates/get.htm
+===================================================================
+--- node/branches/video_test/code/templates/get.htm	2006-05-09 12:08:07 UTC (rev 565)
++++ node/branches/video_test/code/templates/get.htm	2006-05-09 14:08:01 UTC (rev 566)
+@@ -85,44 +85,55 @@
+   &lt;/table&gt;
+ 
+   &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
+-    &lt;tr&gt; 
+-	
++    {*&lt;tr&gt; 
++	 
+ 	{if $FLV_FOUND} 
+       &lt;td class=&quot;tabarea&quot;&gt; 
+-	  {*
++	 
+   &lt;OBJECT class=&quot;videoplayer&quot; classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000'
+         codebase='<A HREF="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0">http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0</A>'
+         width='216' height='186' style=&quot;padding:0; margin:0&quot;&gt;
+-        &lt;param name='movie' value=&quot;{$ROOT_URL}/videoplayer.swf&quot;&gt;
++        &lt;param name='movie' value=&quot;{$ROOT_URL}/videoplayer.swf?flvpath={$FLV_PATH}&quot;&gt;
+ 		&lt;param name='bgcolor' value=&quot;#EFF4FE&quot;&gt;
+         &lt;param name='quality' value=&quot;high&quot;&gt;
+        &lt;param name='loop' value=&quot;false&quot;&gt;
+-        &lt;EMBED class=&quot;videoplayer&quot; style=&quot;padding:0; margin:0&quot; src=&quot;{$ROOT_URL}/videoplayer.swf&quot; quality='high' width='216' height='186' bgcolor=&quot;#EFF4FE&quot; loop=&quot;false&quot; type='application/x-shockwave-flash'
++        &lt;EMBED class=&quot;videoplayer&quot; style=&quot;padding:0; margin:0&quot; src=&quot;{$ROOT_URL}/videoplayer.swf?flvpath={$FLV_PATH}&quot; quality='high' width='216' height='186' bgcolor=&quot;#EFF4FE&quot; loop=&quot;false&quot; type='application/x-shockwave-flash'
+         pluginspage='<A HREF="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash">http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash</A>'&gt;
+         &lt;/EMBED&gt;
+-		  &lt;/OBJECT&gt; *}
++		  &lt;/OBJECT&gt; 
+ 		
+ 	&lt;object type=&quot;application/x-shockwave-flash&quot; width=&quot;176&quot; height=&quot;144&quot; 
+     wmode=&quot;transparent&quot; data=&quot;flvplayer.swf?file={$FLV_PATH}&quot;&gt;
+   &lt;param name=&quot;movie&quot; value=&quot;flvplayer.swf?file={$FLV_PATH}&quot; /&gt;
+   &lt;param name=&quot;wmode&quot; value=&quot;transparent&quot; /&gt;
+   &lt;/object&gt;
+-  
+-  	
+-
+   &lt;/td&gt;
+   
+ {elseif !$FLV_FOUND and $VIDEO_PRG}
+ &lt;td class=&quot;tabarea&quot;&gt; 
+   		Flash-Preview for this programme is not available.
+ 		&lt;/td&gt;
+-  {/if}
++  {/if}javascript:*}
+   
+-  {if $STILLS}&lt;td  class=&quot;tabarea&quot;&gt;{foreach item=item from=$STILLS}
++  {if $STILLS}&lt;tr&gt;&lt;td  class=&quot;tabarea&quot;&gt;{foreach item=item from=$STILLS}
+   &lt;img style=&quot;padding:10px&quot; src='getFile.php/{$item.filename}?id={$PRG_DATA.id}&amp;filename={$item.filename}'&gt;
+-  {/foreach}    &lt;/td&gt;
++  {/foreach}    &lt;/td&gt;&lt;/tr&gt;
+   {/if}
+-&lt;/tr&gt;&lt;/table&gt;
++  
++   &lt;/tr&gt;&lt;td  class=&quot;tabarea&quot;&gt;{if $FLV_FOUND}
++   &lt;script type=&quot;text/javascript&quot;&gt;
++	&lt;!--
++	document.write(&quot;&lt;div style='padding:10px'&gt;&gt;&gt; &lt;a href='#' onClick=popup('videoplayer.swf?flvpath={$FLV_PATH}','CreateNeighbour',170,191,false)&gt;Flash Preview&lt;/a&gt;&lt;/div&gt;&quot;);
++	//--&gt;
++	&lt;/script&gt;
++	&lt;noscript&gt;
++	  &lt;div style='padding:10px'&gt;&gt;&gt; &lt;a target='_blank' href='videoplayer.swf?flvpath={$FLV_PATH}'&gt;Flash Preview&lt;/a&gt;&lt;/div&gt; 
++	&lt;/noscript&gt;
++
++  {else} Flash Preview is not available for this programme.{/if}
++  &lt;/td&gt;&lt;/tr&gt;
++  
++&lt;/table&gt;
+ &lt;p&gt;&lt;/p&gt;
+  {/if}
+  
+
+Modified: node/branches/video_test/www/editFiles.php
+===================================================================
+--- node/branches/video_test/www/editFiles.php	2006-05-09 12:08:07 UTC (rev 565)
++++ node/branches/video_test/www/editFiles.php	2006-05-09 14:08:01 UTC (rev 566)
+@@ -136,6 +136,7 @@
+ 	if (!$still_found &amp;&amp; $createstills){
+ 		sotf_VideoFile::createStills($files[0]-&gt;path, $files[0]-&gt;duration, $id);
+ 	}
++	
+ }
+ 
+ 
+@@ -152,7 +153,7 @@
+ //check for recently converted files or transcoding in progress
+ if($video &amp;&amp; $prgAudiolist-&gt;count()){
+ 
+-	$list_changed=sotf_VideoFile::scanTranscodingQueue($repository, $prg, $checker);
++	$list_changed=sotf_VideoFile::processTranscodingQueue($repository, $prg, $checker);
+ 		
+ 	if($list_changed) {
+ 	  $page-&gt;redirectSelf();
+@@ -182,8 +183,9 @@
+ 			// if conversion in progress calculate percentage
+ 			$regexp_file=&quot;/^&quot;.$id . '_.*_' . $checker-&gt;getFormatFilename($i).&quot;$/&quot;;
+ 			$source = $prgAudiolist-&gt;list[$checker-&gt;reqs[$i][1]]-&gt;getPath();
++			$temppath = $config['wwwdir'].&quot;/tmp/&quot;;
+ 			
+-			if ($tempdir = opendir($config['wwwdir'].&quot;/tmp&quot;)) {
++			if ($tempdir = opendir($temppath)) {
+ 			   while (false !== ($filename = readdir($tempdir))) {
+ 					if(preg_match($regexp_file, $filename)){
+ 						$PRG_AUDIO[$i]['converting']=true;
+@@ -223,8 +225,9 @@
+ // start converting required formats
+ if($videoconv &amp;&amp; $missing){
+ 
+-	if(!$obj)
+-		  raiseError(&quot;object does not exist!&quot;);
++	$obj = $repository-&gt;getObject($id);
++	if(!$obj) raiseError(&quot;object does not exist!&quot;);
++
+ 	checkPerm($obj-&gt;id, 'change');
+ 	
+ 	$checker-&gt;console = false;
+
+Modified: node/branches/video_test/www/get.php
+===================================================================
+--- node/branches/video_test/www/get.php	2006-05-09 12:08:07 UTC (rev 565)
++++ node/branches/video_test/www/get.php	2006-05-09 14:08:01 UTC (rev 566)
+@@ -68,7 +68,7 @@
+   $checker = &amp; new sotf_ContentCheck($prgAudiolist); //todo $prgAudioList MEANT CONTENT
+   $checker = $checker-&gt;selectType();
+ 
+-  sotf_VideoFile::scanTranscodingQueue($repository, $prg, $checker);
++  sotf_VideoFile::processTranscodingQueue($repository, $prg, $checker);
+ 
+ }
+ 
+
+Modified: node/branches/video_test/www/videoplayer.swf
+===================================================================
+(Binary files differ)
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000192.html">[Sotf-general] r565 - node/branches/video_test/www
+</A></li>
+	<LI>Next message: <A HREF="000195.html">[Sotf-general] r567 - in node/branches/video_test: code/templates www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#193">[ date ]</a>
+              <a href="thread.html#193">[ thread ]</a>
+              <a href="subject.html#193">[ subject ]</a>
+              <a href="author.html#193">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

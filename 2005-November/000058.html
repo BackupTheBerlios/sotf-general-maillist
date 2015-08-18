@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] sync probs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2005-November/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20sync%20probs&In-Reply-To=%3C2E8E7FC6-C8E3-4007-862D-035FB3BE98D6%40fhv.at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000057.html">
+   <LINK REL="Next"  HREF="000059.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] sync probs</H1>
+    <B>Wolfgang Reutz</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20sync%20probs&In-Reply-To=%3C2E8E7FC6-C8E3-4007-862D-035FB3BE98D6%40fhv.at%3E"
+       TITLE="[Sotf-general] sync probs">wolfgang.reutz at fhv.at
+       </A><BR>
+    <I>Tue Nov 22 23:21:05 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000057.html">[Sotf-general] sync probs
+</A></li>
+        <LI>Next message: <A HREF="000059.html">[Sotf-general] sync probs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#58">[ date ]</a>
+              <a href="thread.html#58">[ thread ]</a>
+              <a href="subject.html#58">[ subject ]</a>
+              <a href="author.html#58">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+the dornbirn node had a problem with apache this afternoon, all  
+problems have been solved and the two nodes are running again :-)
+
+just ran a cron.php and i get this status in the admin.php page:
+
+Node			Objects waiting on my node	Forwards waiting on my node
+
+666 (AT2)		1							0
+668 (AT6)		3130						3725
+11 (HU1)		1							0
+94 (o94)			1							0
+
+seems ok for me ;-)
+
+Wolfgang
+
+On 22.11.2005, at 23:02, Herbert Gnauer wrote:
+
+&gt;<i> hi erveryone,
+</I>&gt;<i>
+</I>&gt;<i> sorry to say, but 3 nodes are out of sync (radio.sztaki.hu,  
+</I>&gt;<i> medienarchiv.fh-stpoelten.ac.at and sendungsarchiv.o94.at), <A HREF="http://">http://</A> 
+</I>&gt;<i> sotf.fhv.at/node/ returns an empty page at moment.
+</I>&gt;<i>
+</I>&gt;<i> stpoelten and sztaki seem to have synchronized only metadata for a  
+</I>&gt;<i> while. logos of broadcasts are missing as well as audio-data.  
+</I>&gt;<i> examples are <A HREF="http://medienarchiv.fh-stpoelten.ac.at/showSeries.php/">http://medienarchiv.fh-stpoelten.ac.at/showSeries.php/</A> 
+</I>&gt;<i> 094se3 and <A HREF="http://radio.sztaki.hu/node/showSeries.php/094se3">http://radio.sztaki.hu/node/showSeries.php/094se3</A> in  
+</I>&gt;<i> comparison to origin <A HREF="http://sendungsarchiv.o94.at/showSeries.php/">http://sendungsarchiv.o94.at/showSeries.php/</A> 
+</I>&gt;<i> 094se3
+</I>&gt;<i>
+</I>&gt;<i> older boradcasts statisics are out of sync or updated very very  
+</I>&gt;<i> rarely. for example <A HREF="http://sendungsarchiv.o94.at/get.php/094pr95">http://sendungsarchiv.o94.at/get.php/094pr95</A> is  
+</I>&gt;<i> up to date (last updated at: 2005-11-22 22:45:04+01), statistics of  
+</I>&gt;<i> same broadcast at radio sztaki and stpoelten are more than one  
+</I>&gt;<i> month old <A HREF="http://radio.sztaki.hu/node/get.php/094pr95">http://radio.sztaki.hu/node/get.php/094pr95</A> (both last  
+</I>&gt;<i> updated at: 2005-10-16 15:45:03+02)
+</I>&gt;<i>
+</I>&gt;<i> i've found some errors in our /var/www/node/logs/log:
+</I>&gt;<i>
+</I>&gt;<i> ---snip---
+</I>&gt;<i> [22-Nov-2005 21:45:03] 62.116.13.181: XML-RPC: call to <A HREF="http://">http://</A> 
+</I>&gt;<i> medienarchiv.fh-stpoelten.ac.at/xmlrpcServer.php/sync/1
+</I>&gt;<i> [22-Nov-2005 21:45:05] 62.116.13.181: ERROR: Error response: 2   
+</I>&gt;<i> Invalid return payload: enabling debugging to examine incoming  
+</I>&gt;<i> payload.
+</I>&gt;<i> ---snap---
+</I>&gt;<i>
+</I>&gt;<i> ---snip---
+</I>&gt;<i> [22-Nov-2005 21:45:05] 62.116.13.181: XML-RPC: call to <A HREF="http://">http://</A> 
+</I>&gt;<i> sotf.fhv.at/node/xmlrpcServer.php/sync/1
+</I>&gt;<i> [22-Nov-2005 21:45:05] No response received from server.
+</I>&gt;<i> [22-Nov-2005 21:45:05] 62.116.13.181: ERROR: Error response: 6  No  
+</I>&gt;<i> data received from server..
+</I>&gt;<i> ---snap---
+</I>&gt;<i>
+</I>&gt;<i> ---snip---
+</I>&gt;<i> [22-Nov-2005 21:45:06] 62.116.13.181: XML-RPC: call to <A HREF="http://">http://</A> 
+</I>&gt;<i> sotf.fhv.at/node_achwelle/xmlrpcServer.php/forward/1
+</I>&gt;<i> [22-Nov-2005 21:45:06] XML error: no element found at line 2
+</I>&gt;<i> [22-Nov-2005 21:45:06] 62.116.13.181: ERROR: Error response: 2   
+</I>&gt;<i> Invalid return payload: enabling debugging to examine incoming  
+</I>&gt;<i> payload.
+</I>&gt;<i> ---snap---
+</I>&gt;<i>
+</I>&gt;<i> does anyone know what's going wrong and how to fix it?
+</I>&gt;<i>
+</I>&gt;<i> best
+</I>&gt;<i> herbert
+</I>
+-- 
+Wolfgang Reutz
+wissenschaftlicher Mitarbeiter
+Wissenspool Gestaltung und mediale Kommunikation | Fachhochschule  
+Vorarlberg
+Hochschulstra&#223;e 1 | 6850 Dornbirn | AUSTRIA
+p: +43-(0)5572-792-3111 | f: +43-(0)5572-792-9276
+e: <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">wolfgang.reutz at fhv.at</A>
+gpg keys: <A HREF="http://wolfgang.reutz.at/about/gpgkeys/">http://wolfgang.reutz.at/about/gpgkeys/</A>
+w: <A HREF="http://wolfgang.reutz.at/">http://wolfgang.reutz.at/</A>
+w: <A HREF="http://www.fhv.at/">http://www.fhv.at/</A>
+aim/ichat: <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">wreutz at mac.com</A>
+skype: wreutz
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000057.html">[Sotf-general] sync probs
+</A></li>
+	<LI>Next message: <A HREF="000059.html">[Sotf-general] sync probs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#58">[ date ]</a>
+              <a href="thread.html#58">[ thread ]</a>
+              <a href="subject.html#58">[ subject ]</a>
+              <a href="author.html#58">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

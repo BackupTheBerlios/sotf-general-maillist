@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r609 - node/branches/payable/code/classes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2007-June/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r609%20-%20node/branches/payable/code/classes&In-Reply-To=%3C200706151343.l5FDhSH5026252%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000325.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r609 - node/branches/payable/code/classes</H1>
+    <B>clemens_p at mail.berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r609%20-%20node/branches/payable/code/classes&In-Reply-To=%3C200706151343.l5FDhSH5026252%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r609 - node/branches/payable/code/classes">clemens_p at mail.berlios.de
+       </A><BR>
+    <I>Fri Jun 15 15:43:28 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000325.html">[Sotf-general] Dornbirn Node back alive! (sort of)
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#326">[ date ]</a>
+              <a href="thread.html#326">[ thread ]</a>
+              <a href="subject.html#326">[ subject ]</a>
+              <a href="author.html#326">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: clemens_p
+Date: 2007-06-15 15:43:14 +0200 (Fri, 15 Jun 2007)
+New Revision: 609
+
+Modified:
+   node/branches/payable/code/classes/sotf_AdvSearch.class.php
+Log:
+minor_search_bugfix
+
+Modified: node/branches/payable/code/classes/sotf_AdvSearch.class.php
+===================================================================
+--- node/branches/payable/code/classes/sotf_AdvSearch.class.php	2007-06-05 15:14:26 UTC (rev 608)
++++ node/branches/payable/code/classes/sotf_AdvSearch.class.php	2007-06-15 13:43:14 UTC (rev 609)
+@@ -24,8 +24,8 @@
+ 
+   var $SQLFields = array('station','production_date','language','person','title','seriestitle','topic','length','rating','genre_id','keywords','abstract','seriesdescription','entry_date','expiry_date','modify_date','broadcast_date','spatial_coverage','temporal_coverage');
+ 
+-	
+ 
++
+ 	function sotf_AdvSearch($array = &quot;&quot;)			//constuctor with a starting query
+ 
+ 	{
+@@ -268,8 +268,8 @@
+ 
+ 		$query.=&quot; LEFT JOIN sotf_prog_rating ON sotf_programmes.id = sotf_prog_rating.id&quot;;
+ 
+-		
+ 
++
+ 		if ($topic)		// added the topics as left join for performance reasons
+ 
+ 		{
+@@ -286,8 +286,8 @@
+ 
+ 		//$query.=&quot;) as programmes WHERE published = 't'&quot;;
+ 		$query.=&quot;) as programmes WHERE published = 't' AND type='sound'&quot;; //MODIFIED BY Martin Schmidt
+-		
+ 
++
+ 		for($i = 0; $i &lt; $max ;$i++)		//go through all terms
+ 
+ 		{
+@@ -298,8 +298,8 @@
+ 
+ 			else $query .= &quot; AND&quot;;
+ 
+-			
+ 
++
+ 			//set begining of round bracket
+ 
+ 			if ( (($this-&gt;SQLquery[$i][0] == &quot;AND&quot;) || ($i == 0)) &amp;&amp; ($this-&gt;SQLquery[$i+1][0] == &quot;OR&quot;) ) $query = $query.&quot; (&quot;;
+@@ -394,7 +394,7 @@
+ 
+ 
+ 
+-				$query .= &quot; id $not in (SELECT sotf_object_roles.object_id as id FROM sotf_object_roles WHERE sotf_object_roles.contact_id = sotf_contacts.id AND&quot;;
++				$query .= &quot; id $not in (SELECT sotf_object_roles.object_id as id FROM sotf_object_roles, sotf_contacts WHERE sotf_object_roles.contact_id = sotf_contacts.id AND&quot;;
+ 
+ 				$query .= &quot; ( coalesce(sotf_contacts.name,'')&quot;;
+ 
+@@ -438,7 +438,7 @@
+ 
+ 		}
+ 
+-		$query = $query.&quot; ORDER BY &quot;.$this-&gt;sort1.&quot;, &quot;.$this-&gt;sort2;			//ISBN, TITLE 
++		$query = $query.&quot; ORDER BY &quot;.$this-&gt;sort1.&quot;, &quot;.$this-&gt;sort2;			//ISBN, TITLE
+ 
+ 		//print($query);
+ 
+@@ -664,7 +664,7 @@
+ 
+ 			$max = count($this-&gt;SQLquery);
+ 
+-			$output1 = array_slice($this-&gt;SQLquery, 0, $where+1);   
++			$output1 = array_slice($this-&gt;SQLquery, 0, $where+1);
+ 
+ 			if ($where &lt; $max) $output2 = array_slice($this-&gt;SQLquery, $where+1);
+ 
+@@ -680,8 +680,8 @@
+ 
+ 	}
+ 
+-	
+ 
++
+ 	function DelRow($where)		//set the sort order
+ 
+ 	{
+@@ -720,8 +720,8 @@
+ 
+ 	}
+ 
+-	
+ 
++
+ 	function setDir($dir1 = false, $dir2 = false)					//gives back if the current sort order direction 1 is DESC or not
+ 
+ 	{
+@@ -868,8 +868,8 @@
+ 
+ 		$SQLfiels['temporal_coverage'] = $page-&gt;getlocalized(&quot;temporal_coverage&quot;);
+ 
+-		
+ 
++
+ 		asort($SQLfiels);
+ 
+ 		return $SQLfiels;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000325.html">[Sotf-general] Dornbirn Node back alive! (sort of)
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#326">[ date ]</a>
+              <a href="thread.html#326">[ thread ]</a>
+              <a href="subject.html#326">[ subject ]</a>
+              <a href="author.html#326">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

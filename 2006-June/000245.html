@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r581 - node/branches/video_test/www
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r581%20-%20node/branches/video_test/www&In-Reply-To=%3C200606081132.k58BWAuj026101%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000244.html">
+   <LINK REL="Next"  HREF="000246.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r581 - node/branches/video_test/www</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r581%20-%20node/branches/video_test/www&In-Reply-To=%3C200606081132.k58BWAuj026101%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r581 - node/branches/video_test/www">buddhafly at berlios.de
+       </A><BR>
+    <I>Thu Jun  8 13:32:10 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000244.html">[Sotf-general] Simplification of the Topic Tree
+</A></li>
+        <LI>Next message: <A HREF="000246.html">[Sotf-general] subtopics - wrong counting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#245">[ date ]</a>
+              <a href="thread.html#245">[ thread ]</a>
+              <a href="subject.html#245">[ subject ]</a>
+              <a href="author.html#245">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-06-08 13:32:07 +0200 (Thu, 08 Jun 2006)
+New Revision: 581
+
+Modified:
+   node/branches/video_test/www/config.inc.php.template
+Log:
+3gp ffmpeg options optimized
+
+
+Modified: node/branches/video_test/www/config.inc.php.template
+===================================================================
+--- node/branches/video_test/www/config.inc.php.template	2006-05-31 09:27:08 UTC (rev 580)
++++ node/branches/video_test/www/config.inc.php.template	2006-06-08 11:32:07 UTC (rev 581)
+@@ -371,11 +371,11 @@
+ 						'format' =&gt; '3gp',
+ 						'size' =&gt; '176x144',
+ 						'framerate' =&gt; '14.985',
+-						'video_bitrate' =&gt; '336',
+-						'audio_bitrate' =&gt; '64',
+-						'audio_channels' =&gt; '2',
+-						'audio_samplerate' =&gt; '22050',
+-						'ffmpeg_params'=&gt;'-f 3gp -vcodec mpeg4 -s 176x144 -r 14.985 -b 336 -acodec aac -ac 2 -ar 22050 -ab 64')
++						'video_bitrate' =&gt; '144',
++						'audio_bitrate' =&gt; '32',
++						'audio_channels' =&gt; '1',
++						'audio_samplerate' =&gt; '8000',
++						'ffmpeg_params'=&gt;'-f 3gp -vcodec h263 -s 176x144 -r 14.985 -b 144 -acodec amr_nb -ac 1 -ar 8000 -ab 13')
+ 					);
+ 
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000244.html">[Sotf-general] Simplification of the Topic Tree
+</A></li>
+	<LI>Next message: <A HREF="000246.html">[Sotf-general] subtopics - wrong counting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#245">[ date ]</a>
+              <a href="thread.html#245">[ thread ]</a>
+              <a href="subject.html#245">[ subject ]</a>
+              <a href="author.html#245">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

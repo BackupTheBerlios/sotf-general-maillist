@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] fix for broadcast time
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2005-December/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20fix%20for%20broadcast%20time&In-Reply-To=%3C439576CE.3000601%40orange.or.at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000074.html">
+   <LINK REL="Next"  HREF="000076.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] fix for broadcast time</H1>
+    <B>herbert gnauer</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20fix%20for%20broadcast%20time&In-Reply-To=%3C439576CE.3000601%40orange.or.at%3E"
+       TITLE="[Sotf-general] fix for broadcast time">hg at orange.or.at
+       </A><BR>
+    <I>Tue Dec  6 12:32:30 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000074.html">[Sotf-general] fix for broadcast time
+</A></li>
+        <LI>Next message: <A HREF="000076.html">[Sotf-general] fix for broadcast time
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#75">[ date ]</a>
+              <a href="thread.html#75">[ thread ]</a>
+              <a href="subject.html#75">[ subject ]</a>
+              <a href="author.html#75">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>seems to work
+best herbert
+
+Micsik Andr&#225;s wrote:
+&gt;<i> Our users reported a bug in setting broadcast time. When you set a 
+</I>&gt;<i> broadcast time for August, then one hour is added to the time specified. 
+</I>&gt;<i> This is fixed here. Can somebody please check this code and put it into 
+</I>&gt;<i> subversion:
+</I>&gt;<i> 
+</I>&gt;<i> www/editMeta.php lines 81-83:
+</I>&gt;<i> 
+</I>&gt;<i> if($param == 'broadcast_date') {
+</I>&gt;<i>   $value = $value . ' ' . sotf_Utils::getParameter('broadcast_dateHour') 
+</I>&gt;<i> .              ':' . sotf_Utils::getParameter('broadcast_dateMinute'); 
+</I>&gt;<i> // . ' ' . $db-&gt;myTZ();
+</I>&gt;<i> }
+</I>&gt;<i> 
+</I>&gt;<i> thanks,
+</I>&gt;<i>     Andras
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sotf-general mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/sotf-general">http://lists.berlios.de/mailman/listinfo/sotf-general</A>
+</I>
+
+-- 
+
+
+HERBERT GNAUER
+Systemadministration, IT
+
+ORANGE 94.0
+Verein Freies Radio Wien
+A-1200 Wien Klosterneuburger Stra&#223;e 1
+
+TEL +43 - 1 319 09 99 - 12
+FAX +43 - 1 319 09 99 - 14
+E-MAIL <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">hg at o94.at</A>
+WEB o94.at
+UKW 94.0
+UPC 92.7 Telekabel
+WAP wap.o94.at
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000074.html">[Sotf-general] fix for broadcast time
+</A></li>
+	<LI>Next message: <A HREF="000076.html">[Sotf-general] fix for broadcast time
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#75">[ date ]</a>
+              <a href="thread.html#75">[ thread ]</a>
+              <a href="subject.html#75">[ subject ]</a>
+              <a href="author.html#75">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

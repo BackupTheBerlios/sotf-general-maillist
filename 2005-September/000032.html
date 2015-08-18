@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] contributor's privacy
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2005-September/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20contributor%27s%20privacy&In-Reply-To=%3C4329DD8B.3060200%40no-na.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000031.html">
+   <LINK REL="Next"  HREF="000033.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] contributor's privacy</H1>
+    <B>herbert gnauer</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20contributor%27s%20privacy&In-Reply-To=%3C4329DD8B.3060200%40no-na.net%3E"
+       TITLE="[Sotf-general] contributor's privacy">hg at no-na.net
+       </A><BR>
+    <I>Thu Sep 15 22:46:03 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000031.html">[Sotf-general] contributor's privacy
+</A></li>
+        <LI>Next message: <A HREF="000033.html">[Sotf-general] StreamOnTheFly meeting 20 SEPT 12:30 MQ Vienna
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#32">[ date ]</a>
+              <a href="thread.html#32">[ thread ]</a>
+              <a href="subject.html#32">[ subject ]</a>
+              <a href="author.html#32">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>first of all many thanks to the lots of helping hands on synchronization
+of our node! it seems to work properly now... :)
+
+Micsik Andr&#225;s schrieb:
+&gt;<i> Anybody should be 
+</I>&gt;<i> able to contact our contributors...
+</I>
+i totally agree in that, as long as contributor means producer,
+designer, author etc. of broadcasts. in fact i wouldn't include studio-
+or other guests, who are inculpably listed at the same place.
+
+finally it's a question of the claim. my idea was to enable producers to
+keep their gathered contacts (guests, interviewpartners etc.) at the
+same point together with related broadcasts. but maybe that's too far
+from the scope of an online archive.
+
+&gt;<i> can you send a &quot;howto&quot; hide the email adress?
+</I>
+it's more or less a provisorical hack, thought as bridgeover until a
+more sophisticated solution is found. we inserted a simple if-query into
+.../code/templates/showContact.htm above the lines showing email, phone
+etc.:
+
+{if hasPerm($CONTACT_ID,'change')}
+
+the complete section is:
+
+---snip---
+   	 {if hasPerm($CONTACT_ID,'change')}
+                 {if $CONTACT_DATA.email }
+                 &lt;tr&gt;
+                   &lt;td&gt;{#email#}:&lt;/td&gt;
+                   &lt;td&gt;&lt;a
+href=&quot;{$CONTACT_DATA.email}&quot;&gt;{$CONTACT_DATA.email}&lt;/a&gt;&lt;/td&gt;
+                 &lt;/tr&gt;
+                 {/if}
+                 {if $CONTACT_DATA.address }
+                 &lt;tr&gt;
+                   &lt;td&gt;{#address#}:&lt;/td&gt;
+                   &lt;td&gt;{$CONTACT_DATA.address}&lt;/td&gt;
+                 &lt;/tr&gt;
+                 {/if}
+                 {if $CONTACT_DATA.phone }
+                 &lt;tr&gt;
+                   &lt;td&gt;{#phone#}:&lt;/td&gt;
+                   &lt;td&gt;{$CONTACT_DATA.phone}&lt;/td&gt;
+                 &lt;/tr&gt;
+                 {/if}
+                 {if $CONTACT_DATA.cellphone }
+                 &lt;tr&gt;
+                   &lt;td&gt;{#cellphone#}:&lt;/td&gt;
+                   &lt;td&gt;{$CONTACT_DATA.cellphone}&lt;/td&gt;
+                 &lt;/tr&gt;
+                 {/if}
+                 {if $CONTACT_DATA.fax }
+                 &lt;tr&gt;
+                   &lt;td&gt;{#fax#}:&lt;/td&gt;
+                   &lt;td&gt;{$CONTACT_DATA.fax}&lt;/td&gt;
+                 &lt;/tr&gt;
+                 {/if}
+          {/if}
+---snap---
+
+greetings
+herbert
+
+
+-- 
+________________________________________________
+debugging is finished when the last user is dead
+<A HREF="http://no-na.net">http://no-na.net</A>               wer will kann mal
+
+public pgp key              <A HREF="http://no-na.net/pgp">http://no-na.net/pgp</A>
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000031.html">[Sotf-general] contributor's privacy
+</A></li>
+	<LI>Next message: <A HREF="000033.html">[Sotf-general] StreamOnTheFly meeting 20 SEPT 12:30 MQ Vienna
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#32">[ date ]</a>
+              <a href="thread.html#32">[ thread ]</a>
+              <a href="subject.html#32">[ subject ]</a>
+              <a href="author.html#32">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

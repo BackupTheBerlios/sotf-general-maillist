@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r562 - node/branches/video_test/code/share
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r562%20-%20node/branches/video_test/code/share&In-Reply-To=%3C200605081123.k48BNgfp017437%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000187.html">
+   <LINK REL="Next"  HREF="000189.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r562 - node/branches/video_test/code/share</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r562%20-%20node/branches/video_test/code/share&In-Reply-To=%3C200605081123.k48BNgfp017437%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r562 - node/branches/video_test/code/share">buddhafly at berlios.de
+       </A><BR>
+    <I>Mon May  8 13:23:42 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000187.html">[Sotf-general] getid3.1-7-5 / sync between audio and video nodes
+</A></li>
+        <LI>Next message: <A HREF="000189.html">[Sotf-general] r563 - node/branches/video_test/code/share
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#188">[ date ]</a>
+              <a href="thread.html#188">[ thread ]</a>
+              <a href="subject.html#188">[ subject ]</a>
+              <a href="author.html#188">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-05-08 13:23:37 +0200 (Mon, 08 May 2006)
+New Revision: 562
+
+Modified:
+   node/branches/video_test/code/share/db.sql
+   node/branches/video_test/code/share/roles_eng.txt
+   node/branches/video_test/code/share/roles_fra.txt
+   node/branches/video_test/code/share/roles_ger.txt
+   node/branches/video_test/code/share/roles_hun.txt
+   node/branches/video_test/code/share/update.sql
+Log:
+video-related roles, translated in all four languages
+changes in db.sql/update.sql
+
+
+Modified: node/branches/video_test/code/share/db.sql
+===================================================================
+--- node/branches/video_test/code/share/db.sql	2006-05-07 16:54:30 UTC (rev 561)
++++ node/branches/video_test/code/share/db.sql	2006-05-08 11:23:37 UTC (rev 562)
+@@ -104,7 +104,7 @@
+ &quot;neighbours&quot; varchar(255), -- 
+ &quot;last_sync_in&quot; timestamptz,							-- time of last sync 
+ &quot;last_sync_out&quot; timestamptz, 							-- time of last sync 
+-&quot;video_capable&quot; bool DEFAULT 'f'  --ADDED BY Martin Schmidt
++-- &quot;video_capable&quot; bool DEFAULT 'f'  --ADDED BY Martin Schmidt
+ );
+ 
+ CREATE TABLE &quot;sotf_neighbours&quot; (
+@@ -297,6 +297,12 @@
+ &quot;stream_access&quot; bool DEFAULT 't'::bool,	-- if users may view it as a stream
+ &quot;download_access&quot; bool DEFAULT 'f'::bool,	-- if users may download it
+ &quot;main_content&quot; bool DEFAULT 'f'::bool,		-- if this file is a variation of the main programme audio/video or sg. else
++&quot;codec&quot; varchar(40) DEFAULT NULL,
++&quot;frame_rate&quot; int DEFAULT NULL,
++&quot;lossless&quot; boolean DEFAULT NULL,
++&quot;resolution_x&quot; int DEFAULT NULL,
++&quot;resolution_y&quot; int DEFAULT NULL,
++&quot;pixel_aspect_ratio&quot; float DEFAULT NULL,
+ CONSTRAINT &quot;sotf_media_files_u&quot; UNIQUE (&quot;prog_id&quot;, &quot;filename&quot;),
+ CONSTRAINT &quot;to_progs&quot; FOREIGN KEY(&quot;prog_id&quot;) REFERENCES sotf_programmes(&quot;id&quot;) ON DELETE CASCADE
+ );
+
+Modified: node/branches/video_test/code/share/roles_eng.txt
+===================================================================
+--- node/branches/video_test/code/share/roles_eng.txt	2006-05-07 16:54:30 UTC (rev 561)
++++ node/branches/video_test/code/share/roles_eng.txt	2006-05-08 11:23:37 UTC (rev 562)
+@@ -22,3 +22,25 @@
+ 22 Creator
+ 23 Publisher
+ 24 Contributor
++25 Actor
++26 Animator
++27 Art Director
++28 Camera Operator
++29 Director of Photography
++30 Dubber
++31 Graphic Designer
++32 Lighting Technician
++33 Make-Up Artist
++34 Photographer
++35 Post-Production Editor
++36 Rigger
++37 Set Designer
++38 Set Dresser
++39 Sound Designer
++40 Sound Mixer
++41 Special Effects
++42 Stunts
++43 Subtitles
++44 Visual Editor
++45 Visual Effects
++46 Wardrobe
+\ No newline at end of file
+
+Modified: node/branches/video_test/code/share/roles_fra.txt
+===================================================================
+--- node/branches/video_test/code/share/roles_fra.txt	2006-05-07 16:54:30 UTC (rev 561)
++++ node/branches/video_test/code/share/roles_fra.txt	2006-05-08 11:23:37 UTC (rev 562)
+@@ -22,4 +22,25 @@
+ 22 cr&#233;ateur
+ 23 &#233;diteur
+ 24 contribuant
+-
++25 acteur
++26 animateur
++27 directeur artistique
++28 cadreur
++29 cam&#233;raman
++30 dubber
++31 graphiste
++32 &#233;lectricien
++33 maquilleur
++34 photographe
++35 editeur de la post-production
++36 monteur
++37 sc&#233;nographe
++38 fournisseur
++39 sound designer
++40 sound mixer
++41 effets sp&#233;ciaux
++42 stunts
++43 sous-titres
++44 cutter
++45 effets visuels
++46 costumier
+\ No newline at end of file
+
+Modified: node/branches/video_test/code/share/roles_ger.txt
+===================================================================
+--- node/branches/video_test/code/share/roles_ger.txt	2006-05-07 16:54:30 UTC (rev 561)
++++ node/branches/video_test/code/share/roles_ger.txt	2006-05-08 11:23:37 UTC (rev 562)
+@@ -22,3 +22,25 @@
+ 22 Verfasser oder Urheber
+ 23 Verleger bzw. Herausgeber
+ 24 Weitere beteiligten Personen und K&#246;rperschaften
++25 Schauspieler
++26 Trickfilmzeichner
++27 K&#252;nstlericher Leiter
++28 Schwenker
++29 Kameramann
++30 Dubber
++31 Graphiker
++32 Beleuchter
++33 Maskenbildner
++34 Fotograf
++35 Post-Production Editor
++36 Monteur
++37 B&#252;hnenbildner
++38 Ausstatter
++39 Sound Designer
++40 Sound Mixer
++41 Special Effects
++42 Stunts
++43 Untertitel
++44 Schnitt
++45 Visual Effects
++46 Kost&#252;me
+\ No newline at end of file
+
+Modified: node/branches/video_test/code/share/roles_hun.txt
+===================================================================
+--- node/branches/video_test/code/share/roles_hun.txt	2006-05-07 16:54:30 UTC (rev 561)
++++ node/branches/video_test/code/share/roles_hun.txt	2006-05-08 11:23:37 UTC (rev 562)
+@@ -22,3 +22,25 @@
+ 22 Alkot&#243;
+ 23 Kiad&#243;
+ 24 K&#246;zrem&#369;k&#246;d&#337;
++25 Sz&#237;n&#233;sz
++26 Anim&#225;tor
++27 M&#369;v&#233;szeti vezet&#337;
++28 Operat&#337;r
++29 Rendez&#337;
++30 Szinkronsz&#237;n&#233;sz
++31 Grafikai tervez&#337;
++32 Vil&#225;gos&#237;t&#243;
++33 Make-Up
++34 F&#233;nyk&#233;p&#233;sz
++35 Post-production
++36 &#193;llv&#225;nyoz&#243;
++37 D&#237;szlettervez&#337;
++38 D&#237;szlet
++39 Hangtervez&#337;
++40 Hangkever&#337;
++41 K&#252;l&#246;nleges effektek
++42 Kaszkad&#337;r
++43 Feliratok
++44 V&#225;g&#225;s
++45 Vizu&#225;lis effektek
++46 Jelmez
+\ No newline at end of file
+
+Modified: node/branches/video_test/code/share/update.sql
+===================================================================
+--- node/branches/video_test/code/share/update.sql	2006-05-07 16:54:30 UTC (rev 561)
++++ node/branches/video_test/code/share/update.sql	2006-05-08 11:23:37 UTC (rev 562)
+@@ -222,5 +222,5 @@
+ 
+ -- ADDED BY Martin Schmidt
+ -- NEW FIELD &quot;video_capable&quot; in sotf_nodes
+-ALTER TABLE sotf_nodes ADD COLUMN &quot;video_capable&quot; bool;
+-ALTER TABLE sotf_nodes ALTER video_capable SET DEFAULT 'f'::bool;
++-- ALTER TABLE sotf_nodes ADD COLUMN &quot;video_capable&quot; bool;
++-- ALTER TABLE sotf_nodes ALTER video_capable SET DEFAULT 'f'::bool;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000187.html">[Sotf-general] getid3.1-7-5 / sync between audio and video nodes
+</A></li>
+	<LI>Next message: <A HREF="000189.html">[Sotf-general] r563 - node/branches/video_test/code/share
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#188">[ date ]</a>
+              <a href="thread.html#188">[ thread ]</a>
+              <a href="subject.html#188">[ subject ]</a>
+              <a href="author.html#188">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] GUI Redesign | Problem with subtopics listing	(wrong	total numbers)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20GUI%20Redesign%20%7C%20Problem%20with%20subtopics%20listing%0A%09%28wrong%09total%20numbers%29&In-Reply-To=%3C%22H000dbab01958d02.1153222810.scalix.fh-stpoelten.ac.at%2A%22%40MHS%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000258.html">
+   <LINK REL="Next"  HREF="000259.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] GUI Redesign | Problem with subtopics listing	(wrong	total numbers)</H1>
+    <B>Husinsky Matthias</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20GUI%20Redesign%20%7C%20Problem%20with%20subtopics%20listing%0A%09%28wrong%09total%20numbers%29&In-Reply-To=%3C%22H000dbab01958d02.1153222810.scalix.fh-stpoelten.ac.at%2A%22%40MHS%3E"
+       TITLE="[Sotf-general] GUI Redesign | Problem with subtopics listing	(wrong	total numbers)">Matthias.Husinsky at fh-stpoelten.ac.at
+       </A><BR>
+    <I>Tue Jul 18 13:40:11 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000258.html">[Sotf-general] Hello, this is radio K&#246;lncampus and we'd like to join sotf
+</A></li>
+        <LI>Next message: <A HREF="000259.html">[Sotf-general] exit signal File size limit exceeded (25)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#257">[ date ]</a>
+              <a href="thread.html#257">[ thread ]</a>
+              <a href="subject.html#257">[ subject ]</a>
+              <a href="author.html#257">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi,
+
+we, at the Fachhochschule St.P&#246;lten, are indeed working on a redesign of the node interface. not only are we aiming on redesigning a new interface, but also on changing the site's structure by removing the html-tables and replacing them with div-tags. this form of design should make it possible to entirely redesign the site just with a stylesheet and make clean cut between view and the structure. 
+
+doing it that way is the most accepted method among webdesigners nowadays. 
+still, i guess it will take us at least one more month until we can present results.
+
+greetings,
+matthias 
+
+-----Urspr&#252;ngliche Nachricht-----
+Von: Andr&#225;s Micsik [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">micsik at sztaki.hu</A>] 
+Gesendet: Dienstag, 18. Juli 2006 10:51
+An: <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">sotf-general at lists.berlios.de</A>
+Betreff: Re: [Sotf-general] GUI Redesign | Problem with subtopics listing (wrong total numbers)
+
+
+Clemens Peter wrote:
+&gt;<i> 
+</I>&gt;<i> Hi folks,
+</I>&gt;<i> 
+</I>&gt;<i> in recent days I completed my personal GUI redesign of the SOTF node 
+</I>&gt;<i> platform for our site www.radio-gesundheit.at - this could be an 
+</I>&gt;<i> inspiration for others or a start for a general GUI redesign on which 
+</I>&gt;<i> I would participate.
+</I>&gt;<i> 
+</I>&gt;<i> My design was focusing on an easily adoptable GUI in which almost all 
+</I>&gt;<i> style elements are transfered into the separate stylesheet file 
+</I>&gt;<i> main.css and can be edited there. Also the rounded corners of the 
+</I>&gt;<i> program thumbnails are done automatically by overlaying a transparent 
+</I>&gt;<i> gif with corners coloured like the background colour (so no 
+</I>&gt;<i> ImageMagick is needed).
+</I>
+It looks nice! There is also a redesign planned at St. Poelten. If you can contribute (which would be great), please talk with Markus Seidl or Martin Schmidt.
+Besides the cosmetics, I think some structural changes would also be useful, such as placing the listening links more in the front. We can discuss that on the list.
+
+&gt;<i> Since the first setup I notice a problem with the subtopics listing - 
+</I>&gt;<i> not only in my SOTF installation, but also i.e. at the new video test 
+</I>&gt;<i> node (at
+</I>&gt;<i> <A HREF="http://sotf.fh-stpoelten.ac.at/node_881">http://sotf.fh-stpoelten.ac.at/node_881</A> ):
+</I>&gt;<i> the number of total subtopics in one branch isn't displayed correctly 
+</I>&gt;<i> in the right frame of topics listing (topicSearch area), but is shown 
+</I>&gt;<i> properly in the left frame (topicTree area). You can find this in both 
+</I>&gt;<i> installations above, but e.g. not at the Sztaki node.
+</I>
+Each time you run the cron.php script, it does a bunch of housekeeping in your data, including the refreshing of topic counts (which are updated immediately after any change, but accidentally they might go wrong).
+So running cron.php is useful, even if you do not synchronize your content with other nodes.
+
+Otherwise you can do the update manually on the admin screen, as Clemens has already found out.
+
+Andras
+
+_______________________________________________
+Sotf-general mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A>
+<A HREF="http://bat.berlios.de/mailman/listinfo/sotf-general">http://bat.berlios.de/mailman/listinfo/sotf-general</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000258.html">[Sotf-general] Hello, this is radio K&#246;lncampus and we'd like to join sotf
+</A></li>
+	<LI>Next message: <A HREF="000259.html">[Sotf-general] exit signal File size limit exceeded (25)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#257">[ date ]</a>
+              <a href="thread.html#257">[ thread ]</a>
+              <a href="subject.html#257">[ subject ]</a>
+              <a href="author.html#257">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

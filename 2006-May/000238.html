@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r579 - node/trunk/code/classes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r579%20-%20node/trunk/code/classes&In-Reply-To=%3C200605310924.k4V9Ore3007422%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000236.html">
+   <LINK REL="Next"  HREF="000239.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r579 - node/trunk/code/classes</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r579%20-%20node/trunk/code/classes&In-Reply-To=%3C200605310924.k4V9Ore3007422%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r579 - node/trunk/code/classes">buddhafly at berlios.de
+       </A><BR>
+    <I>Wed May 31 11:24:53 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000236.html">[Sotf-general] performance problem on video nodes | ogg/theora
+</A></li>
+        <LI>Next message: <A HREF="000239.html">[Sotf-general] r580 - node/branches/video_test/code/templates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#238">[ date ]</a>
+              <a href="thread.html#238">[ thread ]</a>
+              <a href="subject.html#238">[ subject ]</a>
+              <a href="author.html#238">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-05-31 11:24:51 +0200 (Wed, 31 May 2006)
+New Revision: 579
+
+Modified:
+   node/trunk/code/classes/userdb_sadm.class.php
+Log:
+password change bug solved for sadm db's
+
+
+Modified: node/trunk/code/classes/userdb_sadm.class.php
+===================================================================
+--- node/trunk/code/classes/userdb_sadm.class.php	2006-05-29 14:21:06 UTC (rev 578)
++++ node/trunk/code/classes/userdb_sadm.class.php	2006-05-31 09:24:51 UTC (rev 579)
+@@ -116,7 +116,7 @@
+    function userCheckPwd($fields) {
+     $query = sprintf(&quot;SELECT auth_id, passwd FROM authenticate WHERE username='%s'&quot;, $fields['username']);
+     $res = $this-&gt;userdb-&gt;getRow($query);
+-    if($res &amp;&amp; $res['password'] == $fields['password']) {
++    if($res &amp;&amp; $res['passwd'] == $fields['password']) {
+       return true;
+     } else
+       return false;
+@@ -125,7 +125,7 @@
+     function getUserPwd($fields){
+   	$query = sprintf(&quot;SELECT auth_id, passwd FROM authenticate WHERE username='%s'&quot;, $fields['username']);
+     $res = $this-&gt;userdb-&gt;getRow($query);
+-	return $res['password'];
++	return $res['passwd'];
+   }
+   
+  
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000236.html">[Sotf-general] performance problem on video nodes | ogg/theora
+</A></li>
+	<LI>Next message: <A HREF="000239.html">[Sotf-general] r580 - node/branches/video_test/code/templates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#238">[ date ]</a>
+              <a href="thread.html#238">[ thread ]</a>
+              <a href="subject.html#238">[ subject ]</a>
+              <a href="author.html#238">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

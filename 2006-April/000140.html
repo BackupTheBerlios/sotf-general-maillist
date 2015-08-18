@@ -1,0 +1,1894 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r551 - in node/trunk: code/configs code/share www
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r551%20-%20in%20node/trunk%3A%20code/configs%20code/share%20www&In-Reply-To=%3C200604061640.k36Gepf1028418%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000137.html">
+   <LINK REL="Next"  HREF="000141.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r551 - in node/trunk: code/configs code/share www</H1>
+    <B>micsik at BerliOS</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r551%20-%20in%20node/trunk%3A%20code/configs%20code/share%20www&In-Reply-To=%3C200604061640.k36Gepf1028418%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r551 - in node/trunk: code/configs code/share www">micsik at berlios.de
+       </A><BR>
+    <I>Thu Apr  6 18:40:51 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000137.html">[Sotf-general] r550 - node/trunk/code/share
+</A></li>
+        <LI>Next message: <A HREF="000141.html">[Sotf-general] Node 666 moved to SVN
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#140">[ date ]</a>
+              <a href="thread.html#140">[ thread ]</a>
+              <a href="subject.html#140">[ subject ]</a>
+              <a href="author.html#140">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: micsik
+Date: 2006-04-06 18:40:43 +0200 (Thu, 06 Apr 2006)
+New Revision: 551
+
+Modified:
+   node/trunk/code/configs/hun.conf
+   node/trunk/code/configs/hun.conf.latin2
+   node/trunk/code/share/constraints.sql
+   node/trunk/www/editMeta.php
+Log:
+Accents in the hun.conf file went wrong (oh my!)
+Minor fixes.
+
+
+Modified: node/trunk/code/configs/hun.conf
+===================================================================
+--- node/trunk/code/configs/hun.conf	2006-04-06 14:18:34 UTC (rev 550)
++++ node/trunk/code/configs/hun.conf	2006-04-06 16:40:43 UTC (rev 551)
+@@ -1,1007 +1,1007 @@
+ # general translations
+ ok = Rendben
+-cancel = M&#233;gsem
++cancel = M&#195;&#169;gsem
+ Save = Elment
+-Date = D&#225;tum
+-Station = R&#225;di&#243;
+-Change = Megv&#225;ltoztat
+-close = Bez&#225;r
+-Search = Keres&#233;s
+-node = Csom&#243;pont
++Date = D&#195;&#161;tum
++Station = R&#195;&#161;di&#195;&#179;
++Change = Megv&#195;&#161;ltoztat
++close = Bez&#195;&#161;r
++Search = Keres&#195;&#169;s
++node = Csom&#195;&#179;pont
+ Yes = Igen
+ No = Nem
+ Up = Fel
+ Down = Le
+-Preferences = Be&#225;ll&#237;t&#225;sok
+-Username = Felhaszn&#225;l&#243; neve
+-Password = Jelsz&#243;
+-More = M&#233;g...
++Preferences = Be&#195;&#161;ll&#195;&#173;t&#195;&#161;sok
++Username = Felhaszn&#195;&#161;l&#195;&#179; neve
++Password = Jelsz&#195;&#179;
++More = M&#195;&#169;g...
+ sec = s
+-optional = opcion&#225;lis
++optional = opcion&#195;&#161;lis
+ Metadata = Metaadatok
+ 
+-contact_node_admin = A csom&#243;pont rendszergazd&#225;ja ezen a c&#237;men &#233;rhet? el:
++contact_node_admin = A csom&#195;&#179;pont rendszergazd&#195;&#161;ja ezen a c&#195;&#173;men &#195;&#169;rhet&#197;&#145; el:
+ 
+ # stream info
+ # name for stream mountpoint
+ playlist_name = lista
+-now_playing = Most sz&#243;l
+-reconnect = &#218;jra csatlakoz&#225;s
++now_playing = Most sz&#195;&#179;l
++reconnect = &#195;&#154;jra csatlakoz&#195;&#161;s
+ stop = Stop
+-jingle = szign&#225;l
+-unknown_audio = ismeretlen audi&#243;
++jingle = szign&#195;&#161;l
++unknown_audio = ismeretlen audi&#195;&#179;
+ 
+ # languages
+-alb = alb&#225;n
++alb = alb&#195;&#161;n
+ eng = angol
+-deu = n&#233;met
++deu = n&#195;&#169;met
+ dut = holland
+ hun = magyar
+ ita = olasz
+ esl = spanyol
+ ces = cseh
+-slo = szlov&#225;k
++slo = szlov&#195;&#161;k
+ pol = lengyel
+ fra = francia
+-rum = rom&#225;n
++rum = rom&#195;&#161;n
+ rom = roma
+ rus = orosz
+-any_language = b&#225;rmely nyelv
++any_language = b&#195;&#161;rmely nyelv
+ no_lang = nincs megadva
+ no_second_lang = Nincs 2. nyelv
+ no_third_lang = Nincs 3. nyelv
+ 
+ #navigation bar
+-Home = C&#237;mlap
+-Help = S&#250;g&#243;
+-About = N&#233;vjegy
++Home = C&#195;&#173;mlap
++Help = S&#195;&#186;g&#195;&#179;
++About = N&#195;&#169;vjegy
+ Playlist = Kedvenceim
+-Personal = Be&#225;ll&#237;t&#225;saim
+-Logout = Kil&#233;p&#233;s
+-Login = Bel&#233;p&#233;s
+-Register = Regisztr&#225;ci&#243;
+-EditorPage = Szerkeszt?knek
++Personal = Be&#195;&#161;ll&#195;&#173;t&#195;&#161;saim
++Logout = Kil&#195;&#169;p&#195;&#169;s
++Login = Bel&#195;&#169;p&#195;&#169;s
++Register = Regisztr&#195;&#161;ci&#195;&#179;
++EditorPage = Szerkeszt&#197;&#145;knek
+ AdminPage = Admin
+-advSearch = R&#233;szletes keres&#233;s
+-Stations = R&#225;di&#243;k
+-Topics = T&#233;m&#225;k
++advSearch = R&#195;&#169;szletes keres&#195;&#169;s
++Stations = R&#195;&#161;di&#195;&#179;k
++Topics = T&#195;&#169;m&#195;&#161;k
+ 
+ #permissions
+ perm_admin = Tulaj
+-perm_change = V&#225;ltoztat&#225;s
+-perm_create = L&#233;trehoz&#225;s
+-perm_delete = T&#246;rl&#233;s
+-perm_authorize = Felhatalmaz&#225;s
++perm_change = V&#195;&#161;ltoztat&#195;&#161;s
++perm_create = L&#195;&#169;trehoz&#195;&#161;s
++perm_delete = T&#195;&#182;rl&#195;&#169;s
++perm_authorize = Felhatalmaz&#195;&#161;s
+ 
+ #this is needed for the XML-RPC server
+-comment_notification_subject = Megjegyz&#233;s &#233;rkezett a m?sorodhoz
++comment_notification_subject = Megjegyz&#195;&#169;s &#195;&#169;rkezett a m&#197;&#177;sorodhoz
+ 
+ #error window
+ or = vagy
+ errors_occured = Hiba:
+-error_exclaim = A hib&#225;t napl&#243;ztuk. Tov&#225;bbi lehet?s&#233;geid:
+-error_go_back = Vissza az el?z? lapra.
+-error_go_safe_page = Vissza egy biztons&#225;gos lapra.
+-error_go_home = Vissza a c&#237;mlapra.
+-error_close = Ablak bez&#225;r&#225;sa.
++error_exclaim = A hib&#195;&#161;t napl&#195;&#179;ztuk. Tov&#195;&#161;bbi lehet&#197;&#145;s&#195;&#169;geid:
++error_go_back = Vissza az el&#197;&#145;z&#197;&#145; lapra.
++error_go_safe_page = Vissza egy biztons&#195;&#161;gos lapra.
++error_go_home = Vissza a c&#195;&#173;mlapra.
++error_close = Ablak bez&#195;&#161;r&#195;&#161;sa.
+ 
+ #common errors
+-invalid_url = Hib&#225;s URL.
+-not_an_image = E v&#225;lasztot f&#225;jlt nem siker&#252;lt k&#233;pk&#233;nt &#233;rtelmezni.
+-not_a_number = Ez nem sz&#225;m.
+-select_file = V&#225;lasszon egy f&#225;jlt!
+-format_already_present = Ez a form&#225;tum m&#225;r l&#233;tezik, k&#233;rj&#252;k t&#246;r&#246;lje el?bb!
+-no_such_file = Ilyen f&#225;jl nem l&#233;tezik.
+-cannot_rate_no_authkey = &#201;rt&#233;kel&#233;sed nem tudjuk elfogadni, mivel nem enged&#233;lyezted a cookie (s&#252;ti) haszn&#225;lat&#225;t.
+-no_file_to_listen = Nincs olyan audi&#243;, amelynek hallgat&#225;sa enged&#233;lyezve lenne.
+-conversion_not_supported = Ez a fajta audi&#243; konverzi&#243; pillanatnyilag nincs t&#225;mogatva.
+-audio_length_no_match = Ennek a hanganyagnak a hossza k&#252;l&#246;nb&#246;zik az eddig t&#225;rolt hanganyagok hossz&#225;t&#243;l.
+-no_permission = Ehhez '%1' jogosults&#225;gra lenne sz&#252;ks&#233;ged!
+-conversion_failed = Az auid&#243; konverzi&#243; nem siker&#252;lt.
+-operation_for_local_objects_only = Ez a m?velet csak lok&#225;lis objektumokon enged&#233;lyezett.
+-no_such_object = Nincsen ilyen azonos&#237;t&#243;j&#250; objektum az adatb&#225;zisban
+-illegal_name = A n&#233;v nem megengedett karaktereket tartalmazott. Ezeket kijav&#237;tottuk, k&#233;rj&#252;k ellen?rizze!
++invalid_url = Hib&#195;&#161;s URL.
++not_an_image = E v&#195;&#161;lasztot f&#195;&#161;jlt nem siker&#195;&#188;lt k&#195;&#169;pk&#195;&#169;nt &#195;&#169;rtelmezni.
++not_a_number = Ez nem sz&#195;&#161;m.
++select_file = V&#195;&#161;lasszon egy f&#195;&#161;jlt!
++format_already_present = Ez a form&#195;&#161;tum m&#195;&#161;r l&#195;&#169;tezik, k&#195;&#169;rj&#195;&#188;k t&#195;&#182;r&#195;&#182;lje el&#197;&#145;bb!
++no_such_file = Ilyen f&#195;&#161;jl nem l&#195;&#169;tezik.
++cannot_rate_no_authkey = &#195;&#137;rt&#195;&#169;kel&#195;&#169;sed nem tudjuk elfogadni, mivel nem enged&#195;&#169;lyezted a cookie (s&#195;&#188;ti) haszn&#195;&#161;lat&#195;&#161;t.
++no_file_to_listen = Nincs olyan audi&#195;&#179;, amelynek hallgat&#195;&#161;sa enged&#195;&#169;lyezve lenne.
++conversion_not_supported = Ez a fajta audi&#195;&#179; konverzi&#195;&#179; pillanatnyilag nincs t&#195;&#161;mogatva.
++audio_length_no_match = Ennek a hanganyagnak a hossza k&#195;&#188;l&#195;&#182;nb&#195;&#182;zik az eddig t&#195;&#161;rolt hanganyagok hossz&#195;&#161;t&#195;&#179;l.
++no_permission = Ehhez '%1' jogosults&#195;&#161;gra lenne sz&#195;&#188;ks&#195;&#169;ged!
++conversion_failed = Az auid&#195;&#179; konverzi&#195;&#179; nem siker&#195;&#188;lt.
++operation_for_local_objects_only = Ez a m&#197;&#177;velet csak lok&#195;&#161;lis objektumokon enged&#195;&#169;lyezett.
++no_such_object = Nincsen ilyen azonos&#195;&#173;t&#195;&#179;j&#195;&#186; objektum az adatb&#195;&#161;zisban
++illegal_name = A n&#195;&#169;v nem megengedett karaktereket tartalmazott. Ezeket kijav&#195;&#173;tottuk, k&#195;&#169;rj&#195;&#188;k ellen&#197;&#145;rizze!
+ 
+-confirm_unsaved = Ezen az oldalon elmentetlen inform&#225;ci&#243;k vannak. Ha igent v&#225;laszol, ezek elvesznek. Nyomja meg a nem &#233;s ment&#233;s gombokat miel?tt tov&#225;bbl&#233;pne.
++confirm_unsaved = Ezen az oldalon elmentetlen inform&#195;&#161;ci&#195;&#179;k vannak. Ha igent v&#195;&#161;laszol, ezek elvesznek. Nyomja meg a nem &#195;&#169;s ment&#195;&#169;s gombokat miel&#197;&#145;tt tov&#195;&#161;bbl&#195;&#169;pne.
+ 
+ #list splitting
+-of = &#246;sszes:
+-refresh = Friss&#237;t
++of = &#195;&#182;sszes:
++refresh = Friss&#195;&#173;t
+ first = Eleje
+-prev = El?z?
+-next = K&#246;vetkez?
+-last = V&#233;ge
++prev = El&#197;&#145;z&#197;&#145;
++next = K&#195;&#182;vetkez&#197;&#145;
++last = V&#195;&#169;ge
+ to = -
+-no_results = &#220;res lista
++no_results = &#195;&#156;res lista
+ 
+ # translations for database field names
+-station = R&#225;di&#243; neve
+-production_date = K&#233;sz&#237;t&#233;s d&#225;tuma
++station = R&#195;&#161;di&#195;&#179; neve
++production_date = K&#195;&#169;sz&#195;&#173;t&#195;&#169;s d&#195;&#161;tuma
+ language = Nyelv
+-expiry_date = Lej&#225;rat
++expiry_date = Lej&#195;&#161;rat
+ series = Sorozat
+ track = Track
+-topic = T&#233;ma
+-entry_date = &#201;rkezett
+-broadcast_date = Ad&#225;s d&#225;tuma
+-modify_date = M&#243;dos&#237;t&#225;s d&#225;tuma
++topic = T&#195;&#169;ma
++entry_date = &#195;&#137;rkezett
++broadcast_date = Ad&#195;&#161;s d&#195;&#161;tuma
++modify_date = M&#195;&#179;dos&#195;&#173;t&#195;&#161;s d&#195;&#161;tuma
+ owner = Tulajdonos
+-person = Szem&#233;ly
+-title = C&#237;m
++person = Szem&#195;&#169;ly
++title = C&#195;&#173;m
+ keywords = Kulcsszavak
+ abstract = Kivonat
+ length = Hossz
+-rating = &#201;rt&#233;kel&#233;s
+-contact_email = E-mail c&#237;m
++rating = &#195;&#137;rt&#195;&#169;kel&#195;&#169;s
++contact_email = E-mail c&#195;&#173;m
+ contact_phone = Telefon
+-seriestitle = Sorozatc&#237;m
+-seriesdescription = Sorozat le&#237;r&#225;s
+-spatial_coverage = T&#225;rs&#237;that&#243; helysz&#237;n
+-temporal_coverage = T&#225;rs&#237;that&#243; id&#243;pont
+-genre_id = M?faj
+-alternative_title = Alc&#237;m
+-episode_title = Epiz&#243;dc&#237;m
+-episode_sequence = Epiz&#243;d sorsz&#225;m
++seriestitle = Sorozatc&#195;&#173;m
++seriesdescription = Sorozat le&#195;&#173;r&#195;&#161;s
++spatial_coverage = T&#195;&#161;rs&#195;&#173;that&#195;&#179; helysz&#195;&#173;n
++temporal_coverage = T&#195;&#161;rs&#195;&#173;that&#195;&#179; id&#195;&#179;pont
++genre_id = M&#197;&#177;faj
++alternative_title = Alc&#195;&#173;m
++episode_title = Epiz&#195;&#179;dc&#195;&#173;m
++episode_sequence = Epiz&#195;&#179;d sorsz&#195;&#161;m
+ 
+ # audio conversion messages
+-conversion_started = Konvert&#225;l&#225;s:
+-encoding_mp3 = Konvert&#225;l&#225;s MP3 form&#225;ba...
+-decoding_mp3 = MP3-b&#243;l PCM k&#233;sz&#237;t&#233;s...
+-encoding_ogg = Konvert&#225;l&#225;s OGG form&#225;ba...
+-decoding_ogg = OGG-b&#243;l PCM k&#233;sz&#237;t&#233;s...
+-convert_mono = Mono PCM-b?l sztere&#243; k&#233;sz&#237;t&#233;se...
++conversion_started = Konvert&#195;&#161;l&#195;&#161;s:
++encoding_mp3 = Konvert&#195;&#161;l&#195;&#161;s MP3 form&#195;&#161;ba...
++decoding_mp3 = MP3-b&#195;&#179;l PCM k&#195;&#169;sz&#195;&#173;t&#195;&#169;s...
++encoding_ogg = Konvert&#195;&#161;l&#195;&#161;s OGG form&#195;&#161;ba...
++decoding_ogg = OGG-b&#195;&#179;l PCM k&#195;&#169;sz&#195;&#173;t&#195;&#169;s...
++convert_mono = Mono PCM-b&#197;&#145;l sztere&#195;&#179; k&#195;&#169;sz&#195;&#173;t&#195;&#169;se...
+ 
+ [rss]
+-new_programmes = ?j programok list&#225;ja:
+-search_in_station = Keres&#233;s a %1 r&#225;di&#243; anyagai k&#246;z&#246;tt
++new_programmes = &#195;&#154;j programok list&#195;&#161;ja:
++search_in_station = Keres&#195;&#169;s a %1 r&#195;&#161;di&#195;&#179; anyagai k&#195;&#182;z&#195;&#182;tt
+ Statistics = Statisztika
+ Rights = Jogok
+-for_whole_prg = Az eg&#233;sz m?sorra
+-listen = Meghallgat&#225;s
+-listen_as = Meghallgat&#225;s
+-download_as = Let&#246;lt&#233;s
+-no_rat = &#233;rt&#233;kel&#233;s
+-station = R&#225;di&#243;
++for_whole_prg = Az eg&#195;&#169;sz m&#197;&#177;sorra
++listen = Meghallgat&#195;&#161;s
++listen_as = Meghallgat&#195;&#161;s
++download_as = Let&#195;&#182;lt&#195;&#169;s
++no_rat = &#195;&#169;rt&#195;&#169;kel&#195;&#169;s
++station = R&#195;&#161;di&#195;&#179;
+ series = Sorozat
+-title = C&#237;m
+-alternative_title = Alc&#237;m
+-episode_title = Epiz&#243;dc&#237;m
+-episode_sequence = Epiz&#243;d sorsz&#225;m
+-Links = Ugr&#243;pontok
+-genre = M?faj
++title = C&#195;&#173;m
++alternative_title = Alc&#195;&#173;m
++episode_title = Epiz&#195;&#179;dc&#195;&#173;m
++episode_sequence = Epiz&#195;&#179;d sorsz&#195;&#161;m
++Links = Ugr&#195;&#179;pontok
++genre = M&#197;&#177;faj
+ 
+ [search]
+-Results = Tal&#225;latok
+-No_results = Nincs tal&#225;lat
++Results = Tal&#195;&#161;latok
++No_results = Nincs tal&#195;&#161;lat
+ 
+ [topics]
+-topics_title = T&#233;m&#225;k
++topics_title = T&#195;&#169;m&#195;&#161;k
+ 
+ [index]
+-intro = &#220;dv&#246;z&#246;lj&#252;k a StreamOnTheFly honlapj&#225;n! Ez a nemzetk&#246;zi h&#225;l&#243;zat k&#246;z&#246;ss&#233;gi r&#225;di&#243;k m?sorait archiv&#225;lja.
+-Login_tab = Bejelentkez&#233;s
+-logged_in_as = Az &#214;n felhaszn&#225;l&#243; neve:
+-Go = Kiv&#225;laszt
++intro = &#195;&#156;dv&#195;&#182;z&#195;&#182;lj&#195;&#188;k a StreamOnTheFly honlapj&#195;&#161;n! Ez a nemzetk&#195;&#182;zi h&#195;&#161;l&#195;&#179;zat k&#195;&#182;z&#195;&#182;ss&#195;&#169;gi r&#195;&#161;di&#195;&#179;k m&#197;&#177;sorait archiv&#195;&#161;lja.
++Login_tab = Bejelentkez&#195;&#169;s
++logged_in_as = Az &#195;&#150;n felhaszn&#195;&#161;l&#195;&#179; neve:
++Go = Kiv&#195;&#161;laszt
+ my_playlist = Kedvenceim
+ 
+ statistics = Statisztika
+-nodes = csom&#243;pont
+-stations = r&#225;di&#243;ad&#243;
+-progs = m?sor
++nodes = csom&#195;&#179;pont
++stations = r&#195;&#161;di&#195;&#179;ad&#195;&#179;
++progs = m&#197;&#177;sor
+ mb_of_audio = MB hanganyag
+-hours_of_audio = &#243;r&#225;nyi hanganyag
+-listens_and_downloads = let&#246;lt&#233;s vagy meghallgat&#225;s
+-users = regisztr&#225;lt felhaszn&#225;l&#243;
++hours_of_audio = &#195;&#179;r&#195;&#161;nyi hanganyag
++listens_and_downloads = let&#195;&#182;lt&#195;&#169;s vagy meghallgat&#195;&#161;s
++users = regisztr&#195;&#161;lt felhaszn&#195;&#161;l&#195;&#179;
+ 
+ contacts = Kapcsolat
+ node_admin = Rendszergazda
+ contacts_text = &lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://www.streamonthefly.org">http://www.streamonthefly.org</A>&quot;&gt;StreamOnTheFly projekt&lt;/a&gt;&lt;br&gt;&lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>&quot;&gt;MTA SZTAKI DSD&lt;/a&gt;&lt;br&gt;&lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://szotar.sztaki.hu">http://szotar.sztaki.hu</A>&quot;&gt;szotar.sztaki.hu&lt;/a&gt;
+ 
+ recent_uploads = Friss anyagok
+-topics = T&#233;m&#225;k
+-top_topics = A leggyakoribb t&#233;m&#225;k
++topics = T&#195;&#169;m&#195;&#161;k
++top_topics = A leggyakoribb t&#195;&#169;m&#195;&#161;k
+ New_shows = Friss anyagok
+-No_news = Nincs &#250;j anyag a h&#225;l&#243;zatban
+-Default_query = Alap&#233;rtelmezett keres&#233;s&#233;nek eredm&#233;nye:
+-No_results = Nincs tal&#225;lat
+-total = &#246;sszesen:
++No_news = Nincs &#195;&#186;j anyag a h&#195;&#161;l&#195;&#179;zatban
++Default_query = Alap&#195;&#169;rtelmezett keres&#195;&#169;s&#195;&#169;nek eredm&#195;&#169;nye:
++No_results = Nincs tal&#195;&#161;lat
++total = &#195;&#182;sszesen:
+ 
+ #added by buddhafly 05-11-22
+-Forgot = Elfelejtette a jelszav&#225;t?
++Forgot = Elfelejtette a jelszav&#195;&#161;t?
+ 
+ [stations]
+-admin_tasks = Adminisztr&#225;tori feladatok:
+-create_station = &#218;j r&#225;di&#243; felv&#233;tele
+-newest_first = Legfrissebb legel&#246;l
+-by_name = N&#233;v szerint rendezve
+-change_mode = Rendez&#233;s/sz?r&#233;s megv&#225;ltoztat&#225;sa
++admin_tasks = Adminisztr&#195;&#161;tori feladatok:
++create_station = &#195;&#154;j r&#195;&#161;di&#195;&#179; felv&#195;&#169;tele
++newest_first = Legfrissebb legel&#195;&#182;l
++by_name = N&#195;&#169;v szerint rendezve
++change_mode = Rendez&#195;&#169;s/sz&#197;&#177;r&#195;&#169;s megv&#195;&#161;ltoztat&#195;&#161;sa
+ logo = logo
+ languages = Nyelv(ek):
+-add_prg = M?sorok hozz&#225;ad&#225;sa
+-delete = R&#225;di&#243; t&#246;rl&#233;se
+-delete_station_confirm = Biztosan t&#246;r&#246;lni akarja ezt a r&#225;di&#243;t?
+-managed_by = F?szerkeszt?k:
+-edit_node_rights = Felhaszn&#225;l&#243;i jogok be&#225;ll&#237;t&#225;sa
+-stations = R&#225;di&#243;k
++add_prg = M&#197;&#177;sorok hozz&#195;&#161;ad&#195;&#161;sa
++delete = R&#195;&#161;di&#195;&#179; t&#195;&#182;rl&#195;&#169;se
++delete_station_confirm = Biztosan t&#195;&#182;r&#195;&#182;lni akarja ezt a r&#195;&#161;di&#195;&#179;t?
++managed_by = F&#197;&#145;szerkeszt&#197;&#145;k:
++edit_node_rights = Felhaszn&#195;&#161;l&#195;&#179;i jogok be&#195;&#161;ll&#195;&#173;t&#195;&#161;sa
++stations = R&#195;&#161;di&#195;&#179;k
+ icon = logo
+-edit = Szerkeszt&#233;s
+-no_station = M&#233;g nincs egy r&#225;di&#243; sem.
+-create_ok = A r&#225;di&#243; l&#233;trehozva.
+-delete_ok = A r&#225;di&#243; t&#246;r&#246;lve.
++edit = Szerkeszt&#195;&#169;s
++no_station = M&#195;&#169;g nincs egy r&#195;&#161;di&#195;&#179; sem.
++create_ok = A r&#195;&#161;di&#195;&#179; l&#195;&#169;trehozva.
++delete_ok = A r&#195;&#161;di&#195;&#179; t&#195;&#182;r&#195;&#182;lve.
+ 
+ [createStation]
+-create_station = &#218;j r&#225;di&#243; l&#233;trehoz&#225;sa
+-station_name = R&#225;di&#243; neve
+-description = Le&#237;r&#225;s
+-station_manager = F?szerkeszt?
+-create = Hozd l&#233;tre
+-no_permission = Nincs joga &#250;j r&#225;di&#243;t l&#233;trehozni
+-userlist = Felhaszn&#225;l&#243;k list&#225;ja
+-select_manager = K&#233;rj&#252;k &#237;rjon be egy l&#233;tez? felhaszn&#225;l&#243; nevet f?szerkeszt?nek.
+-name_in_use = M&#225;r van ilyen nev? r&#225;di&#243;.
+-station_created = &#218;j r&#225;di&#243; l&#233;trehozva.
++create_station = &#195;&#154;j r&#195;&#161;di&#195;&#179; l&#195;&#169;trehoz&#195;&#161;sa
++station_name = R&#195;&#161;di&#195;&#179; neve
++description = Le&#195;&#173;r&#195;&#161;s
++station_manager = F&#197;&#145;szerkeszt&#197;&#145;
++create = Hozd l&#195;&#169;tre
++no_permission = Nincs joga &#195;&#186;j r&#195;&#161;di&#195;&#179;t l&#195;&#169;trehozni
++userlist = Felhaszn&#195;&#161;l&#195;&#179;k list&#195;&#161;ja
++select_manager = K&#195;&#169;rj&#195;&#188;k &#195;&#173;rjon be egy l&#195;&#169;tez&#197;&#145; felhaszn&#195;&#161;l&#195;&#179; nevet f&#197;&#145;szerkeszt&#197;&#145;nek.
++name_in_use = M&#195;&#161;r van ilyen nev&#197;&#177; r&#195;&#161;di&#195;&#179;.
++station_created = &#195;&#154;j r&#195;&#161;di&#195;&#179; l&#195;&#169;trehozva.
+ 
+ [editStation]
+-edit_station = R&#225;di&#243; be&#225;ll&#237;t&#225;sainak megv&#225;ltoztat&#225;sa
+-general_data = &#193;ltal&#225;nos adatok
+-station_name = R&#225;di&#243; neve
++edit_station = R&#195;&#161;di&#195;&#179; be&#195;&#161;ll&#195;&#173;t&#195;&#161;sainak megv&#195;&#161;ltoztat&#195;&#161;sa
++general_data = &#195;&#129;ltal&#195;&#161;nos adatok
++station_name = R&#195;&#161;di&#195;&#179; neve
+ url = Weblap (ha van)
+-languages = Ad&#225;s nyelve(i)
+-description = Le&#237;r&#225;s
+-save = Ment&#233;s
+-illegal_name = A r&#225;di&#243; neve nem megengedett karaktereket tartalmazott.
+-access_permissions = Szerkeszt?k &#233;s jogosults&#225;gok
+-Permissions = Jogosults&#225;gok
+-icons_and_jingles = Ikon &#233;s szign&#225;l
+-username = Felhaszn&#225;l&#243; neve
+-permissions = Jogosults&#225;gok
+-actions = Tev&#233;kenys&#233;gek
+-delete = T&#246;r&#246;ld
+-inherited_perms = A rendszer szintekr?l &#246;r&#246;k&#246;lt jogok
+-no_perms = Senkinek sincs joga ehhez a r&#225;di&#243;hoz (??)
+-change_perm = &#218;j jogosults&#225;gok hozz&#225;ad&#225;sa
+-change = V&#225;ltoztat&#225;s
+-deleted_permissions_for = &#214;sszes jogosults&#225;g t&#246;r&#246;lve: %1
+-deleted_contact = N&#233;vjegy t&#246;r&#246;lve: %1
+-ok_icon = A k&#252;ld&#246;tt f&#225;jl ikonnak be&#225;ll&#237;tva.
+-error_icon = Ez a f&#225;jl nem lehet ikon.
+-ok_jingle = A k&#252;ld&#246;tt f&#225;jl szign&#225;lnak be&#225;ll&#237;tva.
+-error_jingle = Ez a f&#225;jl nem lehet szign&#225;l.
+-userfiles = F&#225;jljaim
+-userfiles_expl = Innen is v&#225;laszthat ikont vagy szign&#225;lt.
+-upload_file = Felt&#246;lt&#233;s a f&#225;jljaimhoz
+-view = Megn&#233;z
+-set_jingle = Legyen szign&#225;l
++languages = Ad&#195;&#161;s nyelve(i)
++description = Le&#195;&#173;r&#195;&#161;s
++save = Ment&#195;&#169;s
++illegal_name = A r&#195;&#161;di&#195;&#179; neve nem megengedett karaktereket tartalmazott.
++access_permissions = Szerkeszt&#197;&#145;k &#195;&#169;s jogosults&#195;&#161;gok
++Permissions = Jogosults&#195;&#161;gok
++icons_and_jingles = Ikon &#195;&#169;s szign&#195;&#161;l
++username = Felhaszn&#195;&#161;l&#195;&#179; neve
++permissions = Jogosults&#195;&#161;gok
++actions = Tev&#195;&#169;kenys&#195;&#169;gek
++delete = T&#195;&#182;r&#195;&#182;ld
++inherited_perms = A rendszer szintekr&#197;&#145;l &#195;&#182;r&#195;&#182;k&#195;&#182;lt jogok
++no_perms = Senkinek sincs joga ehhez a r&#195;&#161;di&#195;&#179;hoz (??)
++change_perm = &#195;&#154;j jogosults&#195;&#161;gok hozz&#195;&#161;ad&#195;&#161;sa
++change = V&#195;&#161;ltoztat&#195;&#161;s
++deleted_permissions_for = &#195;&#150;sszes jogosults&#195;&#161;g t&#195;&#182;r&#195;&#182;lve: %1
++deleted_contact = N&#195;&#169;vjegy t&#195;&#182;r&#195;&#182;lve: %1
++ok_icon = A k&#195;&#188;ld&#195;&#182;tt f&#195;&#161;jl ikonnak be&#195;&#161;ll&#195;&#173;tva.
++error_icon = Ez a f&#195;&#161;jl nem lehet ikon.
++ok_jingle = A k&#195;&#188;ld&#195;&#182;tt f&#195;&#161;jl szign&#195;&#161;lnak be&#195;&#161;ll&#195;&#173;tva.
++error_jingle = Ez a f&#195;&#161;jl nem lehet szign&#195;&#161;l.
++userfiles = F&#195;&#161;jljaim
++userfiles_expl = Innen is v&#195;&#161;laszthat ikont vagy szign&#195;&#161;lt.
++upload_file = Felt&#195;&#182;lt&#195;&#169;s a f&#195;&#161;jljaimhoz
++view = Megn&#195;&#169;z
++set_jingle = Legyen szign&#195;&#161;l
+ set_icon = Legyen ikon
+-no_files = Nincsenek felt&#246;lt&#246;tt f&#225;jlok.
+-upload_expl = Ha az ikonk&#233;nt vagy szign&#225;lk&#233;nt haszn&#225;lni k&#237;v&#225;nt f&#225;jl nincs m&#233;g a f&#225;jljai k&#246;z&#246;tt, itt felt&#246;ltheti.
++no_files = Nincsenek felt&#195;&#182;lt&#195;&#182;tt f&#195;&#161;jlok.
++upload_expl = Ha az ikonk&#195;&#169;nt vagy szign&#195;&#161;lk&#195;&#169;nt haszn&#195;&#161;lni k&#195;&#173;v&#195;&#161;nt f&#195;&#161;jl nincs m&#195;&#169;g a f&#195;&#161;jljai k&#195;&#182;z&#195;&#182;tt, itt felt&#195;&#182;ltheti.
+ icon = Ikon
+ no_icon = Nincs ikon.
+-jingle_list = Szign&#225;l lista
+-format = Form&#225;tum
++jingle_list = Szign&#195;&#161;l lista
++format = Form&#195;&#161;tum
+ bitrate = Bit/s
+-channels = Csatorn&#225;k
+-samplerate = Mintav&#233;tel
+-no_jingle = Nincs szign&#225;l
+-upload_jingle = Szign&#225;l felt&#246;lt&#233;se
+-missing = hi&#225;nyzik
++channels = Csatorn&#195;&#161;k
++samplerate = Mintav&#195;&#169;tel
++no_jingle = Nincs szign&#195;&#161;l
++upload_jingle = Szign&#195;&#161;l felt&#195;&#182;lt&#195;&#169;se
++missing = hi&#195;&#161;nyzik
+ exists = rendben
+-convert = Gener&#225;ld a t&#246;bbib?l
+-delete = T&#246;r&#246;ld
++convert = Gener&#195;&#161;ld a t&#195;&#182;bbib&#197;&#145;l
++delete = T&#195;&#182;r&#195;&#182;ld
+ 
+ # roles and contacts
+-Roles = N&#233;vjegyek &#233;s szerepek
++Roles = N&#195;&#169;vjegyek &#195;&#169;s szerepek
+ Role = Szerep
+-Contact = N&#233;vjegy
+-no_roles = Nincs n&#233;vjegy
+-add_new_role = &#218;j szerep hozz&#225;ad&#225;sa
++Contact = N&#195;&#169;vjegy
++no_roles = Nincs n&#195;&#169;vjegy
++add_new_role = &#195;&#154;j szerep hozz&#195;&#161;ad&#195;&#161;sa
+ edit_role = SzerepSzerkesztes
+-edit_contact = N&#233;vjegy m&#243;dos&#237;t&#225;sa
++edit_contact = N&#195;&#169;vjegy m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
+ editcontact = NevjegySzerkesztes
+ series = Sorozat
+-series_title = C&#237;m
++series_title = C&#195;&#173;m
+ no_series = Nincsenek sorozatok
+-add_series = &#218;j sorozat hozz&#225;ad&#225;sa
++add_series = &#195;&#154;j sorozat hozz&#195;&#161;ad&#195;&#161;sa
+ 
+ [changeStation]
+-changeStation = A m?sort m&#225;sik r&#225;di&#243;hoz rendelj&#252;k
++changeStation = A m&#197;&#177;sort m&#195;&#161;sik r&#195;&#161;di&#195;&#179;hoz rendelj&#195;&#188;k
+ Add = Mehet
+ 
+ [createSeries]
+-create_series = &#218;j sorozat l&#233;trehoz&#225;sa
+-Create = L&#233;trehoz&#225;s
++create_series = &#195;&#154;j sorozat l&#195;&#169;trehoz&#195;&#161;sa
++Create = L&#195;&#169;trehoz&#195;&#161;s
+ 
+ [addToSeries]
+-addtoseries = M?sor sorozathoz rendel&#233;se
+-Add = Hozz&#225;rendel&#233;s
++addtoseries = M&#197;&#177;sor sorozathoz rendel&#195;&#169;se
++Add = Hozz&#195;&#161;rendel&#195;&#169;s
+ 
+ [editSeries]
+-edit_series = Sorozat be&#225;ll&#237;t&#225;sainak megv&#225;ltoztat&#225;sa
+-create_series = Sorozat l&#233;trehoz&#225;sa
+-general_data = &#193;ltal&#225;nos adatok
+-title = C&#237;m
++edit_series = Sorozat be&#195;&#161;ll&#195;&#173;t&#195;&#161;sainak megv&#195;&#161;ltoztat&#195;&#161;sa
++create_series = Sorozat l&#195;&#169;trehoz&#195;&#161;sa
++general_data = &#195;&#129;ltal&#195;&#161;nos adatok
++title = C&#195;&#173;m
+ url = Weblap (ha van)
+-languages = Ad&#225;s nyelve(i)
+-description = Le&#237;r&#225;s
+-save = Ment&#233;s
++languages = Ad&#195;&#161;s nyelve(i)
++description = Le&#195;&#173;r&#195;&#161;s
++save = Ment&#195;&#169;s
+ illegal_name = A sorozat neve nem megengedett karaktereket tartalmazott.
+ icons_and_jingles = Ikon
+ 
+ #perms
+-access_permissions = Szerkeszt?k &#233;s jogosults&#225;gok
+-Permissions = Jogosults&#225;gok
+-username = Felhaszn&#225;l&#243; neve
+-permissions = Jogosults&#225;gok
+-actions = Tev&#233;kenys&#233;gek
+-delete = T&#246;r&#246;ld
+-inherited_perms = A r&#225;di&#243; &#233;s rendszer szintekr?l &#246;r&#246;k&#246;lt jogok
+-change_perm = &#218;j jogosults&#225;gok hozz&#225;ad&#225;sa
+-change = V&#225;ltoztat&#225;s
+-deleted_permissions_for = &#214;sszes jogosults&#225;g t&#246;r&#246;lve: %1
+-deleted_contact = N&#233;vjegy t&#246;r&#246;lve: %1
+-ok_icon = A k&#252;ld&#246;tt f&#225;jl ikonnak be&#225;ll&#237;tva.
+-error_icon = Ez a f&#225;jl nem lehet ikon.
+-ok_jingle = A k&#252;ld&#246;tt f&#225;jl szign&#225;lnak be&#225;ll&#237;tva.
+-error_jingle = Ez a f&#225;jl nem lehet szign&#225;l.
+-userfiles = F&#225;jljaim
+-userfiles_expl = Innen is v&#225;laszthat ikont vagy szign&#225;lt.
+-upload_file = Felt&#246;lt&#233;s a f&#225;jljaimhoz
+-view = Megn&#233;z
+-set_jingle = Legyen szign&#225;l
++access_permissions = Szerkeszt&#197;&#145;k &#195;&#169;s jogosults&#195;&#161;gok
++Permissions = Jogosults&#195;&#161;gok
++username = Felhaszn&#195;&#161;l&#195;&#179; neve
++permissions = Jogosults&#195;&#161;gok
++actions = Tev&#195;&#169;kenys&#195;&#169;gek
++delete = T&#195;&#182;r&#195;&#182;ld
++inherited_perms = A r&#195;&#161;di&#195;&#179; &#195;&#169;s rendszer szintekr&#197;&#145;l &#195;&#182;r&#195;&#182;k&#195;&#182;lt jogok
++change_perm = &#195;&#154;j jogosults&#195;&#161;gok hozz&#195;&#161;ad&#195;&#161;sa
++change = V&#195;&#161;ltoztat&#195;&#161;s
++deleted_permissions_for = &#195;&#150;sszes jogosults&#195;&#161;g t&#195;&#182;r&#195;&#182;lve: %1
++deleted_contact = N&#195;&#169;vjegy t&#195;&#182;r&#195;&#182;lve: %1
++ok_icon = A k&#195;&#188;ld&#195;&#182;tt f&#195;&#161;jl ikonnak be&#195;&#161;ll&#195;&#173;tva.
++error_icon = Ez a f&#195;&#161;jl nem lehet ikon.
++ok_jingle = A k&#195;&#188;ld&#195;&#182;tt f&#195;&#161;jl szign&#195;&#161;lnak be&#195;&#161;ll&#195;&#173;tva.
++error_jingle = Ez a f&#195;&#161;jl nem lehet szign&#195;&#161;l.
++userfiles = F&#195;&#161;jljaim
++userfiles_expl = Innen is v&#195;&#161;laszthat ikont vagy szign&#195;&#161;lt.
++upload_file = Felt&#195;&#182;lt&#195;&#169;s a f&#195;&#161;jljaimhoz
++view = Megn&#195;&#169;z
++set_jingle = Legyen szign&#195;&#161;l
+ set_icon = Legyen ikon
+-no_files = Nincsenek felt&#246;lt&#246;tt f&#225;jlok.
+-upload_expl = Ha az ikonk&#233;nt vagy szign&#225;lk&#233;nt haszn&#225;lni k&#237;v&#225;nt f&#225;jl nincs m&#233;g a f&#225;jljai k&#246;z&#246;tt, itt felt&#246;ltheti.
++no_files = Nincsenek felt&#195;&#182;lt&#195;&#182;tt f&#195;&#161;jlok.
++upload_expl = Ha az ikonk&#195;&#169;nt vagy szign&#195;&#161;lk&#195;&#169;nt haszn&#195;&#161;lni k&#195;&#173;v&#195;&#161;nt f&#195;&#161;jl nincs m&#195;&#169;g a f&#195;&#161;jljai k&#195;&#182;z&#195;&#182;tt, itt felt&#195;&#182;ltheti.
+ icon = Ikon
+ no_icon = Nincs ikon.
+-jingle_list = Szign&#225;l lista
+-format = Form&#225;tum
++jingle_list = Szign&#195;&#161;l lista
++format = Form&#195;&#161;tum
+ bitrate = Bit/s
+-channels = Csatorn&#225;k
+-samplerate = Mintav&#233;tel
+-no_jingle = Nincs szign&#225;l
+-upload_jingle = Szign&#225;l felt&#246;lt&#233;se
+-missing = hi&#225;nyzik
++channels = Csatorn&#195;&#161;k
++samplerate = Mintav&#195;&#169;tel
++no_jingle = Nincs szign&#195;&#161;l
++upload_jingle = Szign&#195;&#161;l felt&#195;&#182;lt&#195;&#169;se
++missing = hi&#195;&#161;nyzik
+ exists = rendben
+-convert = Gener&#225;ld a t&#246;bbib?l
+-delete = T&#246;r&#246;ld
++convert = Gener&#195;&#161;ld a t&#195;&#182;bbib&#197;&#145;l
++delete = T&#195;&#182;r&#195;&#182;ld
+ 
+ # roles and contacts
+-Roles = N&#233;vjegyek &#233;s szerepek
++Roles = N&#195;&#169;vjegyek &#195;&#169;s szerepek
+ Role = Szerep
+-Contact = N&#233;vjegy
+-no_roles = Nincs n&#233;vjegy
+-add_new_role = &#218;j szerep hozz&#225;ad&#225;sa
++Contact = N&#195;&#169;vjegy
++no_roles = Nincs n&#195;&#169;vjegy
++add_new_role = &#195;&#154;j szerep hozz&#195;&#161;ad&#195;&#161;sa
+ edit_role = SzerepSzerkesztes
+-edit_contact = N&#233;vjegy m&#243;dos&#237;t&#225;sa
++edit_contact = N&#195;&#169;vjegy m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
+ editcontact = NevjegySzerkesztes
+ 
+-finish = Ment&#233;s &#233;s bez&#225;r&#225;s
++finish = Ment&#195;&#169;s &#195;&#169;s bez&#195;&#161;r&#195;&#161;s
+ 
+ [editPermissions]
+-change_permissions = Jogosults&#225;gok megv&#225;ltoztat&#225;sa
++change_permissions = Jogosults&#195;&#161;gok megv&#195;&#161;ltoztat&#195;&#161;sa
+ target = Objektum
+-user = Felhaszn&#225;l&#243;
++user = Felhaszn&#195;&#161;l&#195;&#179;
+ admin = Tulajdonos
+-admin_expl = Az &#246;sszes al&#225;bbi jog, s?t...
+-change = M&#243;dos&#237;t&#225;s
+-change_expl = M&#243;dos&#237;thatja az objektumot, pl. a le&#237;r&#225;st vagy az ikont.
+-create = L&#233;trehoz&#225;s
+-create_expl = &#220;j dolgokat adhat az objektumhoz, pl. &#252;j m?sorokat.
+-delete = T&#246;rl&#233;s
+-delete_expl = T&#246;r&#246;lhet az objektumhoz tartoz&#243; dolgokat, pl. m?sorokat.
+-authorize = Felhatalmaz&#225;s
+-authorize_expl = Felhaszn&#225;l&#243;i jogokat adhat ill. visszavonhat az objektumra vonatkoz&#243;an.
+-save = Ment&#233;s
+-self_perm_change_not_allowed = Saj&#225;t jogaidat nem tudod megv&#225;ltoztatni.
++admin_expl = Az &#195;&#182;sszes al&#195;&#161;bbi jog, s&#197;&#145;t...
++change = M&#195;&#179;dos&#195;&#173;t&#195;&#161;s
++change_expl = M&#195;&#179;dos&#195;&#173;thatja az objektumot, pl. a le&#195;&#173;r&#195;&#161;st vagy az ikont.
++create = L&#195;&#169;trehoz&#195;&#161;s
++create_expl = &#195;&#154;j dolgokat adhat az objektumhoz, pl. &#195;&#186;j m&#197;&#177;sorokat.
++delete = T&#195;&#182;rl&#195;&#169;s
++delete_expl = T&#195;&#182;r&#195;&#182;lhet az objektumhoz tartoz&#195;&#179; dolgokat, pl. m&#197;&#177;sorokat.
++authorize = Felhatalmaz&#195;&#161;s
++authorize_expl = Felhaszn&#195;&#161;l&#195;&#179;i jogokat adhat ill. visszavonhat az objektumra vonatkoz&#195;&#179;an.
++save = Ment&#195;&#169;s
++self_perm_change_not_allowed = Saj&#195;&#161;t jogaidat nem tudod megv&#195;&#161;ltoztatni.
+ 
+-too_many_matches = T&#250;l sok felhaszn&#225;l&#243;t tal&#225;lt
+-no_matches = Nem tal&#225;lt ilyen felhaszn&#225;l&#243;t
+-find_user = Felhaszn&#225;l&#243; keres&#233;se
+-prefix_search = Sz&#243;eleji egyez&#233;s
+-new_search = &#218;j keres&#233;s ind&#237;t&#225;sa
+-use_template = Jogosults&#225;g minta alkalmaz&#225;sa
++too_many_matches = T&#195;&#186;l sok felhaszn&#195;&#161;l&#195;&#179;t tal&#195;&#161;lt
++no_matches = Nem tal&#195;&#161;lt ilyen felhaszn&#195;&#161;l&#195;&#179;t
++find_user = Felhaszn&#195;&#161;l&#195;&#179; keres&#195;&#169;se
++prefix_search = Sz&#195;&#179;eleji egyez&#195;&#169;s
++new_search = &#195;&#154;j keres&#195;&#169;s ind&#195;&#173;t&#195;&#161;sa
++use_template = Jogosults&#195;&#161;g minta alkalmaz&#195;&#161;sa
+ owner = tulajdonos
+-manager = igazgat&#243;
+-editor = szerkeszt?
+-special_perms = speci&#225;lis jogok
++manager = igazgat&#195;&#179;
++editor = szerkeszt&#197;&#145;
++special_perms = speci&#195;&#161;lis jogok
+ 
+ [editRole]
+-edit_role = Szerep be&#225;ll&#237;t&#225;sai
+-change_role = Szerep megv&#225;ltoztat&#225;sa
+-new_role = &#218;j szerep
+-Name = N&#233;v
++edit_role = Szerep be&#195;&#161;ll&#195;&#173;t&#195;&#161;sai
++change_role = Szerep megv&#195;&#161;ltoztat&#195;&#161;sa
++new_role = &#195;&#154;j szerep
++Name = N&#195;&#169;v
+ Role = Szerep
+-give_contact_name = K&#233;rj&#252;k t&#246;ltse ki a n&#233;v mez?t!
+-Create_new = L&#233;trehoz&#225;s
+-Change = M&#243;dos&#237;t&#225;s
+-Add = Hozz&#225;ad&#225;s
+-role_exists = Ez a n&#233;vjegy ezzel a szereppel m&#225;r szerepel az adatb&#225;zisban!
++give_contact_name = K&#195;&#169;rj&#195;&#188;k t&#195;&#182;ltse ki a n&#195;&#169;v mez&#197;&#145;t!
++Create_new = L&#195;&#169;trehoz&#195;&#161;s
++Change = M&#195;&#179;dos&#195;&#173;t&#195;&#161;s
++Add = Hozz&#195;&#161;ad&#195;&#161;s
++role_exists = Ez a n&#195;&#169;vjegy ezzel a szereppel m&#195;&#161;r szerepel az adatb&#195;&#161;zisban!
+ 
+-how_to_select_contact = N&#233;vjegy kiv&#225;laszt&#225;sa
+-select_scope = A leg&#246;rd&#252;l? lista tartalm&#225;nak be&#225;ll&#237;t&#225;sa
+-my_scope = &#225;ltalam k&#233;sz&#237;tett n&#233;vjegyek
+-series_scope = aktu&#225;lis sorozathoz tartoz&#243; n&#233;vjegyek
+-station_scope = aktu&#225;lis r&#225;di&#243;hoz tartoz&#243; n&#233;vjegyek
+-local_scope = a csom&#243;pont &#246;sszes n&#233;vjegye (sok lehet!)
+-all_scope = &#246;sszes n&#233;vjegy (nagyon sok lehet!)
+-change_scope = V&#225;ltoztat&#225;s
+-search_contact = Keres&#233;s a n&#233;vjegyek k&#246;z&#246;tt
+-search = Keres&#233;s
++how_to_select_contact = N&#195;&#169;vjegy kiv&#195;&#161;laszt&#195;&#161;sa
++select_scope = A leg&#195;&#182;rd&#195;&#188;l&#197;&#145; lista tartalm&#195;&#161;nak be&#195;&#161;ll&#195;&#173;t&#195;&#161;sa
++my_scope = &#195;&#161;ltalam k&#195;&#169;sz&#195;&#173;tett n&#195;&#169;vjegyek
++series_scope = aktu&#195;&#161;lis sorozathoz tartoz&#195;&#179; n&#195;&#169;vjegyek
++station_scope = aktu&#195;&#161;lis r&#195;&#161;di&#195;&#179;hoz tartoz&#195;&#179; n&#195;&#169;vjegyek
++local_scope = a csom&#195;&#179;pont &#195;&#182;sszes n&#195;&#169;vjegye (sok lehet!)
++all_scope = &#195;&#182;sszes n&#195;&#169;vjegy (nagyon sok lehet!)
++change_scope = V&#195;&#161;ltoztat&#195;&#161;s
++search_contact = Keres&#195;&#169;s a n&#195;&#169;vjegyek k&#195;&#182;z&#195;&#182;tt
++search = Keres&#195;&#169;s
+ 
+-create_new_if_needed = &#218;j n&#233;vjegy k&#233;sz&#237;t&#233;se
+-no_contacts_found = Nincs ilyen n&#233;vjegy
+-contact_search_for = N&#233;vjegy keres&#233;s:
++create_new_if_needed = &#195;&#154;j n&#195;&#169;vjegy k&#195;&#169;sz&#195;&#173;t&#195;&#169;se
++no_contacts_found = Nincs ilyen n&#195;&#169;vjegy
++contact_search_for = N&#195;&#169;vjegy keres&#195;&#169;s:
+ 
+ 
+ [createContact]
+-create_contact = &#218;j n&#233;vjegy l&#233;trehoz&#225;sa
+-contact_name_exists = Ilyen n&#233;vvel m&#225;r van n&#233;vjegy!
+-Create = L&#233;trehoz&#225;s
++create_contact = &#195;&#154;j n&#195;&#169;vjegy l&#195;&#169;trehoz&#195;&#161;sa
++contact_name_exists = Ilyen n&#195;&#169;vvel m&#195;&#161;r van n&#195;&#169;vjegy!
++Create = L&#195;&#169;trehoz&#195;&#161;s
+ Icon = Ikon
+ 
+ [showContact]
+-name = N&#233;v
++name = N&#195;&#169;v
+ alias = Alias
+-acronym = R&#246;vid&#237;t&#233;s
+-intro = Bemutatkoz&#225;s
++acronym = R&#195;&#182;vid&#195;&#173;t&#195;&#169;s
++intro = Bemutatkoz&#195;&#161;s
+ email = E-mail
+-address = C&#237;m
++address = C&#195;&#173;m
+ phone = Telefon
+ cellphone = Mobil
+ fax = Fax
+ url = Weblap
+-edit_contact = N&#233;vjegy m&#243;dos&#237;t&#225;sa
+-has_programs = K&#246;zrem?k&#246;d&#246;tt %1 m?sorban
++edit_contact = N&#195;&#169;vjegy m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
++has_programs = K&#195;&#182;zrem&#197;&#177;k&#195;&#182;d&#195;&#182;tt %1 m&#197;&#177;sorban
+ #in_station = %1 of station %2 (*)
+ #in_series = %1 of series %2 (*)
+ of_station = :
+ of_series = :
+ 
+ [showContactProgs]
+-programs_by = M?sorok %1 k&#246;zrem?k&#246;d&#233;s&#233;vel
+-contributions = K&#246;zrem?k&#246;d&#246;tt:
++programs_by = M&#197;&#177;sorok %1 k&#195;&#182;zrem&#197;&#177;k&#195;&#182;d&#195;&#169;s&#195;&#169;vel
++contributions = K&#195;&#182;zrem&#197;&#177;k&#195;&#182;d&#195;&#182;tt:
+ show_contact = Nevjegy
+ 
+ [editContact]
+-delete_contact = N&#233;vjegy t&#246;rl&#233;se
+-delete_contact_confirm = Biztosan t&#246;r&#246;lni akarja ezt a n&#233;vjegyet? Az ehhez tartoz&#243; szerepeket is t&#246;r&#246;lni fogom.
+-edit_contact = N&#233;vjegy m&#243;dos&#237;t&#225;sa
+-general_data = &#193;ltal&#225;nos adatok
+-name = N&#233;v
++delete_contact = N&#195;&#169;vjegy t&#195;&#182;rl&#195;&#169;se
++delete_contact_confirm = Biztosan t&#195;&#182;r&#195;&#182;lni akarja ezt a n&#195;&#169;vjegyet? Az ehhez tartoz&#195;&#179; szerepeket is t&#195;&#182;r&#195;&#182;lni fogom.
++edit_contact = N&#195;&#169;vjegy m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
++general_data = &#195;&#129;ltal&#195;&#161;nos adatok
++name = N&#195;&#169;v
+ alias = Alias
+-acronym = R&#246;vid&#237;t&#233;s
+-intro = Bemutatkoz&#225;s
++acronym = R&#195;&#182;vid&#195;&#173;t&#195;&#169;s
++intro = Bemutatkoz&#195;&#161;s
+ email = E-mail
+-address = C&#237;m
++address = C&#195;&#173;m
+ phone = Telefon
+ cellphone = Mobil
+ fax = Fax
+ url = Weblap
+-save = Ment&#233;s
+-userfiles = F&#225;jljaim
+-userfiles_expl = Innen is v&#225;laszthat ikont.
+-upload_file = Felt&#246;lt&#233;s a f&#225;jljaimhoz
+-view = Megn&#233;z
++save = Ment&#195;&#169;s
++userfiles = F&#195;&#161;jljaim
++userfiles_expl = Innen is v&#195;&#161;laszthat ikont.
++upload_file = Felt&#195;&#182;lt&#195;&#169;s a f&#195;&#161;jljaimhoz
++view = Megn&#195;&#169;z
+ set_icon = Legyen ikon
+-no_files = Nincsenek felt&#246;lt&#246;tt f&#225;jlok.
+-upload_expl = Ha az ikonk&#233;nt haszn&#225;lni k&#237;v&#225;nt f&#225;jl nincs m&#233;g a f&#225;jljai k&#246;z&#246;tt, itt felt&#246;ltheti.
++no_files = Nincsenek felt&#195;&#182;lt&#195;&#182;tt f&#195;&#161;jlok.
++upload_expl = Ha az ikonk&#195;&#169;nt haszn&#195;&#161;lni k&#195;&#173;v&#195;&#161;nt f&#195;&#161;jl nincs m&#195;&#169;g a f&#195;&#161;jljai k&#195;&#182;z&#195;&#182;tt, itt felt&#195;&#182;ltheti.
+ icon = Ikon
+ no_icon = Nincs ikon.
+-icon_ok = Az ikont m&#243;dos&#237;tottam.
+-icon_error = Nem tudtam lecser&#233;lni az ikont.
+-finish = Ment&#233;s &#233;s bez&#225;r&#225;s.
++icon_ok = Az ikont m&#195;&#179;dos&#195;&#173;tottam.
++icon_error = Nem tudtam lecser&#195;&#169;lni az ikont.
++finish = Ment&#195;&#169;s &#195;&#169;s bez&#195;&#161;r&#195;&#161;s.
+ 
+ # perms
+-access_permissions = Szerkeszt?k &#233;s jogosults&#225;gok
+-Permissions = Jogosults&#225;gok
+-username = Felhaszn&#225;l&#243; neve
+-permissions = Jogosults&#225;gok
+-actions = Tev&#233;kenys&#233;gek
+-delete = T&#246;rl&#233;s
+-inherited_perms = A r&#225;di&#243; &#233;s rendszer szintekr?l &#246;r&#246;k&#246;lt jogok
+-change_perm = &#218;j jogosults&#225;gok hozz&#225;ad&#225;sa
+-change = V&#225;ltoztat&#225;s
+-deleted_permissions_for = &#214;sszes jogosults&#225;g t&#246;r&#246;lve: %1
++access_permissions = Szerkeszt&#197;&#145;k &#195;&#169;s jogosults&#195;&#161;gok
++Permissions = Jogosults&#195;&#161;gok
++username = Felhaszn&#195;&#161;l&#195;&#179; neve
++permissions = Jogosults&#195;&#161;gok
++actions = Tev&#195;&#169;kenys&#195;&#169;gek
++delete = T&#195;&#182;rl&#195;&#169;s
++inherited_perms = A r&#195;&#161;di&#195;&#179; &#195;&#169;s rendszer szintekr&#197;&#145;l &#195;&#182;r&#195;&#182;k&#195;&#182;lt jogok
++change_perm = &#195;&#154;j jogosults&#195;&#161;gok hozz&#195;&#161;ad&#195;&#161;sa
++change = V&#195;&#161;ltoztat&#195;&#161;s
++deleted_permissions_for = &#195;&#150;sszes jogosults&#195;&#161;g t&#195;&#182;r&#195;&#182;lve: %1
+ 
+ [showStation]
+-persons_involved = K&#246;zrem?k&#246;d?k:
+-edit_station = R&#225;di&#243; m&#243;dos&#237;t&#225;sa
++persons_involved = K&#195;&#182;zrem&#197;&#177;k&#195;&#182;d&#197;&#145;k:
++edit_station = R&#195;&#161;di&#195;&#179; m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
+ show_contact = Nevjegy
+-general = &#193;ltal&#225;nos adatok
+-station = R&#225;di&#243;
++general = &#195;&#129;ltal&#195;&#161;nos adatok
++station = R&#195;&#161;di&#195;&#179;
+ series = Sorozat
+-add_series = &#218;j sorozat
+-programmes = M?sorok
+-edit_series = Sorozat m&#243;dos&#237;t&#225;sa
+-delete_series = Sorozat t&#246;rl&#233;se
+-delete_series_confirm = Biztosan t&#246;r&#246;lni akarja ezt a sorozatot?
+-edit_prog = M&#243;dos&#237;t&#225;s
+-delete_prog = T&#246;rl&#233;s
+-delete_prog_confirm = Biztosan t&#246;r&#246;lni akarja ezt a m?sort?
+-add_prg = M?sorok hozz&#225;ad&#225;sa
++add_series = &#195;&#154;j sorozat
++programmes = M&#197;&#177;sorok
++edit_series = Sorozat m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
++delete_series = Sorozat t&#195;&#182;rl&#195;&#169;se
++delete_series_confirm = Biztosan t&#195;&#182;r&#195;&#182;lni akarja ezt a sorozatot?
++edit_prog = M&#195;&#179;dos&#195;&#173;t&#195;&#161;s
++delete_prog = T&#195;&#182;rl&#195;&#169;s
++delete_prog_confirm = Biztosan t&#195;&#182;r&#195;&#182;lni akarja ezt a m&#197;&#177;sort?
++add_prg = M&#197;&#177;sorok hozz&#195;&#161;ad&#195;&#161;sa
+ 
+ 
+ [showSeries]
+ show_contact = Nevjegy
+ series = Sorozat
+-station = R&#225;di&#243;
+-general = &#193;ltal&#225;nos adatok
+-persons_involved = K&#246;zrem?k&#246;d?k:
+-programmes = M?sorok
+-edit_series = Sorozat m&#243;dos&#237;t&#225;sa
+-edit_prog = M&#243;dos&#237;t&#225;s
+-delete_prog = T&#246;rl&#233;s
+-delete_prog_confirm = Biztosan t&#246;r&#246;lni akarja ezt a m?sort?
+-add_prg = M?sorok hozz&#225;ad&#225;sa
++station = R&#195;&#161;di&#195;&#179;
++general = &#195;&#129;ltal&#195;&#161;nos adatok
++persons_involved = K&#195;&#182;zrem&#197;&#177;k&#195;&#182;d&#197;&#145;k:
++programmes = M&#197;&#177;sorok
++edit_series = Sorozat m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
++edit_prog = M&#195;&#179;dos&#195;&#173;t&#195;&#161;s
++delete_prog = T&#195;&#182;rl&#195;&#169;s
++delete_prog_confirm = Biztosan t&#195;&#182;r&#195;&#182;lni akarja ezt a m&#197;&#177;sort?
++add_prg = M&#197;&#177;sorok hozz&#195;&#161;ad&#195;&#161;sa
+ 
+ [editor]
+-will_expire = %1 m?sor lej&#225;r (&#233;s t&#246;rl&#233;sre ker&#252;l) %2 napon bel&#252;l!
+-create_new_expl1 = 1. &#218;j m?sor hozz&#225;ad&#225;s&#225;hoz el?sz&#246;r a hanganyagot fel kell t&#246;ltenie a szem&#233;lyes t&#225;rhely&#233;re. Ez t&#246;rt&#233;nhet HTTP felt&#246;lt&#233;ssel vagy FTP-n kereszt&#252;l:
+-create_new_expl2 = 2. Ha m&#225;r felt&#246;lt&#246;tte a hanganyagot, akkor a lenti list&#225;b&#243;l v&#225;lassza ki, melyiket k&#237;v&#225;nja &#250;j m?sork&#233;nt elhelyezni az arch&#237;vumban:	
+-manage_files = Webes f&#225;jlkezel?
++will_expire = %1 m&#197;&#177;sor lej&#195;&#161;r (&#195;&#169;s t&#195;&#182;rl&#195;&#169;sre ker&#195;&#188;l) %2 napon bel&#195;&#188;l!
++create_new_expl1 = 1. &#195;&#154;j m&#197;&#177;sor hozz&#195;&#161;ad&#195;&#161;s&#195;&#161;hoz el&#197;&#145;sz&#195;&#182;r a hanganyagot fel kell t&#195;&#182;ltenie a szem&#195;&#169;lyes t&#195;&#161;rhely&#195;&#169;re. Ez t&#195;&#182;rt&#195;&#169;nhet HTTP felt&#195;&#182;lt&#195;&#169;ssel vagy FTP-n kereszt&#195;&#188;l:
++create_new_expl2 = 2. Ha m&#195;&#161;r felt&#195;&#182;lt&#195;&#182;tte a hanganyagot, akkor a lenti list&#195;&#161;b&#195;&#179;l v&#195;&#161;lassza ki, melyiket k&#195;&#173;v&#195;&#161;nja &#195;&#186;j m&#197;&#177;sork&#195;&#169;nt elhelyezni az arch&#195;&#173;vumban:	
++manage_files = Webes f&#195;&#161;jlkezel&#197;&#145;
+ managefiles = FajlKezelo
+-add_programme = &#218;j m?sork&#233;nt hozz&#225;ad
+-user_ftp_access = FTP hozz&#225;f&#233;r&#233;s f&#225;jljaimhoz
+-upload_file = Felt&#246;lt&#233;s f&#225;jljaimhoz
+-select_file = K&#233;rj&#252;k v&#225;lasszon f&#225;jlt!
+-refresh = (F&#225;jllista friss&#237;t&#233;s)
+-pending_audio = Hangf&#225;jlok, melyekb?l m&#233;g m?sor lehet
+-create_new_prg = &#218;j m?sor l&#233;trehoz&#225;sa
+-my_progs = M?soraim
+-Filter = Sz?r&#233;s
+-sortby = Rendez&#233;s
+-Flag = Kapcsol&#243;
+-Flags = Kapcsol&#243;k
+-Title_abs = C&#237;m / kivonat
+-Station_series = R&#225;di&#243; / sorozat
+-Dates = D&#225;tumok
+-exp_d = Lej&#225;rat
+-entry_d = Felt&#246;lt&#233;s
+-prod_d=K&#233;sz&#252;lt
+-broadcast_d=Ad&#225;sban
+-Published = Nyilv&#225;nos
++add_programme = &#195;&#154;j m&#197;&#177;sork&#195;&#169;nt hozz&#195;&#161;ad
++user_ftp_access = FTP hozz&#195;&#161;f&#195;&#169;r&#195;&#169;s f&#195;&#161;jljaimhoz
++upload_file = Felt&#195;&#182;lt&#195;&#169;s f&#195;&#161;jljaimhoz
++select_file = K&#195;&#169;rj&#195;&#188;k v&#195;&#161;lasszon f&#195;&#161;jlt!
++refresh = (F&#195;&#161;jllista friss&#195;&#173;t&#195;&#169;s)
++pending_audio = Hangf&#195;&#161;jlok, melyekb&#197;&#145;l m&#195;&#169;g m&#197;&#177;sor lehet
++create_new_prg = &#195;&#154;j m&#197;&#177;sor l&#195;&#169;trehoz&#195;&#161;sa
++my_progs = M&#197;&#177;soraim
++Filter = Sz&#197;&#177;r&#195;&#169;s
++sortby = Rendez&#195;&#169;s
++Flag = Kapcsol&#195;&#179;
++Flags = Kapcsol&#195;&#179;k
++Title_abs = C&#195;&#173;m / kivonat
++Station_series = R&#195;&#161;di&#195;&#179; / sorozat
++Dates = D&#195;&#161;tumok
++exp_d = Lej&#195;&#161;rat
++entry_d = Felt&#195;&#182;lt&#195;&#169;s
++prod_d=K&#195;&#169;sz&#195;&#188;lt
++broadcast_d=Ad&#195;&#161;sban
++Published = Nyilv&#195;&#161;nos
+ Stats = Statisztika
+-visits = l&#225;togat&#225;s
+-listens = meghallgat&#225;s
+-downloads = let&#246;lt&#233;s
+-rating = &#233;rt&#233;kel&#233;s
++visits = l&#195;&#161;togat&#195;&#161;s
++listens = meghallgat&#195;&#161;s
++downloads = let&#195;&#182;lt&#195;&#169;s
++rating = &#195;&#169;rt&#195;&#169;kel&#195;&#169;s
+ by = 
+-Actions = Tev&#233;kenys&#233;gek
+-Edit_files = Kapcsolt f&#225;jlok
++Actions = Tev&#195;&#169;kenys&#195;&#169;gek
++Edit_files = Kapcsolt f&#195;&#161;jlok
+ Edit_meta = Metaadatok
+-Delete = T&#246;rl&#233;s
+-delete_prog_confirm = Biztosan t&#246;r&#246;lni akarja ezt a m?sort?
++Delete = T&#195;&#182;rl&#195;&#169;s
++delete_prog_confirm = Biztosan t&#195;&#182;r&#195;&#182;lni akarja ezt a m&#197;&#177;sort?
+ 
+-allseries = &#214;sszes sorozat
+-title = C&#237;m
++allseries = &#195;&#150;sszes sorozat
++title = C&#195;&#173;m
+ series = Sorozat
+-station = R&#225;di&#243;
+-entry_date = Felt&#246;lt&#233;s
+-expiry_date = Lej&#225;rat
++station = R&#195;&#161;di&#195;&#179;
++entry_date = Felt&#195;&#182;lt&#195;&#169;s
++expiry_date = Lej&#195;&#161;rat
+ all = Mind
+-published = Nyilv&#225;nos
++published = Nyilv&#195;&#161;nos
+ unpublished = Rejtett
+-urgent = S&#252;rg?s
++urgent = S&#195;&#188;rg&#197;&#145;s
+ todo = ToDo
+-cat1 = Egy&#233;b1
+-cat2 = Egy&#233;b2
+-cat3 = Egy&#233;b3
+-cat4 = Egy&#233;b4
+-cat5 = Egy&#233;b5
++cat1 = Egy&#195;&#169;b1
++cat2 = Egy&#195;&#169;b2
++cat3 = Egy&#195;&#169;b3
++cat4 = Egy&#195;&#169;b4
++cat5 = Egy&#195;&#169;b5
+ none = Nincs
+ 
+-submit = Friss&#237;t&#233;s
++submit = Friss&#195;&#173;t&#195;&#169;s
+ 
+-export = Export&#225;l&#225;s v&#225;lasztott form&#225;tumban
++export = Export&#195;&#161;l&#195;&#161;s v&#195;&#161;lasztott form&#195;&#161;tumban
+ get_xbmf = XBMF
+ get_soma = SOMA metadata
+ 
+ [test]
+ 
+ [advsearch]
+-Advanced_search = R&#233;szletes keres&#233;s
+-after = ut&#225;n
+-before = el?tt
++Advanced_search = R&#195;&#169;szletes keres&#195;&#169;s
++after = ut&#195;&#161;n
++before = el&#197;&#145;tt
+ is = egyezik
+ contains = tartalmaz
+-begins_with = kezd?dik
++begins_with = kezd&#197;&#145;dik
+ does_not_contain = nem tartalmaz
+ is_not_equal = nem egyezik
+ is_not = nem
+-shorter = r&#246;videbb
++shorter = r&#195;&#182;videbb
+ longer = hosszabb
+ 
+-your_query_is = A keres?k&#233;rd&#233;s
+-empty = &#252;res
+-AND = &#201;S
++your_query_is = A keres&#197;&#145;k&#195;&#169;rd&#195;&#169;s
++empty = &#195;&#188;res
++AND = &#195;&#137;S
+ OR = VAGY
+-delete = Tag t&#246;rl&#233;se
+-seconds = m&#225;sodperc
+-delete = Tag t&#246;rl&#233;se
++delete = Tag t&#195;&#182;rl&#195;&#169;se
++seconds = m&#195;&#161;sodperc
++delete = Tag t&#195;&#182;rl&#195;&#169;se
+ 
+-box1 = 1. Keres?k&#233;rd&#233;s &#246;ssze&#225;ll&#237;t&#225;sa
+-add = Tag hozz&#225;ad&#225;s
+-new_search = &#218;j keres&#233;s
++box1 = 1. Keres&#197;&#145;k&#195;&#169;rd&#195;&#169;s &#195;&#182;ssze&#195;&#161;ll&#195;&#173;t&#195;&#161;sa
++add = Tag hozz&#195;&#161;ad&#195;&#161;s
++new_search = &#195;&#154;j keres&#195;&#169;s
+ 
+-box2 = 2. Keres&#233;s v&#233;grehajt&#225;sa
+-sort1 = Eredm&#233;nyek rendez&#233;se
+-sort2 = M&#225;sodik rendez&#233;si szempont
+-run = Keres&#233;s
+-upload_query = Keres?k&#233;rd&#233;s felt&#246;lt&#233;se port&#225;lra
+-desc = cs&#246;kken?
+-portal_http = Port&#225;l c&#237;m (pl. <A HREF="http://sotf.dsd.sztaki.hu/portal/portal.php/portal_name">http://sotf.dsd.sztaki.hu/portal/portal.php/portal_name</A>)
+-URL_missing = Az URL hi&#225;nyzik!
++box2 = 2. Keres&#195;&#169;s v&#195;&#169;grehajt&#195;&#161;sa
++sort1 = Eredm&#195;&#169;nyek rendez&#195;&#169;se
++sort2 = M&#195;&#161;sodik rendez&#195;&#169;si szempont
++run = Keres&#195;&#169;s
++upload_query = Keres&#197;&#145;k&#195;&#169;rd&#195;&#169;s felt&#195;&#182;lt&#195;&#169;se port&#195;&#161;lra
++desc = cs&#195;&#182;kken&#197;&#145;
++portal_http = Port&#195;&#161;l c&#195;&#173;m (pl. <A HREF="http://sotf.dsd.sztaki.hu/portal/portal.php/portal_name">http://sotf.dsd.sztaki.hu/portal/portal.php/portal_name</A>)
++URL_missing = Az URL hi&#195;&#161;nyzik!
+ 
+-box3 = 3. Keres?k&#233;rd&#233;sek kezel&#233;se
+-load = Bet&#246;lt&#233;s
+-default = Legyen alap&#233;rtelmezett
+-deleteq = T&#246;rl&#233;s
+-save = Mentsd el ezen a n&#233;ven
++box3 = 3. Keres&#197;&#145;k&#195;&#169;rd&#195;&#169;sek kezel&#195;&#169;se
++load = Bet&#195;&#182;lt&#195;&#169;s
++default = Legyen alap&#195;&#169;rtelmezett
++deleteq = T&#195;&#182;rl&#195;&#169;s
++save = Mentsd el ezen a n&#195;&#169;ven
+ 
+ [advsearchresults]
+-Results = A keres&#233;s eredm&#233;nye
++Results = A keres&#195;&#169;s eredm&#195;&#169;nye
+ by = by (*)
+ on_date = on (*)
+-No_results = Nincs eredm&#233;ny
++No_results = Nincs eredm&#195;&#169;ny
+ 
+ is = =
+ contains = tartalmaz
+-begins_with = kezd?dik
++begins_with = kezd&#197;&#145;dik
+ does_not_contain = nem tartalmaz
+ is_not_equal = nem egyezik
+ is_not = nem =
+ bigger = &gt; 
+ smaller = &lt; 
+ 
+-your_query_is = A keres?k&#233;rd&#233;s: 
+-AND = &#201;S
++your_query_is = A keres&#197;&#145;k&#195;&#169;rd&#195;&#169;s: 
++AND = &#195;&#137;S
+ OR = VAGY
+-back = A keres?k&#233;rd&#233;s m&#243;dos&#237;t&#225;sa
++back = A keres&#197;&#145;k&#195;&#169;rd&#195;&#169;s m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
+ 
+-upload_query = Keres?k&#233;rd&#233;s felt&#246;lt&#233;se port&#225;lra
+-portal_http = Port&#225;l c&#237;m (pl. <A HREF="http://sotf.dsd.sztaki.hu/portal/portal.php/portal_name">http://sotf.dsd.sztaki.hu/portal/portal.php/portal_name</A>)
++upload_query = Keres&#197;&#145;k&#195;&#169;rd&#195;&#169;s felt&#195;&#182;lt&#195;&#169;se port&#195;&#161;lra
++portal_http = Port&#195;&#161;l c&#195;&#173;m (pl. <A HREF="http://sotf.dsd.sztaki.hu/portal/portal.php/portal_name">http://sotf.dsd.sztaki.hu/portal/portal.php/portal_name</A>)
+ 
+ [portal_upload]
+-portal_http = Port&#225;l c&#237;m (pl. <A HREF="http://sotf.dsd.sztaki.hu/portal/www/portal.php/portal_name">http://sotf.dsd.sztaki.hu/portal/www/portal.php/portal_name</A>)
+-URL_not_found = Az URL hi&#225;nyzik!
+-upload = M?sor felt&#246;lt&#233;se
+-upload_query = Keres?k&#233;rd&#233;s felt&#246;lt&#233;se
+-upload_playlist = M?sorok felt&#246;lt&#233;se
+-please_wait = K&#233;rem v&#225;rjon...
++portal_http = Port&#195;&#161;l c&#195;&#173;m (pl. <A HREF="http://sotf.dsd.sztaki.hu/portal/www/portal.php/portal_name">http://sotf.dsd.sztaki.hu/portal/www/portal.php/portal_name</A>)
++URL_not_found = Az URL hi&#195;&#161;nyzik!
++upload = M&#197;&#177;sor felt&#195;&#182;lt&#195;&#169;se
++upload_query = Keres&#197;&#145;k&#195;&#169;rd&#195;&#169;s felt&#195;&#182;lt&#195;&#169;se
++upload_playlist = M&#197;&#177;sorok felt&#195;&#182;lt&#195;&#169;se
++please_wait = K&#195;&#169;rem v&#195;&#161;rjon...
+ 
+ [login]
+-missing_parameters = Hi&#225;nyz&#243; param&#233;terek
+-invalid_login = &#201;rv&#233;nytelen bejelentkez&#233;s
+-register_here = Ha m&#233;g nem regisztr&#225;lt felhaszn&#225;l&#243;nk, &lt;a href=&quot;register.php&quot;&gt;itt regisztr&#225;lhat&lt;/a&gt;.
++missing_parameters = Hi&#195;&#161;nyz&#195;&#179; param&#195;&#169;terek
++invalid_login = &#195;&#137;rv&#195;&#169;nytelen bejelentkez&#195;&#169;s
++register_here = Ha m&#195;&#169;g nem regisztr&#195;&#161;lt felhaszn&#195;&#161;l&#195;&#179;nk, &lt;a href=&quot;register.php&quot;&gt;itt regisztr&#195;&#161;lhat&lt;/a&gt;.
+ 
+ #added by buddhafly 05-11-22
+-forgot_password = Elfelejtette a jelszav&#225;t? Itt k&#233;rhet &lt;a href=&quot;newPassword.php&quot;&gt;&#250;j jelsz&#243;t&lt;/a&gt;.
++forgot_password = Elfelejtette a jelszav&#195;&#161;t? Itt k&#195;&#169;rhet &lt;a href=&quot;newPassword.php&quot;&gt;&#195;&#186;j jelsz&#195;&#179;t&lt;/a&gt;.
+ 
+ 
+ [register]
+-username_in_use = Ezt a nevet m&#225;r m&#225;s haszn&#225;lja!
+-invalid_username = Nem enged&#233;lyezett felhaszn&#225;l&#243;i n&#233;v!
+-Password_confirm = Jelsz&#243; m&#233;g egyszer
+-password_too_short = A jelsz&#243; t&#250;l r&#246;vid.
++username_in_use = Ezt a nevet m&#195;&#161;r m&#195;&#161;s haszn&#195;&#161;lja!
++invalid_username = Nem enged&#195;&#169;lyezett felhaszn&#195;&#161;l&#195;&#179;i n&#195;&#169;v!
++Password_confirm = Jelsz&#195;&#179; m&#195;&#169;g egyszer
++password_too_short = A jelsz&#195;&#179; t&#195;&#186;l r&#195;&#182;vid.
+ password_mismatch = A jelszavak nem egyeznek.
+-Realname = Teljes n&#233;v
++Realname = Teljes n&#195;&#169;v
+ Email = E-mail
+ Language = Nyelv
+ 
+-old_password = Jelenlegi jelsz&#243;
+-new_password = New password
+-email_missing = Please enter an email-address.
+-bad_email = This e-mail address is not valid.
+-password_empty = Please enter your current password.
++old_password = Jelenlegi jelsz&#195;&#179;
++new_password = &#195;&#154;j jelsz&#195;&#179;
++email_missing = K&#195;&#169;rj&#195;&#188;k &#195;&#173;rja be e-mail c&#195;&#173;m&#195;&#169;t.
++bad_email = &#195;&#137;rv&#195;&#169;nytelen e-mail c&#195;&#173;met adott meg.
++password_empty = K&#195;&#169;rj&#195;&#188;k &#195;&#173;rja be jelenlegi jelszav&#195;&#161;t.
+ 
+ [newPassword]
+-new_pass_title = &#218;j jelsz&#243; k&#233;r&#233;se
+-new_pass_explain = Az ?rlap kit&#246;lt&#233;se ut&#225;n egy &#250;j jelsz&#243;t k&#252;ld&#252;nk a regisztr&#225;ci&#243;kor megadott e-mail c&#237;mre.
+-request_button = &#218;j jelsz&#243; k&#233;r&#233;se
+-pass_mail_subject = Az &#214;n &#250;j StreamOnTheFly jelszava
+-pass_mail_message = Kedves %1,&lt;br&gt;&nbsp;&lt;br&gt;k&#233;r&#233;s&#233;re az &#250;j jelsz&#243; elk&#233;sz&#252;lt.&lt;br&gt;Az &#250;j jelszava a StreamOnTheFly szerverhez: %2&lt;br&gt;&nbsp;&lt;br&gt;&lt;a href='%3'&gt;Bejelentkez&#233;s&lt;/a&gt; ut&#225;n, a Be&#225;ll&#237;t&#225;sok oldalon tudja a jelsz&#243;t megv&#225;ltoztatni&lt;br&gt;&nbsp;&lt;br&gt;Adminisztr&#225;tor
+-new_pass_error = A felhaszn&#225;l&#243;i n&#233;v vagy az e-mail c&#237;m nem egyezik.
+-missing_parameters = Hi&#225;nyz&#243; param&#233;terek
++new_pass_title = &#195;&#154;j jelsz&#195;&#179; k&#195;&#169;r&#195;&#169;se
++new_pass_explain = Az &#197;&#177;rlap kit&#195;&#182;lt&#195;&#169;se ut&#195;&#161;n egy &#195;&#186;j jelsz&#195;&#179;t k&#195;&#188;ld&#195;&#188;nk a regisztr&#195;&#161;ci&#195;&#179;kor megadott e-mail c&#195;&#173;mre.
++request_button = &#195;&#154;j jelsz&#195;&#179; k&#195;&#169;r&#195;&#169;se
++pass_mail_subject = Az &#195;&#150;n &#195;&#186;j StreamOnTheFly jelszava
++pass_mail_message = Kedves %1,&lt;br&gt;&nbsp;&lt;br&gt;k&#195;&#169;r&#195;&#169;s&#195;&#169;re az &#195;&#186;j jelsz&#195;&#179; elk&#195;&#169;sz&#195;&#188;lt.&lt;br&gt;Az &#195;&#186;j jelszava a StreamOnTheFly szerverhez: %2&lt;br&gt;&nbsp;&lt;br&gt;&lt;a href='%3'&gt;Bejelentkez&#195;&#169;s&lt;/a&gt; ut&#195;&#161;n, a Be&#195;&#161;ll&#195;&#173;t&#195;&#161;sok oldalon tudja a jelsz&#195;&#179;t megv&#195;&#161;ltoztatni&lt;br&gt;&nbsp;&lt;br&gt;Adminisztr&#195;&#161;tor
++new_pass_error = A felhaszn&#195;&#161;l&#195;&#179;i n&#195;&#169;v vagy az e-mail c&#195;&#173;m nem egyezik.
++missing_parameters = Hi&#195;&#161;nyz&#195;&#179; param&#195;&#169;terek
+ 
+ 
+ [get]
+-not_published_yet = Ez a m?sor m&#233;g nem nyilv&#225;nos.
++not_published_yet = Ez a m&#197;&#177;sor m&#195;&#169;g nem nyilv&#195;&#161;nos.
+ unpublished_warning = Rejtett
+-please_enter = &#205;rja be a m?sor azonos&#237;t&#243;j&#225;t!
+-Visits = l&#225;togat&#225;s (egyedi)
+-Listens = meghallgat&#225;s (egyedi)
+-Downloads = let&#246;lt&#233;s (egyedi)
+-Rating = &#233;rt&#233;kel&#233;s (h&#225;nyan)
+-References = Hivatkoz&#243; port&#225;lok
+-Edit = M&#243;dos&#237;t&#225;s
++please_enter = &#195;&#141;rja be a m&#197;&#177;sor azonos&#195;&#173;t&#195;&#179;j&#195;&#161;t!
++Visits = l&#195;&#161;togat&#195;&#161;s (egyedi)
++Listens = meghallgat&#195;&#161;s (egyedi)
++Downloads = let&#195;&#182;lt&#195;&#169;s (egyedi)
++Rating = &#195;&#169;rt&#195;&#169;kel&#195;&#169;s (h&#195;&#161;nyan)
++References = Hivatkoz&#195;&#179; port&#195;&#161;lok
++Edit = M&#195;&#179;dos&#195;&#173;t&#195;&#161;s
+ Content = Tartalom
+-Statistics = Visszajelz&#233;sek, statisztika
+-no_references = Nincs hivatkoz&#225;s
+-Comments = Megjegyz&#233;sek
+-&gt;From = Mikort&#243;l
++Statistics = Visszajelz&#195;&#169;sek, statisztika
++no_references = Nincs hivatkoz&#195;&#161;s
++Comments = Megjegyz&#195;&#169;sek
++&gt;From = Mikort&#195;&#179;l
+ Until = Meddig
+-Nodes = H&#225;l&#243;zat
+-Portals = Port&#225;lok
+-Visits_p = l&#225;togat&#225;s
+-Listens_p = meghallgat&#225;s
++Nodes = H&#195;&#161;l&#195;&#179;zat
++Portals = Port&#195;&#161;lok
++Visits_p = l&#195;&#161;togat&#195;&#161;s
++Listens_p = meghallgat&#195;&#161;s
+ 
+-prog = M?sor
+-station = R&#225;di&#243;
++prog = M&#197;&#177;sor
++station = R&#195;&#161;di&#195;&#179;
+ series = Sorozat
+-title = C&#237;m
+-alternative_title = Alc&#237;m
+-episode_title = Epiz&#243;d c&#237;m
+-author = Szerz?
+-production_date = K&#233;sz&#237;t&#233;s d&#225;tuma
+-broadcast_date = Ad&#225;s d&#225;tuma
+-expiry_date = Lej&#225;rat d&#225;tuma
+-modify_date = Utols&#243; m&#243;dos&#237;t&#225;s
+-entry_date = Felt&#246;lt&#233;s d&#225;tuma
++title = C&#195;&#173;m
++alternative_title = Alc&#195;&#173;m
++episode_title = Epiz&#195;&#179;d c&#195;&#173;m
++author = Szerz&#197;&#145;
++production_date = K&#195;&#169;sz&#195;&#173;t&#195;&#169;s d&#195;&#161;tuma
++broadcast_date = Ad&#195;&#161;s d&#195;&#161;tuma
++expiry_date = Lej&#195;&#161;rat d&#195;&#161;tuma
++modify_date = Utols&#195;&#179; m&#195;&#179;dos&#195;&#173;t&#195;&#161;s
++entry_date = Felt&#195;&#182;lt&#195;&#169;s d&#195;&#161;tuma
+ keywords = Kulcsszavak
+ abstract = Kivonat
+ language = Nyelv
+-genre = M?faj
+-temporal_coverage = Kapcsol&#243;d&#243; id?pont
+-spatial_coverage = Kapcsol&#243;d&#243; helysz&#237;n
+-topics = T&#233;m&#225;k
++genre = M&#197;&#177;faj
++temporal_coverage = Kapcsol&#195;&#179;d&#195;&#179; id&#197;&#145;pont
++spatial_coverage = Kapcsol&#195;&#179;d&#195;&#179; helysz&#195;&#173;n
++topics = T&#195;&#169;m&#195;&#161;k
+ 
+-Roles = K&#246;zrem?k&#246;d?k
++Roles = K&#195;&#182;zrem&#197;&#177;k&#195;&#182;d&#197;&#145;k
+ 
+-Rights = Szerz?i jogok
+-no_rights = Nincsenek k&#252;l&#246;n szerz?i jogok megadva ehhez a m?sorhoz
+-for_whole_prg = az eg&#233;sz m?sorra
++Rights = Szerz&#197;&#145;i jogok
++no_rights = Nincsenek k&#195;&#188;l&#195;&#182;n szerz&#197;&#145;i jogok megadva ehhez a m&#197;&#177;sorhoz
++for_whole_prg = az eg&#195;&#169;sz m&#197;&#177;sorra
+ 
+-stats_may_be_old = utols&#243; friss&#237;t&#233;s
+-Download = Let&#246;lt&#233;s
+-Listen = Meghallgat&#225;s
+-edit_files = Kapcsolt f&#225;jlok kezel&#233;se
+-edit_meta = Metaadatok m&#243;dos&#237;t&#225;sa
+-audio_file_list = Hangf&#225;jlok:
+-other_file_list = Egy&#233;b f&#225;jlok:
+-no_files = Nincsenek csatolt f&#225;jlok
+-bytes = b&#225;jt
+-View = Megtekint&#233;s/let&#246;lt&#233;s
++stats_may_be_old = utols&#195;&#179; friss&#195;&#173;t&#195;&#169;s
++Download = Let&#195;&#182;lt&#195;&#169;s
++Listen = Meghallgat&#195;&#161;s
++edit_files = Kapcsolt f&#195;&#161;jlok kezel&#195;&#169;se
++edit_meta = Metaadatok m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
++audio_file_list = Hangf&#195;&#161;jlok:
++other_file_list = Egy&#195;&#169;b f&#195;&#161;jlok:
++no_files = Nincsenek csatolt f&#195;&#161;jlok
++bytes = b&#195;&#161;jt
++View = Megtekint&#195;&#169;s/let&#195;&#182;lt&#195;&#169;s
+ viewpopup = Nezegeto
+-programme_audio = M?sor hanganyaga
++programme_audio = M&#197;&#177;sor hanganyaga
+ 
+-Links = Ugr&#243;pontok
++Links = Ugr&#195;&#179;pontok
+ put_into_playlist = Tedd a kedvenceimhez!
+-upload_to_portal = Tedd fel a port&#225;lomra!
+-rate_it = &#201;rt&#233;keld a programot:
+-change_rating = &#201;rt&#233;kel&#233;s megv&#225;ltoztat&#225;sa
++upload_to_portal = Tedd fel a port&#195;&#161;lomra!
++rate_it = &#195;&#137;rt&#195;&#169;keld a programot:
++change_rating = &#195;&#137;rt&#195;&#169;kel&#195;&#169;s megv&#195;&#161;ltoztat&#195;&#161;sa
+ by = 
+ 
+ [editMeta]
+-New_prog_step1 = &#218;j m?sor hozz&#225;ad&#225;sa - 1. l&#233;p&#233;s
+-goto_step1 = Vissza az 1. l&#233;p&#233;shez
+-editmeta = Metaadatok m&#243;dos&#237;t&#225;sa
+-edit_files = Csatolm&#225;nyok kezel&#233;se
++New_prog_step1 = &#195;&#154;j m&#197;&#177;sor hozz&#195;&#161;ad&#195;&#161;sa - 1. l&#195;&#169;p&#195;&#169;s
++goto_step1 = Vissza az 1. l&#195;&#169;p&#195;&#169;shez
++editmeta = Metaadatok m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
++edit_files = Csatolm&#195;&#161;nyok kezel&#195;&#169;se
+ 
+-General_metadata = &#193;ltal&#225;nos metaadatok
++General_metadata = &#195;&#129;ltal&#195;&#161;nos metaadatok
+ 
+-station = R&#225;di&#243;
+-change_station = M&#225;sik r&#225;di&#243;hoz rendel&#233;s
++station = R&#195;&#161;di&#195;&#179;
++change_station = M&#195;&#161;sik r&#195;&#161;di&#195;&#179;hoz rendel&#195;&#169;s
+ changestation = RadioValtoztatas
+ series = Sorozat
+ not_in_series = nem tartozik sorozathoz
+-change_series = Sorozathoz rendel&#233;s
++change_series = Sorozathoz rendel&#195;&#169;s
+ changeseries = Sorozat
+-remove_from_series = Sorozatb&#243;l kivesz
+-title = C&#237;m
+-alternative_title = Alc&#237;m
+-episode_title = Epiz&#243;d c&#237;m
+-episode_sequence = Epiz&#243;d sorsz&#225;m
+-author = Szerz?
+-production_date = K&#233;sz&#237;t&#233;s d&#225;tuma
+-broadcast_date = Ad&#225;s d&#225;tuma
++remove_from_series = Sorozatb&#195;&#179;l kivesz
++title = C&#195;&#173;m
++alternative_title = Alc&#195;&#173;m
++episode_title = Epiz&#195;&#179;d c&#195;&#173;m
++episode_sequence = Epiz&#195;&#179;d sorsz&#195;&#161;m
++author = Szerz&#197;&#145;
++production_date = K&#195;&#169;sz&#195;&#173;t&#195;&#169;s d&#195;&#161;tuma
++broadcast_date = Ad&#195;&#161;s d&#195;&#161;tuma
+ broadcast_time = ideje:
+-expiry_date = Lej&#225;rat d&#225;tuma
+-modify_date = Utols&#243; m&#243;dos&#237;t&#225;s
+-entry_date = Felt&#246;lt&#233;s d&#225;tuma
++expiry_date = Lej&#195;&#161;rat d&#195;&#161;tuma
++modify_date = Utols&#195;&#179; m&#195;&#179;dos&#195;&#173;t&#195;&#161;s
++entry_date = Felt&#195;&#182;lt&#195;&#169;s d&#195;&#161;tuma
+ keywords = Kulcsszavak
+ abstract = Kivonat
+ language = Nyelv
+-genre = M?faj
++genre = M&#197;&#177;faj
+ no_genre = nincs megadva
+-temporal_coverage = Kapcsol&#243;d&#243; id?pont
+-spatial_coverage = Kapcsol&#243;d&#243; helysz&#237;n
++temporal_coverage = Kapcsol&#195;&#179;d&#195;&#179; id&#197;&#145;pont
++spatial_coverage = Kapcsol&#195;&#179;d&#195;&#179; helysz&#195;&#173;n
+ 
+-topics = T&#233;m&#225;k
+-no_topics = T&#233;ma nincs megadva
++topics = T&#195;&#169;m&#195;&#161;k
++no_topics = T&#195;&#169;ma nincs megadva
+ topicpopup = TemaValaszto
+-add_topic = &#218;j t&#233;m&#225;hoz rendel&#233;s
++add_topic = &#195;&#154;j t&#195;&#169;m&#195;&#161;hoz rendel&#195;&#169;s
+ 
+-finish_not_publish = Befejez&#233;s publik&#225;l&#225;s n&#233;lk&#252;l
+-finish_publish = Befejez&#233;s &#233;s publik&#225;l&#225;s
++finish_not_publish = Befejez&#195;&#169;s publik&#195;&#161;l&#195;&#161;s n&#195;&#169;lk&#195;&#188;l
++finish_publish = Befejez&#195;&#169;s &#195;&#169;s publik&#195;&#161;l&#195;&#161;s
+ 
+ Rights = Jogok
+-no_rights = Nincsenek k&#252;l&#246;n jogok megadva
+-start_time = Mikort&#243;l (s)
++no_rights = Nincsenek k&#195;&#188;l&#195;&#182;n jogok megadva
++start_time = Mikort&#195;&#179;l (s)
+ stop_time = Meddig (s)
+ rights_text = Jogok
+ edit_right = Jogok
+-add_new_right = &#218;j jog felv&#233;tele
+-for_whole_prg = Az eg&#233;sz m?sorra vonatkoz&#243;an
++add_new_right = &#195;&#154;j jog felv&#195;&#169;tele
++for_whole_prg = Az eg&#195;&#169;sz m&#197;&#177;sorra vonatkoz&#195;&#179;an
+ 
+-general_data = &#193;ltal&#225;nos adatok
+-save = Fenti adatok ment&#233;se
+-access_permissions = Jogosults&#225;gok megv&#225;ltoztat&#225;sa
+-Permissions = Jogosults&#225;gok
++general_data = &#195;&#129;ltal&#195;&#161;nos adatok
++save = Fenti adatok ment&#195;&#169;se
++access_permissions = Jogosults&#195;&#161;gok megv&#195;&#161;ltoztat&#195;&#161;sa
++Permissions = Jogosults&#195;&#161;gok
+ 
+ icons_and_jingles = Ikon
+-username = Felhaszn&#225;l&#243; neve
+-permissions = Jogosults&#225;gok
+-actions = Tev&#233;kenys&#233;gek
+-delete = T&#246;r&#246;ld
+-inherited_perms = A rendszer, r&#225;di&#243; &#233;s sorozat szintekr?l &#246;r&#246;k&#246;lt jogok
+-change_perm = &#218;j jogosults&#225;gok hozz&#225;ad&#225;sa
+-change = V&#225;ltoztat&#225;s
+-deleted_permissions_for = &#214;sszes jogosults&#225;g t&#246;r&#246;lve: %1
+-deleted_contact = N&#233;vjegy t&#246;r&#246;lve: %1
+-ok_icon = A k&#252;ld&#246;tt f&#225;jl ikonnak be&#225;ll&#237;tva.
+-error_icon = Ez a f&#225;jl nem lehet ikon.
+-userfiles = F&#225;jljaim
+-userfiles_expl = Innen is v&#225;laszthat ikont vagy szign&#225;lt.
+-upload_file = Felt&#246;lt&#233;s a f&#225;jljaimhoz
+-view = Megn&#233;z
++username = Felhaszn&#195;&#161;l&#195;&#179; neve
++permissions = Jogosults&#195;&#161;gok
++actions = Tev&#195;&#169;kenys&#195;&#169;gek
++delete = T&#195;&#182;r&#195;&#182;ld
++inherited_perms = A rendszer, r&#195;&#161;di&#195;&#179; &#195;&#169;s sorozat szintekr&#197;&#145;l &#195;&#182;r&#195;&#182;k&#195;&#182;lt jogok
++change_perm = &#195;&#154;j jogosults&#195;&#161;gok hozz&#195;&#161;ad&#195;&#161;sa
++change = V&#195;&#161;ltoztat&#195;&#161;s
++deleted_permissions_for = &#195;&#150;sszes jogosults&#195;&#161;g t&#195;&#182;r&#195;&#182;lve: %1
++deleted_contact = N&#195;&#169;vjegy t&#195;&#182;r&#195;&#182;lve: %1
++ok_icon = A k&#195;&#188;ld&#195;&#182;tt f&#195;&#161;jl ikonnak be&#195;&#161;ll&#195;&#173;tva.
++error_icon = Ez a f&#195;&#161;jl nem lehet ikon.
++userfiles = F&#195;&#161;jljaim
++userfiles_expl = Innen is v&#195;&#161;laszthat ikont vagy szign&#195;&#161;lt.
++upload_file = Felt&#195;&#182;lt&#195;&#169;s a f&#195;&#161;jljaimhoz
++view = Megn&#195;&#169;z
+ set_icon = Legyen ikon
+-no_files = Nincsenek felt&#246;lt&#246;tt f&#225;jlok.
+-upload_expl = Ha az ikonk&#233;nt haszn&#225;lni k&#237;v&#225;nt f&#225;jl nincs m&#233;g a f&#225;jljai k&#246;z&#246;tt, itt felt&#246;ltheti.
++no_files = Nincsenek felt&#195;&#182;lt&#195;&#182;tt f&#195;&#161;jlok.
++upload_expl = Ha az ikonk&#195;&#169;nt haszn&#195;&#161;lni k&#195;&#173;v&#195;&#161;nt f&#195;&#161;jl nincs m&#195;&#169;g a f&#195;&#161;jljai k&#195;&#182;z&#195;&#182;tt, itt felt&#195;&#182;ltheti.
+ icon = Ikon
+ no_icon = Nincs ikon.
+ 
+ # roles and contacts
+-Roles = N&#233;vjegyek &#233;s szerepek
++Roles = N&#195;&#169;vjegyek &#195;&#169;s szerepek
+ Role = Szerep
+-Contact = N&#233;vjegy
+-no_roles = Nincs n&#233;vjegy
+-add_new_role = &#218;j szerep hozz&#225;ad&#225;sa
++Contact = N&#195;&#169;vjegy
++no_roles = Nincs n&#195;&#169;vjegy
++add_new_role = &#195;&#154;j szerep hozz&#195;&#161;ad&#195;&#161;sa
+ edit_role = SzerepSzerkesztes
+-edit_contact = N&#233;vjegy m&#243;dos&#237;t&#225;sa
++edit_contact = N&#195;&#169;vjegy m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
+ editcontact = NevjegySzerkesztes
+ not_available = Nincs megadva
+-no_expiry = Nincs lej&#225;rat
++no_expiry = Nincs lej&#195;&#161;rat
+ 
+ [editFiles]
+-New_prog_step1 = &#218;j program hozz&#225;ad&#225;sa - 1. l&#233;p&#233;s
+-goto_step2 = Tov&#225;bb a m&#225;sodik l&#233;p&#233;shez
+-Edit_files = A m?sorhoz kapcsolt f&#225;jlok &#233;s ugr&#243;pontok
+-edit_meta = Metaadatok szerkeszt&#233;se
+-Links = Ugr&#243;pontok
+-filename = F&#225;jln&#233;v
+-caption = Le&#237;r&#225;s
+-filesize = M&#233;ret
+-last_modified = Utolj&#225;ra m&#243;dos&#237;tva
+-play_length = J&#225;t&#233;kid?
+-stream_access = Streamelhet?
+-download_access = Let&#246;lthet?
+-public_access = Nyilv&#225;nos
+-format = Form&#225;tum
+-mime_type = MIME t&#237;pus
++New_prog_step1 = &#195;&#154;j program hozz&#195;&#161;ad&#195;&#161;sa - 1. l&#195;&#169;p&#195;&#169;s
++goto_step2 = Tov&#195;&#161;bb a m&#195;&#161;sodik l&#195;&#169;p&#195;&#169;shez
++Edit_files = A m&#197;&#177;sorhoz kapcsolt f&#195;&#161;jlok &#195;&#169;s ugr&#195;&#179;pontok
++edit_meta = Metaadatok szerkeszt&#195;&#169;se
++Links = Ugr&#195;&#179;pontok
++filename = F&#195;&#161;jln&#195;&#169;v
++caption = Le&#195;&#173;r&#195;&#161;s
++filesize = M&#195;&#169;ret
++last_modified = Utolj&#195;&#161;ra m&#195;&#179;dos&#195;&#173;tva
++play_length = J&#195;&#161;t&#195;&#169;kid&#197;&#145;
++stream_access = Streamelhet&#197;&#145;
++download_access = Let&#195;&#182;lthet&#197;&#145;
++public_access = Nyilv&#195;&#161;nos
++format = Form&#195;&#161;tum
++mime_type = MIME t&#195;&#173;pus
+ url = URL
+-actions = Utas&#237;t&#225;sok
+-public = Nyilv&#225;nos
+-add_link = &#218;j ugr&#243;pont hozz&#225;ad&#225;sa
+-no_links = Nincsenek ugr&#243;pontok t&#225;rs&#237;tva
+-change = M&#243;dos&#237;t&#225;s
+-delete = T&#246;rl&#233;s
+-change_caption = Le&#237;r&#225;s m&#243;dos&#237;t&#225;sa
+-add_content = M?sor hanganyag&#225;nak felt&#246;lt&#233;se m&#225;s form&#225;tumban
+-add_files = &#218;j f&#225;jl t&#225;rs&#237;t&#225;sa
+-missing = hi&#225;nyzik
+-convert = Gener&#225;ld a t&#246;bbib?l
+-convert_all = Gener&#225;ld az &#246;sszes k&#246;telez? form&#225;tumot
++actions = Utas&#195;&#173;t&#195;&#161;sok
++public = Nyilv&#195;&#161;nos
++add_link = &#195;&#154;j ugr&#195;&#179;pont hozz&#195;&#161;ad&#195;&#161;sa
++no_links = Nincsenek ugr&#195;&#179;pontok t&#195;&#161;rs&#195;&#173;tva
++change = M&#195;&#179;dos&#195;&#173;t&#195;&#161;s
++delete = T&#195;&#182;rl&#195;&#169;s
++change_caption = Le&#195;&#173;r&#195;&#161;s m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
++add_content = M&#197;&#177;sor hanganyag&#195;&#161;nak felt&#195;&#182;lt&#195;&#169;se m&#195;&#161;s form&#195;&#161;tumban
++add_files = &#195;&#154;j f&#195;&#161;jl t&#195;&#161;rs&#195;&#173;t&#195;&#161;sa
++missing = hi&#195;&#161;nyzik
++convert = Gener&#195;&#161;ld a t&#195;&#182;bbib&#197;&#145;l
++convert_all = Gener&#195;&#161;ld az &#195;&#182;sszes k&#195;&#182;telez&#197;&#145; form&#195;&#161;tumot
+ 
+-main_audio_count_mismatch = Integrit&#225;si probl&#233;ma: elt&#233;r&#233;s a hangf&#225;jlok &#233;s az adatb&#225;zis k&#246;z&#246;tt!
+-missing_from_sql = A '%1' f&#225;jl adatai hi&#225;nyoznak az adatb&#225;zisb&#243;l.
++main_audio_count_mismatch = Integrit&#195;&#161;si probl&#195;&#169;ma: elt&#195;&#169;r&#195;&#169;s a hangf&#195;&#161;jlok &#195;&#169;s az adatb&#195;&#161;zis k&#195;&#182;z&#195;&#182;tt!
++missing_from_sql = A '%1' f&#195;&#161;jl adatai hi&#195;&#161;nyoznak az adatb&#195;&#161;zisb&#195;&#179;l.
+ 
+-no_files = Nincsenek f&#225;jlok
+-no_user_files = Nincsenek felt&#246;lt&#246;tt f&#225;jlok
+-Prg_files = A m?sor hanganyaga
+-Files = Kapcsolt f&#225;jlok
+-audio_file_list = Hangf&#225;jlok
+-other_file_list = Egy&#233;b f&#225;jlok
++no_files = Nincsenek f&#195;&#161;jlok
++no_user_files = Nincsenek felt&#195;&#182;lt&#195;&#182;tt f&#195;&#161;jlok
++Prg_files = A m&#197;&#177;sor hanganyaga
++Files = Kapcsolt f&#195;&#161;jlok
++audio_file_list = Hangf&#195;&#161;jlok
++other_file_list = Egy&#195;&#169;b f&#195;&#161;jlok
+ Add_to_audio = &lt;&lt;&lt; Add to audio files &lt;&lt;&lt; (*) ??
+ Add_to_other = &lt;&lt;&lt; Add to other files &lt;&lt;&lt; (*) ??
+ Add_as_icon = &lt;&lt;&lt; Set as icon &lt;&lt;&lt; (*) ??
+ Move_back_to_user = &gt;&gt;&gt; Move back to user files &gt;&gt;&gt; (*) ??
+-copy = m&#225;sol&#225;s
+-move = mozgat&#225;s
++copy = m&#195;&#161;sol&#195;&#161;s
++move = mozgat&#195;&#161;s
+ prgfiles = Files of programme (*)
+ userfiles = User's files (*)
+ select_all = Select all (*)
+ deselect_all = Deselect all (*)
+ delete_selected = Delete selected (*)
+-upload_file = Upload file to user's directory (*) ??
++upload_file = F&#195;&#161;jl felt&#195;&#182;lt&#195;&#169;se a felhaszn&#195;&#161;l&#195;&#179; k&#195;&#182;nyvt&#195;&#161;r&#195;&#161;ba
+ send_file = Send file (*) ??
+ 
+ [editLink]
+-edit_link = Ugr&#243;pont m&#243;dos&#237;t&#225;sa
++edit_link = Ugr&#195;&#179;pont m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
+ url = URL
+-caption = Le&#237;r&#225;s
+-public_access = Nyilv&#225;nos
+-save = Ment&#233;s
++caption = Le&#195;&#173;r&#195;&#161;s
++public_access = Nyilv&#195;&#161;nos
++save = Ment&#195;&#169;s
+ 
+ [addFiles]
+-add_files = F&#225;jlok kapcsol&#225;sa
+-userfiles = F&#225;jljaim
++add_files = F&#195;&#161;jlok kapcsol&#195;&#161;sa
++userfiles = F&#195;&#161;jljaim
+ userfiles_expl = 
+-upload_file = F&#225;jl felt&#246;lt&#233;s
+-add_selected = Kapcsold a kiv&#225;lasztott f&#225;jlokat a m?sorhoz.
+-no_files = Nincsenek felt&#246;lt&#246;tt f&#225;jlok.
+-direct_upload = K&#246;zvetlen felt&#246;lt&#233;s
+-upload_expl = Ha kapcsolni k&#237;v&#225;nt f&#225;jl nincs a felt&#246;lt&#246;tt f&#225;jlok, itt k&#246;zvetlen&#252;l megadhatja.
+-copy_files = Maradjon egy m&#225;solat a f&#225;jljaim k&#246;z&#246;tt
+-move_files = F&#225;jl mozgat&#225;sa a m?sor al&#225;
+-user_dir_ftp_access = Ftp hozz&#225;f&#233;r&#233;s a f&#225;jljaimhoz
++upload_file = F&#195;&#161;jl felt&#195;&#182;lt&#195;&#169;s
++add_selected = Kapcsold a kiv&#195;&#161;lasztott f&#195;&#161;jlokat a m&#197;&#177;sorhoz.
++no_files = Nincsenek felt&#195;&#182;lt&#195;&#182;tt f&#195;&#161;jlok.
++direct_upload = K&#195;&#182;zvetlen felt&#195;&#182;lt&#195;&#169;s
++upload_expl = Ha kapcsolni k&#195;&#173;v&#195;&#161;nt f&#195;&#161;jl nincs a felt&#195;&#182;lt&#195;&#182;tt f&#195;&#161;jlok, itt k&#195;&#182;zvetlen&#195;&#188;l megadhatja.
++copy_files = Maradjon egy m&#195;&#161;solat a f&#195;&#161;jljaim k&#195;&#182;z&#195;&#182;tt
++move_files = F&#195;&#161;jl mozgat&#195;&#161;sa a m&#197;&#177;sor al&#195;&#161;
++user_dir_ftp_access = Ftp hozz&#195;&#161;f&#195;&#169;r&#195;&#169;s a f&#195;&#161;jljaimhoz
+ 
+ [manageFiles]
+-manage_files = F&#225;jljaim kezel&#233;se
+-add_files = F&#225;jlok hozz&#225;ad&#225;sa
+-userfiles = F&#225;jljaim kezel&#233;se
++manage_files = F&#195;&#161;jljaim kezel&#195;&#169;se
++add_files = F&#195;&#161;jlok hozz&#195;&#161;ad&#195;&#161;sa
++userfiles = F&#195;&#161;jljaim kezel&#195;&#169;se
+ userfiles_expl = 
+-upload_file = F&#225;jl felt&#246;lt&#233;se
+-del_selected = Kiv&#225;laszott f&#225;jlok t&#246;rl&#233;se
+-no_files = Nincsenek felt&#246;lt&#246;tt f&#225;jlok.
+-upload_expl = Itt lehet &#250;j f&#225;jlt felt&#246;lteni.
+-close = Bez&#225;r&#225;s
++upload_file = F&#195;&#161;jl felt&#195;&#182;lt&#195;&#169;se
++del_selected = Kiv&#195;&#161;laszott f&#195;&#161;jlok t&#195;&#182;rl&#195;&#169;se
++no_files = Nincsenek felt&#195;&#182;lt&#195;&#182;tt f&#195;&#161;jlok.
++upload_expl = Itt lehet &#195;&#186;j f&#195;&#161;jlt felt&#195;&#182;lteni.
++close = Bez&#195;&#161;r&#195;&#161;s
+ 
+ [editRight]
+-not_integer = A kezd? &#233;s v&#233;gz? id?pontot eg&#233;sz sz&#225;mmal kell megadni!
++not_integer = A kezd&#197;&#145; &#195;&#169;s v&#195;&#169;gz&#197;&#145; id&#197;&#145;pontot eg&#195;&#169;sz sz&#195;&#161;mmal kell megadni!
+ edit_right = Jog modositas
+-change_right = Jog m&#243;dos&#237;t&#225;sa
+-new_right = &#218;j jog felv&#233;tele
++change_right = Jog m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
++new_right = &#195;&#154;j jog felv&#195;&#169;tele
+ start_time = Kezdete
+-stop_time = V&#233;ge
++stop_time = V&#195;&#169;ge
+ time_format = (sec, min:sec)
+-rights_text = Jog le&#237;r&#225;sa
+-Add = Hozz&#225;ad&#225;s
+-Change = M&#243;dos&#237;t&#225;s
+-for_whole_prg = A jog az eg&#233;sz m?sorra vonatkozik.
++rights_text = Jog le&#195;&#173;r&#195;&#161;sa
++Add = Hozz&#195;&#161;ad&#195;&#161;s
++Change = M&#195;&#179;dos&#195;&#173;t&#195;&#161;s
++for_whole_prg = A jog az eg&#195;&#169;sz m&#197;&#177;sorra vonatkozik.
+ 
+ [topicTree]
+-add = Hozz&#225;rendel
++add = Hozz&#195;&#161;rendel
+ 
+ [topicSearch]
+-topic_search = T&#233;m&#225;k b&#246;ng&#233;sz&#233;se
+-subtopics = Alt&#233;m&#225;k
+-no_progs = Ehhez a t&#233;m&#225;hoz nincs m?sor rendelve.
+-topic_tree = T&#233;mafa
+-selected_tree = V&#225;lasztott t&#233;mafa
+-change_tree = V&#225;lt&#225;s
+-other_trees = T&#233;maf&#225;k
++topic_search = T&#195;&#169;m&#195;&#161;k b&#195;&#182;ng&#195;&#169;sz&#195;&#169;se
++subtopics = Alt&#195;&#169;m&#195;&#161;k
++no_progs = Ehhez a t&#195;&#169;m&#195;&#161;hoz nincs m&#197;&#177;sor rendelve.
++topic_tree = T&#195;&#169;mafa
++selected_tree = V&#195;&#161;lasztott t&#195;&#169;mafa
++change_tree = V&#195;&#161;lt&#195;&#161;s
++other_trees = T&#195;&#169;maf&#195;&#161;k
+ 
+ [convert]
+-encode = K&#243;dol&#225;s ??
+-decode = Dek&#243;dol&#225;s ??
+-progress_bar = H&#225;tralev? id? ??
++encode = K&#195;&#179;dol&#195;&#161;s
++decode = Dek&#195;&#179;dol&#195;&#161;s
++progress_bar = H&#195;&#161;tralev&#197;&#145; id&#197;&#145;
+ 
+ [listen]
+-no_listen_access = Ezt a hangf&#225;jlt nem hallgathatja meg.
++no_listen_access = Ezt a hangf&#195;&#161;jlt nem hallgathatja meg.
+ 
+ [playlist]
+-delete = T&#246;rl&#233;s
+-change_order = Sorrend v&#225;ltoztat&#225;s
+-delete_selected = Kiv&#225;lasztottak t&#246;rl&#233;se
+-play_selected = Kiv&#225;lasztottak meghallgat&#225;sa
+-empty = A kedvencek lista &#252;res.
+-select_all = &#214;sszes kiv&#225;laszt&#225;sa
+-invert_selection = Kiv&#225;laszt&#225;s invert&#225;l&#225;sa
+-send_selected = Kiv&#225;lasztottak port&#225;lra t&#246;lt&#233;se
++delete = T&#195;&#182;rl&#195;&#169;s
++change_order = Sorrend v&#195;&#161;ltoztat&#195;&#161;s
++delete_selected = Kiv&#195;&#161;lasztottak t&#195;&#182;rl&#195;&#169;se
++play_selected = Kiv&#195;&#161;lasztottak meghallgat&#195;&#161;sa
++empty = A kedvencek lista &#195;&#188;res.
++select_all = &#195;&#150;sszes kiv&#195;&#161;laszt&#195;&#161;sa
++invert_selection = Kiv&#195;&#161;laszt&#195;&#161;s invert&#195;&#161;l&#195;&#161;sa
++send_selected = Kiv&#195;&#161;lasztottak port&#195;&#161;lra t&#195;&#182;lt&#195;&#169;se
+ 
+ [playlistPopup]
+-top = Tetej&#233;re
++top = Tetej&#195;&#169;re
+ up = Fel
+ down = Le
+-buttom = Alj&#225;ra
+-save = Ment&#233;s
++buttom = Alj&#195;&#161;ra
++save = Ment&#195;&#169;s
+ 
+ [admin]
+-admin = Csom&#243;pont adminsztr&#225;ci&#243;
+-general_data = &#193;ltal&#225;nos adatok
+-save = Ment&#233;s
+-access_permissions = Adminisztr&#225;tori jogosults&#225;gok
+-Permissions = Jogosults&#225;gok
++admin = Csom&#195;&#179;pont adminsztr&#195;&#161;ci&#195;&#179;
++general_data = &#195;&#129;ltal&#195;&#161;nos adatok
++save = Ment&#195;&#169;s
++access_permissions = Adminisztr&#195;&#161;tori jogosults&#195;&#161;gok
++Permissions = Jogosults&#195;&#161;gok
+ username = User name (*)
+ userlist = Userlist (*)
+ permissions = Permissions (*)
+
+Modified: node/trunk/code/configs/hun.conf.latin2
+===================================================================
+--- node/trunk/code/configs/hun.conf.latin2	2006-04-06 14:18:34 UTC (rev 550)
++++ node/trunk/code/configs/hun.conf.latin2	2006-04-06 16:40:43 UTC (rev 551)
+@@ -152,7 +152,7 @@
+ convert_mono = Mono PCM-b&#245;l sztere&#243; k&#233;sz&#237;t&#233;se...
+ 
+ [rss]
+-new_programmes = &#219;j programok list&#225;ja:
++new_programmes = &#218;j programok list&#225;ja:
+ search_in_station = Keres&#233;s a %1 r&#225;di&#243; anyagai k&#246;z&#246;tt
+ Statistics = Statisztika
+ Rights = Jogok
+@@ -206,6 +206,9 @@
+ No_results = Nincs tal&#225;lat
+ total = &#246;sszesen:
+ 
++#added by buddhafly 05-11-22
++Forgot = Elfelejtette a jelszav&#225;t?
++
+ [stations]
+ admin_tasks = Adminisztr&#225;tori feladatok:
+ create_station = &#218;j r&#225;di&#243; felv&#233;tele
+@@ -383,7 +386,7 @@
+ change = M&#243;dos&#237;t&#225;s
+ change_expl = M&#243;dos&#237;thatja az objektumot, pl. a le&#237;r&#225;st vagy az ikont.
+ create = L&#233;trehoz&#225;s
+-create_expl = &#220;j dolgokat adhat az objektumhoz, pl. &#252;j m&#251;sorokat.
++create_expl = &#218;j dolgokat adhat az objektumhoz, pl. &#250;j m&#251;sorokat.
+ delete = T&#246;rl&#233;s
+ delete_expl = T&#246;r&#246;lhet az objektumhoz tartoz&#243; dolgokat, pl. m&#251;sorokat.
+ authorize = Felhatalmaz&#225;s
+@@ -671,6 +674,10 @@
+ invalid_login = &#201;rv&#233;nytelen bejelentkez&#233;s
+ register_here = Ha m&#233;g nem regisztr&#225;lt felhaszn&#225;l&#243;nk, &lt;a href=&quot;register.php&quot;&gt;itt regisztr&#225;lhat&lt;/a&gt;.
+ 
++#added by buddhafly 05-11-22
++forgot_password = Elfelejtette a jelszav&#225;t? Itt k&#233;rhet &lt;a href=&quot;newPassword.php&quot;&gt;&#250;j jelsz&#243;t&lt;/a&gt;.
++
++
+ [register]
+ username_in_use = Ezt a nevet m&#225;r m&#225;s haszn&#225;lja!
+ invalid_username = Nem enged&#233;lyezett felhaszn&#225;l&#243;i n&#233;v!
+@@ -681,6 +688,22 @@
+ Email = E-mail
+ Language = Nyelv
+ 
++old_password = Jelenlegi jelsz&#243;
++new_password = &#218;j jelsz&#243;
++email_missing = K&#233;rj&#252;k &#237;rja be e-mail c&#237;m&#233;t.
++bad_email = &#201;rv&#233;nytelen e-mail c&#237;met adott meg.
++password_empty = K&#233;rj&#252;k &#237;rja be jelenlegi jelszav&#225;t.
++
++[newPassword]
++new_pass_title = &#218;j jelsz&#243; k&#233;r&#233;se
++new_pass_explain = Az &#251;rlap kit&#246;lt&#233;se ut&#225;n egy &#250;j jelsz&#243;t k&#252;ld&#252;nk a regisztr&#225;ci&#243;kor megadott e-mail c&#237;mre.
++request_button = &#218;j jelsz&#243; k&#233;r&#233;se
++pass_mail_subject = Az &#214;n &#250;j StreamOnTheFly jelszava
++pass_mail_message = Kedves %1,&lt;br&gt;&nbsp;&lt;br&gt;k&#233;r&#233;s&#233;re az &#250;j jelsz&#243; elk&#233;sz&#252;lt.&lt;br&gt;Az &#250;j jelszava a StreamOnTheFly szerverhez: %2&lt;br&gt;&nbsp;&lt;br&gt;&lt;a href='%3'&gt;Bejelentkez&#233;s&lt;/a&gt; ut&#225;n, a Be&#225;ll&#237;t&#225;sok oldalon tudja a jelsz&#243;t megv&#225;ltoztatni&lt;br&gt;&nbsp;&lt;br&gt;Adminisztr&#225;tor
++new_pass_error = A felhaszn&#225;l&#243;i n&#233;v vagy az e-mail c&#237;m nem egyezik.
++missing_parameters = Hi&#225;nyz&#243; param&#233;terek
++
++
+ [get]
+ not_published_yet = Ez a m&#251;sor m&#233;g nem nyilv&#225;nos.
+ unpublished_warning = Rejtett
+@@ -695,7 +718,7 @@
+ Statistics = Visszajelz&#233;sek, statisztika
+ no_references = Nincs hivatkoz&#225;s
+ Comments = Megjegyz&#233;sek
+-From = Mikort&#243;l
++&gt;From = Mikort&#243;l
+ Until = Meddig
+ Nodes = H&#225;l&#243;zat
+ Portals = Port&#225;lok
+@@ -889,7 +912,7 @@
+ select_all = Select all (*)
+ deselect_all = Deselect all (*)
+ delete_selected = Delete selected (*)
+-upload_file = Upload file to user's directory (*) ??
++upload_file = F&#225;jl felt&#246;lt&#233;se a felhaszn&#225;l&#243; k&#246;nyvt&#225;r&#225;ba
+ send_file = Send file (*) ??
+ 
+ [editLink]
+@@ -949,9 +972,9 @@
+ other_trees = T&#233;maf&#225;k
+ 
+ [convert]
+-encode = K&#243;dol&#225;s ??
+-decode = Dek&#243;dol&#225;s ??
+-progress_bar = H&#225;tralev&#245; id&#245; ??
++encode = K&#243;dol&#225;s
++decode = Dek&#243;dol&#225;s
++progress_bar = H&#225;tralev&#245; id&#245;
+ 
+ [listen]
+ no_listen_access = Ezt a hangf&#225;jlt nem hallgathatja meg.
+@@ -974,11 +997,11 @@
+ save = Ment&#233;s
+ 
+ [admin]
+-admin = Node administrator's console (*)
+-general_data = General data (*)
+-save = Save (*)
+-access_permissions = Administrators and permissions (*)
+-Permissions = Permissions (*)
++admin = Csom&#243;pont adminsztr&#225;ci&#243;
++general_data = &#193;ltal&#225;nos adatok
++save = Ment&#233;s
++access_permissions = Adminisztr&#225;tori jogosults&#225;gok
++Permissions = Jogosults&#225;gok
+ username = User name (*)
+ userlist = Userlist (*)
+ permissions = Permissions (*)
+
+Modified: node/trunk/code/share/constraints.sql
+===================================================================
+--- node/trunk/code/share/constraints.sql	2006-04-06 14:18:34 UTC (rev 550)
++++ node/trunk/code/share/constraints.sql	2006-04-06 16:40:43 UTC (rev 551)
+@@ -24,6 +24,8 @@
+ 
+ ALTER TABLE &quot;sotf_series&quot; ADD CONSTRAINT &quot;to_stations&quot; FOREIGN KEY(&quot;station_id&quot;) REFERENCES sotf_stations(&quot;id&quot;) ON DELETE CASCADE;
+ 
++ALTER TABLE &quot;sotf_object_roles&quot; ADD  CONSTRAINT &quot;sotf_roles_uniq&quot; UNIQUE(&quot;object_id&quot;, &quot;contact_id&quot;, &quot;role_id&quot;);
++
+ ALTER TABLE &quot;sotf_object_roles&quot; ADD CONSTRAINT &quot;to_node_objects&quot; FOREIGN KEY(&quot;id&quot;) REFERENCES sotf_node_objects(id) ON DELETE CASCADE;
+ 
+ ALTER TABLE &quot;sotf_object_roles&quot; ADD CONSTRAINT &quot;to_contacts&quot; FOREIGN KEY(&quot;contact_id&quot;) REFERENCES sotf_contacts(&quot;id&quot;) ON DELETE CASCADE;
+
+Modified: node/trunk/www/editMeta.php
+===================================================================
+--- node/trunk/www/editMeta.php	2006-04-06 14:18:34 UTC (rev 550)
++++ node/trunk/www/editMeta.php	2006-04-06 16:40:43 UTC (rev 551)
+@@ -137,8 +137,7 @@
+ 	        . sotf_Utils::getParameter($param . 'Month') . '-'
+ 	        . sotf_Utils::getParameter($param . 'Day');
+ 			if($param == 'broadcast_date') {
+-			  $value = $value . ' ' . sotf_Utils::getParameter('broadcast_dateHour') . ':' . sotf_Utils::getParameter('broadcast_dateMinute') . ' ' . $db-&gt;myTZ();
+-              	  $value = $value . ' ' . sotf_Utils::getParameter('broadcast_dateHour') . ':' . sotf_Utils::getParameter('broadcast_dateMinute'); // . ' ' . $db-&gt;myTZ();
++				$value = $value . ' ' . sotf_Utils::getParameter('broadcast_dateHour') . ':' . sotf_Utils::getParameter('broadcast_dateMinute'); // . ' ' . $db-&gt;myTZ();
+ 			}
+ 		} else {
+ 		  $value = NULL;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000137.html">[Sotf-general] r550 - node/trunk/code/share
+</A></li>
+	<LI>Next message: <A HREF="000141.html">[Sotf-general] Node 666 moved to SVN
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#140">[ date ]</a>
+              <a href="thread.html#140">[ thread ]</a>
+              <a href="subject.html#140">[ subject ]</a>
+              <a href="author.html#140">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

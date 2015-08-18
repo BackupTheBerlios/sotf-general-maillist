@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] syncing sendungsarchiv.094.at to the node-network
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2005-September/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20syncing%20sendungsarchiv.094.at%20to%20the%20node-network&In-Reply-To=%3C43259A0B.8%40yaya23.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000022.html">
+   <LINK REL="Next"  HREF="000025.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] syncing sendungsarchiv.094.at to the node-network</H1>
+    <B>roland</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20syncing%20sendungsarchiv.094.at%20to%20the%20node-network&In-Reply-To=%3C43259A0B.8%40yaya23.net%3E"
+       TITLE="[Sotf-general] syncing sendungsarchiv.094.at to the node-network">janki at yaya23.net
+       </A><BR>
+    <I>Mon Sep 12 17:08:59 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000022.html">[Sotf-general] syncing sendungsarchiv.094.at to the node-network
+</A></li>
+        <LI>Next message: <A HREF="000025.html">[Sotf-general] syncing sendungsarchiv.094.at to the node-network
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#23">[ date ]</a>
+              <a href="thread.html#23">[ thread ]</a>
+              <a href="subject.html#23">[ subject ]</a>
+              <a href="author.html#23">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+hmmm errros about invalid payload syncing to AT3:
+
+[12-Sep-2005 17:00:32] 195.177.251.37: number of sent objects: 19
+[12-Sep-2005 17:00:32] 195.177.251.37: XML-RPC: call to
+<A HREF="http://achwelle.fh-vorarlberg.ac.at/node/xmlrpcServer.php/sync/1">http://achwelle.fh-vorarlberg.ac.at/node/xmlrpcServer.php/sync/1</A>
+[12-Sep-2005 17:00:34] XML error: syntax error at line 3
+[12-Sep-2005 17:00:34] 195.177.251.37: ERROR: Error response: 2  Invalid
+return payload: enabling debugging to examine incoming payload.
+[12-Sep-2005 17:00:34] 195.177.251.37: replyInfo:
+[12-Sep-2005 17:00:34] 195.177.251.37: DB:node: Query: UPDATE
+sotf_neighbours SET node_id = '667', accept_incoming = 't',
+use_for_outgoing = 't', last_sync_in = NULL, last_sync_out = NULL,
+errors = '1', success = '0', pending_url =
+'<A HREF="http://achwelle.fh-vorarlberg.ac.at/node">http://achwelle.fh-vorarlberg.ac.at/node</A>' WHERE id='2'
+[12-Sep-2005 17:00:34] 195.177.251.37: parentUpdate:
+[12-Sep-2005 17:00:34] 195.177.251.37: DB:node: Query: ROLLBACK
+[12-Sep-2005 17:00:34] 195.177.251.37:  ms, /admin.php?sync=1&amp;nodeid=667
+
+
+anybody got a clue what this means?
+
+
+Wolfgang Reutz wrote:
+&gt;<i> added the node too ;-)
+</I>&gt;<i> 
+</I>&gt;<i> so it should sync to both st.poelten and dornbirn
+</I>&gt;<i> 
+</I>&gt;<i> Wolfgang
+</I>&gt;<i> 
+</I>&gt;<i> On 12.09.2005, at 16:15, roland jankowski wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> hi all,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> we are ready to sync the o94.at node to the network.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> plz mexx seidl and/or wolfgang reutz, could you
+</I>&gt;&gt;<i> configure your node to allow sync from
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> <A HREF="http://sendungsarchiv.o94.at">http://sendungsarchiv.o94.at</A>
+</I>&gt;&gt;<i> node ID: 94
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> thx
+</I>&gt;&gt;<i> roland jankowski
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> Sotf-general mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A>&gt;
+</I>&gt;&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/sotf-general">http://lists.berlios.de/mailman/listinfo/sotf-general</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> 
+</I>&gt;<i> *Wolfgang Reutz*
+</I>&gt;<i> 
+</I>&gt;<i> research assistant
+</I>&gt;<i> 
+</I>&gt;<i> department of design and media communications | Vorarlberg university of
+</I>&gt;<i> applied sciences
+</I>&gt;<i> 
+</I>&gt;<i> Achstrasse 1 | 6850 Dornbirn | AUSTRIA
+</I>&gt;<i> 
+</I>&gt;<i> p: +43-(0)5572-792-3111 | f: +43-(0)5572-792-9276
+</I>&gt;<i> 
+</I>&gt;<i> e: <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">wolfgang.reutz at fh-vorarlberg.ac.at</A>
+</I>&gt;<i> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">wolfgang.reutz at fh-vorarlberg.ac.at</A>&gt;
+</I>&gt;<i> 
+</I>&gt;<i> gpg keys: <A HREF="http://option.uclv.net/rw/about/gpgkeys/">http://option.uclv.net/rw/about/gpgkeys/</A>
+</I>&gt;<i> 
+</I>&gt;<i> w: <A HREF="http://option.uclv.net/rw/">http://option.uclv.net/rw/</A>
+</I>&gt;<i> 
+</I>&gt;<i> w: <A HREF="http://www.fhv.at/">http://www.fhv.at/</A>
+</I>&gt;<i> 
+</I>&gt;<i> aim/ichat: wreutz
+</I>&gt;<i> 
+</I>&gt;<i> skype: wreutz
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (GNU/Linux)
+Comment: Using GnuPG with Thunderbird - <A HREF="http://enigmail.mozdev.org">http://enigmail.mozdev.org</A>
+
+iD8DBQFDJZoLFrF/eK2uT2wRAsxdAJ4lQ3Vk/O5ksQ2gAf50TF6qBjXWMQCfVOy5
+Cw4ebCXNTwLmohecSVuzajg=
+=813b
+-----END PGP SIGNATURE-----
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000022.html">[Sotf-general] syncing sendungsarchiv.094.at to the node-network
+</A></li>
+	<LI>Next message: <A HREF="000025.html">[Sotf-general] syncing sendungsarchiv.094.at to the node-network
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#23">[ date ]</a>
+              <a href="thread.html#23">[ thread ]</a>
+              <a href="subject.html#23">[ subject ]</a>
+              <a href="author.html#23">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

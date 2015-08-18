@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] sync probs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2005-November/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20sync%20probs&In-Reply-To=%3C43849CDA.4000403%40no-na.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000062.html">
+   <LINK REL="Next"  HREF="000064.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] sync probs</H1>
+    <B>herbert gnauer</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20sync%20probs&In-Reply-To=%3C43849CDA.4000403%40no-na.net%3E"
+       TITLE="[Sotf-general] sync probs">hg at no-na.net
+       </A><BR>
+    <I>Wed Nov 23 17:46:18 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000062.html">[Sotf-general] sync probs
+</A></li>
+        <LI>Next message: <A HREF="000064.html">[Sotf-general] SVN Commit of Andr&#225;s's patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#63">[ date ]</a>
+              <a href="thread.html#63">[ thread ]</a>
+              <a href="subject.html#63">[ subject ]</a>
+              <a href="author.html#63">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>dear andras, thanks for prompt reaction once more! i'll include you to 
+today's evening prayer... ;)
+
+best
+herbert
+
+Micsik Andr&#225;s wrote:
+&gt;<i> 
+</I>&gt;<i> It seems that this has been solved. Although we have to wait a little.
+</I>&gt;<i> 
+</I>&gt;<i> Wolfgang, can you please make a patch in sotf_NodeObject.class.php in 
+</I>&gt;<i> line 159 it should be this:
+</I>&gt;<i> 
+</I>&gt;<i>      $retval = ($this-&gt;getNodeId()==intval($config['nodeId']));
+</I>&gt;<i> 
+</I>&gt;<i> And let us remember that in config.inc.php we should use integers and 
+</I>&gt;<i> not strings for nodeid:
+</I>&gt;<i> 
+</I>&gt;<i>     $config['nodeId'] = 111;
+</I>&gt;<i> 
+</I>&gt;<i> At least I hope this was the problem.
+</I>&gt;<i> 
+</I>&gt;<i> Andras
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sotf-general mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/sotf-general">http://lists.berlios.de/mailman/listinfo/sotf-general</A>
+</I>&gt;<i> 
+</I>
+
+-- 
+
+________________________________________________
+debugging is finished when the last user is dead
+<A HREF="http://no-na.net">http://no-na.net</A>           content managed by vi
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000062.html">[Sotf-general] sync probs
+</A></li>
+	<LI>Next message: <A HREF="000064.html">[Sotf-general] SVN Commit of Andr&#225;s's patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#63">[ date ]</a>
+              <a href="thread.html#63">[ thread ]</a>
+              <a href="subject.html#63">[ subject ]</a>
+              <a href="author.html#63">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

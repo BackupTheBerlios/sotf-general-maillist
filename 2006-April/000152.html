@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] Release Note: New Topic Tree
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20Release%20Note%3A%20New%20Topic%20Tree&In-Reply-To=%3C443CD8AE.6000802%40fh-stpoelten.ac.at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000150.html">
+   <LINK REL="Next"  HREF="000153.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] Release Note: New Topic Tree</H1>
+    <B>Martin Schmidt</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20Release%20Note%3A%20New%20Topic%20Tree&In-Reply-To=%3C443CD8AE.6000802%40fh-stpoelten.ac.at%3E"
+       TITLE="[Sotf-general] Release Note: New Topic Tree">ptmschmidt at fh-stpoelten.ac.at
+       </A><BR>
+    <I>Wed Apr 12 12:38:38 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000150.html">[Sotf-general] Release Note: New Topic Tree
+</A></li>
+        <LI>Next message: <A HREF="000153.html">[Sotf-general] Error in displaying series
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#152">[ date ]</a>
+              <a href="thread.html#152">[ thread ]</a>
+              <a href="subject.html#152">[ subject ]</a>
+              <a href="author.html#152">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+yes, the newly installed nodes will have the new topic tree. That works 
+fine without any problems.
+
+-&gt; <A HREF="http://fetest.fh-stpoelten.ac.at/sotf/node_svn/trunk/www/topics.php">http://fetest.fh-stpoelten.ac.at/sotf/node_svn/trunk/www/topics.php</A>
+
+What about RadioSwap? Are they part of this mailing list?
+
+Greetings,
+Martin
+
+P.S.: I just added a confirmation request in admin.php so the topic tree 
+cannot be updated accidentially. Please check it out! :)
+
+
+
+Micsik Andr&#225;s schrieb:
+
+&gt;<i> OK,
+</I>&gt;<i>
+</I>&gt;<i>   let's run that script. :-) We just have to remember to run that 
+</I>&gt;<i> script on any old installation before adding it to the network.
+</I>&gt;<i>
+</I>&gt;<i> The newly installed nodes will have the new topic tree when they run 
+</I>&gt;<i> the install script?
+</I>&gt;<i>
+</I>&gt;<i> Usually the unused IDs will be deleted from the sotf_node_objects 
+</I>&gt;<i> table via cascading deletes. So there's no need to modify the script.
+</I>&gt;<i>
+</I>&gt;<i> Sorry, I was too cautious,
+</I>&gt;<i>
+</I>&gt;<i>     Andras
+</I>&gt;<i>
+</I>&gt;<i> Martin Schmidt wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Hello,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I'm sorry to say but this mail surprises me as the SQL-script has 
+</I>&gt;&gt;<i> been sent to the list already on February 6 for everyone to have a 
+</I>&gt;&gt;<i> look at it.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Anyway: It is true that I forgot to adapt the sotf_node_objects 
+</I>&gt;&gt;<i> table. But as I see it, there are only the entries with the now 
+</I>&gt;&gt;<i> unnecessary IDs
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> 001td128 - 001td260
+</I>&gt;&gt;<i> 001to128ger - 001to260ger
+</I>&gt;&gt;<i> 001to128eng - 001to260eng
+</I>&gt;&gt;<i> 001to128fra - 001to260fra
+</I>&gt;&gt;<i> 001to128hun - 001to260hun
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> which will have to be deleted. I could add the proper SQL statements 
+</I>&gt;&gt;<i> to the script for the database to be kept clean. As I see it, 
+</I>&gt;&gt;<i> additions would not be necessary as the new topic IDs range 
+</I>&gt;&gt;<i> consistently from 0 to 127 - and all of these have their equivalent 
+</I>&gt;&gt;<i> in sotf_topics, sotf_topic_tree_defs and sotf_prog_topics. So, no SQL 
+</I>&gt;&gt;<i> error should occur.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Concerning the chaos theory: I don't like solution 1a as this would 
+</I>&gt;&gt;<i> not make the system less complex - that's the opposite of what we 
+</I>&gt;&gt;<i> wanted by creating the simplified topic tree...
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Solution 1b sounds good but is not quite clear to me. Does this mean 
+</I>&gt;&gt;<i> that I have to reassign all new IDs to the new topics, continuing the 
+</I>&gt;&gt;<i> old schema with 261? Else, would change_stamp=1 be enough to differ 
+</I>&gt;&gt;<i> old and new topics in the case RadioSwap syncs? How would this way 
+</I>&gt;&gt;<i> work exactly?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> (Besides, is there no contact at all with RadioSwap? Couldn't they 
+</I>&gt;&gt;<i> switch to SVN, too? Then, every existent node would have the 
+</I>&gt;&gt;<i> capability to update the topic tree. The only one left - according to 
+</I>&gt;&gt;<i> the map on streamonthefly.org *g* - would be 
+</I>&gt;&gt;<i> &quot;ste-audiorating.dh.uclv.net&quot;, but this URL is not reachable...)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Regarding point 2, i suppose the same process as in install.php 
+</I>&gt;&gt;<i> (delete/create vocabularies) is meant...
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I would like to invite everybody who knows what's the problem about 
+</I>&gt;&gt;<i> to contribute their thoughts to the discussion. Together, we'll maybe 
+</I>&gt;&gt;<i> find a practicable, good and lbnl efficient solution for the problem 
+</I>&gt;&gt;<i> as I would like to continue focusing on the video extension to get it 
+</I>&gt;&gt;<i> finished in time... :)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Greetings,
+</I>&gt;&gt;<i> Martin
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Micsik Andr&#225;s schrieb:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Hi,
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I had a more careful thought on this, and I DO NOT RECOMMEND to 
+</I>&gt;&gt;&gt;<i> change topic trees as it is now. Sorry for saying it now, but there 
+</I>&gt;&gt;&gt;<i> are some dangers in it:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> - sotf_node_objects table is untouched by the update process: each 
+</I>&gt;&gt;&gt;<i> synchronised object has an entry in this table. As Martin directly 
+</I>&gt;&gt;&gt;<i> adds/deletes objects using SQL commands, the node_objects table 
+</I>&gt;&gt;&gt;<i> should be manually edited as well: additions and deletions should be 
+</I>&gt;&gt;&gt;<i> done. Or, by using the save() method of sotf_NodeObject class this 
+</I>&gt;&gt;&gt;<i> can be done automatically (see sotf_Vocabularies::importTopicTree)
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> - The change in the topic tree makes a change &quot;without history&quot;: the 
+</I>&gt;&gt;&gt;<i> old tree disappears, it is replaced by the new one. What happens 
+</I>&gt;&gt;&gt;<i> when an existing node installed some years before (e.g. the Belgian 
+</I>&gt;&gt;&gt;<i> RadioSwap) accidentally joins the network? big chaos!
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> My suggestion is:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> 1.a. either insert the modified tree as a completely new tree and 
+</I>&gt;&gt;&gt;<i> make it the default,
+</I>&gt;&gt;&gt;<i> 1.b. or insert it with change_stamp=1 and create the proper 
+</I>&gt;&gt;&gt;<i> sotf_deletion objects for deleted topics
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> In both cases if some node with the old tree joins the network, the 
+</I>&gt;&gt;&gt;<i> old tree will not overwrite the new one.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> 2. Use/extend the sotf_Vocabularies class to import the updated tree 
+</I>&gt;&gt;&gt;<i> (instead of raw SQL), because it takes care of some things under the 
+</I>&gt;&gt;&gt;<i> hood...
+</I>&gt;&gt;&gt;<i> (or create the necessary changes for the sotf_node_objects table, 
+</I>&gt;&gt;&gt;<i> which will be hard)
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Or there might be some simpler solution, which I did not notice...
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Andras
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Martin Schmidt wrote:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i> Hello everybody,
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i> i have just committed the simplified topic tree i worked out in 
+</I>&gt;&gt;&gt;&gt;<i> Jan/Feb to SVN.
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i> In the admin section, there is now a link &quot;Update topic tree&quot;. A 
+</I>&gt;&gt;&gt;&gt;<i> click on it runs the script in admin.php, which
+</I>&gt;&gt;&gt;&gt;<i> - replaces the old topic tree
+</I>&gt;&gt;&gt;&gt;<i> - maps all programmes' topic id's to the accordant new ones
+</I>&gt;&gt;&gt;&gt;<i> - checks for possible duplicate topic entries (e.g. a programme 
+</I>&gt;&gt;&gt;&gt;<i> with the old topics &quot;handball&quot; and &quot;football&quot; cannot have the new 
+</I>&gt;&gt;&gt;&gt;<i> topic &quot;sport&quot; twice, as sotf_prog_topics does only allow unique 
+</I>&gt;&gt;&gt;&gt;<i> entries).
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i> The topictree_sotf_*.txt-files in code/share have also been updated 
+</I>&gt;&gt;&gt;&gt;<i> in all four languages (thx andras!), so newly installed nodes will 
+</I>&gt;&gt;&gt;&gt;<i> have automatically the new topic tree.
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i> It would be best if the running nodes switch to the new tree 
+</I>&gt;&gt;&gt;&gt;<i> approximately simultaneous. So there will be no conflicting topic 
+</I>&gt;&gt;&gt;&gt;<i> id's when syncs are done. But maybe, there is also another solution 
+</I>&gt;&gt;&gt;&gt;<i> for it i might not have thought about...?
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i> Greetings,
+</I>&gt;&gt;&gt;&gt;<i> Martin
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;&gt;&gt;<i> Sotf-general mailing list
+</I>&gt;&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A>
+</I>&gt;&gt;&gt;&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/sotf-general">http://lists.berlios.de/mailman/listinfo/sotf-general</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;&gt;<i> Sotf-general mailing list
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/sotf-general">http://lists.berlios.de/mailman/listinfo/sotf-general</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> Sotf-general mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/sotf-general">http://lists.berlios.de/mailman/listinfo/sotf-general</A>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sotf-general mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/sotf-general">http://lists.berlios.de/mailman/listinfo/sotf-general</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000150.html">[Sotf-general] Release Note: New Topic Tree
+</A></li>
+	<LI>Next message: <A HREF="000153.html">[Sotf-general] Error in displaying series
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#152">[ date ]</a>
+              <a href="thread.html#152">[ thread ]</a>
+              <a href="subject.html#152">[ subject ]</a>
+              <a href="author.html#152">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

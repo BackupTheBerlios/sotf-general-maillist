@@ -1,0 +1,3546 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r590 - in node/branches/payable: code/classes	code/configs code/doc code/share code/templates www www/static
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r590%20-%20in%20node/branches/payable%3A%20code/classes%0A%09code/configs%20code/doc%20code/share%20code/templates%20www%20www/static&In-Reply-To=%3C200611052212.kA5MCSKr024472%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000283.html">
+   <LINK REL="Next"  HREF="000285.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r590 - in node/branches/payable: code/classes	code/configs code/doc code/share code/templates www www/static</H1>
+    <B>micsik at BerliOS</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r590%20-%20in%20node/branches/payable%3A%20code/classes%0A%09code/configs%20code/doc%20code/share%20code/templates%20www%20www/static&In-Reply-To=%3C200611052212.kA5MCSKr024472%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r590 - in node/branches/payable: code/classes	code/configs code/doc code/share code/templates www www/static">micsik at mail.berlios.de
+       </A><BR>
+    <I>Sun Nov  5 23:12:28 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000283.html">[Sotf-general] Audio Foundation Podcasting
+</A></li>
+        <LI>Next message: <A HREF="000285.html">[Sotf-general] r591 - node/branches/payable/code/share
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#284">[ date ]</a>
+              <a href="thread.html#284">[ thread ]</a>
+              <a href="subject.html#284">[ subject ]</a>
+              <a href="author.html#284">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: micsik
+Date: 2006-11-05 23:12:26 +0100 (Sun, 05 Nov 2006)
+New Revision: 590
+
+Added:
+   node/branches/payable/code/templates/adminMenu.htm
+   node/branches/payable/code/templates/adminProgStats.htm
+   node/branches/payable/code/templates/adminShowUser.htm
+   node/branches/payable/code/templates/adminTopProgs.htm
+   node/branches/payable/code/templates/adminTopUsers.htm
+   node/branches/payable/code/templates/adminUserStats.htm
+   node/branches/payable/code/templates/getNormalContent.htm
+   node/branches/payable/code/templates/getPromotedContent.htm
+   node/branches/payable/code/templates/getProtectedContent.htm
+   node/branches/payable/code/templates/showGroup.htm
+   node/branches/payable/www/adminProgStats.php
+   node/branches/payable/www/adminShowUser.php
+   node/branches/payable/www/adminTopProgs.php
+   node/branches/payable/www/adminTopUsers.php
+   node/branches/payable/www/adminUserStats.php
+   node/branches/payable/www/showGroup.php
+Removed:
+   node/branches/payable/code/templates/adminStats.htm
+   node/branches/payable/www/adminStats.php
+Modified:
+   node/branches/payable/code/classes/sotf_Group.class.php
+   node/branches/payable/code/classes/sotf_Permission.class.php
+   node/branches/payable/code/classes/sotf_Programme.class.php
+   node/branches/payable/code/classes/sotf_Vocabularies.class.php
+   node/branches/payable/code/configs/eng.conf
+   node/branches/payable/code/configs/fra.conf
+   node/branches/payable/code/configs/ger.conf
+   node/branches/payable/code/configs/hun.conf
+   node/branches/payable/code/doc/README.protected-content.txt
+   node/branches/payable/code/share/update.sql
+   node/branches/payable/code/templates/admin.htm
+   node/branches/payable/code/templates/adminGroups.htm
+   node/branches/payable/code/templates/adminUsers.htm
+   node/branches/payable/code/templates/editGroup.htm
+   node/branches/payable/code/templates/editMeta.htm
+   node/branches/payable/code/templates/editUserGroups.htm
+   node/branches/payable/code/templates/get.htm
+   node/branches/payable/code/templates/index.htm
+   node/branches/payable/code/templates/topicTree.htm
+   node/branches/payable/www/adminGroups.php
+   node/branches/payable/www/config.inc.php.template
+   node/branches/payable/www/editGroup.php
+   node/branches/payable/www/editMeta.php
+   node/branches/payable/www/functions.inc.php
+   node/branches/payable/www/get.php
+   node/branches/payable/www/index.php
+   node/branches/payable/www/static/main.css
+Log:
+2nd phase of additions
+
+
+Modified: node/branches/payable/code/classes/sotf_Group.class.php
+===================================================================
+--- node/branches/payable/code/classes/sotf_Group.class.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/classes/sotf_Group.class.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -29,7 +29,7 @@
+   function listAll($withCounts=1) {
+     global $db;
+     if($withCounts)
+-      $sql = &quot;SELECT g.*, count(u.id) as count FROM sotf_groups g LEFT JOIN sotf_user_groups u ON g.id=u.group_id GROUP BY g.name, g.id, g.comments ORDER BY g.name&quot;;
++      $sql = &quot;SELECT g.*, count(u.id) as count FROM sotf_groups g LEFT JOIN sotf_user_groups u ON g.id=u.group_id GROUP BY g.name, g.id, g.comments, g.price ORDER BY g.name&quot;;
+     else
+       $sql = &quot;SELECT * FROM sotf_groups g&quot;;
+     $res = $db-&gt;getAll($sql);
+@@ -109,6 +109,50 @@
+     }
+   }
+ 
++  function listObjectsOfGroup() {
++	 global $repository, $permissions;
++	 $retval = $permissions-&gt;listObjectsInGroup($this-&gt;id);
++	 return $retval;
++  }
++
++  /** Static */
++  function listGroupIdsOfObject($id, $perm='listen') {
++    global $repository, $permissions;
++	 if(!$id)
++		return array();
++	 $obj = &amp; $repository-&gt;getObject($id);
++	 $perms = $permissions-&gt;listGroupsAndPermissions($id);
++	 $groups = array();
++	 //debug(&quot;PERMS&quot;, $perms);
++	 foreach($perms as $row) {
++		if($row['perm']==$perm) {
++		  $groups[] = substr($row['id'], 1);
++		}
++	 }
++	 $fields = $obj-&gt;getAll();
++	 // propagate query upwards
++	 if($fields['series_id']) {
++		$groups = array_merge($groups, sotf_Group::listGroupIdsOfObject($fields['series_id'], $perm));
++	 } elseif($fields['station_id']) {
++		$groups = array_merge($groups, sotf_Group::listGroupIdsOfObject($fields['station_id'], $perm));
++	 }
++	 $groups = array_unique($groups);
++	 //debug(&quot;GROUP IDS&quot;, $groups);
++	 return $groups;
++  }
++
++  function listGroupsOfObject($id, $perm='listen') {
++	 $groups = sotf_Group::listGroupIdsOfObject($id, $perm);
++	 $retval = array();
++	 foreach($groups as $gid) {
++		$group = sotf_Group::getById($gid);
++		$retval[$group-&gt;get('name')] = $group-&gt;getAll();
++	 }
++	 asort($retval);
++	 //debug(&quot;GROUPS&quot;, $retval);
++    return $retval;
++  }
++
+   function listGroupsOfUser($uid) {
+     global $db;
+ 	 if(!$uid)
+
+Modified: node/branches/payable/code/classes/sotf_Permission.class.php
+===================================================================
+--- node/branches/payable/code/classes/sotf_Permission.class.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/classes/sotf_Permission.class.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -206,6 +206,14 @@
+ 	 return $retval;
+   }
+ 
++  function listObjectsInGroup($gid, $perm='listen') {
++	 global $db;
++	 $retval = $db-&gt;getCol(&quot;SELECT u.object_id FROM sotf_group_permissions u, sotf_permissions p WHERE p.permission='$perm' AND p.id = u.permission_id AND u.group_id='$gid'&quot;);
++	 if(DB::isError($retval))
++		raiseError($retval);
++	 return $retval;
++  }
++
+   /** private */
+   function sortUsersByName($a, $b) {
+ 	 return strcasecmp($a['name'], $b['name']);
+
+Modified: node/branches/payable/code/classes/sotf_Programme.class.php
+===================================================================
+--- node/branches/payable/code/classes/sotf_Programme.class.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/classes/sotf_Programme.class.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -264,6 +264,14 @@
+ 	 return $this-&gt;getBool('published');
+   }
+ 
++  function isFree() {
++	 return $this-&gt;getBool('free_content');
++  }
++
++  function isPromoted() {
++	 return $this-&gt;getBool('promoted');
++  }
++
+   function canListen() {
+ 	 if($this-&gt;getBool('free_content'))
+ 		return 1;
+@@ -373,14 +381,16 @@
+    *   QUERIES
+    ************************************************/
+ 
+-  /** get news for index page, mode: 0=all, 1=non-free, 2=free */
+-  function getNewProgrammes($fromDay, $maxItems, $mode=0) {
++  /** get news for index page, mode can be: all, free, promoted, premium */
++  function getNewProgrammes($fromDay, $maxItems, $mode='all') {
+ 	 global $config, $db;
+ 
+-	 if($mode==1)
++	 if($mode=='premium')
+ 		$modeSql = &quot;i.free_content='f' AND&quot;;
+-	 elseif($mode==2)
+-		$modeSql = &quot;i.free_content='t' AND&quot;;
++	 elseif($mode=='promoted')
++		$modeSql = &quot;i.free_content='t' AND i.promoted='t' AND&quot;;
++	 elseif($mode=='free')
++		$modeSql = &quot;i.free_content='t' AND i.promoted='f' AND&quot;;
+ 	 //$sql = &quot;SELECT i.* FROM sotf_programmes i, sotf_stations s WHERE $modeSql i.station_id = s.id AND i.published='t' AND i.entry_date &gt;= '$fromDay' ORDER BY i.entry_date DESC&quot;;
+ 	  $sql = &quot;SELECT i.* FROM sotf_programmes i, sotf_stations s WHERE $modeSql i.station_id = s.id AND i.published='t' AND i.type='sound' AND i.entry_date &gt;= '$fromDay' ORDER BY i.entry_date DESC&quot;; //MODIFIED BY Martin Schmidt
+ 	 $res =	$db-&gt;limitQuery($sql, 0, $maxItems);
+
+Modified: node/branches/payable/code/classes/sotf_Vocabularies.class.php
+===================================================================
+--- node/branches/payable/code/classes/sotf_Vocabularies.class.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/classes/sotf_Vocabularies.class.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -327,8 +327,9 @@
+ 				$roots[] = $parentId;
+ 				$parentId = $prevId;
+ 			}
+-			if($level &gt; $l) {
+-		  $parentId = array_pop($roots);
++			while($level &gt; $l) {
++				$parentId = array_pop($roots);
++				$level--;
+ 			}
+ 			$level = $l;
+ 			debug(&quot;&quot;, &quot;LEVEL: $level, PARENT: $parentId, ROOTS: &quot; . join(&quot;,&quot;, $roots));
+
+Modified: node/branches/payable/code/configs/eng.conf
+===================================================================
+--- node/branches/payable/code/configs/eng.conf	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/configs/eng.conf	2006-11-05 22:12:26 UTC (rev 590)
+@@ -73,7 +73,8 @@
+ Network = Network &amp; General
+ Users = Users
+ Groups = Groups
+-Stats = Statistics
++TopProgs = Prog stats
++TopUsers = User stats
+ admin=Node administrator's console
+ 
+ #permissions
+@@ -128,6 +129,7 @@
+ 
+ # translations for database field names
+ free_content=Free content
++promoted=Promoted content
+ station=Station name
+ production_date=Production date
+ language=Language
+@@ -220,6 +222,7 @@
+ topics = Topics
+ top_topics = Topics with most programmes:
+ 
++Promoted_shows = Promoted content:
+ Premium_shows = Premium content:
+ No_premium_news = No new premium content
+ New_shows = New programmes:
+@@ -788,6 +791,8 @@
+ viewpopup = View
+ programme_audio = Programme audio
+ 
++Listener_groups = This programme can be listened after subscribing to one of these groups:
++
+ Links = Links
+ put_into_playlist = Put into my playlist
+ upload_to_portal = Upload to my portal
+@@ -828,6 +833,11 @@
+ temporal_coverage = Temporal coverage
+ spatial_coverage = Spatial coverage
+ 
++content_type = Type of content
++Free = Free
++Promoted = Promoted
++Protected = Protected/payable
++
+ topics = Topics
+ no_topics = No topics given yet.
+ topicpopup = AddTopic
+@@ -1081,6 +1091,8 @@
+ [adminGroups]
+ count=Members
+ comments=Comments
++price=Price
++income=Income
+ edit=Change
+ delete=Delete
+ add=Create new group
+@@ -1088,19 +1100,53 @@
+ [adminUsers]
+ groups=Groups
+ edit_groups=Change groups
++listen_stats=Statistics
+ delete=Delete
+ Search= Search
+ 
+ [editGroup]
+ edit_group= Create/change group
+ comments=Comments
++price=Price
+ error_name_missing = The name must be given!
+ error_name_in_use = A group with this name already exists
+ 
+ [editUserGroups]
+ editUserGroups = Change group memberships for user
+ 
+-[adminStats]
+-Top_shows = Top listens
++[adminTopProgs]
++Top_shows = Top programs
++Top_expl = These statistics is based on logged in users only!
+ listenNum = Listens/Downloads
++details = Details
+ 
++[adminTopUsers]
++Top_users = Top listeners
++User = User
++Contact = Contact
++Groups = Groups
++listenNum = Listens/Downloads
++details = Details
++
++[adminProgStats]
++adminProgStats = Program statistics
++Prog_title = Program:
++User = User
++Contact = Contact
++Groups = Groups
++
++[adminUserStats]
++adminUserStats = User statistics
++User_name = User:
++Program = Program
++Groups = Groups
++Contact = Contact:
++
++[showGroup]
++name = Group name
++contents = Contains:
++
++[adminShowUser]
++adminShowUser = User data
++User_name = User name:
++
+
+Modified: node/branches/payable/code/configs/fra.conf
+===================================================================
+--- node/branches/payable/code/configs/fra.conf	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/configs/fra.conf	2006-11-05 22:12:26 UTC (rev 590)
+@@ -73,7 +73,8 @@
+ Network = Network &amp; General !!
+ Users = Users !!
+ Groups = Groups !!
+-Stats = Statistics !!
++TopProgs = Prog stats !!
++TopUsers = User stats !!
+ admin= la console de l'administrateur de noeud
+ 
+ #permissions
+@@ -129,6 +130,7 @@
+ 
+ # translations for database field names
+ free_content=Free content !!
++promoted=Promoted content !!
+ station= nom de station
+ production_date= date de production
+ language= langue
+@@ -221,6 +223,7 @@
+ topics = mati&#195;&#168;res
+ top_topics = mati&#195;&#168;res avec le plus de programmes:
+ 
++Promoted_shows = Promoted content !!
+ Premium_shows = Premium content: !!
+ No_premium_news = No new premium content !!
+ New_shows = nouveaux programmes:
+@@ -784,6 +787,8 @@
+ viewpopup = ???
+ programme_audio = programme audio
+ 
++Listener_groups = This programme can be listened after subscribing to one of these groups: !!
++
+ Links = liens
+ put_into_playlist = Mettez dans mon programme
+ upload_to_portal = T&#195;&#169;l&#195;&#169;chargez &#195;&#160; mon portail
+@@ -822,6 +827,11 @@
+ temporal_coverage = port&#195;&#169;e temporelle
+ spatial_coverage = port&#195;&#169;e spatial
+ 
++content_type = Type of content !!
++Free = Free !!
++Promoted = Promoted !!
++Protected = Protected/payable !!
++
+ topics = mati&#195;&#168;res
+ no_topics = aucunes mati&#195;&#168;res donn&#195;&#169;es encore.
+ topicpopup = ajoutez mati&#195;&#168;res
+@@ -1074,6 +1084,8 @@
+ [adminGroups]
+ count=Members !!
+ comments=Comments !!
++price=Price !!
++income=Income !!
+ edit=Change !!
+ delete=Delete !!
+ add=Create new group !!
+@@ -1081,18 +1093,53 @@
+ [adminUsers]
+ groups=Groups !!
+ edit_groups=Change groups !!
++listen_stats=Statistics !!
+ delete=Delete !!
+ Search= Search !!
+ 
+ [editGroup]
+ edit_group= Create/change group !!
+ comments=Comments !!
++price=Price !!
+ error_name_missing = The name must be given! !!
+ error_name_in_use = A group with this name already exists !!
+ 
+ [editUserGroups]
+ editUserGroups = Change group memberships for user !!
+ 
+-[adminStats]
+-Top_shows = Top listens !!
++[adminTopProgs]
++Top_shows = Top programs !!
++Top_expl = These statistics is based on logged in users only! !!
++listenNum = Listens/Downloads  !!
++details = Details !!
++
++[adminTopUsers]
++Top_users = Top listeners !!
++User = User !!
++Contact = Contact !!
++Groups = Groups !!
+ listenNum = Listens/Downloads !!
++details = Details !!
++
++[adminProgStats]
++adminProgStats = Program statistics !!
++Prog_title = Program: !!
++User = User !!
++Contact = Contact !!
++Groups = Groups !!
++
++[adminUserStats]
++adminUserStats = User statistics !!
++User_name = User: !!
++Program = Program !!
++Groups = Groups !!
++Contact = Contact: !!
++
++[showGroup]
++name = Group name !!
++contents = Contains: !!
++
++[adminShowUser]
++adminShowUser = User data !!
++User_name = User name: !!
++
+
+Modified: node/branches/payable/code/configs/ger.conf
+===================================================================
+--- node/branches/payable/code/configs/ger.conf	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/configs/ger.conf	2006-11-05 22:12:26 UTC (rev 590)
+@@ -73,7 +73,8 @@
+ Network = Netzwerk &amp; Allgemein
+ Users = Nutzer
+ Groups = Gruppen
+-Stats = Statistik
++TopProgs = Progr. stat. !!
++TopUsers = Nutzer stat. !!
+ admin=Node-Administratoren Kontrollfeld
+ 
+ #permissions
+@@ -128,6 +129,7 @@
+ 
+ # translations for database field names
+ free_content = Freier Inhalt (gratis)
++promoted=Promoted content !!
+ station = Sendername
+ production_date = Produktionsdatum
+ language = Sprache
+@@ -220,6 +222,7 @@
+ topics = Themen
+ top_topics = Topthemen:
+ 
++Promoted_shows = Promotion Inhalte: !!
+ Premium_shows = Premium Inhalte:
+ No_premium_news = Keine neuen Premium Inhalte
+ New_shows = Neue Sendungen:
+@@ -790,6 +793,8 @@
+ viewpopup = Ansicht
+ programme_audio = Audio
+ 
++Listener_groups = This programme can be listened after subscribing to one of these groups: !!
++
+ Links = Links
+ put_into_playlist = Zu meinem Programm hinzuf&#195;&#188;gen
+ upload_to_portal = Auf mein Portal raufladen
+@@ -830,6 +835,11 @@
+ temporal_coverage = zeitliche Zuordnung
+ spatial_coverage = regionale Zuordnung
+ 
++content_type = Type of content !!
++Free = Free !!
++Promoted = Promoted !!
++Protected = Protected/payable !!
++
+ topics = Themen
+ no_topics = Noch keine Themen vorhanden
+ topicpopup = Thema hinzuf&#195;&#188;gen
+@@ -1089,6 +1099,8 @@
+ [adminGroups]
+ count = Mitglieder
+ comments = Kommentare
++price=Price !!
++income=Income !!
+ edit = &#195;&#132;ndern
+ delete = L&#195;&#182;schen
+ add = Neue Gruppe erstellen
+@@ -1096,18 +1108,53 @@
+ [adminUsers]
+ groups = Gruppen
+ edit_groups = Gruppen &#195;&#164;ndern
++listen_stats=Statistics !!
+ delete = L&#195;&#182;schen
+ Search = Suchen
+ 
+ [editGroup]
+ edit_group = Erstellen/&#195;&#132;ndern einer Gruppe
+ comments = Kommentare
++price=Price !!
+ error_name_missing = Der Name muss angegeben werden!
+ error_name_in_use = Eine Gruppe mit diesem Namen existiert bereits.
+ 
+ [editUserGroups]
+ editUserGroups = &#195;&#132;ndern der Gruppenmitgliedschaft von Nutzern
+ 
+-[adminStats]
++[adminTopProgs]
+ Top_shows = Liste der h&#195;&#164;ufigsten H&#195;&#182;rer
++Top_expl = These statistics is based on logged in users only!
+ listenNum = Angeh&#195;&#182;rt/Heruntergeladen
++details = Details
++
++[adminTopUsers]
++Top_users = Top listeners
++User = User
++Contact = Contact
++Groups = Groups
++listenNum = Listens/Downloads
++details = Details
++
++[adminProgStats]
++adminProgStats = Program statistics
++Prog_title = Program:
++User = User
++Contact = Contact
++Groups = Groups
++
++[adminUserStats]
++adminUserStats = User statistics
++User_name = User:
++Program = Program
++Groups = Groups
++Contact = Contact:
++
++[showGroup]
++name = Group name
++contents = Contains:
++
++[adminShowUser]
++adminShowUser = User data
++User_name = User name:
++
+
+Modified: node/branches/payable/code/configs/hun.conf
+===================================================================
+--- node/branches/payable/code/configs/hun.conf	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/configs/hun.conf	2006-11-05 22:12:26 UTC (rev 590)
+@@ -73,7 +73,8 @@
+ Network = H&#195;&#161;l&#195;&#179;zat &#195;&#169;s &#195;&#161;ltal&#195;&#161;nos
+ Users = Felhaszn&#195;&#161;l&#195;&#179;k
+ Groups = Csoportok
+-Stats = Statisztika
++TopProgs = M&#197;&#177;sor stat.
++TopUsers = Felh. stat.
+ admin = Csom&#195;&#179;pont adminsztr&#195;&#161;ci&#195;&#179;
+ 
+ #permissions
+@@ -128,6 +129,7 @@
+ 
+ # translations for database field names
+ free_content=Ingyenes tartalom
++promoted=Aj&#195;&#161;nlott tartalom
+ station = R&#195;&#161;di&#195;&#179; neve
+ production_date = K&#195;&#169;sz&#195;&#173;t&#195;&#169;s d&#195;&#161;tuma
+ language = Nyelv
+@@ -214,7 +216,8 @@
+ topics = T&#195;&#169;m&#195;&#161;k
+ top_topics = A leggyakoribb t&#195;&#169;m&#195;&#161;k
+ 
+-Premium_shows = T&#195;&#161;mogatott m&#197;&#177;sorok
++Promoted_shows = Aj&#195;&#161;nlott m&#197;&#177;sorok
++Premium_shows = Fizet&#197;&#145;s m&#197;&#177;sorok
+ No_premium_news = Nincs &#195;&#186;j anyag
+ New_shows = Friss anyagok
+ No_news = Nincs &#195;&#186;j anyag
+@@ -781,6 +784,8 @@
+ viewpopup = Nezegeto
+ programme_audio = M&#197;&#177;sor hanganyaga
+ 
++Listener_groups = Az al&#195;&#161;bbi csoportok egyik&#195;&#169;be kell feliratkozni a m&#197;&#177;sor meghallgat&#195;&#161;s&#195;&#161;hoz:
++
+ Links = Ugr&#195;&#179;pontok
+ put_into_playlist = Tedd a kedvenceimhez!
+ upload_to_portal = Tedd fel a port&#195;&#161;lomra!
+@@ -823,6 +828,11 @@
+ temporal_coverage = Kapcsol&#195;&#179;d&#195;&#179; id&#197;&#145;pont
+ spatial_coverage = Kapcsol&#195;&#179;d&#195;&#179; helysz&#195;&#173;n
+ 
++content_type = Tartalom t&#195;&#173;pusa
++Free = Ingyenes
++Promoted = Aj&#195;&#161;nlott
++Protected = V&#195;&#169;dett/fizet&#197;&#145;s
++
+ topics = T&#195;&#169;m&#195;&#161;k
+ no_topics = T&#195;&#169;ma nincs megadva
+ topicpopup = TemaValaszto
+@@ -1080,6 +1090,8 @@
+ [adminGroups]
+ count=Tagok
+ comments=Megjegyz&#195;&#169;s
++price=&#195;&#129;r
++income=Bev&#195;&#169;tel
+ edit=Szerkeszt&#195;&#169;s
+ delete=T&#195;&#182;rl&#195;&#169;s
+ add=&#195;&#154;j csoport l&#195;&#169;trehoz&#195;&#161;sa
+@@ -1087,19 +1099,52 @@
+ [adminUsers]
+ groups=Csoporttags&#195;&#161;g
+ edit_groups=Csoporttags&#195;&#161;g v&#195;&#161;lt&#195;&#161;s
++listen_stats=Statisztika
+ delete=T&#195;&#182;rl&#195;&#169;s
+ Search=Keres&#195;&#169;s
+ 
+ [editGroup]
+ edit_group= Csoport v&#195;&#161;ltoztat&#195;&#161;s / l&#195;&#169;trehoz&#195;&#161;s
+ comments=Megjegyz&#195;&#169;s
++price=&#195;&#129;r
+ error_name_missing = N&#195;&#169;v nincs megadva!
+ error_name_in_use = Ilyen nev&#197;&#177; csoport m&#195;&#161;r l&#195;&#169;tezik
+ 
+ [editUserGroups]
+ editUserGroups = A felhaszn&#195;&#161;l&#195;&#179; csoporttags&#195;&#161;g&#195;&#161;nak v&#195;&#161;ltoztat&#195;&#161;sa
+ 
+-[adminStats]
+-Top_shows = Leghallgatottabb m&#197;&#177;sorok
+-listenNum = Hallgat&#195;&#161;s/Let&#195;&#182;lt&#195;&#169;s sz&#195;&#161;m
++[adminTopProgs]
++Top_shows = Top m&#197;&#177;sorok
++Top_expl = Ez a statisztika csak a regisztr&#195;&#161;lt felhaszn&#195;&#161;l&#195;&#179;k tev&#195;&#169;kenys&#195;&#169;ge alapj&#195;&#161;n k&#195;&#169;sz&#195;&#188;lt.
++listenNum = Meghallgat&#195;&#161;s, let&#195;&#182;lt&#195;&#169;s
++details = R&#195;&#169;szletek
+ 
++[adminTopUsers]
++Top_users = Top hallgat&#195;&#179;k
++User = Felhaszn&#195;&#161;l&#195;&#179;
++Contact = Kapcsolattart&#195;&#179;
++Groups = Csoportok
++listenNum = Meghallgat&#195;&#161;s, let&#195;&#182;lt&#195;&#169;s
++details = R&#195;&#169;szletek
++
++[adminProgStats]
++adminProgStats = M&#197;&#177;sor statisztika
++Prog_title = M&#197;&#177;sor c&#195;&#173;me:
++User = Felhaszn&#195;&#161;l&#195;&#179;
++Contact = Kapcsolattart&#195;&#179;
++Groups = Csoportok
++
++[adminUserStats]
++adminUserStats = Felhaszn&#195;&#161;l&#195;&#179; statisztika
++User_name = Felhaszn&#195;&#161;l&#195;&#179;:
++Program = M&#197;&#177;sor
++Groups = Csoportok
++Contact = Kapcsolattart&#195;&#179;:
++
++[showGroup]
++name = A csoport neve:
++contents = Hallgathat&#195;&#179; m&#197;&#177;sorok:
++
++[adminShowUser]
++adminShowUser = Felhaszn&#195;&#161;l&#195;&#179; adatai
++User_name = Regisztr&#195;&#161;lt n&#195;&#169;v:
+
+Modified: node/branches/payable/code/doc/README.protected-content.txt
+===================================================================
+--- node/branches/payable/code/doc/README.protected-content.txt	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/doc/README.protected-content.txt	2006-11-05 22:12:26 UTC (rev 590)
+@@ -34,6 +34,8 @@
+ registration. The corresponding SQL table sotf_user_data has to be changed
+ accordingly.
+ 
++Both pages are monolingual, currently Smarty-based localizations are not used there.
++
+ Then you can start it:
+ 
+ - create groups under Admin/Groups
+
+Modified: node/branches/payable/code/share/update.sql
+===================================================================
+--- node/branches/payable/code/share/update.sql	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/share/update.sql	2006-11-05 22:12:26 UTC (rev 590)
+@@ -302,3 +302,13 @@
+ &quot;nl_meri_med&quot; bool DEFAULT 'f'::bool,
+ &quot;nl_update&quot; bool DEFAULT 'f'::bool
+ );
++
++-- Further changes for restricted and payable content
++-- 2006-11-05
++
++ALTER TABLE sotf_programmes ADD COLUMN promoted bool;
++ALTER TABLE sotf_programmes ALTER promoted SET DEFAULT 'f'::bool;
++
++ALTER TABLE sotf_groups ADD COLUMN price float;
++ALTER TABLE sotf_groups ALTER price SET DEFAULT 0;
++
+
+Modified: node/branches/payable/code/templates/admin.htm
+===================================================================
+--- node/branches/payable/code/templates/admin.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/admin.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -4,12 +4,7 @@
+ {if $TTREE_UPD_MESS}{$TTREE_UPD_MESS}&lt;br&gt;&nbsp;&lt;br&gt;{/if}
+ {if hasPerm('node', 'change') }
+ 
+-&lt;ul class=&quot;tabs&quot;&gt;
+-&lt;li class=&quot;sel&quot;&gt;{#Network#}&lt;/li&gt;
+-&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;adminUsers.php&quot;&gt;{#Users#}&lt;/a&gt;&lt;/li&gt;
+-&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;adminGroups.php&quot;&gt;{#Groups#}&lt;/a&gt;&lt;/li&gt;
+-&lt;li class=&quot;last&quot;&gt;&lt;a href=&quot;adminStats.php&quot;&gt;{#Stats#}&lt;/a&gt;&lt;/li&gt;
+-&lt;/ul&gt;
++{include file=&quot;adminMenu.htm&quot; sel=&quot;1&quot;}
+ 
+ &lt;a name=&quot;network&quot;&gt;&lt;/a&gt;
+   &lt;table class=&quot;tab&quot;&gt;
+
+Modified: node/branches/payable/code/templates/adminGroups.htm
+===================================================================
+--- node/branches/payable/code/templates/adminGroups.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/adminGroups.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -1,12 +1,7 @@
+ 
+   &lt;h3&gt;{#admin#}&lt;/h3&gt;
+ 
+-&lt;ul class=&quot;tabs&quot;&gt;
+-&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;admin.php&quot;&gt;{#Network#}&lt;/a&gt;&lt;/li&gt;
+-&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;adminUsers.php&quot;&gt;{#Users#}&lt;/a&gt;&lt;/li&gt;
+-&lt;li class=&quot;sel&quot;&gt;{#Groups#}&lt;/li&gt;
+-&lt;li class=&quot;last&quot;&gt;&lt;a href=&quot;adminStats.php&quot;&gt;{#Stats#}&lt;/a&gt;&lt;/li&gt;
+-&lt;/ul&gt;
++{include file=&quot;adminMenu.htm&quot; sel=&quot;3&quot;}
+ 
+   &lt;table class=&quot;tab&quot;&gt;
+     &lt;tr&gt; 
+@@ -19,7 +14,9 @@
+ 	&lt;table&gt;
+           &lt;tr class=&quot;listhead&quot;&gt;
+             &lt;th&gt;{#name#}&lt;/th&gt;
++            &lt;th&gt;{#price#}&lt;/th&gt;
+             &lt;th&gt;{#count#}&lt;/th&gt;
++            &lt;th&gt;{#income#}&lt;/th&gt;
+             &lt;th&gt;{#comments#}&lt;/th&gt;
+ 	    &lt;th&gt;&lt;/th&gt;
+           &lt;/tr&gt;
+@@ -27,11 +24,17 @@
+           {foreach item=item from=$GROUPS}
+           &lt;tr class=&quot;{cycle name=roles}&quot;&gt;
+             &lt;td&gt;
+-            	{$item.name}
++            	&lt;a href=&quot;javascript:popup('showGroup.php?id={$item.id}','Group',350,400,false)&quot;&gt;{$item.name}&lt;/a&gt;
+             &lt;/td&gt;
+ 	    &lt;td&gt;
++	    	{$item.price}
++	    &lt;/td&gt;
++	    &lt;td&gt;
+ 	    	{$item.count}
+ 	    &lt;/td&gt;
++	    &lt;td&gt;
++	    	{$item.income}
++	    &lt;/td&gt;
+             &lt;td&gt;
+ 		{$item.comments}
+             &lt;/td&gt;
+
+Added: node/branches/payable/code/templates/adminMenu.htm
+===================================================================
+--- node/branches/payable/code/templates/adminMenu.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/adminMenu.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,9 @@
++
++&lt;ul class=&quot;tabs&quot;&gt;
++&lt;li class=&quot;{if $sel eq 1}sel{/if}&quot;&gt;&lt;a href=&quot;admin.php&quot;&gt;{#Network#}&lt;/a&gt;&lt;/li&gt;
++&lt;li class=&quot;{if $sel eq 2}sel{/if}&quot;&gt;&lt;a href=&quot;adminUsers.php&quot;&gt;{#Users#}&lt;/a&gt;&lt;/li&gt;
++&lt;li class=&quot;{if $sel eq 3}sel{/if}&quot;&gt;&lt;a href=&quot;adminGroups.php&quot;&gt;{#Groups#}&lt;/a&gt;&lt;/li&gt;
++&lt;li class=&quot;{if $sel eq 4}sel{/if}&quot;&gt;&lt;a href=&quot;adminTopProgs.php&quot;&gt;{#TopProgs#}&lt;/a&gt;&lt;/li&gt;
++&lt;li class=&quot;last {if $sel eq 5}sel{/if}&quot;&gt;&lt;a href=&quot;adminTopUsers.php&quot;&gt;{#TopUsers#}&lt;/a&gt;&lt;/li&gt;
++&lt;/ul&gt;
++
+
+Added: node/branches/payable/code/templates/adminProgStats.htm
+===================================================================
+--- node/branches/payable/code/templates/adminProgStats.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/adminProgStats.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,36 @@
++
++  &lt;h3&gt;{#adminProgStats#}&lt;/h3&gt;
++
++    &lt;table class=&quot;tabarea&quot;&gt;
++      &lt;tr&gt; 
++	&lt;td class=&quot;tabarea&quot;&gt;
++	  &lt;p&gt;{#Prog_title#} {$PRG.title}&lt;/p&gt;
++	  &lt;table&gt;
++	    &lt;tr class=&quot;listhead&quot;&gt;
++	      &lt;th&gt;{#User#}&lt;/th&gt;
++	      &lt;th&gt;{#Contact#}&lt;/th&gt;
++	      &lt;th&gt;{#Groups#}&lt;/th&gt;
++	    &lt;/tr&gt;
++	    {cycle name=&quot;roles&quot; values=&quot;list1,list2&quot; print=false advance=false}
++	    {foreach item=item from=$USERS}
++	    &lt;tr class=&quot;{cycle name=roles}&quot; valign=&quot;top&quot;&gt;
++	      &lt;td&gt;
++            	{$item.username}
++	      &lt;/td&gt;
++	      &lt;td&gt;
++	    	{$item.contact_person}
++	      &lt;/td&gt;
++	      &lt;td&gt;
++		{foreach item=group from=$item.groups}
++		&lt;div&gt;{$group}&lt;/div&gt;
++		{/foreach}
++	      &lt;/td&gt;
++	    &lt;/tr&gt;
++	    {/foreach}
++	  &lt;/table&gt;
++        &lt;p&gt;
++
++        &lt;/p&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
+
+Added: node/branches/payable/code/templates/adminShowUser.htm
+===================================================================
+--- node/branches/payable/code/templates/adminShowUser.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/adminShowUser.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,25 @@
++
++  &lt;h3&gt;{#adminShowUser#}&lt;/h3&gt;
++
++    &lt;table class=&quot;tabarea&quot;&gt;
++      &lt;tr&gt; 
++	&lt;td class=&quot;tabarea&quot;&gt;
++	  &lt;table&gt;
++	  &lt;tr&gt;
++	    &lt;td&gt;{#User_name#}&lt;/td&gt;
++	    &lt;td&gt;{$USER-&gt;name}&lt;/td&gt;
++	  &lt;/tr&gt;
++	  &lt;tr&gt;
++	    &lt;td&gt;{#email#}:&lt;/td&gt;
++	    &lt;td&gt;{$USER-&gt;email}&lt;/td&gt;
++	  &lt;/tr&gt;
++	  &lt;tr&gt;
++	    &lt;TD&gt;{#language#}:&lt;/TD&gt;
++	    &lt;td&gt;{$USER-&gt;language}&lt;/td&gt;
++	  &lt;/tr&gt;
++	  &lt;/table&gt;
++	  {include file=&quot;userData.htm&quot;}
++
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
+
+Deleted: node/branches/payable/code/templates/adminStats.htm
+===================================================================
+--- node/branches/payable/code/templates/adminStats.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/adminStats.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -1,50 +0,0 @@
+-
+-  &lt;h3&gt;{#admin#}&lt;/h3&gt;
+-
+-&lt;ul class=&quot;tabs&quot;&gt;
+-&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;admin.php&quot;&gt;{#Network#}&lt;/a&gt;&lt;/li&gt;
+-&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;adminUsers.php&quot;&gt;{#Users#}&lt;/a&gt;&lt;/li&gt;
+-&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;adminGroups.php&quot;&gt;{#Groups#}&lt;/a&gt;&lt;/li&gt;
+-&lt;li class=&quot;sel last&quot;&gt;{#Stats#}&lt;/li&gt;
+-&lt;/ul&gt;
+-
+-    &lt;table class=&quot;tab&quot;&gt;
+-      &lt;tr&gt; 
+-	&lt;td nowrap class=&quot;tab&quot;&gt;{#Top_shows#}&lt;/td&gt;
+-      &lt;/tr&gt;
+-    &lt;/table&gt;
+-    &lt;table class=&quot;tabarea&quot;&gt;
+-      &lt;tr&gt; 
+-	&lt;td class=&quot;tabarea&quot;&gt;
+-	  &lt;table&gt;
+-	    &lt;tr class=&quot;listhead&quot;&gt;
+-	      &lt;td colspan=&quot;3&quot;&gt;
+-		{include file=&quot;splitList.htm&quot;}
+-	      &lt;/td&gt;
+-	    &lt;/tr&gt;
+-	    &lt;tr class=&quot;listhead&quot;&gt;
+-	      &lt;th&gt;{#Program#}&lt;/th&gt;
+-	      &lt;th&gt;{#Station#}&lt;/th&gt;
+-	      &lt;th&gt;{#listenNum#}&lt;/th&gt;
+-	    &lt;/tr&gt;
+-	    {cycle name=&quot;roles&quot; values=&quot;list1,list2&quot; print=false advance=false}
+-	    {foreach item=item from=$TOPLIST}
+-	    &lt;tr class=&quot;{cycle name=roles}&quot;&gt;
+-	      &lt;td&gt;
+-            	&lt;a href=&quot;get.php/{$item.id}&quot;&gt;{$item.title}&lt;/a&gt;
+-	      &lt;/td&gt;
+-	    &lt;td&gt;
+-	    	&lt;a href=&quot;showStation.php/{$item.station_id}&quot;&gt;{$item.station_name}&lt;/a&gt;
+-	    &lt;/td&gt;
+-            &lt;td&gt;
+-		{$item.count}
+-            &lt;/td&gt;
+-          &lt;/tr&gt;
+-          {/foreach}
+-        &lt;/table&gt;
+-        &lt;p&gt;
+-
+-        &lt;/p&gt;
+-      &lt;/td&gt;
+-    &lt;/tr&gt;
+-  &lt;/table&gt;
+
+Added: node/branches/payable/code/templates/adminTopProgs.htm
+===================================================================
+--- node/branches/payable/code/templates/adminTopProgs.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/adminTopProgs.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,54 @@
++
++  &lt;h3&gt;{#admin#}&lt;/h3&gt;
++
++{include file=&quot;adminMenu.htm&quot; sel=&quot;4&quot;}
++
++    &lt;table class=&quot;tab&quot;&gt;
++      &lt;tr&gt; 
++	&lt;td nowrap class=&quot;tab&quot;&gt;{#Top_shows#}&lt;/td&gt;
++      &lt;/tr&gt;
++    &lt;/table&gt;
++    &lt;table class=&quot;tabarea&quot;&gt;
++      &lt;tr&gt; 
++	&lt;td class=&quot;tabarea&quot;&gt;
++	  &lt;p&gt;{#Top_expl#}&lt;/p&gt;
++	  &lt;table&gt;
++	    &lt;tr class=&quot;listhead&quot;&gt;
++	      &lt;td colspan=&quot;5&quot;&gt;
++		{include file=&quot;splitList.htm&quot;}
++	      &lt;/td&gt;
++	    &lt;/tr&gt;
++	    &lt;tr class=&quot;listhead&quot;&gt;
++	      &lt;th&gt;{#Program#}&lt;/th&gt;
++	      &lt;th&gt;{#Station#}&lt;/th&gt;
++	      &lt;th&gt;{#Group#}&lt;/th&gt;
++	      &lt;th&gt;{#listenNum#}&lt;/th&gt;
++	      &lt;th&gt;&lt;/th&gt;
++	    &lt;/tr&gt;
++	    {cycle name=&quot;roles&quot; values=&quot;list1,list2&quot; print=false advance=false}
++	    {foreach item=item from=$TOPLIST}
++	    &lt;tr class=&quot;{cycle name=roles}&quot; valign=&quot;top&quot;&gt;
++	      &lt;td&gt;
++            	&lt;a href=&quot;get.php/{$item.id}&quot;&gt;{$item.title}&lt;/a&gt;
++	      &lt;/td&gt;
++	    &lt;td&gt;
++	    	&lt;a href=&quot;showStation.php/{$item.station_id}&quot;&gt;{$item.station_name}&lt;/a&gt;
++	    &lt;/td&gt;
++	    &lt;td&gt;
++		{foreach item=group from=$item.groups}
++		&lt;div&gt;{$group.name}&lt;/div&gt;
++		{/foreach}
++	    &lt;/td&gt;
++            &lt;td align=&quot;center&quot;&gt;
++		{$item.count}
++            &lt;/td&gt;
++	    &lt;td&gt;&lt;a href=&quot;javascript:popup('adminProgStats.php?id={$item.id}','ProgStats',350,400,false)&quot;&gt;{#details#}&lt;/a&gt;&lt;/td&gt;
++          &lt;/tr&gt;
++          {/foreach}
++        &lt;/table&gt;
++        &lt;p&gt;
++
++        &lt;/p&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
+
+
+Property changes on: node/branches/payable/code/templates/adminTopProgs.htm
+___________________________________________________________________
+Name: svn:executable
+   + *
+
+Added: node/branches/payable/code/templates/adminTopUsers.htm
+===================================================================
+--- node/branches/payable/code/templates/adminTopUsers.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/adminTopUsers.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,56 @@
++
++  &lt;h3&gt;{#admin#}&lt;/h3&gt;
++
++{include file=&quot;adminMenu.htm&quot; sel=&quot;5&quot;}
++
++    &lt;table class=&quot;tab&quot;&gt;
++      &lt;tr&gt; 
++	&lt;td nowrap class=&quot;tab&quot;&gt;{#Top_users#}&lt;/td&gt;
++      &lt;/tr&gt;
++    &lt;/table&gt;
++    &lt;table class=&quot;tabarea&quot;&gt;
++      &lt;tr&gt; 
++	&lt;td class=&quot;tabarea&quot;&gt;
++	  &lt;table&gt;
++	    &lt;tr class=&quot;listhead&quot;&gt;
++	      &lt;td colspan=&quot;5&quot;&gt;
++		{include file=&quot;splitList.htm&quot;}
++	      &lt;/td&gt;
++	    &lt;/tr&gt;
++	    &lt;tr class=&quot;listhead&quot;&gt;
++	      &lt;th&gt;{#User#}&lt;/th&gt;
++	      &lt;th&gt;{#Contact#}&lt;/th&gt;
++	      &lt;th&gt;{#Groups#}&lt;/th&gt;
++	      &lt;th&gt;{#listenNum#}&lt;/th&gt;
++	      &lt;th&gt;&lt;/th&gt;
++	    &lt;/tr&gt;
++	    {cycle name=&quot;roles&quot; values=&quot;list1,list2&quot; print=false advance=false}
++	    {foreach item=item from=$TOPLIST}
++	    &lt;tr class=&quot;{cycle name=roles}&quot;&gt;
++	      &lt;td&gt;
++            	{$item.username}
++	      &lt;/td&gt;
++	      &lt;td&gt;
++		{$item.contact_person}
++	      &lt;/td&gt;
++	    &lt;td&gt;
++		{foreach item=group from=$item.groups}
++		&lt;div&gt;{$group}&lt;/div&gt;
++		{/foreach}
++	    &lt;/td&gt;
++            &lt;td align=&quot;center&quot;&gt;
++		{$item.count}
++            &lt;/td&gt;
++	    &lt;td&gt;
++	      &lt;a href=&quot;javascript:popup('adminUserStats.php?id={$item.id}','UserStats',350,400,false)&quot; &gt;{#details#}&lt;/a&gt;
++	    &lt;/td&gt;
++
++          &lt;/tr&gt;
++          {/foreach}
++        &lt;/table&gt;
++        &lt;p&gt;
++
++        &lt;/p&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
+
+
+Property changes on: node/branches/payable/code/templates/adminTopUsers.htm
+___________________________________________________________________
+Name: svn:executable
+   + *
+
+Added: node/branches/payable/code/templates/adminUserStats.htm
+===================================================================
+--- node/branches/payable/code/templates/adminUserStats.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/adminUserStats.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,33 @@
++
++  &lt;h3&gt;{#adminUserStats#}&lt;/h3&gt;
++
++    &lt;table class=&quot;tabarea&quot;&gt;
++      &lt;tr&gt; 
++	&lt;td class=&quot;tabarea&quot;&gt;
++	  &lt;p&gt;{#User_name#} {$USER-&gt;name}&lt;/br&gt;
++	  {#Contact#} {$UDATA.contact_person} &lt;/p&gt;
++	  &lt;table&gt;
++	    &lt;tr class=&quot;listhead&quot;&gt;
++	      &lt;th&gt;{#Program#}&lt;/th&gt;
++	      &lt;th&gt;{#Groups#}&lt;/th&gt;
++	    &lt;/tr&gt;
++	    {cycle name=&quot;roles&quot; values=&quot;list1,list2&quot; print=false advance=false}
++	    {foreach item=item from=$PROGS}
++	    &lt;tr class=&quot;{cycle name=roles}&quot; valign=&quot;top&quot;&gt;
++	      &lt;td&gt;
++            	&lt;a target=&quot;prog&quot; href=&quot;get.php/{$item.id}&quot;&gt;{$item.title}&lt;/a&gt;
++	      &lt;/td&gt;
++	      &lt;td&gt;
++		{foreach item=group from=$item.groups}
++		&lt;div&gt;&lt;a href=&quot;javascript:popup('showGroup.php?id={$group.id}','Group',350,400,false)&quot;&gt;{$group.name}&lt;/div&gt;
++		{/foreach}
++	      &lt;/td&gt;
++	    &lt;/tr&gt;
++	    {/foreach}
++	  &lt;/table&gt;
++        &lt;p&gt;
++
++        &lt;/p&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
+
+Modified: node/branches/payable/code/templates/adminUsers.htm
+===================================================================
+--- node/branches/payable/code/templates/adminUsers.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/adminUsers.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -1,12 +1,7 @@
+ 
+   &lt;h3&gt;{#admin#}&lt;/h3&gt;
+ 
+-&lt;ul class=&quot;tabs&quot;&gt;
+-&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;admin.php&quot;&gt;{#Network#}&lt;/a&gt;&lt;/li&gt;
+-&lt;li class=&quot;sel&quot;&gt;{#Users#}&lt;/li&gt;
+-&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;adminGroups.php&quot;&gt;{#Groups#}&lt;/a&gt;&lt;/li&gt;
+-&lt;li class=&quot;last&quot;&gt;&lt;a href=&quot;adminStats.php&quot;&gt;{#Stats#}&lt;/a&gt;&lt;/li&gt;
+-&lt;/ul&gt;
++{include file=&quot;adminMenu.htm&quot; sel=&quot;2&quot;}
+ 
+ &lt;form&gt;
+   &lt;table class=&quot;tab&quot;&gt;
+@@ -37,7 +32,7 @@
+           {foreach item=item from=$USERS}
+           &lt;tr class=&quot;{cycle name=roles}&quot;&gt;
+             &lt;td&gt;
+-            	{$item.username}
++            	&lt;a href=&quot;javascript:popup('adminShowUser.php?id={$item.id}','User',450,400,true)&quot;&gt;{$item.username}&lt;/a&gt;
+             &lt;/td&gt;
+ 	    &lt;td&gt;
+ 	    	{$item.email}
+@@ -47,6 +42,7 @@
+             &lt;/td&gt;
+             &lt;td nowrap&gt;
+                 &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#edit_groups#}&quot; onClick=&quot;popup('editUserGroups.php?uid={$item.id}','EditUserGroup',350,400,false)&quot; /&gt;
++                &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#listen_stats#}&quot; onClick=&quot;popup('adminUserStats.php?id={$item.id}','UserStat',350,400,false)&quot; /&gt;
+                &lt;!-- &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#delete#}&quot; onClick=&quot;redir(this.form,'adminUsers.php?del=1&amp;uid={$item.id}')&quot; /&gt;
+                --&gt;
+             &lt;/td&gt;
+
+Modified: node/branches/payable/code/templates/editGroup.htm
+===================================================================
+--- node/branches/payable/code/templates/editGroup.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/editGroup.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -12,10 +12,14 @@
+               	&lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;{$GROUP.id}&quot; /&gt;
+                 &lt;table&gt;
+                   &lt;tr&gt;
+-                    &lt;td nowrap&gt;{#Name#}:&lt;/td&gt;
++                    &lt;td nowrap&gt;{#name#}:&lt;/td&gt;
+                     &lt;td&gt;&lt;input name=&quot;name&quot; value=&quot;{$GROUP.name}&quot; /&gt;&lt;/td&gt;
+                   &lt;/tr&gt;
+                   &lt;tr&gt;
++                    &lt;td nowrap&gt;{#price#}:&lt;/td&gt;
++                    &lt;td&gt;&lt;input name=&quot;price&quot; value=&quot;{$GROUP.price}&quot; /&gt;&lt;/td&gt;
++                  &lt;/tr&gt;
++                  &lt;tr&gt;
+                     &lt;td nowrap&gt;{#comments#}:&lt;/td&gt;
+                     &lt;td&gt;
+                     &lt;textarea name=&quot;comments&quot;&gt;{$GROUP.comments}&lt;/textarea&gt;
+
+Modified: node/branches/payable/code/templates/editMeta.htm
+===================================================================
+--- node/branches/payable/code/templates/editMeta.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/editMeta.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -208,11 +208,12 @@
+   {#no_expiry#} &lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list2&quot;&gt;
+-              &lt;td class=&quot;meta&quot;&gt;{#free_content#}:&lt;/td&gt;
++              &lt;td class=&quot;meta&quot;&gt;{#content_type#}:&lt;/td&gt;
+               &lt;td&gt;&nbsp;&lt;/td&gt;
+               &lt;td&gt;
+-		&lt;input type=&quot;radio&quot; name=&quot;free_content&quot; value=&quot;1&quot; {if $PRG_DATA.free_content eq 't'}checked{/if} &gt; {#Yes#}
+-		&lt;input type=&quot;radio&quot; name=&quot;free_content&quot; value=&quot;0&quot; {if $PRG_DATA.free_content eq 'f'}checked{/if} &gt; {#No#}
++		&lt;input type=&quot;radio&quot; name=&quot;content_type&quot; value=&quot;free&quot; {if $PRG_DATA.free_content eq 't'}checked{/if} &gt; {#Free#}
++		&lt;input type=&quot;radio&quot; name=&quot;content_type&quot; value=&quot;promoted&quot; {if $PRG_DATA.promoted eq 't'}checked{/if} &gt; {#Promoted#}
++		&lt;input type=&quot;radio&quot; name=&quot;content_type&quot; value=&quot;protected&quot; {if $PRG_DATA.free_content eq 'f' &amp;&amp; $PRG_DATA.promoted eq 'f'}checked{/if} &gt; {#Protected#}
+ 	      &lt;/td&gt;
+             &lt;/tr&gt;
+           &lt;/table&gt;
+
+Modified: node/branches/payable/code/templates/editUserGroups.htm
+===================================================================
+--- node/branches/payable/code/templates/editUserGroups.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/editUserGroups.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -12,7 +12,7 @@
+                 &lt;input value=&quot;1&quot; name=&quot;g_{$item.id}&quot; type=&quot;checkbox&quot; {if $item.rid}CHECKED{/if} /&gt;
+               &lt;/td&gt;
+               &lt;td&gt;
+-                {$item.name}
++                &lt;a href=&quot;javascript:popup('showGroup.php?id={$item.id}','Group',350,400,false)&quot;&gt;{$item.name}&lt;/a&gt;
+               &lt;/td&gt;
+               &lt;td&gt;
+                 &lt;em&gt;{$item.comments}&lt;/em&gt;
+
+Modified: node/branches/payable/code/templates/get.htm
+===================================================================
+--- node/branches/payable/code/templates/get.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/get.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -17,414 +17,5 @@
+       &lt;input type=&quot;text&quot; name=&quot;id&quot; size=&quot;60&quot; value=&quot;{$ID}&quot;&gt;
+   &lt;/form&gt;
+ {else}
+-
+-  &lt;form&gt;
+-    &lt;table class=&quot;title&quot; cellspacing=&quot;0&quot; cellpadding=&quot;5&quot; width=&quot;100%&quot;&gt;
+-      &lt;tr valign=&quot;bottom&quot;&gt;
+-        &lt;td class=&quot;titlehead&quot; width=&quot;2%&quot;&gt;
+-          {if $PRG_DATA.icon}
+-          &lt;img src=&quot;{$CACHE_URL}/{$ID}.png&quot; align=&quot;left&quot;&gt;
+-          {/if}
+-        &lt;/td&gt;
+-        &lt;td class=&quot;titlehead&quot; width=&quot;20%&quot;&gt;
+-          {if $UNPUBLISHED}
+-          &lt;table&gt;&lt;tr&gt;&lt;td bgcolor=&quot;#FF0000&quot;&gt;&lt;b&gt;&lt;font color=&quot;#FFFFFF&quot;&gt;{#unpublished_warning#}&lt;/font&gt;&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+-          {/if}
+-          &lt;font size=&quot;-1&quot;&gt;{#prog#}:&lt;/font&gt;
+-          &lt;br&gt;{$PRG_DATA.title}
+-        &lt;/td&gt;
+-        &lt;td class=&quot;title2&quot;&gt;
+-          &lt;a href=&quot;#general&quot;&gt;{#Metadata#}&lt;/a&gt;{if $ROLES}, &lt;a href=&quot;#roles&quot;&gt;{#Roles#}&lt;/a&gt;{/if}{if $RIGHTS}, &lt;a href=&quot;#rights&quot;&gt;{#Rights#}&lt;/a&gt;{/if},
+-          &lt;a href=&quot;#mfiles&quot;&gt;{#Content#}&lt;/a&gt;{if $LINKS }, &lt;a href=&quot;#links&quot;&gt;{#Links#}&lt;/a&gt;{/if}, &lt;a href=&quot;#stats&quot;&gt;{#Statistics#}&lt;/a&gt;
+-        &lt;/td&gt;
+-        &lt;td class=&quot;title2&quot; width=&quot;15%&quot;&gt;
+-        {if $SERIES_DATA and $SERIES_DATA.icon}
+-          {strip}
+-          &lt;a href=&quot;{$ROOT_URL}/showSeries.php/{$SERIES_DATA.id}&quot;&gt;
+-            &lt;img hheight=&quot;50%&quot; border=&quot;0&quot; src=&quot;{$CACHE_URL}/{$SERIES_DATA.id}.png&quot;  alt=&quot;{#series#}: {$SERIES_DATA.name}&quot;&gt;
+-          &lt;/a&gt;
+-          {/strip}
+-        {/if}
+-        &lt;/td&gt;
+-        &lt;td class=&quot;title2&quot; width=&quot;15%&quot;&gt;
+-        {if $STATION_DATA.icon}
+-          {strip}
+-          &lt;a href=&quot;{$ROOT_URL}/showStation.php/{$STATION_DATA.id}&quot;&gt;
+-            &lt;img hheight=&quot;50%&quot; border=&quot;0&quot; src=&quot;{$CACHE_URL}/{$STATION_DATA.id}.png&quot; alt=&quot;{#station#}: {$STATION_DATA.name}&quot;&gt;
+-          &lt;/a&gt;
+-          {/strip}
+-        {/if}
+-      &lt;/td&gt;
+-        &lt;td class=&quot;title2&quot; width=&quot;10%&quot; align=&quot;right&quot; valign=&quot;bottom&quot;&gt;
+-          &lt;a href=&quot;{$ROOT_URL}/rss.php?id={$ID}&amp;uiLang={$LANG}&quot;&gt;RSS&lt;/a&gt;&lt;br /&gt;
+-          {if hasPerm($ID,'change') }
+-          &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#edit_meta#}&quot; onClick=&quot;redir(this.form,'{$ROOT_URL}/editMeta.php?id={$ID}')&quot; /&gt;
+-          &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#edit_files#}&quot; onClick=&quot;redir(this.form,'{$ROOT_URL}/editFiles.php?id={$ID}')&quot; /&gt;
+-          {/if}
+-        &lt;/td&gt;
+-      &lt;/tr&gt;
+-      &lt;tr&gt;
+-        &lt;td colspan=&quot;6&quot; class=&quot;titlehead&quot; height=&quot;5&quot;&gt;
+-        &lt;/td&gt;
+-      &lt;/tr&gt;
+-    &lt;/table&gt;
+-  &lt;/form&gt;
+-
+-
+-    &lt;/tr&gt;
+-  &lt;/table&gt;
+-
+-  &lt;table class=&quot;tab&quot;&gt;
+-    &lt;tr&gt; 
+-      &lt;td nowrap class=&quot;tab&quot;&gt;{#Metadata#}&lt;/td&gt;
+-    &lt;/tr&gt;
+-  &lt;/table&gt;
+-  &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
+-    &lt;tr&gt; 
+-      &lt;td class=&quot;tabarea&quot;&gt; 
+-        &lt;a name=&quot;general&quot;&gt;&lt;/a&gt;
+-        &lt;table width=&quot;100%&quot;&gt;
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap width=&quot;10%&quot;&gt;{#station#}:&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;{$ROOT_URL}/showStation.php/{$STATION_DATA.id}&quot;&gt;{$STATION_DATA.name}&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+-            {if $SERIES_DATA}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#series#}:&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;{$ROOT_URL}/showSeries.php/{$SERIES_DATA.id}&quot;&gt;{$SERIES_DATA.name}&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#title#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.title}&lt;/td&gt;&lt;/tr&gt;
+-            {if $PRG_DATA.alternative_title}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#alternative_title#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.alternative_title}&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-            {if $PRG_DATA.episode_title}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#episode_title#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.episode_title}&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-            {if $PRG_DATA.episode_sequence}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#episode_sequence#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.episode_sequence}&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#language#}:&lt;/td&gt;&lt;td&gt;{$LANGUAGE}&lt;/td&gt;&lt;/tr&gt;
+-            {if $PRG_DATA.abstract}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#abstract#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.abstract}&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-            {if $PRG_DATA.keywords}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#keywords#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.keywords}&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-            {if $PRG_DATA.genre_id}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#genre#}:&lt;/td&gt;&lt;td&gt;{$GENRE}&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-            {if $TOPICS}
+-            &lt;tr valign=&quot;top&quot;&gt;
+-              &lt;td class=&quot;meta&quot; nowrap&gt;{#topics#}:&lt;/td&gt;
+-              &lt;td&gt;
+-                &lt;table&gt;
+-                  {foreach item=item from=$TOPICS}
+-                  &lt;tr&gt;
+-                    &lt;td&gt;
+-                      {$item.name}
+-                    &lt;/td&gt;
+-                  &lt;/tr&gt;
+-                  {/foreach}
+-                &lt;/table&gt;
+-              &lt;/td&gt;
+-            &lt;/tr&gt;
+-            {/if}
+-            {if $PRG_DATA.temporal_coverage}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#temporal_coverage#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.temporal_coverage}&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-            {if $PRG_DATA.spatial_coverage}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#spatial_coverage#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.spatial_coverage}&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-            {if $PRG_DATA.production_date}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#production_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.production_date}&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-            {if $PRG_DATA.broadcast_date}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#broadcast_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.broadcast_date}&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-            {if $PRG_DATA.entry_date}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#entry_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.entry_date}&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-            {if $PRG_DATA.modify_date}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#modify_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.modify_date}&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-            {if $PRG_DATA.expiry_date}
+-            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#expiry_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.expiry_date}&lt;/td&gt;&lt;/tr&gt;
+-            {/if}
+-          &lt;/table&gt;
+-		&lt;/td&gt; 
+-	&lt;/tr&gt;
+-&lt;/table&gt;
+-
+-{if $ROLES}
+-&lt;p&gt;&lt;/p&gt;
+-
+-&lt;table class=&quot;tab&quot;&gt;
+-  &lt;tr&gt; 
+-    &lt;td nowrap class=&quot;tab&quot;&gt;{#Roles#}&lt;/td&gt;
+-  &lt;/tr&gt;
+-&lt;/table&gt;
+-&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
+-&lt;tr&gt; 
+-  &lt;td class=&quot;tabarea&quot;&gt;
+-        &lt;a name=&quot;roles&quot;&gt;&lt;/a&gt;
+-        &lt;table&gt;
+-          {foreach item=item from=$ROLES}
+-          &lt;tr valign=&quot;top&quot;&gt;
+-            &lt;td&gt;
+-              {$item.role_name}
+-            &lt;/td&gt;
+-            &lt;td&gt;
+-              &lt;a href=&quot;javascript:popup('{$ROOT_URL}/showContact.php/{$item.contact_data.id}','ShowContact',400,400,true)&quot;&gt;{$item.contact_data.name}&lt;/a&gt;
+-              {if $item.contact_data.url}&lt;br&gt;(&lt;a href=&quot;{$item.contact_data.url}&quot;&gt;{$item.contact_data.url})&lt;/a&gt;
+-                {elseif $item.contact_data.email}&lt;br&gt;(&lt;a href=&quot;mailto:{$item.contact_data.email}&quot;&gt;{$item.contact_data.email})&lt;/a&gt;
+-                  {/if}
+-            &lt;/td&gt;
+-            &lt;td&gt;
+-              {if $item.contact_data.icon }{strip}
+-              &lt;a href=&quot;javascript:popup('{$ROOT_URL}/showContact.php/{$item.contact_data.id}','ShowContact',400,400,true)&quot;&gt;
+-                &lt;img hheight=&quot;50%&quot; border=&quot;0&quot; src=&quot;{$CACHE_URL}/{$item.contact_data.id}.png&quot;&gt;
+-              &lt;/a&gt;{/strip}
+-              {/if}
+-            &lt;/td&gt;
+-          &lt;/tr&gt;
+-          {/foreach}
+-        &lt;/table&gt;
+-      &lt;/td&gt;
+-    &lt;/tr&gt;
+-&lt;/table&gt;
+-{/if}
+-
+-{if $RIGHTS}
+-&lt;p&gt;&lt;/p&gt;
+-
+-&lt;table class=&quot;tab&quot;&gt;
+-  &lt;tr&gt; 
+-    &lt;td nowrap class=&quot;tab&quot;&gt;{#Rights#}&lt;/td&gt;
+-  &lt;/tr&gt;
+-&lt;/table&gt;
+-&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
+-&lt;tr&gt; 
+-  &lt;td class=&quot;tabarea&quot;&gt;
+-        &lt;a name=&quot;rights&quot;&gt;&lt;/a&gt;
+-        &lt;table&gt;
+-          {cycle name=&quot;rights&quot; values=&quot;list1,list2&quot; print=false advance=false}
+-          {foreach item=item from=$RIGHTS}
+-          &lt;tr class=&quot;{cycle name=rights}&quot;&gt;
+-            &lt;td&gt;
+-              {if empty($item.start_time) and empty($item.stop_time) }
+-                {#for_whole_prg#}
+-              {else}
+-                 {$item.start_time} {#sec#} - {$item.stop_time} {#sec#}
+-              {/if}
+-            &lt;/td&gt;
+-            &lt;td&gt;
+-              {$item.rights_text}
+-            &lt;/td&gt;
+-          &lt;/tr&gt;
+-          {/foreach}
+-        &lt;/table&gt;
+-      &lt;/td&gt;
+-    &lt;/tr&gt;
+-&lt;/table&gt;
+-{/if}
+-
+-&lt;p&gt;&lt;/p&gt;
+-&lt;form&gt;
+-&lt;table class=&quot;tab&quot;&gt;
+-  &lt;tr&gt; 
+-    &lt;td nowrap class=&quot;tab&quot;&gt;{#Content#}&lt;/td&gt;
+-  &lt;/tr&gt;
+-&lt;/table&gt;
+-&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
+-&lt;tr&gt; 
+-  &lt;td class=&quot;tabarea&quot;&gt; 
+-   {if $AUDIO_FILES }
+-        &lt;div class=&quot;subheader&quot;&gt;{#audio_file_list#}&lt;/div&gt;
+-        &lt;a name=&quot;mfiles&quot;&gt;&lt;/a&gt;
+-    &lt;table&gt;
+-       {cycle name=&quot;audio&quot; values=&quot;list1,list2&quot; print=false advance=false}
+-       {foreach item=item from=$AUDIO_FILES}
+-          {if $item.download_access eq 't' or $item.stream_access eq 't' }
+-          &lt;tr class=&quot;{cycle name=audio}&quot;&gt;
+-            &lt;td width=&quot;5%&quot;&gt;&lt;/td&gt;
+-            &lt;td&gt;
+-              {if $item.main_content eq 't' }
+-                 {#programme_audio#}
+-              {elseif $item.caption} 
+-                 {$item.caption}
+-              {else}
+-                 {$item.filename}
+-              {/if}
+-            &lt;/td&gt;
+-            &lt;td align=&quot;right&quot;&gt;
+-              {$item.bitrate} kbps 
+-            &lt;/td&gt;
+-            &lt;td&gt;
+-                {$item.format}
+-            &lt;/td&gt;
+-            &lt;td align=&quot;right&quot;&gt;
+-              {$item.playtime_string}
+-            &lt;/td&gt;
+-            &lt;td&gt;
+-              { if $item.download_access eq 't'}
+-                &lt;!-- &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#Download#}&quot; onClick=&quot;popup('{$ROOT_URL}/getFile.php/{$item.filename}?{if $item.main_content eq 't' }audio=1&amp;{/if}id={$ID}&amp;filename={$item.filename}','ViewPopup',500,500,true)&quot; /&gt; --&gt;
+-                &lt;a href=&quot;{$ROOT_URL}/getFile.php/{$item.filename}?{if $item.main_content eq 't' }audio=1&amp;{/if}id={$ID}&amp;filename={$item.filename}&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/download.gif&quot; border=&quot;0&quot; alt=&quot;{#Download#}&quot;&gt;&lt;/a&gt;
+-              {/if}
+-            &lt;/td&gt;
+-            &lt;td&gt;
+-              { if $item.stream_access eq 't' }
+-                &lt;a href=&quot;{$ROOT_URL}/listen.php/id__{$ID}/fileid__{$item.id}/audio.m3u&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/listen.gif&quot; border=&quot;0&quot; alt=&quot;{#Listen#}&quot;&gt;&lt;/a&gt;
+-              {/if}
+-            &lt;/td&gt;
+-          &lt;/tr&gt;
+-          {/if}
+-          {/foreach}    
+-    &lt;/table&gt;
+-   {/if}
+-   {if $OTHER_FILES }
+-        &lt;div class=&quot;subheader&quot;&gt;{#other_file_list#}&lt;/div&gt;
+-        &lt;a name=&quot;ofiles&quot;&gt;&lt;/a&gt;
+-        &lt;table&gt;
+-          {cycle name=other values=&quot;list1,list2&quot; print=false advance=false}
+-          {foreach item=item from=$OTHER_FILES}
+-          {if $item.public_access eq 't' }
+-          &lt;tr class=&quot;{cycle name=other}&quot;&gt;
+-            &lt;td width=&quot;5%&quot;&gt;&lt;/td&gt;
+-            &lt;td&gt;
+-              {if $item.caption}
+-                {$item.caption}
+-              {else} 
+-                {$item.filename}
+-              {/if}
+-            &lt;/td&gt;
+-            &lt;td align=&quot;right&quot;&gt;
+-              {$item.filesize} {#bytes#}
+-            &lt;/td&gt;
+-            &lt;td nowrap&gt;
+-              {if $item.public_access eq 't' }
+-                &lt;!-- &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#View#}&quot; onClick=&quot;popup('{$ROOT_URL}/getFile.php/{$item.filename}?id={$ID}&amp;filename={$item.filename}','ViewPopup',500,500,true)&quot; /&gt; --&gt;
+-                  &lt;a target=&quot;link&quot; href=&quot;{$ROOT_URL}/getFile.php/{$item.filename}?id={$ID}&amp;filename={$item.filename}&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/download.gif&quot; border=&quot;0&quot; alt=&quot;{#Download#}&quot;&gt;&lt;/a&gt;
+-              {/if}
+-            &lt;/td&gt;
+-          &lt;/tr&gt;
+-          {/if}
+-          {/foreach}    
+-        &lt;/table&gt;
+-   {/if}
+-   {if !$AUDIO_FILES and !$OTHER_FILES }
+-        &lt;p&gt;{#no_files#}&lt;/p&gt;
+-   {/if}
+-  &lt;/td&gt;
+-&lt;/tr&gt;
+-&lt;/table&gt;
+-&lt;/form&gt;
+-
+-&lt;p&gt;&lt;/p&gt;
+-
+-{if $LINKS } 
+-  &lt;table class=&quot;tab&quot;&gt;
+-    &lt;tr&gt; 
+-      &lt;td nowrap class=&quot;tab&quot;&gt;{#Links#}&lt;/td&gt;
+-    &lt;/tr&gt;
+-  &lt;/table&gt;
+-  &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
+-    &lt;tr&gt; 
+-      &lt;td class=&quot;tabarea&quot;&gt;
+-        &lt;a name=&quot;links&quot;&gt;&lt;/a&gt;
+-        &lt;table&gt;
+-          {foreach item=item from=$LINKS}
+-          &lt;tr&gt;
+-            &lt;td&gt;
+-              &lt;a target=&quot;link&quot; href=&quot;{$item.url}&quot;&gt;{if $item.caption}{$item.caption}{else}{$item.url}{/if}&lt;/a&gt;
+-            &lt;/td&gt;
+-          &lt;/tr&gt;
+-          {/foreach}    
+-        &lt;/table&gt;
+-      &lt;/td&gt;
+-    &lt;/tr&gt;
+-  &lt;/table&gt;
+-{/if}
+-
+-&lt;p&gt;&lt;/p&gt;
+-
+-  &lt;table class=&quot;tab&quot;&gt;
+-    &lt;tr&gt; 
+-      &lt;td nowrap class=&quot;tab&quot;&gt;{#Statistics#}&lt;/td&gt;
+-    &lt;/tr&gt;
+-  &lt;/table&gt;
+-  &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
+-    &lt;tr&gt; 
+-      &lt;td class=&quot;tabarea&quot;&gt;
+-        &lt;p&gt;{#stats_may_be_old#}: {$STATS.last_change}&lt;/p&gt;
+-        &lt;table width=&quot;100%&quot;&gt;
+-          &lt;tr&gt;
+-            &lt;td valign=&quot;top&quot;&gt;
+-              &lt;a name=&quot;stats&quot;&gt;&lt;/a&gt;
+-              &lt;table&gt;
+-                &lt;tr class=&quot;listhead&quot;&gt;
+-                  &lt;th&gt;&lt;/th&gt;
+-                  &lt;th&gt;{#Visits#}&lt;/th&gt;
+-                  &lt;th&gt;{#Listens#}&lt;/th&gt;
+-                  &lt;th&gt;{#Downloads#}&lt;/th&gt; 
+-                  &lt;th&gt;{#Rating#}&lt;/th&gt; 
+-                  &lt;th&gt;&lt;/th&gt; 
+-                  &lt;th&gt;&lt;/th&gt; 
+-                &lt;/tr&gt;
+-                &lt;tr&gt;
+-                  &lt;td&gt;{#Nodes#}&lt;/td&gt;
+-                  &lt;td align=&quot;center&quot;&gt;{$STATS.visits} ({$STATS.unique_visits})&lt;/td&gt;
+-                  &lt;td align=&quot;center&quot;&gt;{$STATS.listens} ({$STATS.unique_listens})&lt;/td&gt;
+-                  &lt;td align=&quot;center&quot;&gt;{$STATS.downloads} ({$STATS.unique_downloads})&lt;/td&gt;
+-                  &lt;td&gt;{if $RATING}{$RATING.rating_value} ({#by#} {$RATING.rating_count}){else}-{/if}&lt;/td&gt;
+-                  &lt;td&gt;&lt;/td&gt; 
+-                  &lt;td&gt;&lt;/td&gt; 
+-                &lt;/tr&gt;
+-                {if $REFS}
+-                 &lt;tr class=&quot;listhead&quot;&gt;
+-                   &lt;th&gt;{#Portals#}&lt;/th&gt;
+-                   &lt;th&gt;{#Visits_p#}&lt;/th&gt;
+-                   &lt;th&gt;{#Listens_p#}&lt;/th&gt;
+-                   &lt;th&gt;{#Comments#}&lt;/th&gt; 
+-                   &lt;th&gt;{#Rating#}&lt;/th&gt; 
+-                   &lt;th&gt;{#From#}&lt;/th&gt; 
+-                   &lt;th&gt;{#Until#}&lt;/th&gt; 
+-                 &lt;/tr&gt;
+-                 {foreach item=item from=$REFS}
+-                   &lt;tr&gt;
+-                     &lt;td&gt;&lt;a target=&quot;_blank&quot; href=&quot;{$item.url}&quot;&gt;{$item.portal_name}&lt;/a&gt;&lt;/td&gt;
+-                     &lt;td align=&quot;center&quot;&gt;{$item.visits}&lt;/td&gt;
+-                     &lt;td align=&quot;center&quot;&gt;{$item.listens}&lt;/td&gt;
+-                     &lt;td align=&quot;center&quot;&gt;{$item.comments}&lt;/td&gt;
+-                     &lt;td&gt;{if $item.rating} {$item.rating} ({#by#} {$item.raters}){else}-{/if}&lt;/td&gt;
+-                     &lt;td&gt;{$item.start_date}&lt;/td&gt;
+-                     &lt;td&gt;{$item.end_date}&lt;/td&gt;
+-                   &lt;/tr&gt;
+-                 {/foreach}
+-                {/if}
+-              &lt;/table&gt;
+-            &lt;/td&gt;
+-            &lt;td valign=&quot;top&quot;&gt;
+-              {if $loggedIn}
+-                &lt;form method=&quot;post&quot; action=&quot;{$ROOT_URL}/get.php?id={$ID}&quot;&gt;
+-                &lt;input type=&quot;button&quot; name=&quot;put_into_playlist&quot; value=&quot;{#put_into_playlist#}&quot; onclick=&quot;javascript:setvalue('addplaylist', '{$ID}', 'add');this.disabled='true';return true;&quot; {if $inplaylist}disabled=&quot;true&quot;{/if} /&gt;
+-                &lt;input type=&quot;button&quot; value=&quot;{#upload_to_portal#}&quot; onclick=&quot;javascript:window.open('{$ROOT_URL}/portal_upload.php?type=prg&amp;data={$ID}','','scrollbars=yes,width=640,height=340,left=320,top=200');&quot; /&gt;
+-                &lt;/form&gt;
+-              {/if}
+-              &lt;p&gt;
+-                &lt;form&gt;
+-                  &lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;{$ID}&quot; /&gt;
+-                  &lt;select name=&quot;rating&quot;&gt;
+-                    &lt;option value=&quot;1&quot; {if $MY_RATING==1}SELECTED=1{/if} &gt;*&lt;/option&gt;
+-                    &lt;option value=&quot;2&quot; {if $MY_RATING==2}SELECTED=1{/if} &gt;**&lt;/option&gt;
+-                    &lt;option value=&quot;3&quot; {if $MY_RATING==3}SELECTED=1{/if} &gt;***&lt;/option&gt;
+-                    &lt;option value=&quot;4&quot; {if $MY_RATING==4}SELECTED=1{/if} &gt;****&lt;/option&gt;
+-                    &lt;option value=&quot;5&quot; {if $MY_RATING==5}SELECTED=1{/if} &gt;*****&lt;/option&gt;
+-                  &lt;/select&gt;
+-                  &lt;input type=&quot;button&quot; name=&quot;rate&quot; value=&quot;{if $MY_RATING}{#change_rating#}{else}{#rate_it#}{/if}&quot;   
+-                         onclick=&quot;javascript:setvalue('rating', '{$ID}', this.form.rating.options[this.form.rating.selectedIndex].value);this.value='{#change_rating#}';return true;&quot;
+-                         /&gt;
+-                  
+-                &lt;/form&gt;
+-
+-            &lt;/td&gt;
+-          &lt;/tr&gt;
+-        &lt;/table&gt;
+-      &lt;/td&gt;
+-    &lt;/tr&gt;
+-  &lt;/table&gt;
++  {include file=&quot;$SUBPAGE.htm&quot;}
+ {/if}
+\ No newline at end of file
+
+Added: node/branches/payable/code/templates/getNormalContent.htm
+===================================================================
+--- node/branches/payable/code/templates/getNormalContent.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/getNormalContent.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,409 @@
++  &lt;form&gt;
++    &lt;table class=&quot;title&quot; cellspacing=&quot;0&quot; cellpadding=&quot;5&quot; width=&quot;100%&quot;&gt;
++      &lt;tr valign=&quot;bottom&quot;&gt;
++        &lt;td class=&quot;titlehead&quot; width=&quot;2%&quot;&gt;
++          {if $PRG_DATA.icon}
++          &lt;img src=&quot;{$CACHE_URL}/{$ID}.png&quot; align=&quot;left&quot;&gt;
++          {/if}
++        &lt;/td&gt;
++        &lt;td class=&quot;titlehead&quot; width=&quot;20%&quot;&gt;
++          {if $UNPUBLISHED}
++          &lt;table&gt;&lt;tr&gt;&lt;td bgcolor=&quot;#FF0000&quot;&gt;&lt;b&gt;&lt;font color=&quot;#FFFFFF&quot;&gt;{#unpublished_warning#}&lt;/font&gt;&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
++          {/if}
++          &lt;font size=&quot;-1&quot;&gt;{#prog#}:&lt;/font&gt;
++          &lt;br&gt;{$PRG_DATA.title}
++        &lt;/td&gt;
++        &lt;td class=&quot;title2&quot;&gt;
++          &lt;a href=&quot;#general&quot;&gt;{#Metadata#}&lt;/a&gt;{if $ROLES}, &lt;a href=&quot;#roles&quot;&gt;{#Roles#}&lt;/a&gt;{/if}{if $RIGHTS}, &lt;a href=&quot;#rights&quot;&gt;{#Rights#}&lt;/a&gt;{/if},
++          &lt;a href=&quot;#mfiles&quot;&gt;{#Content#}&lt;/a&gt;{if $LINKS }, &lt;a href=&quot;#links&quot;&gt;{#Links#}&lt;/a&gt;{/if}, &lt;a href=&quot;#stats&quot;&gt;{#Statistics#}&lt;/a&gt;
++        &lt;/td&gt;
++        &lt;td class=&quot;title2&quot; width=&quot;15%&quot;&gt;
++        {if $SERIES_DATA and $SERIES_DATA.icon}
++          {strip}
++          &lt;a href=&quot;{$ROOT_URL}/showSeries.php/{$SERIES_DATA.id}&quot;&gt;
++            &lt;img hheight=&quot;50%&quot; border=&quot;0&quot; src=&quot;{$CACHE_URL}/{$SERIES_DATA.id}.png&quot;  alt=&quot;{#series#}: {$SERIES_DATA.name}&quot;&gt;
++          &lt;/a&gt;
++          {/strip}
++        {/if}
++        &lt;/td&gt;
++        &lt;td class=&quot;title2&quot; width=&quot;15%&quot;&gt;
++        {if $STATION_DATA.icon}
++          {strip}
++          &lt;a href=&quot;{$ROOT_URL}/showStation.php/{$STATION_DATA.id}&quot;&gt;
++            &lt;img hheight=&quot;50%&quot; border=&quot;0&quot; src=&quot;{$CACHE_URL}/{$STATION_DATA.id}.png&quot; alt=&quot;{#station#}: {$STATION_DATA.name}&quot;&gt;
++          &lt;/a&gt;
++          {/strip}
++        {/if}
++      &lt;/td&gt;
++        &lt;td class=&quot;title2&quot; width=&quot;10%&quot; align=&quot;right&quot; valign=&quot;bottom&quot;&gt;
++          &lt;a href=&quot;{$ROOT_URL}/rss.php?id={$ID}&amp;uiLang={$LANG}&quot;&gt;RSS&lt;/a&gt;&lt;br /&gt;
++          {if hasPerm($ID,'change') }
++          &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#edit_meta#}&quot; onClick=&quot;redir(this.form,'{$ROOT_URL}/editMeta.php?id={$ID}')&quot; /&gt;
++          &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#edit_files#}&quot; onClick=&quot;redir(this.form,'{$ROOT_URL}/editFiles.php?id={$ID}')&quot; /&gt;
++          {/if}
++        &lt;/td&gt;
++      &lt;/tr&gt;
++      &lt;tr&gt;
++        &lt;td colspan=&quot;6&quot; class=&quot;titlehead&quot; height=&quot;5&quot;&gt;
++        &lt;/td&gt;
++      &lt;/tr&gt;
++    &lt;/table&gt;
++  &lt;/form&gt;
++
++
++    &lt;/tr&gt;
++  &lt;/table&gt;
++
++  &lt;table class=&quot;tab&quot;&gt;
++    &lt;tr&gt; 
++      &lt;td nowrap class=&quot;tab&quot;&gt;{#Metadata#}&lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++  &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++    &lt;tr&gt; 
++      &lt;td class=&quot;tabarea&quot;&gt; 
++        &lt;a name=&quot;general&quot;&gt;&lt;/a&gt;
++        &lt;table width=&quot;100%&quot;&gt;
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap width=&quot;10%&quot;&gt;{#station#}:&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;{$ROOT_URL}/showStation.php/{$STATION_DATA.id}&quot;&gt;{$STATION_DATA.name}&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
++            {if $SERIES_DATA}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#series#}:&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;{$ROOT_URL}/showSeries.php/{$SERIES_DATA.id}&quot;&gt;{$SERIES_DATA.name}&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#title#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.title}&lt;/td&gt;&lt;/tr&gt;
++            {if $PRG_DATA.alternative_title}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#alternative_title#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.alternative_title}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.episode_title}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#episode_title#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.episode_title}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.episode_sequence}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#episode_sequence#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.episode_sequence}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#language#}:&lt;/td&gt;&lt;td&gt;{$LANGUAGE}&lt;/td&gt;&lt;/tr&gt;
++            {if $PRG_DATA.abstract}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#abstract#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.abstract}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.keywords}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#keywords#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.keywords}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.genre_id}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#genre#}:&lt;/td&gt;&lt;td&gt;{$GENRE}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $TOPICS}
++            &lt;tr valign=&quot;top&quot;&gt;
++              &lt;td class=&quot;meta&quot; nowrap&gt;{#topics#}:&lt;/td&gt;
++              &lt;td&gt;
++                &lt;table&gt;
++                  {foreach item=item from=$TOPICS}
++                  &lt;tr&gt;
++                    &lt;td&gt;
++                      {$item.name}
++                    &lt;/td&gt;
++                  &lt;/tr&gt;
++                  {/foreach}
++                &lt;/table&gt;
++              &lt;/td&gt;
++            &lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.temporal_coverage}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#temporal_coverage#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.temporal_coverage}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.spatial_coverage}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#spatial_coverage#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.spatial_coverage}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.production_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#production_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.production_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.broadcast_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#broadcast_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.broadcast_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.entry_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#entry_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.entry_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.modify_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#modify_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.modify_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.expiry_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#expiry_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.expiry_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++          &lt;/table&gt;
++		&lt;/td&gt; 
++	&lt;/tr&gt;
++&lt;/table&gt;
++
++{if $ROLES}
++&lt;p&gt;&lt;/p&gt;
++
++&lt;table class=&quot;tab&quot;&gt;
++  &lt;tr&gt; 
++    &lt;td nowrap class=&quot;tab&quot;&gt;{#Roles#}&lt;/td&gt;
++  &lt;/tr&gt;
++&lt;/table&gt;
++&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++&lt;tr&gt; 
++  &lt;td class=&quot;tabarea&quot;&gt;
++        &lt;a name=&quot;roles&quot;&gt;&lt;/a&gt;
++        &lt;table&gt;
++          {foreach item=item from=$ROLES}
++          &lt;tr valign=&quot;top&quot;&gt;
++            &lt;td&gt;
++              {$item.role_name}
++            &lt;/td&gt;
++            &lt;td&gt;
++              &lt;a href=&quot;javascript:popup('{$ROOT_URL}/showContact.php/{$item.contact_data.id}','ShowContact',400,400,true)&quot;&gt;{$item.contact_data.name}&lt;/a&gt;
++              {if $item.contact_data.url}&lt;br&gt;(&lt;a href=&quot;{$item.contact_data.url}&quot;&gt;{$item.contact_data.url})&lt;/a&gt;
++                {elseif $item.contact_data.email}&lt;br&gt;(&lt;a href=&quot;mailto:{$item.contact_data.email}&quot;&gt;{$item.contact_data.email})&lt;/a&gt;
++                  {/if}
++            &lt;/td&gt;
++            &lt;td&gt;
++              {if $item.contact_data.icon }{strip}
++              &lt;a href=&quot;javascript:popup('{$ROOT_URL}/showContact.php/{$item.contact_data.id}','ShowContact',400,400,true)&quot;&gt;
++                &lt;img hheight=&quot;50%&quot; border=&quot;0&quot; src=&quot;{$CACHE_URL}/{$item.contact_data.id}.png&quot;&gt;
++              &lt;/a&gt;{/strip}
++              {/if}
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/foreach}
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++&lt;/table&gt;
++{/if}
++
++{if $RIGHTS}
++&lt;p&gt;&lt;/p&gt;
++
++&lt;table class=&quot;tab&quot;&gt;
++  &lt;tr&gt; 
++    &lt;td nowrap class=&quot;tab&quot;&gt;{#Rights#}&lt;/td&gt;
++  &lt;/tr&gt;
++&lt;/table&gt;
++&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++&lt;tr&gt; 
++  &lt;td class=&quot;tabarea&quot;&gt;
++        &lt;a name=&quot;rights&quot;&gt;&lt;/a&gt;
++        &lt;table&gt;
++          {cycle name=&quot;rights&quot; values=&quot;list1,list2&quot; print=false advance=false}
++          {foreach item=item from=$RIGHTS}
++          &lt;tr class=&quot;{cycle name=rights}&quot;&gt;
++            &lt;td&gt;
++              {if empty($item.start_time) and empty($item.stop_time) }
++                {#for_whole_prg#}
++              {else}
++                 {$item.start_time} {#sec#} - {$item.stop_time} {#sec#}
++              {/if}
++            &lt;/td&gt;
++            &lt;td&gt;
++              {$item.rights_text}
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/foreach}
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++&lt;/table&gt;
++{/if}
++
++&lt;p&gt;&lt;/p&gt;
++&lt;form&gt;
++&lt;table class=&quot;tab&quot;&gt;
++  &lt;tr&gt; 
++    &lt;td nowrap class=&quot;tab&quot;&gt;{#Content#}&lt;/td&gt;
++  &lt;/tr&gt;
++&lt;/table&gt;
++&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++&lt;tr&gt; 
++  &lt;td class=&quot;tabarea&quot;&gt; 
++   {if $AUDIO_FILES }
++        &lt;div class=&quot;subheader&quot;&gt;{#audio_file_list#}&lt;/div&gt;
++        &lt;a name=&quot;mfiles&quot;&gt;&lt;/a&gt;
++    &lt;table&gt;
++       {cycle name=&quot;audio&quot; values=&quot;list1,list2&quot; print=false advance=false}
++       {foreach item=item from=$AUDIO_FILES}
++          {if $item.download_access eq 't' or $item.stream_access eq 't' }
++          &lt;tr class=&quot;{cycle name=audio}&quot;&gt;
++            &lt;td width=&quot;5%&quot;&gt;&lt;/td&gt;
++            &lt;td&gt;
++              {if $item.main_content eq 't' }
++                 {#programme_audio#}
++              {elseif $item.caption} 
++                 {$item.caption}
++              {else}
++                 {$item.filename}
++              {/if}
++            &lt;/td&gt;
++            &lt;td align=&quot;right&quot;&gt;
++              {$item.bitrate} kbps 
++            &lt;/td&gt;
++            &lt;td&gt;
++                {$item.format}
++            &lt;/td&gt;
++            &lt;td align=&quot;right&quot;&gt;
++              {$item.playtime_string}
++            &lt;/td&gt;
++            &lt;td&gt;
++              { if $item.download_access eq 't'}
++                &lt;!-- &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#Download#}&quot; onClick=&quot;popup('{$ROOT_URL}/getFile.php/{$item.filename}?{if $item.main_content eq 't' }audio=1&amp;{/if}id={$ID}&amp;filename={$item.filename}','ViewPopup',500,500,true)&quot; /&gt; --&gt;
++                &lt;a href=&quot;{$ROOT_URL}/getFile.php/{$item.filename}?{if $item.main_content eq 't' }audio=1&amp;{/if}id={$ID}&amp;filename={$item.filename}&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/download.gif&quot; border=&quot;0&quot; alt=&quot;{#Download#}&quot;&gt;&lt;/a&gt;
++              {/if}
++            &lt;/td&gt;
++            &lt;td&gt;
++              { if $item.stream_access eq 't' }
++                &lt;a href=&quot;{$ROOT_URL}/listen.php/id__{$ID}/fileid__{$item.id}/audio.m3u&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/listen.gif&quot; border=&quot;0&quot; alt=&quot;{#Listen#}&quot;&gt;&lt;/a&gt;
++              {/if}
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/if}
++          {/foreach}    
++    &lt;/table&gt;
++   {/if}
++   {if $OTHER_FILES }
++        &lt;div class=&quot;subheader&quot;&gt;{#other_file_list#}&lt;/div&gt;
++        &lt;a name=&quot;ofiles&quot;&gt;&lt;/a&gt;
++        &lt;table&gt;
++          {cycle name=other values=&quot;list1,list2&quot; print=false advance=false}
++          {foreach item=item from=$OTHER_FILES}
++          {if $item.public_access eq 't' }
++          &lt;tr class=&quot;{cycle name=other}&quot;&gt;
++            &lt;td width=&quot;5%&quot;&gt;&lt;/td&gt;
++            &lt;td&gt;
++              {if $item.caption}
++                {$item.caption}
++              {else} 
++                {$item.filename}
++              {/if}
++            &lt;/td&gt;
++            &lt;td align=&quot;right&quot;&gt;
++              {$item.filesize} {#bytes#}
++            &lt;/td&gt;
++            &lt;td nowrap&gt;
++              {if $item.public_access eq 't' }
++                &lt;!-- &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#View#}&quot; onClick=&quot;popup('{$ROOT_URL}/getFile.php/{$item.filename}?id={$ID}&amp;filename={$item.filename}','ViewPopup',500,500,true)&quot; /&gt; --&gt;
++                  &lt;a target=&quot;link&quot; href=&quot;{$ROOT_URL}/getFile.php/{$item.filename}?id={$ID}&amp;filename={$item.filename}&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/download.gif&quot; border=&quot;0&quot; alt=&quot;{#Download#}&quot;&gt;&lt;/a&gt;
++              {/if}
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/if}
++          {/foreach}    
++        &lt;/table&gt;
++   {/if}
++   {if !$AUDIO_FILES and !$OTHER_FILES }
++        &lt;p&gt;{#no_files#}&lt;/p&gt;
++   {/if}
++  &lt;/td&gt;
++&lt;/tr&gt;
++&lt;/table&gt;
++&lt;/form&gt;
++
++&lt;p&gt;&lt;/p&gt;
++
++{if $LINKS } 
++  &lt;table class=&quot;tab&quot;&gt;
++    &lt;tr&gt; 
++      &lt;td nowrap class=&quot;tab&quot;&gt;{#Links#}&lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++  &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++    &lt;tr&gt; 
++      &lt;td class=&quot;tabarea&quot;&gt;
++        &lt;a name=&quot;links&quot;&gt;&lt;/a&gt;
++        &lt;table&gt;
++          {foreach item=item from=$LINKS}
++          &lt;tr&gt;
++            &lt;td&gt;
++              &lt;a target=&quot;link&quot; href=&quot;{$item.url}&quot;&gt;{if $item.caption}{$item.caption}{else}{$item.url}{/if}&lt;/a&gt;
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/foreach}    
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++{/if}
++
++&lt;p&gt;&lt;/p&gt;
++
++  &lt;table class=&quot;tab&quot;&gt;
++    &lt;tr&gt; 
++      &lt;td nowrap class=&quot;tab&quot;&gt;{#Statistics#}&lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++  &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++    &lt;tr&gt; 
++      &lt;td class=&quot;tabarea&quot;&gt;
++        &lt;p&gt;{#stats_may_be_old#}: {$STATS.last_change}&lt;/p&gt;
++        &lt;table width=&quot;100%&quot;&gt;
++          &lt;tr&gt;
++            &lt;td valign=&quot;top&quot;&gt;
++              &lt;a name=&quot;stats&quot;&gt;&lt;/a&gt;
++              &lt;table&gt;
++                &lt;tr class=&quot;listhead&quot;&gt;
++                  &lt;th&gt;&lt;/th&gt;
++                  &lt;th&gt;{#Visits#}&lt;/th&gt;
++                  &lt;th&gt;{#Listens#}&lt;/th&gt;
++                  &lt;th&gt;{#Downloads#}&lt;/th&gt; 
++                  &lt;th&gt;{#Rating#}&lt;/th&gt; 
++                  &lt;th&gt;&lt;/th&gt; 
++                  &lt;th&gt;&lt;/th&gt; 
++                &lt;/tr&gt;
++                &lt;tr&gt;
++                  &lt;td&gt;{#Nodes#}&lt;/td&gt;
++                  &lt;td align=&quot;center&quot;&gt;{$STATS.visits} ({$STATS.unique_visits})&lt;/td&gt;
++                  &lt;td align=&quot;center&quot;&gt;{$STATS.listens} ({$STATS.unique_listens})&lt;/td&gt;
++                  &lt;td align=&quot;center&quot;&gt;{$STATS.downloads} ({$STATS.unique_downloads})&lt;/td&gt;
++                  &lt;td&gt;{if $RATING}{$RATING.rating_value} ({#by#} {$RATING.rating_count}){else}-{/if}&lt;/td&gt;
++                  &lt;td&gt;&lt;/td&gt; 
++                  &lt;td&gt;&lt;/td&gt; 
++                &lt;/tr&gt;
++                {if $REFS}
++                 &lt;tr class=&quot;listhead&quot;&gt;
++                   &lt;th&gt;{#Portals#}&lt;/th&gt;
++                   &lt;th&gt;{#Visits_p#}&lt;/th&gt;
++                   &lt;th&gt;{#Listens_p#}&lt;/th&gt;
++                   &lt;th&gt;{#Comments#}&lt;/th&gt; 
++                   &lt;th&gt;{#Rating#}&lt;/th&gt; 
++                   &lt;th&gt;{#From#}&lt;/th&gt; 
++                   &lt;th&gt;{#Until#}&lt;/th&gt; 
++                 &lt;/tr&gt;
++                 {foreach item=item from=$REFS}
++                   &lt;tr&gt;
++                     &lt;td&gt;&lt;a target=&quot;_blank&quot; href=&quot;{$item.url}&quot;&gt;{$item.portal_name}&lt;/a&gt;&lt;/td&gt;
++                     &lt;td align=&quot;center&quot;&gt;{$item.visits}&lt;/td&gt;
++                     &lt;td align=&quot;center&quot;&gt;{$item.listens}&lt;/td&gt;
++                     &lt;td align=&quot;center&quot;&gt;{$item.comments}&lt;/td&gt;
++                     &lt;td&gt;{if $item.rating} {$item.rating} ({#by#} {$item.raters}){else}-{/if}&lt;/td&gt;
++                     &lt;td&gt;{$item.start_date}&lt;/td&gt;
++                     &lt;td&gt;{$item.end_date}&lt;/td&gt;
++                   &lt;/tr&gt;
++                 {/foreach}
++                {/if}
++              &lt;/table&gt;
++            &lt;/td&gt;
++            &lt;td valign=&quot;top&quot;&gt;
++              {if $loggedIn}
++                &lt;form method=&quot;post&quot; action=&quot;{$ROOT_URL}/get.php?id={$ID}&quot;&gt;
++                &lt;input type=&quot;button&quot; name=&quot;put_into_playlist&quot; value=&quot;{#put_into_playlist#}&quot; onclick=&quot;javascript:setvalue('addplaylist', '{$ID}', 'add');this.disabled='true';return true;&quot; {if $inplaylist}disabled=&quot;true&quot;{/if} /&gt;
++                &lt;input type=&quot;button&quot; value=&quot;{#upload_to_portal#}&quot; onclick=&quot;javascript:window.open('{$ROOT_URL}/portal_upload.php?type=prg&amp;data={$ID}','','scrollbars=yes,width=640,height=340,left=320,top=200');&quot; /&gt;
++                &lt;/form&gt;
++              {/if}
++              &lt;p&gt;
++                &lt;form&gt;
++                  &lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;{$ID}&quot; /&gt;
++                  &lt;select name=&quot;rating&quot;&gt;
++                    &lt;option value=&quot;1&quot; {if $MY_RATING==1}SELECTED=1{/if} &gt;*&lt;/option&gt;
++                    &lt;option value=&quot;2&quot; {if $MY_RATING==2}SELECTED=1{/if} &gt;**&lt;/option&gt;
++                    &lt;option value=&quot;3&quot; {if $MY_RATING==3}SELECTED=1{/if} &gt;***&lt;/option&gt;
++                    &lt;option value=&quot;4&quot; {if $MY_RATING==4}SELECTED=1{/if} &gt;****&lt;/option&gt;
++                    &lt;option value=&quot;5&quot; {if $MY_RATING==5}SELECTED=1{/if} &gt;*****&lt;/option&gt;
++                  &lt;/select&gt;
++                  &lt;input type=&quot;button&quot; name=&quot;rate&quot; value=&quot;{if $MY_RATING}{#change_rating#}{else}{#rate_it#}{/if}&quot;   
++                         onclick=&quot;javascript:setvalue('rating', '{$ID}', this.form.rating.options[this.form.rating.selectedIndex].value);this.value='{#change_rating#}';return true;&quot;
++                         /&gt;
++                  
++                &lt;/form&gt;
++
++            &lt;/td&gt;
++          &lt;/tr&gt;
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
+
+
+Property changes on: node/branches/payable/code/templates/getNormalContent.htm
+___________________________________________________________________
+Name: svn:executable
+   + *
+
+Added: node/branches/payable/code/templates/getPromotedContent.htm
+===================================================================
+--- node/branches/payable/code/templates/getPromotedContent.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/getPromotedContent.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,409 @@
++  &lt;form&gt;
++    &lt;table class=&quot;title&quot; cellspacing=&quot;0&quot; cellpadding=&quot;5&quot; width=&quot;100%&quot;&gt;
++      &lt;tr valign=&quot;bottom&quot;&gt;
++        &lt;td class=&quot;titlehead&quot; width=&quot;2%&quot;&gt;
++          {if $PRG_DATA.icon}
++          &lt;img src=&quot;{$CACHE_URL}/{$ID}.png&quot; align=&quot;left&quot;&gt;
++          {/if}
++        &lt;/td&gt;
++        &lt;td class=&quot;titlehead&quot; width=&quot;20%&quot;&gt;
++          {if $UNPUBLISHED}
++          &lt;table&gt;&lt;tr&gt;&lt;td bgcolor=&quot;#FF0000&quot;&gt;&lt;b&gt;&lt;font color=&quot;#FFFFFF&quot;&gt;{#unpublished_warning#}&lt;/font&gt;&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
++          {/if}
++          &lt;font size=&quot;-1&quot;&gt;{#prog#}:&lt;/font&gt;
++          &lt;br&gt;{$PRG_DATA.title} &lt;b&gt;PROMOTED!&lt;/b&gt;
++        &lt;/td&gt;
++        &lt;td class=&quot;title2&quot;&gt;
++          &lt;a href=&quot;#general&quot;&gt;{#Metadata#}&lt;/a&gt;{if $ROLES}, &lt;a href=&quot;#roles&quot;&gt;{#Roles#}&lt;/a&gt;{/if}{if $RIGHTS}, &lt;a href=&quot;#rights&quot;&gt;{#Rights#}&lt;/a&gt;{/if},
++          &lt;a href=&quot;#mfiles&quot;&gt;{#Content#}&lt;/a&gt;{if $LINKS }, &lt;a href=&quot;#links&quot;&gt;{#Links#}&lt;/a&gt;{/if}, &lt;a href=&quot;#stats&quot;&gt;{#Statistics#}&lt;/a&gt;
++        &lt;/td&gt;
++        &lt;td class=&quot;title2&quot; width=&quot;15%&quot;&gt;
++        {if $SERIES_DATA and $SERIES_DATA.icon}
++          {strip}
++          &lt;a href=&quot;{$ROOT_URL}/showSeries.php/{$SERIES_DATA.id}&quot;&gt;
++            &lt;img hheight=&quot;50%&quot; border=&quot;0&quot; src=&quot;{$CACHE_URL}/{$SERIES_DATA.id}.png&quot;  alt=&quot;{#series#}: {$SERIES_DATA.name}&quot;&gt;
++          &lt;/a&gt;
++          {/strip}
++        {/if}
++        &lt;/td&gt;
++        &lt;td class=&quot;title2&quot; width=&quot;15%&quot;&gt;
++        {if $STATION_DATA.icon}
++          {strip}
++          &lt;a href=&quot;{$ROOT_URL}/showStation.php/{$STATION_DATA.id}&quot;&gt;
++            &lt;img hheight=&quot;50%&quot; border=&quot;0&quot; src=&quot;{$CACHE_URL}/{$STATION_DATA.id}.png&quot; alt=&quot;{#station#}: {$STATION_DATA.name}&quot;&gt;
++          &lt;/a&gt;
++          {/strip}
++        {/if}
++      &lt;/td&gt;
++        &lt;td class=&quot;title2&quot; width=&quot;10%&quot; align=&quot;right&quot; valign=&quot;bottom&quot;&gt;
++          &lt;a href=&quot;{$ROOT_URL}/rss.php?id={$ID}&amp;uiLang={$LANG}&quot;&gt;RSS&lt;/a&gt;&lt;br /&gt;
++          {if hasPerm($ID,'change') }
++          &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#edit_meta#}&quot; onClick=&quot;redir(this.form,'{$ROOT_URL}/editMeta.php?id={$ID}')&quot; /&gt;
++          &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#edit_files#}&quot; onClick=&quot;redir(this.form,'{$ROOT_URL}/editFiles.php?id={$ID}')&quot; /&gt;
++          {/if}
++        &lt;/td&gt;
++      &lt;/tr&gt;
++      &lt;tr&gt;
++        &lt;td colspan=&quot;6&quot; class=&quot;titlehead&quot; height=&quot;5&quot;&gt;
++        &lt;/td&gt;
++      &lt;/tr&gt;
++    &lt;/table&gt;
++  &lt;/form&gt;
++
++
++    &lt;/tr&gt;
++  &lt;/table&gt;
++
++  &lt;table class=&quot;tab&quot;&gt;
++    &lt;tr&gt; 
++      &lt;td nowrap class=&quot;tab&quot;&gt;{#Metadata#}&lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++  &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++    &lt;tr&gt; 
++      &lt;td class=&quot;tabarea&quot;&gt; 
++        &lt;a name=&quot;general&quot;&gt;&lt;/a&gt;
++        &lt;table width=&quot;100%&quot;&gt;
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap width=&quot;10%&quot;&gt;{#station#}:&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;{$ROOT_URL}/showStation.php/{$STATION_DATA.id}&quot;&gt;{$STATION_DATA.name}&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
++            {if $SERIES_DATA}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#series#}:&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;{$ROOT_URL}/showSeries.php/{$SERIES_DATA.id}&quot;&gt;{$SERIES_DATA.name}&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#title#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.title}&lt;/td&gt;&lt;/tr&gt;
++            {if $PRG_DATA.alternative_title}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#alternative_title#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.alternative_title}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.episode_title}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#episode_title#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.episode_title}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.episode_sequence}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#episode_sequence#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.episode_sequence}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#language#}:&lt;/td&gt;&lt;td&gt;{$LANGUAGE}&lt;/td&gt;&lt;/tr&gt;
++            {if $PRG_DATA.abstract}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#abstract#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.abstract}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.keywords}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#keywords#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.keywords}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.genre_id}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#genre#}:&lt;/td&gt;&lt;td&gt;{$GENRE}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $TOPICS}
++            &lt;tr valign=&quot;top&quot;&gt;
++              &lt;td class=&quot;meta&quot; nowrap&gt;{#topics#}:&lt;/td&gt;
++              &lt;td&gt;
++                &lt;table&gt;
++                  {foreach item=item from=$TOPICS}
++                  &lt;tr&gt;
++                    &lt;td&gt;
++                      {$item.name}
++                    &lt;/td&gt;
++                  &lt;/tr&gt;
++                  {/foreach}
++                &lt;/table&gt;
++              &lt;/td&gt;
++            &lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.temporal_coverage}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#temporal_coverage#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.temporal_coverage}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.spatial_coverage}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#spatial_coverage#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.spatial_coverage}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.production_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#production_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.production_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.broadcast_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#broadcast_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.broadcast_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.entry_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#entry_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.entry_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.modify_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#modify_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.modify_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.expiry_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#expiry_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.expiry_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++          &lt;/table&gt;
++		&lt;/td&gt; 
++	&lt;/tr&gt;
++&lt;/table&gt;
++
++{if $ROLES}
++&lt;p&gt;&lt;/p&gt;
++
++&lt;table class=&quot;tab&quot;&gt;
++  &lt;tr&gt; 
++    &lt;td nowrap class=&quot;tab&quot;&gt;{#Roles#}&lt;/td&gt;
++  &lt;/tr&gt;
++&lt;/table&gt;
++&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++&lt;tr&gt; 
++  &lt;td class=&quot;tabarea&quot;&gt;
++        &lt;a name=&quot;roles&quot;&gt;&lt;/a&gt;
++        &lt;table&gt;
++          {foreach item=item from=$ROLES}
++          &lt;tr valign=&quot;top&quot;&gt;
++            &lt;td&gt;
++              {$item.role_name}
++            &lt;/td&gt;
++            &lt;td&gt;
++              &lt;a href=&quot;javascript:popup('{$ROOT_URL}/showContact.php/{$item.contact_data.id}','ShowContact',400,400,true)&quot;&gt;{$item.contact_data.name}&lt;/a&gt;
++              {if $item.contact_data.url}&lt;br&gt;(&lt;a href=&quot;{$item.contact_data.url}&quot;&gt;{$item.contact_data.url})&lt;/a&gt;
++                {elseif $item.contact_data.email}&lt;br&gt;(&lt;a href=&quot;mailto:{$item.contact_data.email}&quot;&gt;{$item.contact_data.email})&lt;/a&gt;
++                  {/if}
++            &lt;/td&gt;
++            &lt;td&gt;
++              {if $item.contact_data.icon }{strip}
++              &lt;a href=&quot;javascript:popup('{$ROOT_URL}/showContact.php/{$item.contact_data.id}','ShowContact',400,400,true)&quot;&gt;
++                &lt;img hheight=&quot;50%&quot; border=&quot;0&quot; src=&quot;{$CACHE_URL}/{$item.contact_data.id}.png&quot;&gt;
++              &lt;/a&gt;{/strip}
++              {/if}
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/foreach}
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++&lt;/table&gt;
++{/if}
++
++{if $RIGHTS}
++&lt;p&gt;&lt;/p&gt;
++
++&lt;table class=&quot;tab&quot;&gt;
++  &lt;tr&gt; 
++    &lt;td nowrap class=&quot;tab&quot;&gt;{#Rights#}&lt;/td&gt;
++  &lt;/tr&gt;
++&lt;/table&gt;
++&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++&lt;tr&gt; 
++  &lt;td class=&quot;tabarea&quot;&gt;
++        &lt;a name=&quot;rights&quot;&gt;&lt;/a&gt;
++        &lt;table&gt;
++          {cycle name=&quot;rights&quot; values=&quot;list1,list2&quot; print=false advance=false}
++          {foreach item=item from=$RIGHTS}
++          &lt;tr class=&quot;{cycle name=rights}&quot;&gt;
++            &lt;td&gt;
++              {if empty($item.start_time) and empty($item.stop_time) }
++                {#for_whole_prg#}
++              {else}
++                 {$item.start_time} {#sec#} - {$item.stop_time} {#sec#}
++              {/if}
++            &lt;/td&gt;
++            &lt;td&gt;
++              {$item.rights_text}
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/foreach}
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++&lt;/table&gt;
++{/if}
++
++&lt;p&gt;&lt;/p&gt;
++&lt;form&gt;
++&lt;table class=&quot;tab&quot;&gt;
++  &lt;tr&gt; 
++    &lt;td nowrap class=&quot;tab&quot;&gt;{#Content#}&lt;/td&gt;
++  &lt;/tr&gt;
++&lt;/table&gt;
++&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++&lt;tr&gt; 
++  &lt;td class=&quot;tabarea&quot;&gt; 
++   {if $AUDIO_FILES }
++        &lt;div class=&quot;subheader&quot;&gt;{#audio_file_list#}&lt;/div&gt;
++        &lt;a name=&quot;mfiles&quot;&gt;&lt;/a&gt;
++    &lt;table&gt;
++       {cycle name=&quot;audio&quot; values=&quot;list1,list2&quot; print=false advance=false}
++       {foreach item=item from=$AUDIO_FILES}
++          {if $item.download_access eq 't' or $item.stream_access eq 't' }
++          &lt;tr class=&quot;{cycle name=audio}&quot;&gt;
++            &lt;td width=&quot;5%&quot;&gt;&lt;/td&gt;
++            &lt;td&gt;
++              {if $item.main_content eq 't' }
++                 {#programme_audio#}
++              {elseif $item.caption} 
++                 {$item.caption}
++              {else}
++                 {$item.filename}
++              {/if}
++            &lt;/td&gt;
++            &lt;td align=&quot;right&quot;&gt;
++              {$item.bitrate} kbps 
++            &lt;/td&gt;
++            &lt;td&gt;
++                {$item.format}
++            &lt;/td&gt;
++            &lt;td align=&quot;right&quot;&gt;
++              {$item.playtime_string}
++            &lt;/td&gt;
++            &lt;td&gt;
++              { if $item.download_access eq 't'}
++                &lt;!-- &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#Download#}&quot; onClick=&quot;popup('{$ROOT_URL}/getFile.php/{$item.filename}?{if $item.main_content eq 't' }audio=1&amp;{/if}id={$ID}&amp;filename={$item.filename}','ViewPopup',500,500,true)&quot; /&gt; --&gt;
++                &lt;a href=&quot;{$ROOT_URL}/getFile.php/{$item.filename}?{if $item.main_content eq 't' }audio=1&amp;{/if}id={$ID}&amp;filename={$item.filename}&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/download.gif&quot; border=&quot;0&quot; alt=&quot;{#Download#}&quot;&gt;&lt;/a&gt;
++              {/if}
++            &lt;/td&gt;
++            &lt;td&gt;
++              { if $item.stream_access eq 't' }
++                &lt;a href=&quot;{$ROOT_URL}/listen.php/id__{$ID}/fileid__{$item.id}/audio.m3u&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/listen.gif&quot; border=&quot;0&quot; alt=&quot;{#Listen#}&quot;&gt;&lt;/a&gt;
++              {/if}
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/if}
++          {/foreach}    
++    &lt;/table&gt;
++   {/if}
++   {if $OTHER_FILES }
++        &lt;div class=&quot;subheader&quot;&gt;{#other_file_list#}&lt;/div&gt;
++        &lt;a name=&quot;ofiles&quot;&gt;&lt;/a&gt;
++        &lt;table&gt;
++          {cycle name=other values=&quot;list1,list2&quot; print=false advance=false}
++          {foreach item=item from=$OTHER_FILES}
++          {if $item.public_access eq 't' }
++          &lt;tr class=&quot;{cycle name=other}&quot;&gt;
++            &lt;td width=&quot;5%&quot;&gt;&lt;/td&gt;
++            &lt;td&gt;
++              {if $item.caption}
++                {$item.caption}
++              {else} 
++                {$item.filename}
++              {/if}
++            &lt;/td&gt;
++            &lt;td align=&quot;right&quot;&gt;
++              {$item.filesize} {#bytes#}
++            &lt;/td&gt;
++            &lt;td nowrap&gt;
++              {if $item.public_access eq 't' }
++                &lt;!-- &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#View#}&quot; onClick=&quot;popup('{$ROOT_URL}/getFile.php/{$item.filename}?id={$ID}&amp;filename={$item.filename}','ViewPopup',500,500,true)&quot; /&gt; --&gt;
++                  &lt;a target=&quot;link&quot; href=&quot;{$ROOT_URL}/getFile.php/{$item.filename}?id={$ID}&amp;filename={$item.filename}&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/download.gif&quot; border=&quot;0&quot; alt=&quot;{#Download#}&quot;&gt;&lt;/a&gt;
++              {/if}
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/if}
++          {/foreach}    
++        &lt;/table&gt;
++   {/if}
++   {if !$AUDIO_FILES and !$OTHER_FILES }
++        &lt;p&gt;{#no_files#}&lt;/p&gt;
++   {/if}
++  &lt;/td&gt;
++&lt;/tr&gt;
++&lt;/table&gt;
++&lt;/form&gt;
++
++&lt;p&gt;&lt;/p&gt;
++
++{if $LINKS } 
++  &lt;table class=&quot;tab&quot;&gt;
++    &lt;tr&gt; 
++      &lt;td nowrap class=&quot;tab&quot;&gt;{#Links#}&lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++  &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++    &lt;tr&gt; 
++      &lt;td class=&quot;tabarea&quot;&gt;
++        &lt;a name=&quot;links&quot;&gt;&lt;/a&gt;
++        &lt;table&gt;
++          {foreach item=item from=$LINKS}
++          &lt;tr&gt;
++            &lt;td&gt;
++              &lt;a target=&quot;link&quot; href=&quot;{$item.url}&quot;&gt;{if $item.caption}{$item.caption}{else}{$item.url}{/if}&lt;/a&gt;
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/foreach}    
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++{/if}
++
++&lt;p&gt;&lt;/p&gt;
++
++  &lt;table class=&quot;tab&quot;&gt;
++    &lt;tr&gt; 
++      &lt;td nowrap class=&quot;tab&quot;&gt;{#Statistics#}&lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++  &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++    &lt;tr&gt; 
++      &lt;td class=&quot;tabarea&quot;&gt;
++        &lt;p&gt;{#stats_may_be_old#}: {$STATS.last_change}&lt;/p&gt;
++        &lt;table width=&quot;100%&quot;&gt;
++          &lt;tr&gt;
++            &lt;td valign=&quot;top&quot;&gt;
++              &lt;a name=&quot;stats&quot;&gt;&lt;/a&gt;
++              &lt;table&gt;
++                &lt;tr class=&quot;listhead&quot;&gt;
++                  &lt;th&gt;&lt;/th&gt;
++                  &lt;th&gt;{#Visits#}&lt;/th&gt;
++                  &lt;th&gt;{#Listens#}&lt;/th&gt;
++                  &lt;th&gt;{#Downloads#}&lt;/th&gt; 
++                  &lt;th&gt;{#Rating#}&lt;/th&gt; 
++                  &lt;th&gt;&lt;/th&gt; 
++                  &lt;th&gt;&lt;/th&gt; 
++                &lt;/tr&gt;
++                &lt;tr&gt;
++                  &lt;td&gt;{#Nodes#}&lt;/td&gt;
++                  &lt;td align=&quot;center&quot;&gt;{$STATS.visits} ({$STATS.unique_visits})&lt;/td&gt;
++                  &lt;td align=&quot;center&quot;&gt;{$STATS.listens} ({$STATS.unique_listens})&lt;/td&gt;
++                  &lt;td align=&quot;center&quot;&gt;{$STATS.downloads} ({$STATS.unique_downloads})&lt;/td&gt;
++                  &lt;td&gt;{if $RATING}{$RATING.rating_value} ({#by#} {$RATING.rating_count}){else}-{/if}&lt;/td&gt;
++                  &lt;td&gt;&lt;/td&gt; 
++                  &lt;td&gt;&lt;/td&gt; 
++                &lt;/tr&gt;
++                {if $REFS}
++                 &lt;tr class=&quot;listhead&quot;&gt;
++                   &lt;th&gt;{#Portals#}&lt;/th&gt;
++                   &lt;th&gt;{#Visits_p#}&lt;/th&gt;
++                   &lt;th&gt;{#Listens_p#}&lt;/th&gt;
++                   &lt;th&gt;{#Comments#}&lt;/th&gt; 
++                   &lt;th&gt;{#Rating#}&lt;/th&gt; 
++                   &lt;th&gt;{#From#}&lt;/th&gt; 
++                   &lt;th&gt;{#Until#}&lt;/th&gt; 
++                 &lt;/tr&gt;
++                 {foreach item=item from=$REFS}
++                   &lt;tr&gt;
++                     &lt;td&gt;&lt;a target=&quot;_blank&quot; href=&quot;{$item.url}&quot;&gt;{$item.portal_name}&lt;/a&gt;&lt;/td&gt;
++                     &lt;td align=&quot;center&quot;&gt;{$item.visits}&lt;/td&gt;
++                     &lt;td align=&quot;center&quot;&gt;{$item.listens}&lt;/td&gt;
++                     &lt;td align=&quot;center&quot;&gt;{$item.comments}&lt;/td&gt;
++                     &lt;td&gt;{if $item.rating} {$item.rating} ({#by#} {$item.raters}){else}-{/if}&lt;/td&gt;
++                     &lt;td&gt;{$item.start_date}&lt;/td&gt;
++                     &lt;td&gt;{$item.end_date}&lt;/td&gt;
++                   &lt;/tr&gt;
++                 {/foreach}
++                {/if}
++              &lt;/table&gt;
++            &lt;/td&gt;
++            &lt;td valign=&quot;top&quot;&gt;
++              {if $loggedIn}
++                &lt;form method=&quot;post&quot; action=&quot;{$ROOT_URL}/get.php?id={$ID}&quot;&gt;
++                &lt;input type=&quot;button&quot; name=&quot;put_into_playlist&quot; value=&quot;{#put_into_playlist#}&quot; onclick=&quot;javascript:setvalue('addplaylist', '{$ID}', 'add');this.disabled='true';return true;&quot; {if $inplaylist}disabled=&quot;true&quot;{/if} /&gt;
++                &lt;input type=&quot;button&quot; value=&quot;{#upload_to_portal#}&quot; onclick=&quot;javascript:window.open('{$ROOT_URL}/portal_upload.php?type=prg&amp;data={$ID}','','scrollbars=yes,width=640,height=340,left=320,top=200');&quot; /&gt;
++                &lt;/form&gt;
++              {/if}
++              &lt;p&gt;
++                &lt;form&gt;
++                  &lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;{$ID}&quot; /&gt;
++                  &lt;select name=&quot;rating&quot;&gt;
++                    &lt;option value=&quot;1&quot; {if $MY_RATING==1}SELECTED=1{/if} &gt;*&lt;/option&gt;
++                    &lt;option value=&quot;2&quot; {if $MY_RATING==2}SELECTED=1{/if} &gt;**&lt;/option&gt;
++                    &lt;option value=&quot;3&quot; {if $MY_RATING==3}SELECTED=1{/if} &gt;***&lt;/option&gt;
++                    &lt;option value=&quot;4&quot; {if $MY_RATING==4}SELECTED=1{/if} &gt;****&lt;/option&gt;
++                    &lt;option value=&quot;5&quot; {if $MY_RATING==5}SELECTED=1{/if} &gt;*****&lt;/option&gt;
++                  &lt;/select&gt;
++                  &lt;input type=&quot;button&quot; name=&quot;rate&quot; value=&quot;{if $MY_RATING}{#change_rating#}{else}{#rate_it#}{/if}&quot;   
++                         onclick=&quot;javascript:setvalue('rating', '{$ID}', this.form.rating.options[this.form.rating.selectedIndex].value);this.value='{#change_rating#}';return true;&quot;
++                         /&gt;
++                  
++                &lt;/form&gt;
++
++            &lt;/td&gt;
++          &lt;/tr&gt;
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
+
+
+Property changes on: node/branches/payable/code/templates/getPromotedContent.htm
+___________________________________________________________________
+Name: svn:executable
+   + *
+
+Added: node/branches/payable/code/templates/getProtectedContent.htm
+===================================================================
+--- node/branches/payable/code/templates/getProtectedContent.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/getProtectedContent.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,423 @@
++  &lt;form&gt;
++    &lt;table class=&quot;title&quot; cellspacing=&quot;0&quot; cellpadding=&quot;5&quot; width=&quot;100%&quot;&gt;
++      &lt;tr valign=&quot;bottom&quot;&gt;
++        &lt;td class=&quot;titlehead&quot; width=&quot;2%&quot;&gt;
++          {if $PRG_DATA.icon}
++          &lt;img src=&quot;{$CACHE_URL}/{$ID}.png&quot; align=&quot;left&quot;&gt;
++          {/if}
++        &lt;/td&gt;
++        &lt;td class=&quot;titlehead&quot; width=&quot;20%&quot;&gt;
++          {if $UNPUBLISHED}
++          &lt;table&gt;&lt;tr&gt;&lt;td bgcolor=&quot;#FF0000&quot;&gt;&lt;b&gt;&lt;font color=&quot;#FFFFFF&quot;&gt;{#unpublished_warning#}&lt;/font&gt;&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
++          {/if}
++          &lt;font size=&quot;-1&quot;&gt;{#prog#}:&lt;/font&gt;
++          &lt;br&gt;{$PRG_DATA.title} &lt;b&gt;PREMIUM!&lt;/b&gt;
++        &lt;/td&gt;
++        &lt;td class=&quot;title2&quot;&gt;
++          &lt;a href=&quot;#general&quot;&gt;{#Metadata#}&lt;/a&gt;{if $ROLES}, &lt;a href=&quot;#roles&quot;&gt;{#Roles#}&lt;/a&gt;{/if}{if $RIGHTS}, &lt;a href=&quot;#rights&quot;&gt;{#Rights#}&lt;/a&gt;{/if},
++          &lt;a href=&quot;#mfiles&quot;&gt;{#Content#}&lt;/a&gt;{if $LINKS }, &lt;a href=&quot;#links&quot;&gt;{#Links#}&lt;/a&gt;{/if}, &lt;a href=&quot;#stats&quot;&gt;{#Statistics#}&lt;/a&gt;
++        &lt;/td&gt;
++        &lt;td class=&quot;title2&quot; width=&quot;15%&quot;&gt;
++        {if $SERIES_DATA and $SERIES_DATA.icon}
++          {strip}
++          &lt;a href=&quot;{$ROOT_URL}/showSeries.php/{$SERIES_DATA.id}&quot;&gt;
++            &lt;img hheight=&quot;50%&quot; border=&quot;0&quot; src=&quot;{$CACHE_URL}/{$SERIES_DATA.id}.png&quot;  alt=&quot;{#series#}: {$SERIES_DATA.name}&quot;&gt;
++          &lt;/a&gt;
++          {/strip}
++        {/if}
++        &lt;/td&gt;
++        &lt;td class=&quot;title2&quot; width=&quot;15%&quot;&gt;
++        {if $STATION_DATA.icon}
++          {strip}
++          &lt;a href=&quot;{$ROOT_URL}/showStation.php/{$STATION_DATA.id}&quot;&gt;
++            &lt;img hheight=&quot;50%&quot; border=&quot;0&quot; src=&quot;{$CACHE_URL}/{$STATION_DATA.id}.png&quot; alt=&quot;{#station#}: {$STATION_DATA.name}&quot;&gt;
++          &lt;/a&gt;
++          {/strip}
++        {/if}
++      &lt;/td&gt;
++        &lt;td class=&quot;title2&quot; width=&quot;10%&quot; align=&quot;right&quot; valign=&quot;bottom&quot;&gt;
++          &lt;a href=&quot;{$ROOT_URL}/rss.php?id={$ID}&amp;uiLang={$LANG}&quot;&gt;RSS&lt;/a&gt;&lt;br /&gt;
++          {if hasPerm($ID,'change') }
++          &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#edit_meta#}&quot; onClick=&quot;redir(this.form,'{$ROOT_URL}/editMeta.php?id={$ID}')&quot; /&gt;
++          &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#edit_files#}&quot; onClick=&quot;redir(this.form,'{$ROOT_URL}/editFiles.php?id={$ID}')&quot; /&gt;
++          {/if}
++        &lt;/td&gt;
++      &lt;/tr&gt;
++      &lt;tr&gt;
++        &lt;td colspan=&quot;6&quot; class=&quot;titlehead&quot; height=&quot;5&quot;&gt;
++        &lt;/td&gt;
++      &lt;/tr&gt;
++    &lt;/table&gt;
++  &lt;/form&gt;
++
++
++    &lt;/tr&gt;
++  &lt;/table&gt;
++
++  &lt;table class=&quot;tab&quot;&gt;
++    &lt;tr&gt; 
++      &lt;td nowrap class=&quot;tab&quot;&gt;{#Metadata#}&lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++  &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++    &lt;tr&gt; 
++      &lt;td class=&quot;tabarea&quot;&gt; 
++        &lt;a name=&quot;general&quot;&gt;&lt;/a&gt;
++        &lt;table width=&quot;100%&quot;&gt;
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap width=&quot;10%&quot;&gt;{#station#}:&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;{$ROOT_URL}/showStation.php/{$STATION_DATA.id}&quot;&gt;{$STATION_DATA.name}&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
++            {if $SERIES_DATA}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#series#}:&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;{$ROOT_URL}/showSeries.php/{$SERIES_DATA.id}&quot;&gt;{$SERIES_DATA.name}&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#title#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.title}&lt;/td&gt;&lt;/tr&gt;
++            {if $PRG_DATA.alternative_title}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#alternative_title#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.alternative_title}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.episode_title}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#episode_title#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.episode_title}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.episode_sequence}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#episode_sequence#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.episode_sequence}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#language#}:&lt;/td&gt;&lt;td&gt;{$LANGUAGE}&lt;/td&gt;&lt;/tr&gt;
++            {if $PRG_DATA.abstract}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#abstract#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.abstract}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.keywords}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#keywords#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.keywords}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.genre_id}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#genre#}:&lt;/td&gt;&lt;td&gt;{$GENRE}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $TOPICS}
++            &lt;tr valign=&quot;top&quot;&gt;
++              &lt;td class=&quot;meta&quot; nowrap&gt;{#topics#}:&lt;/td&gt;
++              &lt;td&gt;
++                &lt;table&gt;
++                  {foreach item=item from=$TOPICS}
++                  &lt;tr&gt;
++                    &lt;td&gt;
++                      {$item.name}
++                    &lt;/td&gt;
++                  &lt;/tr&gt;
++                  {/foreach}
++                &lt;/table&gt;
++              &lt;/td&gt;
++            &lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.temporal_coverage}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#temporal_coverage#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.temporal_coverage}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.spatial_coverage}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#spatial_coverage#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.spatial_coverage}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.production_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#production_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.production_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.broadcast_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#broadcast_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.broadcast_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.entry_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#entry_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.entry_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.modify_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#modify_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.modify_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++            {if $PRG_DATA.expiry_date}
++            &lt;tr valign=&quot;top&quot;&gt;&lt;td class=&quot;meta&quot; nowrap&gt;{#expiry_date#}:&lt;/td&gt;&lt;td&gt;{$PRG_DATA.expiry_date}&lt;/td&gt;&lt;/tr&gt;
++            {/if}
++          &lt;/table&gt;
++		&lt;/td&gt; 
++	&lt;/tr&gt;
++&lt;/table&gt;
++
++{if $ROLES}
++&lt;p&gt;&lt;/p&gt;
++
++&lt;table class=&quot;tab&quot;&gt;
++  &lt;tr&gt; 
++    &lt;td nowrap class=&quot;tab&quot;&gt;{#Roles#}&lt;/td&gt;
++  &lt;/tr&gt;
++&lt;/table&gt;
++&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++&lt;tr&gt; 
++  &lt;td class=&quot;tabarea&quot;&gt;
++        &lt;a name=&quot;roles&quot;&gt;&lt;/a&gt;
++        &lt;table&gt;
++          {foreach item=item from=$ROLES}
++          &lt;tr valign=&quot;top&quot;&gt;
++            &lt;td&gt;
++              {$item.role_name}
++            &lt;/td&gt;
++            &lt;td&gt;
++              &lt;a href=&quot;javascript:popup('{$ROOT_URL}/showContact.php/{$item.contact_data.id}','ShowContact',400,400,true)&quot;&gt;{$item.contact_data.name}&lt;/a&gt;
++              {if $item.contact_data.url}&lt;br&gt;(&lt;a href=&quot;{$item.contact_data.url}&quot;&gt;{$item.contact_data.url})&lt;/a&gt;
++                {elseif $item.contact_data.email}&lt;br&gt;(&lt;a href=&quot;mailto:{$item.contact_data.email}&quot;&gt;{$item.contact_data.email})&lt;/a&gt;
++                  {/if}
++            &lt;/td&gt;
++            &lt;td&gt;
++              {if $item.contact_data.icon }{strip}
++              &lt;a href=&quot;javascript:popup('{$ROOT_URL}/showContact.php/{$item.contact_data.id}','ShowContact',400,400,true)&quot;&gt;
++                &lt;img hheight=&quot;50%&quot; border=&quot;0&quot; src=&quot;{$CACHE_URL}/{$item.contact_data.id}.png&quot;&gt;
++              &lt;/a&gt;{/strip}
++              {/if}
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/foreach}
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++&lt;/table&gt;
++{/if}
++
++{if $RIGHTS}
++&lt;p&gt;&lt;/p&gt;
++
++&lt;table class=&quot;tab&quot;&gt;
++  &lt;tr&gt; 
++    &lt;td nowrap class=&quot;tab&quot;&gt;{#Rights#}&lt;/td&gt;
++  &lt;/tr&gt;
++&lt;/table&gt;
++&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++&lt;tr&gt; 
++  &lt;td class=&quot;tabarea&quot;&gt;
++        &lt;a name=&quot;rights&quot;&gt;&lt;/a&gt;
++        &lt;table&gt;
++          {cycle name=&quot;rights&quot; values=&quot;list1,list2&quot; print=false advance=false}
++          {foreach item=item from=$RIGHTS}
++          &lt;tr class=&quot;{cycle name=rights}&quot;&gt;
++            &lt;td&gt;
++              {if empty($item.start_time) and empty($item.stop_time) }
++                {#for_whole_prg#}
++              {else}
++                 {$item.start_time} {#sec#} - {$item.stop_time} {#sec#}
++              {/if}
++            &lt;/td&gt;
++            &lt;td&gt;
++              {$item.rights_text}
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/foreach}
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++&lt;/table&gt;
++{/if}
++
++&lt;p&gt;&lt;/p&gt;
++&lt;form&gt;
++&lt;table class=&quot;tab&quot;&gt;
++  &lt;tr&gt; 
++    &lt;td nowrap class=&quot;tab&quot;&gt;{#Content#}&lt;/td&gt;
++  &lt;/tr&gt;
++&lt;/table&gt;
++&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++&lt;tr&gt; 
++  &lt;td class=&quot;tabarea&quot;&gt; 
++   {if $AUDIO_FILES }
++        &lt;div class=&quot;subheader&quot;&gt;{#audio_file_list#}&lt;/div&gt;
++        &lt;a name=&quot;mfiles&quot;&gt;&lt;/a&gt;
++    &lt;table&gt;
++       {cycle name=&quot;audio&quot; values=&quot;list1,list2&quot; print=false advance=false}
++       {foreach item=item from=$AUDIO_FILES}
++          {if $item.download_access eq 't' or $item.stream_access eq 't' }
++          &lt;tr class=&quot;{cycle name=audio}&quot;&gt;
++            &lt;td width=&quot;5%&quot;&gt;&lt;/td&gt;
++            &lt;td&gt;
++              {if $item.main_content eq 't' }
++                 {#programme_audio#}
++              {elseif $item.caption} 
++                 {$item.caption}
++              {else}
++                 {$item.filename}
++              {/if}
++            &lt;/td&gt;
++            &lt;td align=&quot;right&quot;&gt;
++              {$item.bitrate} kbps 
++            &lt;/td&gt;
++            &lt;td&gt;
++                {$item.format}
++            &lt;/td&gt;
++            &lt;td align=&quot;right&quot;&gt;
++              {$item.playtime_string}
++            &lt;/td&gt;
++            &lt;td&gt;
++              { if $item.download_access eq 't'}
++                &lt;!-- &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#Download#}&quot; onClick=&quot;popup('{$ROOT_URL}/getFile.php/{$item.filename}?{if $item.main_content eq 't' }audio=1&amp;{/if}id={$ID}&amp;filename={$item.filename}','ViewPopup',500,500,true)&quot; /&gt; --&gt;
++                &lt;a href=&quot;{$ROOT_URL}/getFile.php/{$item.filename}?{if $item.main_content eq 't' }audio=1&amp;{/if}id={$ID}&amp;filename={$item.filename}&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/download.gif&quot; border=&quot;0&quot; alt=&quot;{#Download#}&quot;&gt;&lt;/a&gt;
++              {/if}
++            &lt;/td&gt;
++            &lt;td&gt;
++              { if $item.stream_access eq 't' }
++                &lt;a href=&quot;{$ROOT_URL}/listen.php/id__{$ID}/fileid__{$item.id}/audio.m3u&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/listen.gif&quot; border=&quot;0&quot; alt=&quot;{#Listen#}&quot;&gt;&lt;/a&gt;
++              {/if}
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/if}
++          {/foreach}    
++    &lt;/table&gt;
++   {/if}
++
++   {if $OTHER_FILES }
++        &lt;div class=&quot;subheader&quot;&gt;{#other_file_list#}&lt;/div&gt;
++        &lt;a name=&quot;ofiles&quot;&gt;&lt;/a&gt;
++        &lt;table&gt;
++          {cycle name=other values=&quot;list1,list2&quot; print=false advance=false}
++          {foreach item=item from=$OTHER_FILES}
++          {if $item.public_access eq 't' }
++          &lt;tr class=&quot;{cycle name=other}&quot;&gt;
++            &lt;td width=&quot;5%&quot;&gt;&lt;/td&gt;
++            &lt;td&gt;
++              {if $item.caption}
++                {$item.caption}
++              {else} 
++                {$item.filename}
++              {/if}
++            &lt;/td&gt;
++            &lt;td align=&quot;right&quot;&gt;
++              {$item.filesize} {#bytes#}
++            &lt;/td&gt;
++            &lt;td nowrap&gt;
++              {if $item.public_access eq 't' }
++                &lt;!-- &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#View#}&quot; onClick=&quot;popup('{$ROOT_URL}/getFile.php/{$item.filename}?id={$ID}&amp;filename={$item.filename}','ViewPopup',500,500,true)&quot; /&gt; --&gt;
++                  &lt;a target=&quot;link&quot; href=&quot;{$ROOT_URL}/getFile.php/{$item.filename}?id={$ID}&amp;filename={$item.filename}&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/download.gif&quot; border=&quot;0&quot; alt=&quot;{#Download#}&quot;&gt;&lt;/a&gt;
++              {/if}
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/if}
++          {/foreach}    
++        &lt;/table&gt;
++   {/if}
++   {if !$AUDIO_FILES and !$OTHER_FILES }
++        &lt;p&gt;{#no_files#}&lt;/p&gt;
++   {else}
++	    {* list groups for prog *}
++	    &lt;table&gt;
++	      &lt;tr&gt;&lt;th&gt;{#Listener_groups#}&lt;/th&gt;&lt;/tr&gt;
++	      {foreach item=item from=$LISTEN_GROUPS}
++	      &lt;tr&gt;
++		&lt;td&gt;
++		&lt;a href=&quot;javascript:popup('{$ROOT_URL}/showGroup.php?id={$item.id}','Group',350,400,false)&quot;&gt;{$item.name}&lt;/a&gt;
++		{if $item.price} {$item.price} {$CURRENCY}{/if}
++		&lt;/td&gt;
++	      &lt;/tr&gt;
++	      {/foreach}
++	    &lt;/table&gt;
++   {/if}
++  &lt;/td&gt;
++&lt;/tr&gt;
++&lt;/table&gt;
++&lt;/form&gt;
++
++&lt;p&gt;&lt;/p&gt;
++
++{if $LINKS } 
++  &lt;table class=&quot;tab&quot;&gt;
++    &lt;tr&gt; 
++      &lt;td nowrap class=&quot;tab&quot;&gt;{#Links#}&lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++  &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++    &lt;tr&gt; 
++      &lt;td class=&quot;tabarea&quot;&gt;
++        &lt;a name=&quot;links&quot;&gt;&lt;/a&gt;
++        &lt;table&gt;
++          {foreach item=item from=$LINKS}
++          &lt;tr&gt;
++            &lt;td&gt;
++              &lt;a target=&quot;link&quot; href=&quot;{$item.url}&quot;&gt;{if $item.caption}{$item.caption}{else}{$item.url}{/if}&lt;/a&gt;
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/foreach}    
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++{/if}
++
++&lt;p&gt;&lt;/p&gt;
++
++  &lt;table class=&quot;tab&quot;&gt;
++    &lt;tr&gt; 
++      &lt;td nowrap class=&quot;tab&quot;&gt;{#Statistics#}&lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++  &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
++    &lt;tr&gt; 
++      &lt;td class=&quot;tabarea&quot;&gt;
++        &lt;p&gt;{#stats_may_be_old#}: {$STATS.last_change}&lt;/p&gt;
++        &lt;table width=&quot;100%&quot;&gt;
++          &lt;tr&gt;
++            &lt;td valign=&quot;top&quot;&gt;
++              &lt;a name=&quot;stats&quot;&gt;&lt;/a&gt;
++              &lt;table&gt;
++                &lt;tr class=&quot;listhead&quot;&gt;
++                  &lt;th&gt;&lt;/th&gt;
++                  &lt;th&gt;{#Visits#}&lt;/th&gt;
++                  &lt;th&gt;{#Listens#}&lt;/th&gt;
++                  &lt;th&gt;{#Downloads#}&lt;/th&gt; 
++                  &lt;th&gt;{#Rating#}&lt;/th&gt; 
++                  &lt;th&gt;&lt;/th&gt; 
++                  &lt;th&gt;&lt;/th&gt; 
++                &lt;/tr&gt;
++                &lt;tr&gt;
++                  &lt;td&gt;{#Nodes#}&lt;/td&gt;
++                  &lt;td align=&quot;center&quot;&gt;{$STATS.visits} ({$STATS.unique_visits})&lt;/td&gt;
++                  &lt;td align=&quot;center&quot;&gt;{$STATS.listens} ({$STATS.unique_listens})&lt;/td&gt;
++                  &lt;td align=&quot;center&quot;&gt;{$STATS.downloads} ({$STATS.unique_downloads})&lt;/td&gt;
++                  &lt;td&gt;{if $RATING}{$RATING.rating_value} ({#by#} {$RATING.rating_count}){else}-{/if}&lt;/td&gt;
++                  &lt;td&gt;&lt;/td&gt; 
++                  &lt;td&gt;&lt;/td&gt; 
++                &lt;/tr&gt;
++                {if $REFS}
++                 &lt;tr class=&quot;listhead&quot;&gt;
++                   &lt;th&gt;{#Portals#}&lt;/th&gt;
++                   &lt;th&gt;{#Visits_p#}&lt;/th&gt;
++                   &lt;th&gt;{#Listens_p#}&lt;/th&gt;
++                   &lt;th&gt;{#Comments#}&lt;/th&gt; 
++                   &lt;th&gt;{#Rating#}&lt;/th&gt; 
++                   &lt;th&gt;{#From#}&lt;/th&gt; 
++                   &lt;th&gt;{#Until#}&lt;/th&gt; 
++                 &lt;/tr&gt;
++                 {foreach item=item from=$REFS}
++                   &lt;tr&gt;
++                     &lt;td&gt;&lt;a target=&quot;_blank&quot; href=&quot;{$item.url}&quot;&gt;{$item.portal_name}&lt;/a&gt;&lt;/td&gt;
++                     &lt;td align=&quot;center&quot;&gt;{$item.visits}&lt;/td&gt;
++                     &lt;td align=&quot;center&quot;&gt;{$item.listens}&lt;/td&gt;
++                     &lt;td align=&quot;center&quot;&gt;{$item.comments}&lt;/td&gt;
++                     &lt;td&gt;{if $item.rating} {$item.rating} ({#by#} {$item.raters}){else}-{/if}&lt;/td&gt;
++                     &lt;td&gt;{$item.start_date}&lt;/td&gt;
++                     &lt;td&gt;{$item.end_date}&lt;/td&gt;
++                   &lt;/tr&gt;
++                 {/foreach}
++                {/if}
++              &lt;/table&gt;
++            &lt;/td&gt;
++            &lt;td valign=&quot;top&quot;&gt;
++              {if $loggedIn}
++                &lt;form method=&quot;post&quot; action=&quot;{$ROOT_URL}/get.php?id={$ID}&quot;&gt;
++                &lt;input type=&quot;button&quot; name=&quot;put_into_playlist&quot; value=&quot;{#put_into_playlist#}&quot; onclick=&quot;javascript:setvalue('addplaylist', '{$ID}', 'add');this.disabled='true';return true;&quot; {if $inplaylist}disabled=&quot;true&quot;{/if} /&gt;
++                &lt;input type=&quot;button&quot; value=&quot;{#upload_to_portal#}&quot; onclick=&quot;javascript:window.open('{$ROOT_URL}/portal_upload.php?type=prg&amp;data={$ID}','','scrollbars=yes,width=640,height=340,left=320,top=200');&quot; /&gt;
++                &lt;/form&gt;
++              {/if}
++              &lt;p&gt;
++                &lt;form&gt;
++                  &lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;{$ID}&quot; /&gt;
++                  &lt;select name=&quot;rating&quot;&gt;
++                    &lt;option value=&quot;1&quot; {if $MY_RATING==1}SELECTED=1{/if} &gt;*&lt;/option&gt;
++                    &lt;option value=&quot;2&quot; {if $MY_RATING==2}SELECTED=1{/if} &gt;**&lt;/option&gt;
++                    &lt;option value=&quot;3&quot; {if $MY_RATING==3}SELECTED=1{/if} &gt;***&lt;/option&gt;
++                    &lt;option value=&quot;4&quot; {if $MY_RATING==4}SELECTED=1{/if} &gt;****&lt;/option&gt;
++                    &lt;option value=&quot;5&quot; {if $MY_RATING==5}SELECTED=1{/if} &gt;*****&lt;/option&gt;
++                  &lt;/select&gt;
++                  &lt;input type=&quot;button&quot; name=&quot;rate&quot; value=&quot;{if $MY_RATING}{#change_rating#}{else}{#rate_it#}{/if}&quot;   
++                         onclick=&quot;javascript:setvalue('rating', '{$ID}', this.form.rating.options[this.form.rating.selectedIndex].value);this.value='{#change_rating#}';return true;&quot;
++                         /&gt;
++                  
++                &lt;/form&gt;
++
++            &lt;/td&gt;
++          &lt;/tr&gt;
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
+
+
+Property changes on: node/branches/payable/code/templates/getProtectedContent.htm
+___________________________________________________________________
+Name: svn:executable
+   + *
+
+Modified: node/branches/payable/code/templates/index.htm
+===================================================================
+--- node/branches/payable/code/templates/index.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/index.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -243,8 +243,41 @@
+         &lt;/tr&gt;
+ 
+         &lt;tr valign=&quot;top&quot;&gt; 
++	  &lt;td class=&quot;promotedList&quot;&gt;
++	    &lt;strong&gt;{#Promoted_shows#}&lt;/strong&gt;
++	    {if count($PROMOTED) gt 0 }
++	    &lt;table width=&quot;100%&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;2&quot;&gt;
++	      {foreach item=item from=$PROMOTED}
++	      &lt;tr bgcolor=&quot;#FFFFFF&quot; height=&quot;1&quot;&gt;&lt;td colspan=&quot;2&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
++	      &lt;tr valign=&quot;top&quot;&gt;
++		&lt;td width=&quot;5%&quot;&gt;
++		  {if $item.icon }
++		  &lt;img src=&quot;{$CACHE_URL}/{$item.icon}&quot;&gt;
++		  {else}
++		  {/if}
++		&lt;/td&gt;
++		&lt;td&gt;
++                    &lt;a class=&quot;goto_object&quot; href=&quot;get.php?id={$item.id}&quot;&gt;{$item.title}&lt;/a&gt; 
++		  {if $item.alternative_title}&lt;br&gt;{$item.alternative_title}{/if}
++		  {if $item.episode_title}&lt;br&gt;{$item.episode_sequence}.: {$item.episode_title}{/if}
++		  &lt;br&gt;{$item.entry_date} {if $item.broadcast_date}({$item.broadcast_date|date_format:&quot;%Y-%m-%d&quot;}){/if}
++		  {if $item.abstract}
++		  &lt;div class=&quot;abstract&quot;&gt;{$item.abstract|truncate:300}&lt;/div&gt;
++		  {/if}
++		&lt;/td&gt;
++	      &lt;/tr&gt;
++	      {/foreach}
++	    &lt;/table&gt;
++	    {else}
++		{#No_news#}
++	    {/if}
++	  &lt;/td&gt;
++	&lt;/tr&gt;
++	    &lt;tr valign=&quot;top&quot; height=&quot;5&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
++	    &lt;tr valign=&quot;top&quot;&gt; 
+ 
+-	  &lt;td bgcolor=&quot;#eeeeee&quot;&gt;
++        &lt;tr valign=&quot;top&quot;&gt; 
++	  &lt;td class=&quot;premiumList&quot;&gt;
+ 	    &lt;strong&gt;{#Premium_shows#}&lt;/strong&gt;
+ 	    {if count($PREMIUM) gt 0 }
+ 	    &lt;table width=&quot;100%&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;2&quot;&gt;
+
+Added: node/branches/payable/code/templates/showGroup.htm
+===================================================================
+--- node/branches/payable/code/templates/showGroup.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/showGroup.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,34 @@
++&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot;&gt;
++&lt;tr&gt; 
++  &lt;td class=&quot;tabarea&quot;&gt; 
++        &lt;table width=&quot;100%&quot; &gt;
++          &lt;tr&gt;
++	    &lt;td&gt;
++              &lt;table&gt;
++                &lt;tr&gt;
++                  &lt;td&gt;{#name#}:&lt;/td&gt;
++                  &lt;td&gt;{$GROUP_DATA.name}&lt;/td&gt;
++                &lt;/tr&gt;
++                &lt;tr&gt;
++                  &lt;td colspan=&quot;2&quot;&gt;{#contents#}&lt;/td&gt;
++                &lt;/tr&gt;
++		{foreach item=item from=$OBJECTS}
++                &lt;tr class=&quot;list2&quot;&gt;
++                  &lt;td&gt;
++                    {$item.mid}
++		  &lt;/td&gt;
++		  &lt;td&gt;
++		    &lt;a target=&quot;prog&quot; href=&quot;{$item.url}&quot;&gt;{$item.name}&lt;/a&gt; {if $item.count}({$item.count}){/if}
++		  &lt;/td&gt;
++                &lt;/tr&gt;
++		{/foreach}
++	      &lt;/table&gt;
++            &lt;/td&gt;
++          &lt;/tr&gt;
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++&lt;form&gt;
++    &lt;input class=&quot;action&quot; type=&quot;button&quot; onClick=&quot;window.close()&quot; value=&quot;{#close#}&quot;&gt;
++&lt;/form&gt;
+
+Modified: node/branches/payable/code/templates/topicTree.htm
+===================================================================
+--- node/branches/payable/code/templates/topicTree.htm	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/code/templates/topicTree.htm	2006-11-05 22:12:26 UTC (rev 590)
+@@ -35,9 +35,13 @@
+             &lt;td&gt;
+               
+               {section name=i loop=$TREE}
+-
++	        
+               {if $TREE[i].level gt $TREE[i.index_prev].level}&lt;ul compact&gt;{/if}
+-              {if $TREE[i].level lt $TREE[i.index_prev].level}&lt;/ul&gt;{/if}
++              {if $TREE[i].level lt $TREE[i.index_prev].level}
++		{section name=level loop=$TREE[i.index_prev].level-$TREE[i].level}
++	          &lt;/ul&gt;
++	        {/section}
++	      {/if}
+               &lt;li&gt;
+                 &lt;nobr&gt;&lt;a name=&quot;{$TREE[i].id}&quot;&gt;&lt;/a&gt;
+                   {if $ADD_MODE}
+
+Modified: node/branches/payable/www/adminGroups.php
+===================================================================
+--- node/branches/payable/www/adminGroups.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/adminGroups.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -25,6 +25,9 @@
+ }
+ 
+ $groups = sotf_Group::listAll();
++while(list($i,$item)=each($groups)) {
++  $groups[$i]['income'] = $groups[$i]['price']*$groups[$i]['count'];
++}
+ $smarty-&gt;assign('GROUPS',$groups);
+ 
+ $page-&gt;send();
+
+Added: node/branches/payable/www/adminProgStats.php
+===================================================================
+--- node/branches/payable/www/adminProgStats.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/adminProgStats.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,38 @@
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++
++/*  
++ * $Id: admin.php 554 2006-04-12 10:37:20Z buddhafly $
++ * Author: Andr&#225;s Micsik 
++ */
++
++require(&quot;init.inc.php&quot;);
++
++$smarty-&gt;assign('PAGETITLE',$page-&gt;getlocalized('AdminPage'));
++
++$page-&gt;forceLogin();
++
++//$page-&gt;errorURL = &quot;admin.php&quot;;
++
++checkPerm('node', 'change');
++
++$progId = sotf_Utils::getParameter('id');
++$prog = &amp;$repository-&gt;getObject($progId);
++$smarty-&gt;assign(&quot;PRG&quot;, $prog-&gt;getAll());
++
++$actionsToCount = &quot;'listens','downloads'&quot;;
++
++$sql = &quot;SELECT distinct u.*, d.contact_person FROM sotf_users u LEFT JOIN sotf_user_data d ON d.user_id=u.id, sotf_user_history h WHERE u.id=h.user_id AND h.object_id='$progId' AND h.action IN ($actionsToCount) ORDER BY u.username&quot;;
++$res = $db-&gt;query($sql);
++if(DB::isError($res))
++  raiseError($res);
++$users = array();
++while (DB_OK === $res-&gt;fetchInto($row)) {
++  $row['groups'] = sotf_Group::getGroupNames($row['id']);
++  $users[] = $row;
++}
++
++$smarty-&gt;assign(&quot;USERS&quot;, $users);
++
++$page-&gt;sendPopup();
++
++?&gt;
+
+
+Property changes on: node/branches/payable/www/adminProgStats.php
+___________________________________________________________________
+Name: svn:executable
+   + *
+
+Added: node/branches/payable/www/adminShowUser.php
+===================================================================
+--- node/branches/payable/www/adminShowUser.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/adminShowUser.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,28 @@
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++
++/*  
++ * $Id: admin.php 554 2006-04-12 10:37:20Z buddhafly $
++ * Author: Andr&#225;s Micsik 
++ */
++
++require(&quot;init.inc.php&quot;);
++
++$smarty-&gt;assign('PAGETITLE',$page-&gt;getlocalized('AdminPage'));
++
++$page-&gt;forceLogin();
++
++//$page-&gt;errorURL = &quot;admin.php&quot;;
++
++checkPerm('node', 'change');
++
++$userId = sotf_Utils::getParameter('id');
++$user = new sotf_User($userId);
++$smarty-&gt;assign(&quot;USER&quot;, $user);
++$uData = sotf_UserData::getSmartyData($userId);
++//unset($uData['id']);
++//unset($uData['user_id']);
++$smarty-&gt;assign(&quot;UDATA&quot;, $uData);
++
++$page-&gt;sendPopup();
++
++?&gt;
+
+Deleted: node/branches/payable/www/adminStats.php
+===================================================================
+--- node/branches/payable/www/adminStats.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/adminStats.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -1,37 +0,0 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
+-
+-/*  
+- * $Id: admin.php 554 2006-04-12 10:37:20Z buddhafly $
+- * Authors: Andr&#225;s Micsik 
+- */
+-
+-require(&quot;init.inc.php&quot;);
+-
+-$smarty-&gt;assign('PAGETITLE',$page-&gt;getlocalized('AdminPage'));
+-
+-$page-&gt;forceLogin();
+-
+-//$page-&gt;errorURL = &quot;admin.php&quot;;
+-
+-checkPerm('node', 'change');
+-
+-$count = sotf_Programme::countAll();
+-
+-$limit = $page-&gt;splitList($count, $scriptUrl);
+-
+-$actionsToCount = &quot;'listens','downloads'&quot;;
+-
+-$sql = &quot;SELECT p.id, p.title, s.id AS station_id, s.name AS station_name, count(h.id) as count FROM sotf_programmes p, sotf_stations s, sotf_user_history h WHERE p.station_id=s.id AND p.id=h.object_id AND h.action IN ($actionsToCount) GROUP BY p.id, p.title, s.id, s.name ORDER BY count DESC&quot;;
+-$res =	$db-&gt;limitQuery($sql, $limit[&quot;from&quot;] , $limit[&quot;maxresults&quot;]);
+-if(DB::isError($res))
+-  raiseError($res);
+-$results = null;
+-while (DB_OK === $res-&gt;fetchInto($row)) {
+-  $results[] = $row;
+-}
+-
+-$smarty-&gt;assign('TOPLIST', $results);
+-
+-$page-&gt;send();
+-
+-?&gt;
+
+Added: node/branches/payable/www/adminTopProgs.php
+===================================================================
+--- node/branches/payable/www/adminTopProgs.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/adminTopProgs.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,39 @@
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++
++/*  
++ * $Id: admin.php 554 2006-04-12 10:37:20Z buddhafly $
++ * Authors: Andr&#225;s Micsik 
++ */
++
++require(&quot;init.inc.php&quot;);
++
++$smarty-&gt;assign('PAGETITLE',$page-&gt;getlocalized('AdminPage'));
++
++$page-&gt;forceLogin();
++
++//$page-&gt;errorURL = &quot;admin.php&quot;;
++
++checkPerm('node', 'change');
++
++$count = sotf_Programme::countAll();
++
++$limit = $page-&gt;splitList($count, $scriptUrl);
++
++$actionsToCount = &quot;'listens','downloads'&quot;;
++
++$sql = &quot;SELECT p.id, p.title, s.id AS station_id, s.name AS station_name, count(distinct h.user_id) as count FROM sotf_programmes p, sotf_stations s, sotf_user_history h WHERE p.station_id=s.id AND p.id=h.object_id AND h.action IN ($actionsToCount) GROUP BY p.id, p.title, s.id, s.name ORDER BY count DESC&quot;;
++$res =	$db-&gt;limitQuery($sql, $limit[&quot;from&quot;] , $limit[&quot;maxresults&quot;]);
++if(DB::isError($res))
++  raiseError($res);
++$results = null;
++while (DB_OK === $res-&gt;fetchInto($row)) {
++  $row['groups'] = sotf_Group::listGroupsOfObject($row['id']);
++  $results[] = $row;
++}
++
++debug(&quot;TOPLIST&quot;, $results);
++$smarty-&gt;assign('TOPLIST', $results);
++
++$page-&gt;send();
++
++?&gt;
+
+
+Property changes on: node/branches/payable/www/adminTopProgs.php
+___________________________________________________________________
+Name: svn:executable
+   + *
+
+Added: node/branches/payable/www/adminTopUsers.php
+===================================================================
+--- node/branches/payable/www/adminTopUsers.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/adminTopUsers.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,38 @@
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++
++/*  
++ * $Id: admin.php 554 2006-04-12 10:37:20Z buddhafly $
++ * Authors: Andr&#225;s Micsik 
++ */
++
++require(&quot;init.inc.php&quot;);
++
++$smarty-&gt;assign('PAGETITLE',$page-&gt;getlocalized('AdminPage'));
++
++$page-&gt;forceLogin();
++
++//$page-&gt;errorURL = &quot;admin.php&quot;;
++
++checkPerm('node', 'change');
++
++$count = sotf_Programme::countAll();
++
++$limit = $page-&gt;splitList($count, $scriptUrl);
++
++$actionsToCount = &quot;'listens','downloads'&quot;;
++
++$sql = &quot;SELECT u.id, u.username, d.contact_person, count(distinct h.object_id) as count FROM sotf_users u LEFT JOIN sotf_user_data d ON d.user_id=u.id, sotf_user_history h WHERE u.id=h.user_id AND h.action IN ($actionsToCount) GROUP BY u.id, u.username, d.contact_person ORDER BY count DESC&quot;;
++$res =	$db-&gt;limitQuery($sql, $limit[&quot;from&quot;] , $limit[&quot;maxresults&quot;]);
++if(DB::isError($res))
++  raiseError($res);
++$results = null;
++while (DB_OK === $res-&gt;fetchInto($row)) {
++  $row['groups'] = sotf_Group::getGroupNames($row['id']);
++  $results[] = $row;
++}
++
++$smarty-&gt;assign('TOPLIST', $results);
++
++$page-&gt;send();
++
++?&gt;
+
+
+Property changes on: node/branches/payable/www/adminTopUsers.php
+___________________________________________________________________
+Name: svn:executable
+   + *
+
+Added: node/branches/payable/www/adminUserStats.php
+===================================================================
+--- node/branches/payable/www/adminUserStats.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/adminUserStats.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,39 @@
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++
++/*  
++ * $Id: admin.php 554 2006-04-12 10:37:20Z buddhafly $
++ * Author: Andr&#225;s Micsik 
++ */
++
++require(&quot;init.inc.php&quot;);
++
++$smarty-&gt;assign('PAGETITLE',$page-&gt;getlocalized('AdminPage'));
++
++$page-&gt;forceLogin();
++
++//$page-&gt;errorURL = &quot;admin.php&quot;;
++
++checkPerm('node', 'change');
++
++$userId = sotf_Utils::getParameter('id');
++$user = new sotf_User($userId);
++$smarty-&gt;assign(&quot;USER&quot;, $user);
++$smarty-&gt;assign(&quot;UDATA&quot;, sotf_UserData::getSmartyData($userId));
++
++$actionsToCount = &quot;'listens','downloads'&quot;;
++
++$sql = &quot;SELECT DISTINCT p.id, p.title, s.id AS station_id, s.name AS station_name FROM sotf_programmes p, sotf_stations s, sotf_user_history h WHERE p.station_id=s.id AND p.id=h.object_id AND h.action IN ($actionsToCount) ORDER BY p.title&quot;;
++$res = $db-&gt;query($sql);
++if(DB::isError($res))
++  raiseError($res);
++$progs = array();
++while (DB_OK === $res-&gt;fetchInto($row)) {
++  $row['groups'] = sotf_Group::listGroupsOfObject($row['id']);
++  $progs[] = $row;
++}
++
++$smarty-&gt;assign(&quot;PROGS&quot;, $progs);
++
++$page-&gt;sendPopup();
++
++?&gt;
+
+Modified: node/branches/payable/www/config.inc.php.template
+===================================================================
+--- node/branches/payable/www/config.inc.php.template	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/config.inc.php.template	2006-11-05 22:12:26 UTC (rev 590)
+@@ -64,6 +64,10 @@
+ // whether imported files are published by default
+ $config['publishXbmf'] = false;
+ 
++// whether some programmes are restricted/payable
++//$config['payableMode'] = true;
++//$config['currency'] = 'EUR';
++
+ // regexp determining the IP addresses (or hostnames if web server does hostname lookup)
+ // from which admin tasks (such as cron.php) can be run
+ //$config['adminDomain'] = '^10\.0\.0\.';
+
+Modified: node/branches/payable/www/editGroup.php
+===================================================================
+--- node/branches/payable/www/editGroup.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/editGroup.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -27,6 +27,7 @@
+   $oldName = $group-&gt;get('name');
+   $group-&gt;setWithTextParam('name', 'name');
+   $group-&gt;setWithTextParam('comments', 'comments');
++  $group-&gt;setWithParam('price', 'price');
+   $name = $group-&gt;get('name');
+   if(!$name)
+     $error = &quot;error_name_missing&quot;;
+
+Modified: node/branches/payable/www/editMeta.php
+===================================================================
+--- node/branches/payable/www/editMeta.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/editMeta.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -112,9 +112,19 @@
+                   'production_date'=&gt;array('date',0),
+                   'broadcast_date'=&gt;array('date',0),
+                   'expiry_date'=&gt;array('date',0),
+-                  'free_content'=&gt;array('number',0),
+                   );
+-  
++
++  $contentType = sotf_Utils::getParameter('content_type');
++  if($contentType=='promoted') {
++	 $prg-&gt;set('free_content', 'true');
++	 $prg-&gt;set('promoted', 'true');
++  } elseif($contentType=='protected') {
++	 $prg-&gt;set('free_content', 'false');
++	 $prg-&gt;set('promoted', 'false');
++  } else {
++	 $prg-&gt;set('free_content', 'true');
++	 $prg-&gt;set('promoted', 'false');
++  }
+  // changed by wolfgang csacsinovits and martin schmidt -&gt; check empty fields, validate input data
+   $field_error = array();
+   $error_count = 0;
+
+Modified: node/branches/payable/www/functions.inc.php
+===================================================================
+--- node/branches/payable/www/functions.inc.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/functions.inc.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -202,6 +202,11 @@
+ 		return $user-&gt;getUsername($id);
+ }
+ 
++function nodeConfig($name) {
++	global $config;
++	return $config[$name];
++}
++
+ /** wrapper function for move_uploaded_file, because sometimes chmod is needed afterwards. */
+ function moveUploadedFile($fieldName, $file) {
+ 	// check and convert filename
+
+Modified: node/branches/payable/www/get.php
+===================================================================
+--- node/branches/payable/www/get.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/get.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -31,6 +31,15 @@
+ 
+   $page-&gt;setTitle($prg-&gt;get('title'));
+ 
++  $subPage = 'getNormalContent';
++  if(!$prg-&gt;getBool('free_content')) {
++	 $subPage = 'getProtectedContent';
++  } elseif($prg-&gt;getBool('promoted')) {
++	 $subPage = 'getPromotedContent';
++  }
++    
++  $smarty-&gt;assign(&quot;SUBPAGE&quot;, $subPage);
++
+   // general data
+   $prgData = $prg-&gt;getAll();
+   $prgData['icon'] = sotf_Blob::cacheIcon($id);
+@@ -103,6 +112,13 @@
+   debug(&quot;r&quot;, $myRating);
+   $smarty-&gt;assign('MY_RATING', $myRating);
+ 
++  if(nodeConfig('payableMode')) {
++	 $smarty-&gt;assign('CURRENCY', $config['currency']);
++	 if(!$prg-&gt;isFree()) {
++		$smarty-&gt;assign('LISTEN_GROUPS', sotf_Group::listGroupsOfObject($id, 'listen'));
++	 }
++  }
++
+   if ($page-&gt;loggedIn()) {
+     // is in my playlist?
+     $smarty-&gt;assign('inplaylist', sotf_UserPlaylist::contains($id));
+
+Modified: node/branches/payable/www/index.php
+===================================================================
+--- node/branches/payable/www/index.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/index.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -93,10 +93,17 @@
+ 
+ } else {
+   // get new programmes
+-  $smarty-&gt;assign('NEWS', sotf_Programme::getNewProgrammes($fromDay, $maxItemsIndexPage, 2));
++  if(nodeConfig('payableMode'))
++	 $mode = 'free';
++  else
++	 $mode = 'all';
++  $smarty-&gt;assign('NEWS', sotf_Programme::getNewProgrammes($fromDay, $maxItemsIndexPage, $mode));
+ }
+ 
+-$smarty-&gt;assign('PREMIUM', sotf_Programme::getNewProgrammes($fromDay, $maxItemsIndexPage, 1));
++if(nodeConfig('payableMode')) {
++  $smarty-&gt;assign('PREMIUM', sotf_Programme::getNewProgrammes($fromDay, $maxItemsIndexPage, 'premium'));
++  $smarty-&gt;assign('PROMOTED', sotf_Programme::getNewProgrammes($fromDay, 3, 'promoted'));
++}
+ 
+ // get topics with most content
+ $smarty-&gt;assign('TOPICS', $vocabularies-&gt;getTopTopics(5));
+
+Added: node/branches/payable/www/showGroup.php
+===================================================================
+--- node/branches/payable/www/showGroup.php	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/showGroup.php	2006-11-05 22:12:26 UTC (rev 590)
+@@ -0,0 +1,54 @@
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++
++/*  
++ * $Id: showContact.php 372 2005-02-03 15:15:51Z micsik $
++ * Author: Andras Micsik
++ */
++
++require(&quot;init.inc.php&quot;);
++
++$gid = sotf_Utils::getParameter('id');
++$group = new sotf_Group($gid);
++if(!$group)
++  raiseError(&quot;no_such_object&quot;, &quot;Group $gid&quot;);
++
++$smarty-&gt;assign('PAGETITLE', $group-&gt;get('name'));
++$smarty-&gt;assign('GID',$gid);
++$smarty-&gt;assign('GROUP_DATA',$group-&gt;getAll());
++
++$objects = $group-&gt;listObjectsOfGroup();
++rsort($objects);
++
++$numProgs = 0;
++while(list(,$oid)=each($objects)) {
++    $obj = &amp;$repository-&gt;getObject($oid);
++	 if(!$obj) {
++		logError(&quot;DB integrity error: role $role for $id which does not exist&quot;);
++		continue;
++	 }
++    $class = get_class($obj);
++    $data = array();
++	 $data['name'] = $obj-&gt;get('name');
++    if($class == 'sotf_station') {
++      $data['url'] = $config['rootUrl'] . &quot;/showStation.php/$oid&quot;;
++      $data['mid'] = $page-&gt;getlocalized('Station');
++      $data['count'] = $obj-&gt;numProgrammes();
++    } elseif($class == 'sotf_series') {
++      $data['url'] = $config['rootUrl'] . &quot;/showSeries.php/$oid&quot;;
++      $data['mid'] = $page-&gt;getlocalized('series');
++		$data['count'] = $obj-&gt;numProgrammes();
++    } elseif($class == 'sotf_programme') {
++      $data['name'] = $obj-&gt;get('title');
++      $data['url'] = $config['rootUrl'] . &quot;/get.php/$oid&quot;;
++      $data['mid'] = $page-&gt;getlocalized('Program');
++    } else {
++      logError(&quot;unhandled class&quot;, $class);
++      continue;
++    }
++    $ins[] = $data;
++}
++$smarty-&gt;assign('OBJECTS',$ins);
++
++$page-&gt;sendPopup();
++
++?&gt;
+
+Modified: node/branches/payable/www/static/main.css
+===================================================================
+--- node/branches/payable/www/static/main.css	2006-10-03 08:03:34 UTC (rev 589)
++++ node/branches/payable/www/static/main.css	2006-11-05 22:12:26 UTC (rev 590)
+@@ -157,3 +157,11 @@
+ ul.tabs li.last {
+   border: none;
+ }
++
++.promotedList { 
++  background: #ddcccc;
++}
++
++.premiumList {
++  background: #ccddcc;
++}
+\ No newline at end of file
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000283.html">[Sotf-general] Audio Foundation Podcasting
+</A></li>
+	<LI>Next message: <A HREF="000285.html">[Sotf-general] r591 - node/branches/payable/code/share
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#284">[ date ]</a>
+              <a href="thread.html#284">[ thread ]</a>
+              <a href="subject.html#284">[ subject ]</a>
+              <a href="author.html#284">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

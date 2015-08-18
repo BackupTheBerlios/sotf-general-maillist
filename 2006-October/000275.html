@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r588 - in node/branches/payable/code: classes	templates
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-October/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r588%20-%20in%20node/branches/payable/code%3A%20classes%0A%09templates&In-Reply-To=%3C200610022038.k92Kcw2H021802%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000274.html">
+   <LINK REL="Next"  HREF="000276.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r588 - in node/branches/payable/code: classes	templates</H1>
+    <B>micsik at BerliOS</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r588%20-%20in%20node/branches/payable/code%3A%20classes%0A%09templates&In-Reply-To=%3C200610022038.k92Kcw2H021802%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r588 - in node/branches/payable/code: classes	templates">micsik at mail.berlios.de
+       </A><BR>
+    <I>Mon Oct  2 22:38:58 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000274.html">[Sotf-general] r587 - in node/branches/payable: code/doc code/share	www
+</A></li>
+        <LI>Next message: <A HREF="000276.html">[Sotf-general] r589 - in node/branches/payable/code: classes configs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#275">[ date ]</a>
+              <a href="thread.html#275">[ thread ]</a>
+              <a href="subject.html#275">[ subject ]</a>
+              <a href="author.html#275">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: micsik
+Date: 2006-10-02 22:38:58 +0200 (Mon, 02 Oct 2006)
+New Revision: 588
+
+Modified:
+   node/branches/payable/code/classes/sotf_UserData.class.php
+   node/branches/payable/code/templates/adminStats.htm
+   node/branches/payable/code/templates/userData.htm
+Log:
+
+
+Modified: node/branches/payable/code/classes/sotf_UserData.class.php
+===================================================================
+--- node/branches/payable/code/classes/sotf_UserData.class.php	2006-10-02 20:19:10 UTC (rev 587)
++++ node/branches/payable/code/classes/sotf_UserData.class.php	2006-10-02 20:38:58 UTC (rev 588)
+@@ -28,7 +28,7 @@
+     $o = new sotf_UserData();
+ 	 if($o-&gt;hasPostData()) {
+ 		$o-&gt;copyPostData();
+-	 } else {
++	 } elseif($userid) {
+ 		$o-&gt;set('user_id', $userid);
+ 		$o-&gt;find();
+ 	 }
+
+Modified: node/branches/payable/code/templates/adminStats.htm
+===================================================================
+--- node/branches/payable/code/templates/adminStats.htm	2006-10-02 20:19:10 UTC (rev 587)
++++ node/branches/payable/code/templates/adminStats.htm	2006-10-02 20:38:58 UTC (rev 588)
+@@ -4,7 +4,7 @@
+ &lt;ul class=&quot;tabs&quot;&gt;
+ &lt;li class=&quot;&quot;&gt;&lt;a href=&quot;admin.php&quot;&gt;{#Network#}&lt;/a&gt;&lt;/li&gt;
+ &lt;li class=&quot;&quot;&gt;&lt;a href=&quot;adminUsers.php&quot;&gt;{#Users#}&lt;/a&gt;&lt;/li&gt;
+-&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;adminStats.php&quot;&gt;{#Groups#}&lt;/a&gt;&lt;/li&gt;
++&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;adminGroups.php&quot;&gt;{#Groups#}&lt;/a&gt;&lt;/li&gt;
+ &lt;li class=&quot;sel last&quot;&gt;{#Stats#}&lt;/li&gt;
+ &lt;/ul&gt;
+ 
+
+Modified: node/branches/payable/code/templates/userData.htm
+===================================================================
+--- node/branches/payable/code/templates/userData.htm	2006-10-02 20:19:10 UTC (rev 587)
++++ node/branches/payable/code/templates/userData.htm	2006-10-02 20:38:58 UTC (rev 588)
+@@ -22,12 +22,12 @@
+     &lt;td&gt;Professional guild in the health field:&lt;/td&gt;
+     &lt;td&gt;
+       &lt;select name=&quot;ud_sel_guild&quot;&gt;
+-	&lt;option value=&quot;1&quot;&gt;doctor&lt;/option&gt;
+-        &lt;option value=&quot;2&quot;&gt;apothecary&lt;/option&gt;
+-	&lt;option value=&quot;3&quot;&gt;therapist&lt;/option&gt;
+-	&lt;option value=&quot;4&quot;&gt;light/energy worker&lt;/option&gt;
+-	&lt;option value=&quot;5&quot;&gt;private&lt;/option&gt;
+-	&lt;option value=&quot;100&quot;&gt;other&lt;/option&gt;
++	&lt;option value=&quot;1&quot; {if $UDATA.guild eq 1}SELECTED{/if} &gt;doctor&lt;/option&gt;
++        &lt;option value=&quot;2&quot; {if $UDATA.guild eq 2}SELECTED{/if} &gt;apothecary&lt;/option&gt;
++	&lt;option value=&quot;3&quot; {if $UDATA.guild eq 3}SELECTED{/if} &gt;therapist&lt;/option&gt;
++	&lt;option value=&quot;4&quot; {if $UDATA.guild eq 4}SELECTED{/if} &gt;light/energy worker&lt;/option&gt;
++	&lt;option value=&quot;5&quot; {if $UDATA.guild eq 5}SELECTED{/if} &gt;private&lt;/option&gt;
++	&lt;option value=&quot;100&quot; {if $UDATA.guild eq 100}SELECTED{/if} &gt;other&lt;/option&gt;
+       &lt;/select&gt;
+     &lt;/td&gt;
+   &lt;/tr&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000274.html">[Sotf-general] r587 - in node/branches/payable: code/doc code/share	www
+</A></li>
+	<LI>Next message: <A HREF="000276.html">[Sotf-general] r589 - in node/branches/payable/code: classes configs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#275">[ date ]</a>
+              <a href="thread.html#275">[ thread ]</a>
+              <a href="subject.html#275">[ subject ]</a>
+              <a href="author.html#275">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

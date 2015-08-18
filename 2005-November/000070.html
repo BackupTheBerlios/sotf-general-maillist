@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] The plan from St.P.: Video, Interface
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2005-November/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20The%20plan%20from%20St.P.%3A%20Video%2C%20Interface&In-Reply-To=%3CF8E27AF3-1E52-4729-9C66-FA36FC75CE06%40openpartnership.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000069.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] The plan from St.P.: Video, Interface</H1>
+    <B>David Bovill</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20The%20plan%20from%20St.P.%3A%20Video%2C%20Interface&In-Reply-To=%3CF8E27AF3-1E52-4729-9C66-FA36FC75CE06%40openpartnership.net%3E"
+       TITLE="[Sotf-general] The plan from St.P.: Video, Interface">david at openpartnership.net
+       </A><BR>
+    <I>Sat Nov 26 18:58:33 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000069.html">[Sotf-general] The plan from St.P.: Video, Interface
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#70">[ date ]</a>
+              <a href="thread.html#70">[ thread ]</a>
+              <a href="subject.html#70">[ subject ]</a>
+              <a href="author.html#70">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 25 Nov 2005, at 11:13, <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">markus.seidl at fh-stpoelten.ac.at</A> wrote:
+
+&gt;<i> As the user interface of the node needs a facelifting urgently, we  
+</I>&gt;<i> are going to begin this task on monday. in a first step, we will  
+</I>&gt;<i> generate xhtml-valid templates with strictly seperated css  
+</I>&gt;<i> stylesheets.
+</I>
+It would be good to meet early as we will be installing the user  
+interfaces we have created for CTV and bug-testing in December. These  
+interfaces are rich applications for video metadata, people and roles  
+metadata (in LDAP) and archive browsing created in Revolution.
+
+I think it would make sense for you to take a look at these - to help  
+with defining the html interface requirements?
+
+
+&gt;<i> To finish this milestone, we will sooner or later need the ci  
+</I>&gt;<i> guidelines which had been developed for the community portal by the  
+</I>&gt;<i> fh vorarlberg. according to the schedule, this task should be  
+</I>&gt;<i> accomplished by xmas 2005.
+</I>&gt;<i>
+</I>&gt;<i> In 2006, we are going to start a new branch of sotf to implement  
+</I>&gt;<i> video functionality. it will be possible to upload video content on  
+</I>&gt;<i> the node for other users to download in different resolutions for  
+</I>&gt;<i> their ipods (video), mms-cell phones or pdas. this will also be the  
+</I>&gt;<i> subject of martin schmidt's diploma thesis.
+</I>&gt;<i>
+</I>&gt;<i> Our starting content will be the video projects of our students of  
+</I>&gt;<i> the past years, but we are also highly interested in discuss with  
+</I>&gt;<i> the community tv people about their needs for such a system!
+</I>
+Great! We have a by now quite complex database structure and we lack  
+proper treatment of audio metadata which can occur as timed elements  
+of tracks within video clips or playlists. In terms of the two  
+projects collaborating / integrating on a technical level I can think  
+of two basic directions:
+
+     1) We link the separate video and audio databases using postGres  
+features, but keeping the databases separate.
+
+     2) We integrate the two schemas learning from one and using it  
+to extend the second.
+
+
+&gt;<i> As their have been many discussion on this topic but none of it  
+</I>&gt;<i> have led to a specification now, we need one day of discussion and  
+</I>&gt;<i> specification before xmas. we would be glad to invite you to st.  
+</I>&gt;<i> p&#246;lten, but are also willing to come to other places for this meeting.
+</I>&gt;<i>
+</I>&gt;<i> Questions to be solved for this meeting should include but are not  
+</I>&gt;<i> limited to:
+</I>&gt;<i> - transcoding
+</I>&gt;<i> - branch management (should sotf generally be video capable or do  
+</I>&gt;<i> we have to make a fork)
+</I>&gt;<i> - metadata
+</I>&gt;<i> - rights management (copyright/-left)
+</I>
+There is an additional requirement from out point of view which is  
+looking at the future technical platform to build web applications  
+around the database structure. At the moment we have a variety of web  
+services written in a combination of perl and php with interact with  
+the data model, and rich interfaces written in Revolution which  
+operate AJAX style. The aim is to extend this through user testing  
+within a flexible design and requirements led process until these  
+requirements stabalise and then port the interfaces to full AJAX  
+based deployment where appropriate.
+
+This means looking at modern MVC style web application frameworks of  
+which there are a number (Ruby on Rails getting the most press at the  
+moment), and looking to use the built in object relational mapping  
+tools present in such frameworks to create the web application  
+framework. This MVC framework can then then be directed to call the  
+existing web services and views created in the first stage  
+(regardless of which language the web services are created in).
+
+Comments?
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000069.html">[Sotf-general] The plan from St.P.: Video, Interface
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#70">[ date ]</a>
+              <a href="thread.html#70">[ thread ]</a>
+              <a href="subject.html#70">[ subject ]</a>
+              <a href="author.html#70">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,1101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r543 - in node/trunk: . code/classes code/templates www www/help www/help/images
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r543%20-%20in%20node/trunk%3A%20.%20code/classes%20code/templates%20www%20www/help%20www/help/images&In-Reply-To=%3C200603311050.k2VAobaC015179%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000121.html">
+   <LINK REL="Next"  HREF="000123.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r543 - in node/trunk: . code/classes code/templates www www/help www/help/images</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r543%20-%20in%20node/trunk%3A%20.%20code/classes%20code/templates%20www%20www/help%20www/help/images&In-Reply-To=%3C200603311050.k2VAobaC015179%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r543 - in node/trunk: . code/classes code/templates www www/help www/help/images">buddhafly at berlios.de
+       </A><BR>
+    <I>Fri Mar 31 12:50:37 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000121.html">[Sotf-general] r542 - node/trunk
+</A></li>
+        <LI>Next message: <A HREF="000123.html">[Sotf-general] r544 - in node/trunk: . code/doc
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#122">[ date ]</a>
+              <a href="thread.html#122">[ thread ]</a>
+              <a href="subject.html#122">[ subject ]</a>
+              <a href="author.html#122">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-03-31 12:50:19 +0200 (Fri, 31 Mar 2006)
+New Revision: 543
+
+Added:
+   node/trunk/README_WEBDAV
+   node/trunk/www/help/images/create_new_programme.jpg
+Modified:
+   node/trunk/code/classes/sotf_Metadata.class.php
+   node/trunk/code/classes/sotf_User.class.php
+   node/trunk/code/templates/editMeta.htm
+   node/trunk/code/templates/main.htm
+   node/trunk/code/templates/main_frame_left.htm
+   node/trunk/www/editMeta.php
+   node/trunk/www/help/index.eng.html
+Log:
+CHANGES AUTUMN 2005 
+by Wolfgang Csacsinovits and Martin Schmidt (FH-St.Poelten)
+
+-&gt; current XBMF specification (yet unused tags contain &quot;DEFAULT&quot;)
+-&gt; proper reading/writing of id3-tags in editMeta
+-&gt; checking for required fields in editMeta
+-&gt; improvements in the help section (anchors, popup without 
+javascript, short description of the editor's console)
+-&gt; preparations for webdav (see README_WEBDAV for details)
+
+
+
+Added: node/trunk/README_WEBDAV
+===================================================================
+--- node/trunk/README_WEBDAV	2006-03-31 09:08:35 UTC (rev 542)
++++ node/trunk/README_WEBDAV	2006-03-31 10:50:19 UTC (rev 543)
+@@ -0,0 +1,67 @@
++StreamOnTheFly and WebDAV
++Instructions for node administators
++
++
++IMPORTANT SECURITY INFORMATION
++
++At the moment, the .htaccess files which control the user authentication are created by the
++time when a NEW user directory is created &#150; concretely when a user first accesses his
++&#147;Editor&#146;s Console&#148; on the node.
++Thus, existent user directories will preliminary be accessible via WebDAV without user
++verification!
++The WebDAV configuration as described here has successfully been tested on Windows
++using WebDrive (<A HREF="http://www.webdrive.com">http://www.webdrive.com</A>). Unfortunately, I have not got any experience
++with other system configurations.
++Therefore, I would classify the current status of the WebDAV link as UNSTABLE.
++As soon as everything is clarified, a script should be written to implement the WebDAV 
++authentication into existent user directories.
++
++
++INTRODUCTION
++
++WebDAV is a comfortable alternative for node users to upload content onto the node.
++It is directly integrated into Mac OS X systems and most LINUX distributions and &#150; with the
++help of an appropriate client &#150; can also be used under Windows.
++How to get WebDAV running on a SOTF node
++
++1. First, download the WebDAV Apache Module from <A HREF="http://www.webdav.org/mod_dav/">http://www.webdav.org/mod_dav/</A>
++and install it. Help can be found at <A HREF="http://www.webdav.org/mod_dav/install.html.">http://www.webdav.org/mod_dav/install.html.</A>
++On Debian, you can easily get the whole package using apt-get:
++apt-get install libapache-mod-dav
++
++2. Create an DAVLockDB file. This file is used for storing information on file locks and
++must be writable for the user under which Apache is running. If you are not sure, you
++can find the required user name in the web server configuration.
++
++3. Add the following lines into your Apache config file. Usually, it can be found under
++/etc/apache/httpd.conf.
++
++##################################################
++DAVLockDB /path/to/the/DAVLockDB/file
++Alias /webdav /path/to/the/node&#146;s/users/directory
++&lt;Location /webdav&gt;
++DAV on
++Order allow,deny
++Allow from all
++AllowOverride All
++&lt;/Location&gt;
++&lt;Directory / path/to/the/node&#146;s/users/directory &gt;
++Order allow,deny
++Allow from all
++AllowOverride All
++&lt;/Directory&gt;
++##################################################
++
++After having done the changes, don&#146;t forget to restart the web server.
++
++4. That&#146;s all. The user directories are now accessible via WebDAV under the following
++address: www.node-server.url/webdav/username
++
++The user will be asked to enter his SOTF node password after the connection has
++been established.
++
++
++Written on 05-09-28 by
++-----------------------------------------------
++Martin Schmidt | <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">ptmschmidt at fh-stpoelten.ac.at</A>
++-----------------------------------------------
+\ No newline at end of file
+
+Modified: node/trunk/code/classes/sotf_Metadata.class.php
+===================================================================
+--- node/trunk/code/classes/sotf_Metadata.class.php	2006-03-31 09:08:35 UTC (rev 542)
++++ node/trunk/code/classes/sotf_Metadata.class.php	2006-03-31 10:50:19 UTC (rev 543)
+@@ -1,4 +1,5 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
++&lt;?php 
++// -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+ /* 
+  * $Id$
+@@ -6,6 +7,7 @@
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+  * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
+  *				at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
++ *          Wolfgang Csacsinovits, Martin Schmidt at FH St. Poelten
+  */
+ 
+ class sotf_Metadata {
+@@ -17,6 +19,26 @@
+   var $xml;
+ 
+ 
++function getUsername($user_id) {
++	  global $userdb;
++	  static $userNameCache;
++	  $storage = &amp;sotf_User::getStorageObject();
++	  if (is_numeric($user_id)) {
++		 if($userNameCache[$user_id])
++			return $userNameCache[$user_id];
++		 $data = $storage-&gt;userDbSelect(array('userid' =&gt; sotf_Utils::magicQuotes($user_id)));
++		 if(!$data)
++			return false;
++		 $name = $data['username'];
++		 $userNameCache[$user_id] = $name;
++		 return $name;
++	  }
++	  return false;
++	}
++
++
++
++
+   function sotf_Metadata($prg) {
+     $this-&gt;prg = $prg;
+   }
+@@ -52,9 +74,25 @@
+  &gt;';
+ 
+ 	 $this-&gt;writeMetaTag('dc:title', $prg-&gt;get('title'), $lang);
+-	 $this-&gt;writeMetaTag('dcterms:alternative', $prg-&gt;get('alternative_title'), $lang);
++	 
++	 //---- new tags changed by wolfgang csacsinovits and martin schmidt
++	 $this-&gt;writeMetaTag('dc:alternative', $prg-&gt;get('alternative_title'), $lang);
++	 $this-&gt;writeMetaTag('dcterms:created', $prg-&gt;get('production_date'), $lang);
++	 $this-&gt;writeMetaTag('dcterms:location', $prg-&gt;get('URL'), $lang);
++	 $this-&gt;writeMetaTag('dc:source', 'DEFAULT', $lang);
++	 $this-&gt;writeMetaTag('dc:relation', 'DEFAULT', $lang);
++	 $this-&gt;writeMetaTag('dcterms:IsVersionOf', 'DEFAULT', $lang);
++	 $this-&gt;writeMetaTag('dcterms:HasVersion', 'DEFAULT', $lang);
++	 $this-&gt;writeMetaTag('dcterms:IsReplacedBy', 'DEFAULT', $lang);
++   	 $this-&gt;writeMetaTag('dcterms:Replaces', 'DEFAULT', $lang);
++	 
++	 //NEW: getting the right path to the get.php - file
++	require('config.inc.php');
++	$this-&gt;writeMetaTag('dc:identifier', '<A HREF="http://">http://</A>' . $_SERVER['HTTP_HOST'] . $config['localPrefix'] . '/get.php/' . $prg-&gt;get('id'));
++	$this-&gt;writeMetaTag('dc:coverage', 'DEFAULT', $lang);
++	//-----------------------------------------------------
++	
+ 	 $this-&gt;writeMetaTag('dc:publisher', $prg-&gt;stationName); // TODO: station or StreamOnTheFly?
+-	 //$this-&gt;writeMetaTag('dcterms:isPartOf', $prg-&gt;stationName, $lang);
+ 	 $series = $prg-&gt;getSeries();
+ 	 if($series) {
+ 	   $this-&gt;writeMetaTag('dcterms:isPartOf', $series-&gt;get('name'));
+@@ -87,18 +125,33 @@
+ 	   foreach($langs as $l)
+ 	     $this-&gt;writeMetaTag('dc:language', $l, '', 'xsi:type=&quot;dcterms:ISO639-2&quot;');
+ 
+-	 $this-&gt;writeMetaTag('dc:identifier', 'streamonthefly:' . $prg-&gt;get('id'));
+-	 $this-&gt;writeMetaTag('dc:identifier', '<A HREF="http://radio.sztaki.hu/node/get.php/">http://radio.sztaki.hu/node/get.php/</A>' . $prg-&gt;get('id'));
+-
++	//$this-&gt;writeMetaTag('dc:identifier', 'streamonthefly:' . $prg-&gt;get('id'));
++	//$this-&gt;writeMetaTag('dc:identifier', '<A HREF="http://radio.sztaki.hu/node/get.php/">http://radio.sztaki.hu/node/get.php/</A>' . $prg-&gt;get('id'));
++	
++	
++	
+ 	 $this-&gt;writeMetaTag('dcterms:spatial', $prg-&gt;get('spatial_coverage'));
+ 	 $this-&gt;writeMetaTag('dcterms:temporal', $prg-&gt;get('temporal_coverage'));
+ 
+ 	 // XBMF extensions
+ 	 $this-&gt;writeMetaTag('xbmf:station', $prg-&gt;stationName);
++	 
++	 //  ---- new tags changed by wolfgang csacsinovits and martin schmidt
++	 $this-&gt;writeMetaTag('xbmf:alternative', $prg-&gt;get('alternative_title'), $lang);
++	 $this-&gt;writeMetaTag('xbmf:SubjectEncodingScheme', 'DEFAULT', $lang);
++	 //---------------------------------------------------
++	 
+ 	 if($series) {
+ 	   $this-&gt;xml .= &quot;\n&lt;xbmf:series&gt;&quot;;
+ 	   $this-&gt;writeMetaTag('xbmf:seriestitle', $series-&gt;get('name'));
+-	   $this-&gt;writeMetaTag('xbmf:seriestitle', $series-&gt;get('description'));
++	   
++	   // ---------------------- new tags changed by wolfgang csacsinovits and martin schmidt
++	 $this-&gt;writeMetaTag('xbmf:seriesdescription', 'DEFAULT' , $lang);
++	 $this-&gt;writeMetaTag('xbmf:extendedInformation', 'DEFAULT' , $lang);
++	 $this-&gt;writeMetaTag('xbmf:ExtendedInformationScheme', 'DEFAULT' , $lang);
++	   // --------------------------------------------------
++	   
++	   //$this-&gt;writeMetaTag('xbmf:seriestitle', $series-&gt;get('description'));
+ 	   $this-&gt;xml .= &quot;\n&lt;/xbmf:series&gt;&quot;;
+ 	 }
+ 	 $this-&gt;writeMetaTag('xbmf:episodetitle', $prg-&gt;get('episodetitle'));
+@@ -115,6 +168,12 @@
+ 	 $rights = $prg-&gt;getAssociatedObjects('sotf_rights', 'start_time');
+ 	 foreach($rights as $right) {
+ 	   $this-&gt;xml .= &quot;\n&lt;xbmf:rights&gt;&quot;;
++	   
++	   // ---------------------- new tags changed by wolfgang csacsinovits and martin schmidt
++	   $this-&gt;writeMetaTag('xbmf:creativecommons', 'DEFAULT'); // $lang?
++ 	   $this-&gt;writeMetaTag('xbmf:RightControlledParts', 'DEFAULT'); // $lang?
++	   // -------------------------------------------------------------------
++	   
+ 	   $this-&gt;writeMetaTag('xbmf:rightstext', $right['rights_text']); // $lang?
+ 	   $this-&gt;writeMetaTag('xbmf:startime', $right['start_time']);
+ 	   $this-&gt;writeMetaTag('xbmf:endtime', $right['stop_time']);
+@@ -126,12 +185,44 @@
+ 		$this-&gt;xml .= &quot;\n&lt;xbmf:contributor&gt;&quot;;
+ 		$this-&gt;writeMetaTag('xbmf:role', $role['role_name'], 'eng');
+ 		$this-&gt;writeMetaTag('xbmf:name', $role['contact_data']['name']);
+-		$this-&gt;writeMetaTag('xbmf:acronym', $role['contact_data']['acronym']);
++		//$this-&gt;writeMetaTag('xbmf:acronym', $role['contact_data']['acronym']);
+ 		$this-&gt;writeMetaTag('xbmf:email', $role['contact_data']['email']);
+ 		$this-&gt;writeMetaTag('xbmf:phone', $role['contact_data']['phone']);
+ 		$this-&gt;writeMetaTag('xbmf:address', $role['contact_data']['address']);
++		$this-&gt;writeMetaTag('xbmf:intro', $role['contact_data']['intro']); // lang??
+ 		$this-&gt;writeMetaTag('xbmf:uri', $role['contact_data']['uri']);
+-		$this-&gt;writeMetaTag('xbmf:intro', $role['contact_data']['intro']); // lang??
++
++		
++	// ------------------ new tags changed by wolfgang csacsinovits and martin schmidt
++	 $this-&gt;writeMetaTag('xbmf:alias', $role['contact_data']['alias']);
++	 $this-&gt;writeMetaTag('xbmf:OrganizationAlias', $role['contact_data']['OrganizationAlias']);
++	 
++
++
++	/*function getUserDir($dir) {
++	  global $config;
++	  $dir = $config['userDirs'] . &quot;/&quot; . $this-&gt;name;
++	  if(!is_dir($dir)) {
++		 if(!mkdir($dir, 0775))
++			raiseError(&quot;Could not create directory for user&quot;);
++	  }
++	  return $dir;
++	}	*/
++	
++	 $dir = $config['userDirs']; // . &quot;/&quot; . getUsername($filename);
++	 //$dir = getUserDir($dir);
++        //$file =  sotf_Utils::getFileInDir($user-&gt;getUserDir(), $filename);
++	 echo &quot;userdir: &quot;.$dir;
++
++	 $this-&gt;writeMetaTag('xbmf:logo', $dir);
++	 
++	 $this-&gt;writeMetaTag('cc:creativecommons', $role['contact_data']['creativecommons']);
++	 $this-&gt;writeMetaTag('cc:permissions', $role['contact_data']['permissions']);
++	 $this-&gt;writeMetaTag('cc:prohibitions', $role['contact_data']['prohibitions']);
++	 $this-&gt;writeMetaTag('cc:requirements', $role['contact_data']['requirements']);
++	 $this-&gt;writeMetaTag('xbmf:RightControlledParts', $role['contact_data']['RightControlledParts']);
++	//-----------------------------------------------------------
++		
+ 		$this-&gt;xml .= &quot;\n&lt;/xbmf:contributor&gt;&quot;;
+ 	 }
+ 
+@@ -223,3 +314,4 @@
+ */
+ 
+ }
++?&gt;
+\ No newline at end of file
+
+Modified: node/trunk/code/classes/sotf_User.class.php
+===================================================================
+--- node/trunk/code/classes/sotf_User.class.php	2006-03-31 09:08:35 UTC (rev 542)
++++ node/trunk/code/classes/sotf_User.class.php	2006-03-31 10:50:19 UTC (rev 543)
+@@ -5,7 +5,7 @@
+ * This is a class for basic handling of users. Preferences and
+ * playlists are handled in separate classes.
+ *
+-* @author Andras Micsik SZTAKI DSD <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">micsik at sztaki.hu</A>
++* @author Andras Micsik SZTAKI DSD <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">micsik at sztaki.hu</A>, Martin Schmidt <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">ptmschmidt at fh-stpoelten.ac.at</A>
+ */
+ 
+ class sotf_User {
+@@ -227,6 +227,38 @@
+ 	  if(!is_dir($dir)) {
+ 		 if(!mkdir($dir, 0775))
+ 			raiseError(&quot;Could not create directory for user&quot;);
++
++         //-------------------- added by martin schmidt 05-09-19
++		 else {
++		  	
++			$htaccess=fopen($dir . &quot;/.htaccess&quot;, &quot;w&quot;);
++     			$htaccess_string = &quot;AuthName \&quot;Directory for User &quot;.$this-&gt;name.&quot;\&quot;&quot;;
++			$htaccess_string .= &quot;\nAuthType basic&quot;;
++			$htaccess_string .= &quot;\nAuth_PG_host &quot; . $config['nodeDbHost'];
++			$htaccess_string .= &quot;\nAuth_PG_user &quot; . $config['nodeDbUser'];
++			$htaccess_string .= &quot;\nAuth_PG_pwd &quot; . $config['nodeDbPasswd'];
++			$htaccess_string .= &quot;\nAuth_PG_port &quot; . $config['nodeDbPort'];
++			$htaccess_string .= &quot;\nAuth_PG_database &quot; . $config['nodeDbName'];
++			$htaccess_string .= &quot;\nAuth_PG_pwd_table sotf_users&quot;;
++			$htaccess_string .= &quot;\nAuth_PG_uid_field username&quot;;
++			$htaccess_string .= &quot;\nAuth_PG_pwd_field password&quot;;
++			$htaccess_string .= &quot;\nAuth_PG_encrypted off&quot;;
++			$htaccess_string .= &quot;\nRequire user &quot; . $this-&gt;name;
++			$htaccess_string .= &quot;\n\n&lt;Files .htaccess&gt;&quot;;
++			$htaccess_string .= &quot;\norder allow,deny&quot;;
++			$htaccess_string .= &quot;\ndeny from all&quot;;
++			$htaccess_string .= &quot;\n&lt;/Files&gt;&quot;;
++			fwrite($htaccess, $htaccess_string, &quot;400&quot;);
++			fclose($htaccess);
++
++			$warnfile=fopen($dir . &quot;/DO NOT DELETE .HTACCESS&quot;, &quot;w&quot;);
++			fwrite($warnfile, &quot;If you delete the .htaccess-file, your user directory could be read by other users if WebDav is enabled.&quot;, &quot;400&quot;);
++			fclose($warnfile);
++			
++               }
++
++	  //------------------------------------------------
++
+ 	  }
+ 	  return $dir;
+ 	}
+
+Modified: node/trunk/code/templates/editMeta.htm
+===================================================================
+--- node/trunk/code/templates/editMeta.htm	2006-03-31 09:08:35 UTC (rev 542)
++++ node/trunk/code/templates/editMeta.htm	2006-03-31 10:50:19 UTC (rev 543)
+@@ -22,7 +22,7 @@
+ {/literal}
+ disable(&quot;temporal_coverage&quot;, {if $PRG_DATA.temporal_coverage == &quot;&quot;}1{else}0{/if});
+ disable(&quot;broadcast_date&quot;, {if $PRG_DATA.broadcast_date == &quot;&quot;}1{else}0{/if});
+-disable(&quot;production_date&quot;, {if $PRG_DATA.production_date == &quot;&quot;}1{else}0{/if});
++//disable(&quot;production_date&quot;, {if $PRG_DATA.production_date == &quot;&quot;}1{else}0{/if});
+ disable(&quot;expiry_date&quot;, {if $PRG_DATA.expiry_date == &quot;&quot;}1{else}0{/if});
+ {literal}
+ }
+@@ -41,7 +41,7 @@
+             &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#goto_step1#}&quot; onClick=&quot;redir(this.form, 'editFiles.php?new=1&amp;id={$PRG_ID}')&quot; /&gt;
+             &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;finishpublish&quot; value=&quot;{#finish_publish#}&quot; onClick=&quot;this.form.action='editMeta.php?new=1&amp;id={$PRG_ID}&amp;finishpublish=1';this.form.submit();&quot; /&gt;
+             &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;finish&quot; value=&quot;{#finish_not_publish#}&quot; onClick=&quot;this.form.action='editMeta.php?new=1&amp;id={$PRG_ID}&amp;finish=1';this.form.submit()&quot; /&gt;
+-          &lt;/td&gt;
++        &lt;/td&gt;
+       &lt;/tr&gt;
+     &lt;/table&gt;
+ {else}
+@@ -58,125 +58,162 @@
+       &lt;td nowrap class=&quot;tab&quot;&gt;{#general_data#}&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/table&gt;
+-  &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot;&gt;
++  
++  {* if $ERROR_COUNT... and if $FIELD_ERROR... added by martin schmidt on 05-09-28 *}
++  
++  {if $ERROR_COUNT}&lt;table style=&quot;font-weight:bold; color:#FF0000&quot;&gt;&lt;tr&gt;&lt;td&gt;&nbsp;&lt;br&gt;Data not saved. Some required fields are empty!&lt;br&gt;&nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;{/if}
++&lt;table class=&quot;tabarea&quot; width=&quot;100%&quot;&gt;
+     &lt;tr&gt; 
+       &lt;td class=&quot;tabarea&quot;&gt; 
+           &lt;table width=&quot;100%&quot;&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list1&quot;&gt;
+               &lt;td class=&quot;meta&quot; width=&quot;20%&quot;&gt;{#station#}:&lt;/td&gt;
+-              &lt;td&gt;&lt;a class=&quot;goto_object&quot; href=&quot;showStation.php/{$STATION_DATA.id}&quot;&gt;{$STATION_DATA.name}&lt;/a&gt;
+-                {if $CHANGE_STATION}
+-                   &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#change_station#}&quot; onClick=&quot;popup('changeStation.php?prgid={$PRG_ID}','ChangeStation',120,400,false); return false;&quot; /&gt;
+-                {/if}
+-		&lt;/td&gt;
++              &lt;td width=&quot;2%&quot;&gt;&nbsp;&lt;/td&gt;
++              &lt;td width=&quot;78%&quot;&gt;&lt;a class=&quot;goto_object&quot; href=&quot;showStation.php/{$STATION_DATA.id}&quot;&gt;{$STATION_DATA.name}&lt;/a&gt; {if $CHANGE_STATION}
++                  &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#change_station#}&quot; onClick=&quot;popup('changeStation.php?prgid={$PRG_ID}','ChangeStation',120,400,false); return false;&quot; /&gt;
++  {/if} &lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list2&quot;&gt;
+               &lt;td class=&quot;meta&quot;&gt;{#series#}:&lt;/td&gt;
+-              &lt;td&gt;{if $SERIES_DATA}&lt;a class=&quot;goto_object&quot; href=&quot;showSeries.php/{$SERIES_DATA.id}&quot;&gt;{$SERIES_DATA.name}&lt;/a&gt;{else}{#not_in_series#}{/if}
+-                {if !empty($MY_SERIES)}
+-                   &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#change_series#}&quot; onClick=&quot;popup('addToSeries.php?prgid={$PRG_ID}','ChangeSeries',120,400,false); return false;&quot; /&gt;
+-                {/if}
+-                {if $SERIES_DATA}
+-                   &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#remove_from_series#}&quot; onClick=&quot;redir(this.form, 'editMeta.php?delfromseries=1&amp;id={$PRG_ID}')&quot; /&gt;
+-                {/if}
+-              &lt;/td&gt;
++              &lt;td&gt;*&lt;/td&gt;
++              &lt;td&gt;{if $SERIES_DATA}&lt;a class=&quot;goto_object&quot; href=&quot;showSeries.php/{$SERIES_DATA.id}&quot;&gt;{$SERIES_DATA.name}&lt;/a&gt;{else}{#not_in_series#}{/if} {if !empty($MY_SERIES)}
++                  &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#change_series#}&quot; onClick=&quot;popup('addToSeries.php?prgid={$PRG_ID}','ChangeSeries',120,400,false); return false;&quot; /&gt;
++  {/if} {if $SERIES_DATA}
++  &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#remove_from_series#}&quot; onClick=&quot;redir(this.form, 'editMeta.php?delfromseries=1&amp;id={$PRG_ID}')&quot; /&gt;
++  {/if} &lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list1&quot;&gt;
+-              &lt;td class=&quot;meta&quot;&gt;{#title#}:&lt;/td&gt;
++			{if $FIELD_ERROR.title}
++              &lt;td class=&quot;meta&quot; style=&quot;font-weight:bold; color:#FF0000&quot;&gt;{#title#}:&lt;/td&gt;
++              &lt;td style=&quot;font-weight:bold; color:#FF0000&quot;&gt;*&lt;/td&gt;
++			{else}
++			  &lt;td class=&quot;meta&quot;&gt;{#title#}:&lt;/td&gt;
++              &lt;td&gt;*&lt;/td&gt;
++			{/if}
+               &lt;td&gt;&lt;input name=&quot;title&quot; value=&quot;{$PRG_DATA.title|strip}&quot; size=&quot;60&quot; maxlength=&quot;255&quot; onChange=&quot;if(value != defaultValue) data_changed++;&quot; &gt;&lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list2&quot;&gt;
+               &lt;td class=&quot;meta&quot;&gt;{#alternative_title#}:&lt;/td&gt;
++              &lt;td&gt;&nbsp;&lt;/td&gt;
+               &lt;td&gt;&lt;input name=&quot;alternative_title&quot; value=&quot;{$PRG_DATA.alternative_title|strip}&quot; size=&quot;60&quot; maxlength=&quot;255&quot; onChange=&quot;if(value != defaultValue) data_changed++;&quot; &gt;&lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list1&quot;&gt;
+               &lt;td class=&quot;meta&quot;&gt;{#episode_title#}:&lt;/td&gt;
++              &lt;td&gt;&nbsp;&lt;/td&gt;
+               &lt;td&gt;&lt;input name=&quot;episode_title&quot; value=&quot;{$PRG_DATA.episode_title|strip}&quot; size=&quot;60&quot; maxlength=&quot;255&quot; onChange=&quot;if(value != defaultValue) data_changed++;&quot; &gt;&lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list2&quot;&gt;
+               &lt;td class=&quot;meta&quot;&gt;{#episode_sequence#}:&lt;/td&gt;
++              &lt;td&gt;&nbsp;&lt;/td&gt;
+               &lt;td&gt;&lt;input name=&quot;episode_sequence&quot; value=&quot;{if $PRG_DATA.episode_sequence}{$PRG_DATA.episode_sequence}{/if}&quot; size=&quot;5&quot; maxlength=&quot;5&quot; onChange=&quot;if(value != defaultValue) data_changed++;&quot; &gt;&lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list1&quot;&gt;
+               &lt;td class=&quot;meta&quot;&gt;{#language#}:&lt;/td&gt;
+-              &lt;td&gt;
+-                &lt;!-- &lt;table&gt;
++              &lt;td&gt;*&lt;/td&gt;
++              &lt;td&gt;&lt;!-- &lt;table&gt;
+                   &lt;tr&gt;&lt;td&gt;&lt;/td&gt; --&gt;
+-                &lt;select name=&quot;language1&quot;&gt;
++                  &lt;select name=&quot;language1&quot;&gt;
++                    
+                   {html_options values=$LANG_CODES output=$LANG_NAMES selected=$PRG_LANG1}
+-                &lt;/select&gt;
+-                &lt;select name=&quot;language2&quot;&gt;
+-                  &lt;option value=&quot;0&quot;&gt;{#no_second_lang#}&lt;/option&gt;
++                
++                  &lt;/select&gt;
++                  &lt;select name=&quot;language2&quot;&gt;
++                    &lt;option value=&quot;0&quot;&gt;{#no_second_lang#}&lt;/option&gt;
++                    
+                   {html_options values=$LANG_CODES output=$LANG_NAMES selected=$PRG_LANG2}
+-                &lt;/select&gt;
+-                &lt;select name=&quot;language3&quot;&gt;
+-                  &lt;option value=&quot;0&quot;&gt;{#no_third_lang#}&lt;/option&gt;
++                
++                  &lt;/select&gt;
++                  &lt;select name=&quot;language3&quot;&gt;
++                    &lt;option value=&quot;0&quot;&gt;{#no_third_lang#}&lt;/option&gt;
++                    
+                   {html_options values=$LANG_CODES output=$LANG_NAMES selected=$PRG_LANG3}
+-                &lt;/select&gt;
++                
++                  &lt;/select&gt;
+               &lt;/td&gt;
+             &lt;/tr&gt;		
+             &lt;tr valign=&quot;top&quot; class=&quot;list2&quot;&gt;
+-              &lt;td class=&quot;meta&quot;&gt;{#abstract#}:&lt;/td&gt;
+-              &lt;td&gt;&lt;textarea name=&quot;abstract&quot; rows=&quot;6&quot; cols=&quot;50&quot; onChange=&quot;if(value != defaultValue) data_changed++;&quot; &gt;{$PRG_DATA.abstract}&lt;/textarea&gt;&lt;/td&gt;
++              {if $FIELD_ERROR.abstract}
++              &lt;td class=&quot;meta&quot; style=&quot;font-weight:bold; color:#FF0000&quot;&gt;{#abstract#}:&lt;/td&gt;
++              &lt;td style=&quot;font-weight:bold; color:#FF0000&quot;&gt;*&lt;/td&gt;
++			{else}
++			  &lt;td class=&quot;meta&quot;&gt;{#abstract#}:&lt;/td&gt;
++              &lt;td&gt;*&lt;/td&gt;
++			{/if}
++              &lt;td&gt;&lt;textarea name=&quot;abstract&quot; rows=&quot;6&quot; cols=&quot;50&quot; onChange=&quot;if(value != defaultValue) data_changed++;&quot; &gt;{$PRG_DATA.abstract}&lt;/textarea&gt;
++              &lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list1&quot;&gt;
+-              &lt;td class=&quot;meta&quot;&gt;{#keywords#}:&lt;/td&gt;
+-              &lt;td&gt;&lt;textarea name=&quot;keywords&quot; rows=&quot;3&quot; cols=&quot;50&quot; onChange=&quot;if(value != defaultValue) data_changed++;&quot; &gt;{$PRG_DATA.keywords}&lt;/textarea&gt;&lt;/td&gt;
++              {if $FIELD_ERROR.keywords}
++              &lt;td class=&quot;meta&quot; style=&quot;font-weight:bold; color:#FF0000&quot;&gt;{#keywords#}:&lt;/td&gt;
++              &lt;td style=&quot;font-weight:bold; color:#FF0000&quot;&gt;*&lt;/td&gt;
++			{else}
++			  &lt;td class=&quot;meta&quot;&gt;{#keywords#}:&lt;/td&gt;
++              &lt;td&gt;*&lt;/td&gt;
++			{/if}
++              &lt;td&gt;&lt;textarea name=&quot;keywords&quot; rows=&quot;3&quot; cols=&quot;50&quot; onChange=&quot;if(value != defaultValue) data_changed++;&quot; &gt;{$PRG_DATA.keywords}&lt;/textarea&gt;
++              &lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list2&quot;&gt;
+-              &lt;td class=&quot;meta&quot;&gt;{#genre#}&lt;/td&gt;
+-              &lt;td&gt;
+-                &lt;select name=&quot;genre_id&quot;&gt;
++            {if $FIELD_ERROR.genre_id}
++              &lt;td class=&quot;meta&quot; style=&quot;font-weight:bold; color:#FF0000&quot;&gt;{#genre#}:&lt;/td&gt;
++              &lt;td style=&quot;font-weight:bold; color:#FF0000&quot;&gt;*&lt;/td&gt;
++			{else}
++			  &lt;td class=&quot;meta&quot;&gt;{#genre#}:&lt;/td&gt;
++              &lt;td&gt;*&lt;/td&gt;
++			{/if}
++              &lt;td&gt;&lt;select name=&quot;genre_id&quot;&gt;
++                  
+                   {foreach from=$GENRES_LIST item=item}
++                  
+                   &lt;option value=&quot;{$item.id}&quot;  {if $item.id eq $PRG_DATA.genre_id} SELECTED {/if} &gt;{$item.name}&lt;/option&gt;
++                  
+                   {/foreach}
++                
+                 &lt;/select&gt;
+               &lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list1&quot;&gt;
+               &lt;td class=&quot;meta&quot;&gt;{#temporal_coverage#}:&lt;/td&gt;
+-              &lt;td&gt;
+-                  &lt;input type=&quot;radio&quot; name=&quot;temporal_coverage_radio0&quot; value=&quot;selected&quot; onclick=&quot;javascript:disable('temporal_coverage', 0)&quot;&gt;
+-                  {html_select_date time=$PRG_DATA.temporal_coverage start_year=&quot;1900&quot; prefix=&quot;temporal_coverage&quot; month_format=&quot;%m&quot; field_order=&quot;YMD&quot; field_separator=&quot;-&quot;}
+-                  &lt;br&gt;&lt;input type=&quot;radio&quot; name=&quot;temporal_coverage_radio1&quot; value=&quot;unselected&quot; onclick=&quot;javascript:disable('temporal_coverage', 1)&quot;&gt;{#not_available#}
+-            &lt;/td&gt;
++              &lt;td&gt;&nbsp;&lt;/td&gt;
++              &lt;td&gt;&lt;input type=&quot;radio&quot; name=&quot;temporal_coverage_radio0&quot; value=&quot;selected&quot; onclick=&quot;javascript:disable('temporal_coverage', 0)&quot;&gt;
++  {html_select_date time=$PRG_DATA.temporal_coverage start_year=&quot;1900&quot; prefix=&quot;temporal_coverage&quot; month_format=&quot;%m&quot; field_order=&quot;YMD&quot; field_separator=&quot;-&quot;} &lt;br&gt;
++  &lt;input type=&quot;radio&quot; name=&quot;temporal_coverage_radio1&quot; value=&quot;unselected&quot; onclick=&quot;javascript:disable('temporal_coverage', 1)&quot;&gt;
++  {#not_available#} &lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list2&quot;&gt;
+               &lt;td class=&quot;meta&quot;&gt;{#spatial_coverage#}:&lt;/td&gt;
++              &lt;td&gt;&nbsp;&lt;/td&gt;
+               &lt;td&gt;&lt;input name=&quot;spatial_coverage&quot; value=&quot;{$PRG_DATA.spatial_coverage}&quot; size=&quot;60&quot; maxlength=&quot;255&quot; onChange=&quot;if(value != defaultValue) data_changed++;&quot; &gt;&lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list1&quot;&gt;
+               &lt;td class=&quot;meta&quot;&gt;{#production_date#}:&lt;/td&gt;
+-              &lt;td&gt;
+-                  &lt;input type=&quot;radio&quot; name=&quot;production_date_radio0&quot; value=&quot;selected&quot; onclick=&quot;javascript:disable('production_date', 0)&quot;&gt;
+-                  {html_select_date time=$PRG_DATA.production_date start_year=&quot;-20&quot; prefix=&quot;production_date&quot; month_format=&quot;%m&quot; field_order=&quot;YMD&quot; field_separator=&quot;-&quot;}
+-                  &lt;br&gt;&lt;input type=&quot;radio&quot; name=&quot;production_date_radio1&quot; value=&quot;unselected&quot; onclick=&quot;javascript:disable('production_date', 1)&quot;&gt;{#not_available#}
+-              &lt;/td&gt;
++              &lt;td&gt;*&lt;/td&gt;
++              &lt;td&gt;{*COMMENT by martin schmidt - production date is required for xbmf creation: &lt;input type=&quot;radio&quot; name=&quot;production_date_radio0&quot; value=&quot;selected&quot; onclick=&quot;javascript:disable('production_date', 0)&quot;&gt;*}
++  {html_select_date time=$PRG_DATA.production_date start_year=&quot;-20&quot; prefix=&quot;production_date&quot; month_format=&quot;%m&quot; field_order=&quot;YMD&quot; field_separator=&quot;-&quot;} &lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list2&quot;&gt;
+               &lt;td class=&quot;meta&quot;&gt;{#broadcast_date#}:&lt;/td&gt;
+-              &lt;td&gt;
+-                  &lt;input type=&quot;radio&quot; name=&quot;broadcast_date_radio0&quot; value=&quot;selected&quot; onclick=&quot;javascript:disable('broadcast_date', 0)&quot;&gt;
+-                  {html_select_date time=$PRG_DATA.broadcast_date start_year=&quot;-20&quot; prefix=&quot;broadcast_date&quot; month_format=&quot;%m&quot; field_order=&quot;YMD&quot; field_separator=&quot;-&quot;}
+-                  {#broadcast_time#} {html_select_time time=&quot;$BROADCAST_TIME&quot; display_seconds=&quot;0&quot; use_24_hours=&quot;1&quot; prefix=&quot;broadcast_date&quot; field_separator=&quot;:&quot;}
+-                  &lt;br&gt;&lt;input type=&quot;radio&quot; name=&quot;broadcast_date_radio1&quot; value=&quot;unselected&quot; onclick=&quot;javascript:disable('broadcast_date', 1)&quot;&gt;{#not_available#}
+-            &lt;/td&gt;
++              &lt;td&gt;&nbsp;&lt;/td&gt;
++              &lt;td&gt;&lt;input type=&quot;radio&quot; name=&quot;broadcast_date_radio0&quot; value=&quot;selected&quot; onclick=&quot;javascript:disable('broadcast_date', 0)&quot;&gt;
++  {html_select_date time=$PRG_DATA.broadcast_date start_year=&quot;-20&quot; prefix=&quot;broadcast_date&quot; month_format=&quot;%m&quot; field_order=&quot;YMD&quot; field_separator=&quot;-&quot;} {#broadcast_time#} {html_select_time time=&quot;$BROADCAST_TIME&quot; display_seconds=&quot;0&quot; use_24_hours=&quot;1&quot; prefix=&quot;broadcast_date&quot; } {*COMMENT by martin schmidt - INVALID PARAMETER: field_separator=&quot;:&quot;*} &lt;br&gt;
++                    &lt;input type=&quot;radio&quot; name=&quot;broadcast_date_radio1&quot; value=&quot;unselected&quot; onclick=&quot;javascript:disable('broadcast_date', 1)&quot;&gt;
++                    {#not_available#} &lt;/td&gt;
+             &lt;/tr&gt;
+             &lt;tr valign=&quot;top&quot; class=&quot;list1&quot;&gt;
+               &lt;td class=&quot;meta&quot;&gt;{#expiry_date#}:&lt;/td&gt;
+-              &lt;td&gt;
+-                  &lt;input type=&quot;radio&quot; name=&quot;expiry_date_radio0&quot; value=&quot;selected&quot; onclick=&quot;javascript:disable('expiry_date', 0)&quot; &gt;
+-                  {html_select_date time=$PRG_DATA.expiry_date end_year=&quot;+5&quot; prefix=&quot;expiry_date&quot; month_format=&quot;%m&quot; field_order=&quot;YMD&quot; field_separator=&quot;-&quot;}
+-                  &lt;br&gt;&lt;input type=&quot;radio&quot; name=&quot;expiry_date_radio1&quot; value=&quot;unselected&quot; onclick=&quot;javascript:disable('expiry_date', 1)&quot; &gt;{#no_expiry#}
+-              &lt;/td&gt;
++              &lt;td&gt;&nbsp;&lt;/td&gt;
++              &lt;td&gt;&lt;input type=&quot;radio&quot; name=&quot;expiry_date_radio0&quot; value=&quot;selected&quot; onclick=&quot;javascript:disable('expiry_date', 0)&quot; &gt;
++  {html_select_date time=$PRG_DATA.expiry_date end_year=&quot;+5&quot; prefix=&quot;expiry_date&quot; month_format=&quot;%m&quot; field_order=&quot;YMD&quot; field_separator=&quot;-&quot;} &lt;br&gt;
++  &lt;input type=&quot;radio&quot; name=&quot;expiry_date_radio1&quot; value=&quot;unselected&quot; onclick=&quot;javascript:disable('expiry_date', 1)&quot; &gt;
++  {#no_expiry#} &lt;/td&gt;
+             &lt;/tr&gt;
+           &lt;/table&gt;
+           &lt;input type=&quot;submit&quot; name=&quot;save&quot; value=&quot;{#save#}&quot;&gt;
+ 
+-        &lt;/td&gt;
+-      &lt;/tr&gt;
+-    &lt;/table&gt;
+-  &lt;/form&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++&lt;/form&gt;
+ 
+ &lt;p&gt;&lt;/p&gt;
+   &lt;a name=&quot;topics&quot;&gt;&lt;/a&gt;
+
+Modified: node/trunk/code/templates/main.htm
+===================================================================
+--- node/trunk/code/templates/main.htm	2006-03-31 09:08:35 UTC (rev 542)
++++ node/trunk/code/templates/main.htm	2006-03-31 10:50:19 UTC (rev 543)
+@@ -230,7 +230,7 @@
+ 
+                       {/if}
+ 
+-                      | &lt;a class=&quot;menu&quot; href=&quot;javascript:popup('{$ROOT_URL}/help.php?action={$ACTION}&amp;lang={$LANG}','Help',500,500,true)&quot;&gt;{#Help#}&lt;/a&gt;
++                      | &lt;a target=&quot;_blank&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/help.php?action={$ACTION}&amp;lang={$LANG}&quot;&gt;{#Help#}&lt;/a&gt;
+ 
+                       {if $DEBUG}
+ 
+
+Modified: node/trunk/code/templates/main_frame_left.htm
+===================================================================
+--- node/trunk/code/templates/main_frame_left.htm	2006-03-31 09:08:35 UTC (rev 542)
++++ node/trunk/code/templates/main_frame_left.htm	2006-03-31 10:50:19 UTC (rev 543)
+@@ -95,7 +95,7 @@
+                       {else}
+                       | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/login.php?okURL={$smarty.server.REQUEST_URI|escape:&quot;url&quot;}&quot;&gt;{#Login#}&lt;/a&gt;
+                       {/if}
+-                      | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/help.php&quot;&gt;{#Help#}&lt;/a&gt; 
++                      | &lt;a target=&quot;_blank&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/help.php?action={$ACTION}&amp;lang={$LANG}&quot;&gt;{#Help#}&lt;/a&gt; 
+                       &lt;!-- end navbar --&gt;
+                   &lt;/td&gt;
+                 &lt;/tr&gt;
+
+Modified: node/trunk/www/editMeta.php
+===================================================================
+--- node/trunk/www/editMeta.php	2006-03-31 09:08:35 UTC (rev 542)
++++ node/trunk/www/editMeta.php	2006-03-31 10:50:19 UTC (rev 543)
+@@ -5,8 +5,14 @@
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+  * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+- */
++ *
++ 	@internal change &quot;read ID3 Tags from MP3 File and write ID3 Tags from Metadata fields&quot;
++~  *           by wolfgang csacsinovits and martin schmidt (fh st. poelten)
++~  * 
++~  * 
++~  */
+ 
++
+ require(&quot;init.inc.php&quot;);
+ 
+ $prgId = sotf_Utils::getParameter('id');
+@@ -16,7 +22,6 @@
+      $smarty-&gt;assign(&quot;PAGETITLE&quot;, $page-&gt;getlocalized(&quot;New_prog_step1&quot;));
+ else
+      $smarty-&gt;assign(&quot;PAGETITLE&quot;, $page-&gt;getlocalized(&quot;editmeta&quot;));
+-
+ $page-&gt;forceLogin();
+ 
+ $okURL = sotf_Utils::getParameter('okURL');
+@@ -31,6 +36,41 @@
+ 
+ $prg = &amp; new sotf_Programme($prgId);
+ 
++// ---- changed by wolfgang csacsinovits and martin schmidt GET ID3 TAGS and write into Metadata - Fields
++
++
++	$audioFiles = $prg-&gt;listAudioFiles('true');
++	
++	$file =  $prg-&gt;getAudioDir() . '/' . $audioFiles[0] ['filename'];
++
++	$ThisFileInfo = GetAllFileInfo($file, 'mp3', false, false, false) ;
++	
++	
++	if (($ThisFileInfo['comments']['title']) != '' ) {
++		$title = implode(', ', $ThisFileInfo['comments']['title']);
++		}
++		
++	if (($ThisFileInfo['comments']['artist']) != '' ) {	
++		$artist = implode(', ', $ThisFileInfo['comments']['artist']);
++		}
++	if (($ThisFileInfo['comments']['genre']) != '' ) {	
++		$genre = implode(', ', $ThisFileInfo['comments']['genre']);
++		}
++	
++	if (($ThisFileInfo['comments']['album']) != '' ) {	
++		$album = implode(', ', $ThisFileInfo['comments']['album']);
++		}
++	
++		$keywords = $artist;
++		if ($title != '') $keywords .= ', ' . $title;
++		if ($genre != '' &amp;&amp; $genre!='UNKNOWN_GENRE') $keywords .= ', ' . $genre;
++
++		$prg-&gt;set('title' , $title);
++		$prg-&gt;set('keywords' ,$keywords);
++// -------------------------------------------------------------------------------------
++
++
++
+ if(!$prg-&gt;isLocal()) {
+   raiseError(&quot;You can only edit programmes locally!&quot;);
+ }
+@@ -49,49 +89,180 @@
+ $save = sotf_Utils::getParameter('save');
+ if($save || $finish || $finishpublish) {
+   checkPerm($prg, 'change');
+-  $params = array('title'=&gt;'text',
+-                  'alternative_title'=&gt;'text',
+-                  'episode_title'=&gt;'text',
+-                  'episode_sequence'=&gt;'number',
+-                  'keywords'=&gt;'text',
+-                  'abstract'=&gt;'text',
+-                  'genre_id'=&gt;'number',
+-                  'spatial_coverage'=&gt;'text',
+-                  'temporal_coverage'=&gt;'date',
+-                  'production_date'=&gt;'date',
+-                  'broadcast_date'=&gt;'date',
+-                  'expiry_date'=&gt;'date'
++  $params = array('title'=&gt;array('text',1),
++                  'alternative_title'=&gt;array('text',0),
++                  'episode_title'=&gt;array('text',0),
++                  'episode_sequence'=&gt;array('number',0),
++                  'keywords'=&gt;array('text',1),
++                  'abstract'=&gt;array('text',1),
++                  'genre_id'=&gt;array('number',1),
++                  'spatial_coverage'=&gt;array('text',0),
++                  'temporal_coverage'=&gt;array('date',0),
++                  'production_date'=&gt;array('date',0),
++                  'broadcast_date'=&gt;array('date',0),
++                  'expiry_date'=&gt;array('date',0)
+                   );
++  
++ // changed by wolfgang csacsinovits and martin schmidt -&gt; check empty fields, validate input data
++  $field_error = array();
++  $error_count = 0;
+   foreach($params as $param=&gt;$type) {
++  
+     $value = sotf_Utils::getParameter($param);
+-    if($type=='text') {
++	
++	if($type[1]== 1 &amp;&amp; ($value == '' || $value == 'untitled')) {
++	$field_error[$param]=true;
++	$error_count++;
++	}
++	else $field_error[$param]=false;
++	
++	if($param=='genre_id' &amp;&amp; $value==0) {
++	$field_error[$param]=true;
++	$error_count++;
++	}
++	
++    if($type[0]=='text') {
+       $value = strip_tags($value);
+-    } elseif($type=='number') {
++    } elseif($type[0]=='number') {
+       if(empty($value))
+         $value = 0;
+       elseif(!is_numeric($value)) {
+         addError($page-&gt;getlocalized('not_a_number') . &quot;: $value&quot;);
+         continue;
+       }
+-    } elseif($type=='date') {
++    } elseif($type[0]=='date') {
+       if (sotf_Utils::getParameter($param . '_radio1') != &quot;unselected&quot;) {
+ 	      $value = sotf_Utils::getParameter($param . 'Year') . '-'
+ 	        . sotf_Utils::getParameter($param . 'Month') . '-'
+ 	        . sotf_Utils::getParameter($param . 'Day');
+ 			if($param == 'broadcast_date') {
+ 			  $value = $value . ' ' . sotf_Utils::getParameter('broadcast_dateHour') . ':' . sotf_Utils::getParameter('broadcast_dateMinute') . ' ' . $db-&gt;myTZ();
+-              $value = $value . ' ' . sotf_Utils::getParameter('broadcast_dateHour') . ':' . sotf_Utils::getParameter('broadcast_dateMinute'); // . ' ' . $db-&gt;myTZ();
+ 			}
+ 		} else {
+ 		  $value = NULL;
+ 		}
+     }
++	
++	
+     $prg-&gt;set($param, $value);
++	 
++	
+   }
++
++
++
++//echo $error_msg;
++
+   // language hack
+   $prg-&gt;setLanguageWithParams();
++  
++  
++	// changed by wolfgang csacsinovits and martin schmidt - WRITE ID3 - TAGS --------------------------------------------------
++	
++	$audioFiles = $prg-&gt;listAudioFiles('true');
++	for($q = 0; $q &lt; count($audioFiles); $q++) {
++	
++		$file =  $prg-&gt;getAudioDir() . '/' . $audioFiles[$q] ['filename'];
++		
++		// check if file is mp3 - file
++		$filename = $file;
++		$extension = substr($filename, strrpos($filename, '.') +1);
++		
++		$productiondate = (SafeStripSlashes(sotf_Utils::getParameter('production_date')));
++		
++		if($extension==&quot;mp3&quot;) {
++		
++		
++		// TITLE
++		$data['id3v2']['TIT2']['encodingid'] = 0;
++		$data['id3v2']['TIT2']['data']       = SafeStripSlashes(sotf_Utils::getParameter('title'));
++		$data['ape']['title'][] = SafeStripSlashes(sotf_Utils::getParameter('title'));
++		
++		$data['id3v1']['TIT2']['encodingid'] = 0;
++		$data['id3v1']['TIT2']['data']       = SafeStripSlashes(sotf_Utils::getParameter('title'));
++		$data['ape']['title'][] = SafeStripSlashes(sotf_Utils::getParameter('title'));
++		$title =  $data['ape']['title'][0];
++
++		
++		// STATION
++		$data['id3v2']['TPE1']['encodingid'] = 0;
++		$data['id3v2']['TPE1']['data']       = SafeStripSlashes($prg-&gt;getStation()-&gt;get('name'));
++		$data['ape']['artist'][] = SafeStripSlashes($prg-&gt;getStation()-&gt;get('name'));
++		
++		$data['id3v1']['TPE1']['encodingid'] = 0;
++		$data['id3v1']['TPE1']['data']       = SafeStripSlashes($prg-&gt;getStation()-&gt;get('name'));
++		$data['ape']['artist'][] = SafeStripSlashes($prg-&gt;getStation()-&gt;get('name'));
++		$artist = $data['ape']['artist'][0];
++
++		
++		// YEAR
++		$data['id3v2']['TYER']['encodingid'] = 0;
++		$data['id3v2']['TYER']['data']       = SafeStripSlashes(sotf_Utils::getParameter('production_date' . 'Year'));//
++		$data['ape']['year'][] = SafeStripSlashes(sotf_Utils::getParameter('production_date' . 'Year'));//
++		
++		$data['id3v1']['TYER']['encodingid'] = 0;
++		$data['id3v1']['TYER']['data']       = SafeStripSlashes(sotf_Utils::getParameter('production_date' . 'Year'));//
++		$data['ape']['year'][] = SafeStripSlashes(sotf_Utils::getParameter('production_date' . 'Year'));//
++		$year = $data['ape']['year'][0]; 
++
++		
++		// GENRE
++		$data['id3v2']['TCON']['encodingid'] = 0;
++		$data['id3v2']['TCON']['data']       = SafeStripSlashes($vocabularies-&gt;getGenreName($prg-&gt;get('genre_id')));
++		$data['ape']['genre'][] = SafeStripSlashes($vocabularies-&gt;getGenreName($prg-&gt;get('genre_id')));
++		
++		$data['id3v2']['TRCK']['encodingid'] = 0;
++		$data['id3v2']['TRCK']['data']       = SafeStripSlashes(sotf_Utils::getParameter('title'));
++		$data['ape']['track'][] = SafeStripSlashes(sotf_Utils::getParameter('title'));
++		
++		$data['id3v1']['TCON']['encodingid'] = 0;
++		$data['id3v1']['TCON']['data']       = SafeStripSlashes($vocabularies-&gt;getGenreName($prg-&gt;get('genre_id')));
++		$data['ape']['genre'][] = SafeStripSlashes($vocabularies-&gt;getGenreName($prg-&gt;get('genre_id')));
++		$genre = $data['ape']['genre'][0];
++		
++		$data['id3v1']['TRCK']['encodingid'] = 0;
++		$data['id3v1']['TRCK']['data']       = SafeStripSlashes(sotf_Utils::getParameter('title'));
++		$data['ape']['track'][] = SafeStripSlashes(sotf_Utils::getParameter('title'));
++		
++		// COMMENT
++		$data['id3v1']['COMM'][0]['encodingid']  = 0;
++		$data['id3v1']['COMM'][0]['language']    = 'eng';
++		$data['id3v1']['COMM'][0]['description'] = '';
++		$data['id3v1']['COMM'][0]['data']        = SafeStripSlashes(sotf_Utils::getParameter('keywords'));
++		$data['ape']['comments'][] = SafeStripSlashes(sotf_Utils::getParameter('keywords'));
++		$comment = $data['ape']['comments'][0];
++		
++		
++		$data['id3v2']['TALB']['encodingid'] = 0;
++		$data['id3v2']['TALB']['data']       = '*ID3Tags modified by SOTF*';
++		$data['ape']['album'][] = '*ID3Tags modified by SOTF*';
++				
++
++	WriteID3v1($file, $title, $artist, '*ID3Tags modified by SOTF*' , $year, $comment, $genre, $title, false );
++	WriteID3v2($file, $data, 3, 0, true, 0, true);
++
++		if (!empty($_POST['VersionToEditAPE'])) {
++			echo 'APE changes'.(WriteAPEtag($EditorFilename, $data['ape'], false) ? '' : ' NOT').' written successfully&lt;HR&gt;';
++			}
++				
++					}
++			
++		}
++		
++   //-----------------------------------------------------------------------------------------------------
++
++				
+   // save
+-  if ($finishpublish) {
++  
++  // added by wolfgang csacsinovits &amp; martin schmidt 05-09-27
++  if($error_count&gt;0){
++	  $smarty-&gt;assign(&quot;FIELD_ERROR&quot;, $field_error); 
++	  $smarty-&gt;assign(&quot;ERROR_COUNT&quot;, $error_count);
++  }
++ 
++  // -----------------------------------
++
++  elseif ($finishpublish) {
+     $prg-&gt;publish();
+     $page-&gt;redirect(&quot;editor.php&quot;);
+   } elseif ($finish) {
+@@ -106,6 +277,7 @@
+ $smarty-&gt;assign('PRG_ID', $prgId);
+ $smarty-&gt;assign('PRG_TITLE', $prg-&gt;get('title'));
+ 
++
+ // delete role
+ $delrole = sotf_Utils::getParameter('delrole');
+ $roleid = sotf_Utils::getParameter('roleid');
+@@ -184,14 +356,22 @@
+   exit;
+ }
+ 
++
++
+ // generate output
+ 
+ // general data
+ if($new)
++
++
+      $smarty-&gt;assign(&quot;NEW&quot;,1);
+-$smarty-&gt;assign('PRG_DATA', $prg-&gt;getAllForHTML());
+-$smarty-&gt;assign('BROADCAST_TIME', strtotime($prg-&gt;get('broadcast_date')));
++	 $smarty-&gt;assign('PRG_DATA', $prg-&gt;getAllForHTML());
+ 
++//--- modified by martin schmidt 05-09-11
++if($prg-&gt;get('broadcast_date')) $smarty-&gt;assign('BROADCAST_TIME', strtotime($prg-&gt;get('broadcast_date')));
++//----------------------------------
++
++
+ // station data
+ $station = $prg-&gt;getStation();
+ $smarty-&gt;assign('STATION_DATA', $station-&gt;getAllForHTML());
+
+Added: node/trunk/www/help/images/create_new_programme.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/create_new_programme.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Modified: node/trunk/www/help/index.eng.html
+===================================================================
+--- node/trunk/www/help/index.eng.html	2006-03-31 09:08:35 UTC (rev 542)
++++ node/trunk/www/help/index.eng.html	2006-03-31 10:50:19 UTC (rev 543)
+@@ -2,7 +2,7 @@
+ &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;<A HREF="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd</A>&quot;&gt;
+ &lt;html xmlns=&quot;<A HREF="http://www.w3.org/1999/xhtml">http://www.w3.org/1999/xhtml</A>&quot;&gt;
+ &lt;head&gt;
+-&lt;title&gt;Untitled Document&lt;/title&gt;
++&lt;title&gt;StreamOnTheFly Online Help&lt;/title&gt;
+ &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot; /&gt;
+ &lt;style type=&quot;text/css&quot;&gt;
+ &lt;!--
+@@ -35,8 +35,8 @@
+   &nbsp;&nbsp;&nbsp;&lt;a href=&quot;#13&quot;&gt;1.3) Metadata&lt;/a&gt;&lt;br /&gt;
+   &nbsp;&nbsp;&nbsp;&lt;a href=&quot;#14&quot;&gt;1.4) Portals&lt;/a&gt;&lt;br /&gt;
+   &lt;a href=&quot;#2&quot;&gt;2) Interface Overview&lt;/a&gt;&lt;br /&gt;
+-  &lt;a href=&quot;#3&quot;&gt;3) Registration / Preferences&lt;/a&gt;&lt;br /&gt;
+-  &lt;a href=&quot;#4&quot;&gt;4) The Search Engine&lt;/a&gt;&lt;br /&gt;
++  &lt;a href=&quot;#register&quot;&gt;3) Registration / Preferences&lt;/a&gt;&lt;br /&gt;
++  &lt;a href=&quot;#advsearch&quot;&gt;4) The Search Engine&lt;/a&gt;&lt;br /&gt;
+   &nbsp;&nbsp;&nbsp;&lt;a href=&quot;#41&quot;&gt;4.1) Easy Search&lt;/a&gt;&lt;br /&gt;
+   &nbsp;&nbsp;&nbsp;&lt;a href=&quot;#42&quot;&gt;4.2) Search for Content of Stations&lt;/a&gt;&lt;br /&gt;
+   &nbsp;&nbsp;&nbsp;&lt;a href=&quot;#43&quot;&gt;4.3) Search for Topics&lt;/a&gt;&lt;br /&gt;
+@@ -46,10 +46,12 @@
+   &lt;a href=&quot;#5&quot;&gt;5) The Programme Interface&lt;/a&gt;&lt;br /&gt;
+   &nbsp;&nbsp;&nbsp;&lt;a href=&quot;#51&quot;&gt;5.1) The content of a programme&lt;/a&gt;&lt;br /&gt;
+   &nbsp;&nbsp;&nbsp;&lt;a href=&quot;#52&quot;&gt;5.2) Feedback and Statistics&lt;/a&gt;&lt;br /&gt;
+-  &lt;a href=&quot;#6&quot;&gt;6) My Playlist&lt;/a&gt;&lt;br /&gt;
++  &lt;a href=&quot;#playlist&quot;&gt;6) My Playlist&lt;/a&gt;&lt;br /&gt;
+   &lt;a href=&quot;#7&quot;&gt;7) RSS and PODCAST&lt;/a&gt;&lt;br /&gt;
+   &lt;a href=&quot;#8&quot;&gt;8) Stations in the Network&lt;/a&gt;&lt;br /&gt;
+-  &lt;a href=&quot;#9&quot;&gt;9) Topics&lt;/a&gt;&lt;/h3&gt;
++  &lt;a href=&quot;#topicSearch&quot;&gt;9) Topics&lt;/a&gt;&lt;br /&gt;
++   &lt;a href=&quot;#editor&quot;&gt;10) Editor&acute;s Console&lt;/a&gt;
++&lt;/h3&gt;
+ &lt;hr size=&quot;1&quot; /&gt;
+ &lt;p&gt;&nbsp;&lt;/p&gt;
+ &lt;h1&gt;1&lt;a name=&quot;1&quot; id=&quot;1&quot;&gt;&lt;/a&gt;) General architecture of StreamOnTheFly&lt;/h1&gt;
+@@ -70,12 +72,14 @@
+ &lt;p&gt;Nodes are transparently organized into a etwork. All nodes have metadata about 
+   all radio shows and stations in the network. Nodes communicate with each other 
+   to keep their local database up-to-date. &lt;/p&gt;
+-&lt;h2&gt;1.2&lt;a name=&quot;12&quot; id=&quot;12&quot;&gt;&lt;/a&gt;) Station&lt;/h2&gt;
++&lt;h2&gt;1.2&lt;a name=&quot;stations&quot; id=&quot;stations&quot;&gt;&lt;/a&gt;) Station&lt;/h2&gt;
+ &lt;p&gt;&lt;a href=&quot;#top&quot;&gt;[top]&lt;/a&gt;&lt;/p&gt;
+ &lt;p&gt;A station is archived at a single node, while it is searchable and browseable 
+   by all nodes in the network. Each station has admins and editors. Admins may 
+   change logos and jingles and manage all data, while editors can upload shows 
+-  and manage their own data.&lt;/p&gt;
++  and manage their own data.&lt;br /&gt;
++  &lt;a href=&quot;#8&quot;&gt;more Infos about the stations here&lt;/a&gt;
++&lt;/p&gt;
+ &lt;h2&gt;1.3&lt;a name=&quot;13&quot; id=&quot;13&quot;&gt;&lt;/a&gt;) Metadata&lt;/h2&gt;
+ &lt;p&gt;&lt;a href=&quot;#top&quot;&gt;[top]&lt;/a&gt;&lt;/p&gt;
+ &lt;p&gt;For each radio show a set of metadata is required from the editors (title, 
+@@ -115,7 +119,7 @@
+ &lt;p class=&quot;abb&quot;&gt;&lt;em&gt;Abb.: The SOTF main interface&lt;/em&gt;&lt;/p&gt;
+ &lt;hr size=&quot;1&quot; /&gt;
+ &lt;h1&gt;&nbsp;&lt;/h1&gt;
+-&lt;h1&gt;3&lt;a name=&quot;3&quot; id=&quot;3&quot;&gt;&lt;/a&gt;) Registration / Preferences&lt;/h1&gt;
++&lt;h1&gt;3&lt;a name=&quot;register&quot; id=&quot;register&quot;&gt;&lt;/a&gt;) Registration / Preferences&lt;/h1&gt;
+ &lt;p&gt;&lt;a href=&quot;#top&quot;&gt;[top]&lt;/a&gt;&lt;/p&gt;
+ &lt;p&gt;SOTF offers all users free registration for personalized features in the node 
+   network. To reach the registration interface, click the 'register' link below 
+@@ -132,7 +136,7 @@
+   &lt;/tr&gt;
+ &lt;/table&gt;
+ &lt;hr size=&quot;1&quot; /&gt;
+-&lt;h1&gt;4&lt;a name=&quot;4&quot; id=&quot;4&quot;&gt;&lt;/a&gt;) The Search Engine&lt;/h1&gt;
++&lt;h1&gt;4&lt;a name=&quot;advsearch&quot; id=&quot;advsearch&quot;&gt;&lt;/a&gt;) The Search Engine&lt;/h1&gt;
+ &lt;p&gt;&lt;a href=&quot;#top&quot;&gt;[top]&lt;/a&gt;&lt;/p&gt;
+ SOTF provides you with several different searching tools. The search function 
+ in the right section of the interface is a very basic version, but there is also 
+@@ -277,7 +281,7 @@
+ &lt;p&gt;&lt;span class=&quot;abb&quot;&gt;&lt;em&gt;Abb: Feedbacks and Statistics&lt;/em&gt; &lt;/span&gt;&lt;/p&gt;
+ &lt;p&gt;&nbsp; &lt;/p&gt;
+ &lt;hr size=&quot;1&quot; /&gt;
+-&lt;h2&gt;6&lt;a name=&quot;6&quot; id=&quot;6&quot;&gt;&lt;/a&gt;) My Playlist&lt;/h2&gt;
++&lt;h2&gt;6&lt;a name=&quot;playlist&quot; id=&quot;playlist&quot;&gt;&lt;/a&gt;) My Playlist&lt;/h2&gt;
+ &lt;p&gt;&lt;a href=&quot;#top&quot;&gt;[top]&lt;/a&gt;&lt;/p&gt;
+ &lt;p&gt;This feature is very useful for users who want to listen to several audio files 
+   at once. It is only available to registered users. As we have seen in the programme 
+@@ -337,7 +341,7 @@
+ &lt;/p&gt;
+ &lt;hr size=&quot;1&quot; /&gt;
+ &lt;p&gt;&nbsp; &lt;/p&gt;
+-&lt;h1&gt;9&lt;a name=&quot;9&quot; id=&quot;9&quot;&gt;&lt;/a&gt;) Topics&lt;/h1&gt;
++&lt;h1&gt;9&lt;a name=&quot;topicSearch&quot; id=&quot;topicSearch&quot;&gt;&lt;/a&gt;) Topics&lt;/h1&gt;
+ &lt;p&gt;&lt;a href=&quot;#top&quot;&gt;[top]&lt;/a&gt;&lt;/p&gt;
+ &lt;p&gt;Click on 'Topics' in the main menu to get a full list of topics and their related 
+   programmes.&lt;br /&gt;
+@@ -347,8 +351,28 @@
+ &lt;p&gt;As we have already seen in the search section of this document, you get a split 
+   interface. In the left section you see the topic tree with all sub-topics and 
+   the number of related programmes. In the right part you get a list of sub-topics. 
+-  When you click the sub-topics, SOTF returns you a list of related programmes.&lt;/p&gt;
++  When you click the sub-topics, SOTF returns you a list of related programmes.&lt;br /&gt;
++&lt;a href=&quot;#43&quot;&gt;how to search for topics &lt;/a&gt;&lt;/p&gt;
+ &lt;p&gt;&nbsp; &lt;/p&gt;
+ &lt;p&gt;&nbsp;&lt;/p&gt;
++
++&lt;hr size=&quot;1&quot; /&gt;
++&lt;p&gt;&nbsp; &lt;/p&gt;
++&lt;h1&gt;10&lt;a name=&quot;editor&quot; id=&quot;editor&quot;&gt;&lt;/a&gt;) Editor&#180;s Console&lt;/h1&gt;
++&lt;p&gt;&lt;a href=&quot;#top&quot;&gt;[top]&lt;/a&gt;&lt;/p&gt;
++&lt;p&gt;In the Editor&acute;s Console station editors can upload files per FTP or HTTP, and add appropriate metadata. &lt;/p&gt;
++&lt;p&gt;&lt;strong&gt;UPLOAD VIA FTP:&lt;/strong&gt;&lt;br /&gt;
++  Much faster than HTTP - Upload, but needs an extra client, like SmartFTP (&lt;a href=&quot;<A HREF="http://www.smartftp.com">http://www.smartftp.com</A>&quot; target=&quot;_blank&quot;&gt;download&lt;/a&gt;). Another advantage is the resumability of uploads.&lt;/p&gt;
++&lt;p&gt;To access your personal SOTF directory, use the URL of your node and type in your personal access data in the FTP client. &lt;/p&gt;
++&lt;p&gt;&lt;strong&gt;UPLOAD VIA HTTP:&lt;/strong&gt; (use link &quot;Manage your files&quot;) &lt;br /&gt;
++Comfortable web interface  for adding and deleting files (no extra software required), but may cause problems when transferring larger files. &lt;/p&gt;
++&lt;p&gt;&lt;br /&gt; 
++ &lt;/p&gt;
++&lt;p&gt;&lt;img src=&quot;images/create_new_programme.jpg&quot; width=&quot;911&quot; height=&quot;124&quot; /&gt;&lt;/p&gt;
++&lt;p&gt;&lt;span class=&quot;abb&quot;&gt;&lt;em&gt;Abb: Create new programme / file upload &lt;/em&gt;&lt;/span&gt;&lt;/p&gt;
++&lt;p&gt;&nbsp; &lt;/p&gt;
++&lt;p&gt;&nbsp;&lt;/p&gt;
++
++
+ &lt;/body&gt;
+ &lt;/html&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000121.html">[Sotf-general] r542 - node/trunk
+</A></li>
+	<LI>Next message: <A HREF="000123.html">[Sotf-general] r544 - in node/trunk: . code/doc
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#122">[ date ]</a>
+              <a href="thread.html#122">[ thread ]</a>
+              <a href="subject.html#122">[ subject ]</a>
+              <a href="author.html#122">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

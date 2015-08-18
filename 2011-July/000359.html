@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r611 - node/trunk/code/classes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r611%20-%20node/trunk/code/classes&In-Reply-To=%3C20110708104200.A5632481365%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r611 - node/trunk/code/classes</H1>
+    <B>micsik at mail.berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r611%20-%20node/trunk/code/classes&In-Reply-To=%3C20110708104200.A5632481365%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r611 - node/trunk/code/classes">micsik at mail.berlios.de
+       </A><BR>
+    <I>Fri Jul  8 12:42:00 CEST 2011</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#359">[ date ]</a>
+              <a href="thread.html#359">[ thread ]</a>
+              <a href="subject.html#359">[ subject ]</a>
+              <a href="author.html#359">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: micsik
+Date: 2011-07-08 12:42:00 +0200 (Fri, 08 Jul 2011)
+New Revision: 611
+
+Modified:
+   node/trunk/code/classes/sotf_Programme.class.php
+Log:
+Minor bug with getid3 config.
+
+
+Modified: node/trunk/code/classes/sotf_Programme.class.php
+===================================================================
+--- node/trunk/code/classes/sotf_Programme.class.php	2009-03-12 09:00:05 UTC (rev 610)
++++ node/trunk/code/classes/sotf_Programme.class.php	2011-07-08 10:42:00 UTC (rev 611)
+@@ -610,7 +610,7 @@
+ 
+ 	require_once($config['getid3dir'] . &quot;/write.php&quot;);
+ 	 $tagwriter = new getid3_writetags;
+-	 $tagwriter-&gt;filename   = $file;
++	 $tagwriter-&gt;filename   = $file-&gt;path;
+ 	 $TagData['comment'][] = &quot;id: &quot; . $this-&gt;id;
+ 	 debug(&quot;writing ID3V1&quot;, $id3);	
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#359">[ date ]</a>
+              <a href="thread.html#359">[ thread ]</a>
+              <a href="subject.html#359">[ subject ]</a>
+              <a href="author.html#359">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

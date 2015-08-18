@@ -1,0 +1,3283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r595 - in node/branches/payable: code/configs	code/templates www
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r595%20-%20in%20node/branches/payable%3A%20code/configs%0A%09code/templates%20www&In-Reply-To=%3C200611151446.kAFEk3Kq006740%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000297.html">
+   <LINK REL="Next"  HREF="000292.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r595 - in node/branches/payable: code/configs	code/templates www</H1>
+    <B>clemens_p at mail.berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r595%20-%20in%20node/branches/payable%3A%20code/configs%0A%09code/templates%20www&In-Reply-To=%3C200611151446.kAFEk3Kq006740%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r595 - in node/branches/payable: code/configs	code/templates www">clemens_p at mail.berlios.de
+       </A><BR>
+    <I>Wed Nov 15 15:46:03 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000297.html">[Sotf-general] Interview in Budapest
+</A></li>
+        <LI>Next message: <A HREF="000292.html">[Sotf-general] r596 - in node/branches/payable: code/doc code/share	code/templates www www/static
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#291">[ date ]</a>
+              <a href="thread.html#291">[ thread ]</a>
+              <a href="subject.html#291">[ subject ]</a>
+              <a href="author.html#291">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: clemens_p
+Date: 2006-11-15 15:43:20 +0100 (Wed, 15 Nov 2006)
+New Revision: 595
+
+Modified:
+   node/branches/payable/code/configs/eng.conf
+   node/branches/payable/code/configs/fra.conf
+   node/branches/payable/code/configs/ger.conf
+   node/branches/payable/code/configs/hun.conf
+   node/branches/payable/code/templates/main.htm
+   node/branches/payable/code/templates/main_frame_left.htm
+   node/branches/payable/www/about.php
+   node/branches/payable/www/advsearch.php
+   node/branches/payable/www/advsearchresults.php
+   node/branches/payable/www/config.inc.php.template
+   node/branches/payable/www/get.php
+   node/branches/payable/www/getFile.php
+   node/branches/payable/www/help.php
+   node/branches/payable/www/index.php
+   node/branches/payable/www/listen.php
+   node/branches/payable/www/login.php
+   node/branches/payable/www/protected.php
+   node/branches/payable/www/register.php
+   node/branches/payable/www/search.php
+   node/branches/payable/www/showContact.php
+   node/branches/payable/www/stations.php
+   node/branches/payable/www/topicSearch.php
+Log:
+Added Partner Site for Partner-Links and Promotion, additional topic tree Radio Gesundheit
+
+Modified: node/branches/payable/code/configs/eng.conf
+===================================================================
+--- node/branches/payable/code/configs/eng.conf	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/code/configs/eng.conf	2006-11-15 14:43:20 UTC (rev 595)
+@@ -10,7 +10,7 @@
+ Change = Change
+ close = Close
+ Search = Search
+-node = Node 
++node = Node
+ Yes = Yes.
+ No = No.
+ Up = Up
+@@ -68,6 +68,7 @@
+ advSearch=Advanced search
+ Stations = Stations
+ Topics = Topics
++Partner = Partners
+ 
+ #Admin tabs &amp; general
+ Network = Network &amp; General
+@@ -172,7 +173,7 @@
+ Statistics = Statistics and feedback
+ Rights = Rights
+ for_whole_prg = For the whole programme
+-listen = Listen 
++listen = Listen
+ # the program from the &quot;StreamOnTheFly Archiv&quot; here:
+ listen_as = Listen as
+ download_as = Download as
+@@ -267,7 +268,7 @@
+ station_created = New station has been created
+ 
+ [editStation]
+-edit_station = Change settings for station 
++edit_station = Change settings for station
+ general_data = General data
+ station_name = Station name
+ url = Website (if any)
+@@ -812,7 +813,7 @@
+ change_station = Change station
+ changestation = ChangeStation
+ series = Series
+-not_in_series = not in any series 
++not_in_series = not in any series
+ change_series = Add/change series
+ changeseries = ChangeSeries
+ remove_from_series = Remove from series
+@@ -953,7 +954,7 @@
+ [addFiles]
+ add_files = Add files
+ userfiles = My files
+-userfiles_expl = 
++userfiles_expl =
+ upload_file = Upload file
+ add_selected = Add selected files to programme
+ no_files = You haven't got any uploaded file currently.
+@@ -967,7 +968,7 @@
+ manage_files = Manage your files
+ add_files = Add files
+ userfiles = My files
+-userfiles_expl = 
++userfiles_expl =
+ upload_file = Add to my files
+ del_selected = Delete selected files
+ no_files = You haven't got any uploaded file currently.
+@@ -979,7 +980,7 @@
+ edit_right = Edit rights
+ change_right = Change rights
+ new_right = New rights
+-start_time = Start time 
++start_time = Start time
+ stop_time = Stop time
+ time_format = (sec, min:sec)
+ rights_text = Rights
+@@ -1148,5 +1149,4 @@
+ 
+ [adminShowUser]
+ adminShowUser = User data
+-User_name = User name:
+-
++User_name = User name:
+\ No newline at end of file
+
+Modified: node/branches/payable/code/configs/fra.conf
+===================================================================
+--- node/branches/payable/code/configs/fra.conf	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/code/configs/fra.conf	2006-11-15 14:43:20 UTC (rev 595)
+@@ -68,14 +68,15 @@
+ advSearch= recherche avanc&#195;&#169;e
+ Stations = stations
+ Topics = mati&#195;&#168;res
++Partner = partenaires
+ 
+ #Admin tabs &amp; general
+-Network = Network &amp; General !!
+-Users = Users !!
+-Groups = Groups !!
+-TopProgs = Prog stats !!
+-TopUsers = User stats !!
+-admin= la console de l'administrateur de noeud
++Network = r&#195;&#169;seau &amp; g&#195;&#169;n&#195;&#169;ral
++Users = usager 
++Groups = groupe
++TopProgs = statistique des programmes
++TopUsers = statistique des usagers
++admin = la console de l'administrateur de noeud
+ 
+ #permissions
+ perm_admin = administrateur
+@@ -98,7 +99,7 @@
+ error_close = fermez fen&#195;&#170;tre
+ 
+ #common errors
+-not_published_yet = This programme is not yet available for the public. !!
++not_published_yet = Ce programme non est disponible pour le public.
+ invalid_url = URL Inadmissible.
+ not_an_image= Le dossier choisi n'a pas pu &#195;&#170;tre trait&#195;&#169; comme image.
+ not_a_number = Pas un nombre
+@@ -129,8 +130,8 @@
+ no_results= aucun r&#195;&#169;sultat
+ 
+ # translations for database field names
+-free_content=Free content !!
+-promoted=Promoted content !!
++free_content= contenu gratuit
++promoted= contenu sponsoris&#195;&#169;
+ station= nom de station
+ production_date= date de production
+ language= langue
+@@ -173,15 +174,15 @@
+ Statistics = Statistique et r&#195;&#169;actions
+ Rights = droits
+ for_whole_prg = pour le programme entier
+-listen = ???
++listen = &#195;&#169;coute
+ # the program from the &quot;StreamOnTheFly Archiv&quot; here:
+-listen_as = ???
++listen_as = Entendre comme
+ download_as = T&#195;&#169;l&#195;&#169;chargement comme
+ no_rating = Aucune &#195;&#169;valuation
+ by = par
+ Roles = contribuants
+-Listens = ???
+-Downloads = t&#195;&#169;l&#195;&#169;chargement
++Listens = auditeurs 
++Downloads = t&#195;&#169;l&#195;&#169;chargements
+ Rating = &#195;&#169;valuation
+ station = station
+ series = s&#195;&#169;rie
+@@ -223,9 +224,9 @@
+ topics = mati&#195;&#168;res
+ top_topics = mati&#195;&#168;res avec le plus de programmes:
+ 
+-Promoted_shows = Promoted content !!
+-Premium_shows = Premium content: !!
+-No_premium_news = No new premium content !!
++Promoted_shows = contenu sponsoris&#195;&#169;
++Premium_shows = contenu de grande valeur
++No_premium_news = No nouveau contenu de grande valeur
+ New_shows = nouveaux programmes:
+ No_news= aucun nouveau programme dans le r&#195;&#169;seau
+ Default_query = r&#195;&#169;sultats de votre question de d&#195;&#169;faut:
+@@ -368,7 +369,7 @@
+ userfiles = mes dossiers
+ userfiles_expl = Vous pouvez choisir un dossier ici et l'employer comme ic&#195;&#180;ne ou jingle.
+ upload_file = Ajoutez &#195;&#160; mes dossiers
+-view = ???
++view = vue
+ set_jingle = Placez comme jingle
+ set_icon = Placez comme ic&#195;&#180;ne
+ no_files = Il n'y a pas de dossiers t&#195;&#169;l&#195;&#169;charg&#195;&#169;s.
+@@ -402,8 +403,8 @@
+ change_permissions = changez permission
+ target= cible
+ user= utilisateur
+-listen = Listen !!
+-listen_expl = Listen to the content !!
++listen = entendre
++listen_expl = &#195;&#137;couter aux programmes
+ admin = propri&#195;&#169;taire
+ admin_expl = Toutes les permissions ci-dessous et plus!
+ change = changez
+@@ -504,7 +505,7 @@
+ userfiles = mes dossiers
+ userfiles_expl = Vous pouvez choisir un dossier ici et l'employer comme ic&#195;&#180;ne pour ce contact.
+ upload_file = Ajoutez &#195;&#160; mes dossiers
+-view = ???
++view = vue
+ set_icon = Placez comme ic&#195;&#180;ne
+ no_files = Il n'y a aucun dossier t&#195;&#169;l&#195;&#169;charg&#195;&#169;.
+ upload_expl = Si le dossier lequel vous voulez employer comme jingle ou comme ic&#195;&#180;ne n'est pas parmi vos dossiers t&#195;&#169;l&#195;&#169;charg&#195;&#169;s, vous pouvez le t&#195;&#169;l&#195;&#169;charger ici.
+@@ -540,7 +541,7 @@
+ delete_series_confirm = Etes-vous s&#195;&#187;r que vous voulez supprimer cette s&#195;&#169;rie?
+ edit_prog = Changez les arrangements
+ delete_prog = Effacez le programme
+-delete_prog_confirm = Etes-vous s&#195;&#187;r que vous voulez supprimer ce programme?
++delete_prog_confirm = &#195;&#138;tes-vous s&#195;&#187;r que vous voulez supprimer ce programme?
+ add_prg = Ajoutez des programmes
+ 
+ 
+@@ -554,13 +555,13 @@
+ edit_series = changez les arrangements
+ edit_prog = changez les arrangements
+ delete_prog = effacez le programme
+-delete_prog_confirm = Etes-vous s&#195;&#187;r que vous voulez supprimer ce programme?
++delete_prog_confirm = &#195;&#138;tes-vous s&#195;&#187;r que vous voulez supprimer ce programme?
+ add_prg = Ajoutez es programmes
+ 
+ [editor]
+ will_expire = Vous avez %1 programmes expirant dans les %2 jours !
+ create_new_expl1 = 1. Pour cr&#195;&#169;er un nouveau programme, vous devez d'abord ajouter le fichier son dans votre dossier personnel. Vous pouvez le faire soit par un upload FTP ou par un upload HTTP.
+-create_new_expl2 = 2. Si vous avez d&#195;&#169;jr upload&#195;&#169; le fichier son, choississez ici le fichier que vous voulez transformer en programme:
++create_new_expl2 = 2. Si vous avez d&#195;&#169;ja upload&#195;&#169; le fichier son, choississez ici le fichier que vous voulez transformer en programme:
+ manage_files = Administrez vos fichiers via le Web
+ managefiles = Gestionnaire
+ add_programme= Ajoutez en tant que nouveau programme
+@@ -586,7 +587,7 @@
+ Published= &#195;&#169;dit&#195;&#169;
+ Stats= statistiques
+ visits= visites
+-listens= ???
++listens= auditeurs
+ downloads= t&#195;&#169;l&#195;&#169;chargements
+ rating= estimation
+ by = de
+@@ -656,7 +657,7 @@
+ portal_http=/sotf.dsd.sztaki.hu/portal/portal.php/portal_name) / adresse portique (comme:
+ URL_missing= URL non trouv&#195;&#169;
+ 
+-box3=3. Manage your queries
++box3=3. Administrez votre interrogation s&#195;&#169;lective
+ load= Chargez question
+ default= Faites mon d&#195;&#169;faut
+ deleteq= Effacez question
+@@ -783,11 +784,11 @@
+ other_file_list = d'autres dossiers:
+ no_files = aucuns dossiers de contenu
+ bytes = bytes
+-View =download / ???/t&#195;&#169;l&#195;&#169;chargement
+-viewpopup = ???
++View = vue / t&#195;&#169;l&#195;&#169;chargement
++viewpopup = vue
+ programme_audio = programme audio
+ 
+-Listener_groups = This programme can be listened after subscribing to one of these groups: !!
++Listener_groups = Ce programme peut &#195;&#170;tre &#195;&#169;cout&#195;&#169; si vous acqu&#195;&#169;riez l'acc&#195;&#168;s pour un de ces groupes:
+ 
+ Links = liens
+ put_into_playlist = Mettez dans mon programme
+@@ -827,10 +828,10 @@
+ temporal_coverage = port&#195;&#169;e temporelle
+ spatial_coverage = port&#195;&#169;e spatial
+ 
+-content_type = Type of content !!
+-Free = Free !!
+-Promoted = Promoted !!
+-Protected = Protected/payable !!
++content_type = Type de contenu
++Free = gratuit
++Promoted = sponsoris&#195;&#169;
++Protected = payant
+ 
+ topics = mati&#195;&#168;res
+ no_topics = aucunes mati&#195;&#168;res donn&#195;&#169;es encore.
+@@ -871,7 +872,7 @@
+ userfiles = mes donn&#195;&#169;es
+ userfiles_expl = Vous pouvez choisir un dossier ici et l'employer comme ic&#195;&#180;ne ou jingle.
+ upload_file = Ajoutez &#195;&#160; mes dossiers
+-view = ???
++view = vue
+ set_icon = Placez comme ic&#195;&#180;ne
+ no_files = Il n'y a pas de dossier t&#195;&#169;l&#195;&#169;chares.
+ upload_expl = Si le dossier lequel vous voulez employer comme jingle ou comme ic&#195;&#180;ne n'est pas parmi vos dossiers t&#195;&#169;l&#195;&#169;charg&#195;&#169;s, vous pouvez le t&#195;&#169;l&#195;&#169;charger ici.
+@@ -946,23 +947,23 @@
+ [addFiles]
+ add_files = ajoutez les dossiers
+ userfiles = mes dossiers
+-userfiles_expl = 
++userfiles_expl = Ici vous pouvez choisir un fichier et l'employer comme logo ou jingle.
+ upload_file = T&#195;&#169;l&#195;&#169;chargez le dossier
+ add_selected = Ajoutez les dossiers choisis au programme
+ no_files = Vous n'avez aucun dossier t&#195;&#169;l&#195;&#169;charg&#195;&#169; actuellement.
+ direct_upload = T&#195;&#169;l&#195;&#169;chargez directement
+-upload_expl = If the file you want to add is not among your uploaded files, you can upload it here.
+-copy_files = Leave a copy among my files
+-move_files = Move files to programme
+-user_dir_ftp_access = Ftp access to user's directory
++upload_expl = Si le fichier lequel vous voulez employer n'est pas parmi vos dossiers t&#195;&#169;l&#195;&#169;charg&#195;&#169;s, vous pouvez le t&#195;&#169;l&#195;&#169;charger ici.
++copy_files = gardez une copie dans votre dossier
++move_files = d&#195;&#169;placez vos fichiers au programme
++user_dir_ftp_access = Acc&#195;&#168;s de FTP &#195;&#160; vos dossiers
+ 
+ [manageFiles]
+-manage_files = Manage your files
+-add_files = Add files
+-userfiles = My files
+-userfiles_expl = 
+-upload_file = Add to my files
+-del_selected = Delete selected files
++manage_files = Administrez vos fichiers via le Web
++add_files = Adjoutez des fichiers
++userfiles = Vos fichiers
++userfiles_expl = Vous pouvez choisir un dossier ici et l'employer comme ic&#195;&#180;ne ou jingle.
++upload_file = Adjoutez &#195;&#160; votre dossier
++del_selected = Effacez les fichiers s&#195;&#169;lectionn&#195;&#169;
+ no_files = You haven't got any uploaded file currently.
+ upload_expl = Si le dossier lequel vous voulez employer comme jingle ou comme ic&#195;&#180;ne n'est pas parmi vos dossiers t&#195;&#169;l&#195;&#169;charg&#195;&#169;s, vous pouvez le t&#195;&#169;l&#195;&#169;charger ici.
+ close = fermez fen&#195;&#170;tre
+@@ -1058,7 +1059,7 @@
+ full_sync =Pleine synchro
+ full_sync_expl =Envoyez toutes les donn&#195;&#169;es au noeud &#195;&#160; distance (peut &#195;&#170;tre lent)
+ pending =en attendant le noeud
+-err_succ =error&lt;br /&gt;for outgoing / Success/error&lt;br /&gt;pour sortant
++err_succ = 	erreur / succ&#195;&#168;s pour sortant
+ 
+ arrived_xbmf =XBMF Arriv&#195;&#169;
+ import=Importation
+@@ -1081,65 +1082,81 @@
+ use_out =Envoyez la synchro &#195;&#160; ce voisin
+ save = enregistrez
+ 
++
++# roles and contacts
++Roles = contacts et r&#195;&#180;les
++Role= r&#195;&#180;le
++Contact = contact
++no_roles = Aucun contact n'est donn&#195;&#169;.
++add_new_role = Ajoutez le nouveau r&#195;&#180;le
++edit_role = &#195;&#169;ditez le r&#195;&#180;le
++edit_contact = changez le contact
++editcontact = editez le contact
++series = s&#195;&#169;ries
++series_title = titre
++no_series = pas de s&#195;&#169;ries
++add_series = ajoutez la s&#195;&#169;ries
++
++
+ [adminGroups]
+-count=Members !!
+-comments=Comments !!
+-price=Price !!
+-income=Income !!
+-edit=Change !!
+-delete=Delete !!
+-add=Create new group !!
++count=Usagers
++comments=Commentaires
++price=prix
++income=Rentr&#195;&#169;es d'argent
++edit=&#195;&#169;ditez
++delete=effacez
++add=adjoutez un nouveau groupe
+ 
+ [adminUsers]
+-groups=Groups !!
+-edit_groups=Change groups !!
+-listen_stats=Statistics !!
+-delete=Delete !!
+-Search= Search !!
++groups=groupe
++edit_groups=&#195;&#169;ditez les groupes
++listen_stats=statistique des usagers
++delete=effacez
++Search=cherchez
+ 
+ [editGroup]
+-edit_group= Create/change group !!
+-comments=Comments !!
+-price=Price !!
+-error_name_missing = The name must be given! !!
+-error_name_in_use = A group with this name already exists !!
++edit_group= Adjoutez / &#195;&#169;ditez les groupes
++comments=Commentaires
++price=prix
++error_name_missing = S.v.p. donnez un nom!
++error_name_in_use = Il y a d&#195;&#169;j&#195;&#160; un groupe avec ce nom!
+ 
+ [editUserGroups]
+-editUserGroups = Change group memberships for user !!
++editUserGroups = Changez l'affiliation de groupe pour l'usager
+ 
+ [adminTopProgs]
+-Top_shows = Top programs !!
+-Top_expl = These statistics is based on logged in users only! !!
+-listenNum = Listens/Downloads  !!
+-details = Details !!
++Top_shows = programmes favoris&#195;&#169;s
++Top_expl = Cette statistique indique seulement des usagers registr&#195;&#169;s.
++listenNum = &#195;&#169;coutez et t&#195;&#169;l&#195;&#169;chargements
++details = d&#195;&#169;tails
+ 
+ [adminTopUsers]
+-Top_users = Top listeners !!
+-User = User !!
+-Contact = Contact !!
+-Groups = Groups !!
+-listenNum = Listens/Downloads !!
+-details = Details !!
++Top_users = les plus fr&#195;&#169;quents usagers
++User = usager
++Contact = contact
++Groups = groupes
++listenNum = &#195;&#169;coutez et t&#195;&#169;l&#195;&#169;chargements
++details = d&#195;&#169;tails
+ 
+ [adminProgStats]
+-adminProgStats = Program statistics !!
+-Prog_title = Program: !!
+-User = User !!
+-Contact = Contact !!
+-Groups = Groups !!
++adminProgStats = statistique des programmes
++Prog_title = Programme: 
++User = usager
++Contact = contact
++Groups = groupes
+ 
+ [adminUserStats]
+-adminUserStats = User statistics !!
+-User_name = User: !!
+-Program = Program !!
+-Groups = Groups !!
+-Contact = Contact: !!
++adminUserStats = statistique des usagers
++User_name = nom de usager: 
++Program = Programme
++Groups = groupes
++Contact = contact
+ 
+ [showGroup]
+-name = Group name !!
+-contents = Contains: !!
++name = nom de groupe
++contents = contenu: 
+ 
+ [adminShowUser]
+-adminShowUser = User data !!
+-User_name = User name: !!
++adminShowUser = donn&#195;&#169;es d'usager
++User_name = Nom de usager:
+ 
+
+Modified: node/branches/payable/code/configs/ger.conf
+===================================================================
+--- node/branches/payable/code/configs/ger.conf	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/code/configs/ger.conf	2006-11-15 14:43:20 UTC (rev 595)
+@@ -16,7 +16,7 @@
+ Up = Nach oben
+ Down = Nach unten
+ Preferences = Voreinstellungen
+-Username = User name
++Username = Benutzername
+ Password = Passwort
+ More = Mehr...
+ sec = s
+@@ -32,7 +32,7 @@
+ reconnect = Erneut verbinden
+ stop = Stop
+ jingle = Jingle
+-unknown_audio = Unbekanntes Audio
++unknown_audio = Unbekannte Audio-Datei
+ 
+ # languages
+ alb = Albanisch
+@@ -68,13 +68,14 @@
+ advSearch = Expertensuche
+ Stations = Sender
+ Topics = Themen
++Partner = Partner
+ 
+ #Admin tabs &amp; general
+ Network = Netzwerk &amp; Allgemein
+ Users = Nutzer
+ Groups = Gruppen
+-TopProgs = Progr. stat. !!
+-TopUsers = Nutzer stat. !!
++TopProgs = Programmstatistik
++TopUsers = Nutzerstatistik
+ admin=Node-Administratoren Kontrollfeld
+ 
+ #permissions
+@@ -104,14 +105,14 @@
+ not_a_number = Keine Zahl
+ select_file = Bitte Datei ausw&#195;&#164;hlen!
+ format_already_present = Dieses Format existiert schon. Bitte vorher die Datei l&#195;&#182;schen!
+-no_such_file = Die Datei eistiert nicht.
++no_such_file = Die Datei existiert nicht.
+ cannot_rate_no_authkey = Ohne Cookie k&#195;&#182;nnen keine Beurteilungen angenommen werden.
+ no_file_to_listen = Es ist keine Audiodatei freigegeben.
+ conversion_not_supported = Diese Audiokonvertierung wird nicht unterst&#195;&#188;tzt.
+ audio_length_no_match = Die L&#195;&#164;nge dieser Audiodatei weicht von den anderen ab.
+-no_permission = Sie w&#195;&#188;rden Zugriffsrecht %1 brauchen, umd das zu tun!
++no_permission = Sie w&#195;&#188;rden Zugriffsrecht %1 brauchen, um das zu tun!
+ conversion_failed = Audio-Konvertierung fehlgeschlagen!
+-operation_for_local_objects_only = Diese Operation ist nur f&#194;&#159;r lokale Objekte erlaubt!
++operation_for_local_objects_only = Diese Operation ist nur f&#195;&#188;r lokale Objekte erlaubt!
+ no_such_object = Objekt mit dieser ID kann nich aufgefunden werden
+ illegal_name = Der Sendername enth&#195;&#164;lt nicht erlaubte Zeichen.
+ 
+@@ -129,7 +130,7 @@
+ 
+ # translations for database field names
+ free_content = Freier Inhalt (gratis)
+-promoted=Promoted content !!
++promoted = Besondere Inhalte
+ station = Sendername
+ production_date = Produktionsdatum
+ language = Sprache
+@@ -147,7 +148,7 @@
+ abstract = Beschreibung
+ length = L&#195;&#164;nge
+ rating = Bewertung
+-contact_email = Kantakt e-Mail
++contact_email = Kontakt e-Mail
+ contact_phone = Kontakt Telefonnummer
+ seriestitle = Serien-Titel
+ seriesdescription = Serien-Beschreibung
+@@ -172,7 +173,7 @@
+ Statistics = Statistik
+ Rights = Rechte
+ for_whole_prg = F&#195;&#188;r die ganze Sendung
+-listen = Listen the program from the &quot;StreamOnTheFly Archiv&quot; here:
++listen = Das Programm vom &quot;StreamOnTheFly Archiv&quot; hier anh&#195;&#182;ren:
+ # the program from the &quot;StreamOnTheFly Archiv&quot; here:
+ listen_as = H&#195;&#182;ren
+ download_as = Runterladen
+@@ -215,14 +216,14 @@
+ users = Registrierte User
+ 
+ contacts = Kontakt
+-node_admin = Node operator
++node_admin = Node Administrator
+ contacts_text = &lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://www.streamonthefly.org">http://www.streamonthefly.org</A>&quot;&gt;StreamOnTheFly Projekt&lt;/a&gt;&lt;br&gt;&lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>&quot;&gt;SZTAKI DSD&lt;/a&gt;&lt;br&gt;&lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://dict.sztaki.hu/deutsch-ungarisch">http://dict.sztaki.hu/deutsch-ungarisch</A>&quot;&gt;W&#195;&#182;rterbuch&lt;/a&gt;
+ 
+ recent_uploads = Neueste Sendungen
+ topics = Themen
+ top_topics = Topthemen:
+ 
+-Promoted_shows = Promotion Inhalte: !!
++Promoted_shows = Besondere Inhalte: 
+ Premium_shows = Premium Inhalte:
+ No_premium_news = Keine neuen Premium Inhalte
+ New_shows = Neue Sendungen:
+@@ -359,7 +360,7 @@
+ permissions = Berechtigungen
+ actions = Aktionen
+ delete = L&#195;&#182;schen
+-inherited_perms = vom &quot;node&quot; bzw. der &quot;station&quot; vorgegebene Zugangsrechte
++inherited_perms = vom &quot;Node&quot; bzw. der &quot;Station&quot; vorgegebene Zugangsrechte
+ change_perm = Benutzerrechte hinzuf&#195;&#188;gen/&#195;&#164;ndern
+ change = &#195;&#132;ndern
+ deleted_permissions_for = Alle Berechtigungen f&#195;&#188;r Benutzer %1 gel&#195;&#182;scht
+@@ -527,7 +528,7 @@
+ permissions = Berechtigungen
+ actions = Aktionen
+ delete = L&#195;&#182;schen
+-inherited_perms = vom &quot;node&quot; bzw. der &quot;station&quot; vorgegebene Zugangsrechte
++inherited_perms = vom &quot;Node&quot; bzw. der &quot;Station&quot; vorgegebene Zugangsrechte
+ change_perm = Benutzerrechte hinzuf&#195;&#188;gen/&#195;&#164;ndern
+ change = &#195;&#132;ndern
+ deleted_permissions_for = Alle Berechtigungen f&#195;&#188;r Benutzer %1 gel&#195;&#182;scht
+@@ -543,7 +544,7 @@
+ programmes = Programme
+ edit_series = Einstellungen &#195;&#164;ndern
+ delete_series = Serie l&#195;&#182;schen
+-delete_series_confirm = Sind Sie sicher, dies Serie zu l&#195;&#182;schen?
++delete_series_confirm = Sind Sie sicher, diese Serie zu l&#195;&#182;schen?
+ edit_prog = Einstellungen &#195;&#164;ndern
+ delete_prog = Programm l&#195;&#182;schen
+ delete_prog_confirm = Sind sie sicher, dieses Programm zu l&#195;&#182;schen?
+@@ -566,7 +567,7 @@
+ [editor]
+ will_expire = Sie haben %1 Programm(e), die in %2 Tagen ablaufen!
+ create_new_expl1 = 1. Um eine neue Radiosendung zu erstellen, laden Sie die Audiodaten mit FTP oder HTTP in Ihren Arbeitsbereich.
+-create_new_expl2 = 2. Wenn Sie bereits Audiodaten in Ihrem Arbeitsbereich haben, w&#195;&#164;hlen Sie heir die Datei um daraus eine Sendung zu erzeugen
++create_new_expl2 = 2. Wenn Sie bereits Audiodaten in Ihrem Arbeitsbereich haben, w&#195;&#164;hlen Sie hier die Datei um daraus eine Sendung zu erzeugen.
+ manage_files = Dateiverwaltung
+ managefiles = Dateiverwaltung
+ add_programme = Als neues Programm hinzuf&#195;&#188;gen
+@@ -665,7 +666,7 @@
+ box3 = 3. Suche/n verwalten
+ load = Suche laden
+ default = Zu Standard machen
+-deleteq = Suche l&#195;&#188;schen
++deleteq = Suche l&#195;&#182;schen
+ save = Suche speichern
+ 
+ [advsearchresults]
+@@ -764,7 +765,7 @@
+ production_date = Produktionsdatum
+ broadcast_date = Sendedatum
+ expiry_date = Verfallsdatum
+-modify_date = Lezte &#195;&#132;nderung
++modify_date = Letzte &#195;&#132;nderung
+ entry_date = Speicherdatum
+ keywords = Stichworte
+ abstract = Inhaltsangabe
+@@ -783,7 +784,7 @@
+ stats_may_be_old = Die hier gezeigten Daten wurden das letzte Mal aktualisiert am
+ Download = Runterladen
+ Listen = H&#195;&#182;ren
+-edit_files = Manage files
++edit_files = Dateien &#195;&#164;ndern
+ edit_meta = Metadaten &#195;&#164;ndern
+ audio_file_list = Audiodateien:
+ other_file_list = Andere Dateien
+@@ -793,7 +794,7 @@
+ viewpopup = Ansicht
+ programme_audio = Audio
+ 
+-Listener_groups = This programme can be listened after subscribing to one of these groups: !!
++Listener_groups = Dieses Programm kann angeh&#195;&#182;rt werden, wenn Sie f&#195;&#188;r eine der folgenden Gruppen den Zugang erwerben: 
+ 
+ Links = Links
+ put_into_playlist = Zu meinem Programm hinzuf&#195;&#188;gen
+@@ -835,10 +836,10 @@
+ temporal_coverage = zeitliche Zuordnung
+ spatial_coverage = regionale Zuordnung
+ 
+-content_type = Type of content !!
+-Free = Free !!
+-Promoted = Promoted !!
+-Protected = Protected/payable !!
++content_type = Art der Inhalte
++Free = frei/gratis
++Promoted = au&#195;&#159;ergew&#195;&#182;hnlich/gesponsort
++Protected = kostenpflichtig
+ 
+ topics = Themen
+ no_topics = Noch keine Themen vorhanden
+@@ -869,7 +870,7 @@
+ permissions = Berechtigungen
+ actions = Aktionen
+ delete = L&#195;&#182;schen
+-inherited_perms = vom &quot;node&quot; bzw. der &quot;station&quot; vorgegebene Zugangsrechte
++inherited_perms = vom &quot;Node&quot; bzw. der &quot;Station&quot; vorgegebene Zugangsrechte
+ change_perm = Benutzerrechte hinzuf&#195;&#188;gen/&#195;&#164;ndern
+ change = &#195;&#132;ndern
+ deleted_permissions_for = Alle Berechtigungen f&#195;&#188;r Benutzer %1 gel&#195;&#182;scht
+@@ -882,7 +883,7 @@
+ view = Betrachten
+ set_icon = Als Logo setzten
+ no_files = Noch keine Dateien vorhanden.
+-upload_expl = Wenn die Datei, die sie als Jingle oder Icon verwenden wollen, noch nicht in ihrer Dateiliste vorhanden ist, dann k&#195;&#182;nnen sie eine Datei hier raufladen.
++upload_expl = Wenn die Datei, die Sie als Jingle oder Icon verwenden wollen, noch nicht in Ihrer Dateiliste vorhanden ist, dann k&#195;&#182;nnen Sie eine Datei hier raufladen.
+ icon = Logo
+ no_icon = Kein Icon
+ 
+@@ -922,7 +923,7 @@
+ change = &#195;&#132;ndern
+ delete = L&#195;&#182;schen
+ change_caption = Benennung ver&#195;&#164;ndern
+-add_content = Andere format hinzuf&#195;&#188;gen
++add_content = Inhalte hinzuf&#195;&#188;gen
+ add_files = Datei(en) hinzuf&#195;&#188;gen
+ missing = fehlt
+ convert = Von anderen konvertieren
+@@ -961,7 +962,7 @@
+ [addFiles]
+ add_files = Datei(en) hinzuf&#195;&#188;gen
+ userfiles = Meine Dateien
+-userfiles_expl = 
++userfiles_expl = Sie k&#195;&#182;nnen hier eine Datei ausw&#195;&#164;hlen und dann als Logo oder Jingle verwenden.
+ upload_file = Datei raufladen
+ add_selected = Selektierte Datei dem Programm hinzuf&#195;&#188;gen
+ no_files = Sie haben noch keine Dateien raufgeladen.
+@@ -975,11 +976,11 @@
+ manage_files = Eigene Dateien verwalten
+ add_files = Datei(en) hinzuf&#195;&#188;gen
+ userfiles = Meine Dateien
+-userfiles_expl = 
++userfiles_expl = Sie k&#195;&#182;nnen eine Datei hier ausw&#195;&#164;hlen und als Icon oder Jingle verwenden.
+ upload_file = Meinen Dateien hinzuf&#195;&#188;gen
+ del_selected = Selektierte Dateien l&#195;&#182;schen
+ no_files = Sie haben noch keine Dateien raufgeladen.
+-upload_expl = Wenn die Datei, die sie als Jingle oder Icon verwenden wollen, noch nicht in ihrer Dateiliste vorhanden ist, dann k&#195;&#182;nnen sie eine Datei hier raufladen.
++upload_expl = Wenn die Datei, die Sie als Jingle oder Icon verwenden wollen, noch nicht in Ihrer Dateiliste vorhanden ist, dann k&#195;&#182;nnen Sie eine Datei hier raufladen.
+ close = Fenster schliessen
+ 
+ [editRight]
+@@ -1046,7 +1047,7 @@
+ change_perm = Benutzerrechte hinzuf&#195;&#188;gen/&#195;&#164;ndern
+ change = &#195;&#132;ndern
+ deleted_permissions_for = Alle Berechtigungen f&#195;&#188;r Benutzer %1 gel&#195;&#182;scht
+-debug_log = Debugging and logging
++debug_log = Fehler bereinigen und protokollieren
+ 
+ view_log = Protokolldatei anzeigen
+ view_config = Konfiguration anzeigen
+@@ -1099,8 +1100,8 @@
+ [adminGroups]
+ count = Mitglieder
+ comments = Kommentare
+-price=Price !!
+-income=Income !!
++price = Preis
++income= Einnahmen
+ edit = &#195;&#132;ndern
+ delete = L&#195;&#182;schen
+ add = Neue Gruppe erstellen
+@@ -1108,14 +1109,14 @@
+ [adminUsers]
+ groups = Gruppen
+ edit_groups = Gruppen &#195;&#164;ndern
+-listen_stats=Statistics !!
++listen_stats = H&#195;&#182;rer Statistik
+ delete = L&#195;&#182;schen
+ Search = Suchen
+ 
+ [editGroup]
+ edit_group = Erstellen/&#195;&#132;ndern einer Gruppe
+ comments = Kommentare
+-price=Price !!
++price=Preis
+ error_name_missing = Der Name muss angegeben werden!
+ error_name_in_use = Eine Gruppe mit diesem Namen existiert bereits.
+ 
+@@ -1123,38 +1124,38 @@
+ editUserGroups = &#195;&#132;ndern der Gruppenmitgliedschaft von Nutzern
+ 
+ [adminTopProgs]
+-Top_shows = Liste der h&#195;&#164;ufigsten H&#195;&#182;rer
+-Top_expl = These statistics is based on logged in users only!
++Top_shows = Liste der am meisten geh&#195;&#182;rten Sendungen
++Top_expl = Diese Statistiken beziehen sich nur auf angemeldete H&#195;&#182;rer!
+ listenNum = Angeh&#195;&#182;rt/Heruntergeladen
+ details = Details
+ 
+ [adminTopUsers]
+-Top_users = Top listeners
+-User = User
+-Contact = Contact
+-Groups = Groups
+-listenNum = Listens/Downloads
++Top_users = Liste der h&#195;&#164;ufigsten H&#195;&#182;rer
++User = Nutzer
++Contact = Kontakt
++Groups = Gruppe
++listenNum = H&#195;&#182;rer/Downloads
+ details = Details
+ 
+ [adminProgStats]
+-adminProgStats = Program statistics
+-Prog_title = Program:
+-User = User
+-Contact = Contact
+-Groups = Groups
++adminProgStats = Programmstatistik
++Prog_title = Programm:
++User = Nutzer
++Contact = Kontakt
++Groups = Gruppe
+ 
+ [adminUserStats]
+-adminUserStats = User statistics
+-User_name = User:
+-Program = Program
+-Groups = Groups
+-Contact = Contact:
++adminUserStats = Nutzerstatistik
++User_name = Nutzer:
++Program = Programm
++Groups = Gruppe
++Contact = Kontakt:
+ 
+ [showGroup]
+-name = Group name
+-contents = Contains:
++name = Gruppenname
++contents = Inhalte:
+ 
+ [adminShowUser]
+-adminShowUser = User data
+-User_name = User name:
++adminShowUser = Benutzerdaten
++User_name = Benutzername:
+ 
+
+Modified: node/branches/payable/code/configs/hun.conf
+===================================================================
+--- node/branches/payable/code/configs/hun.conf	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/code/configs/hun.conf	2006-11-15 14:43:20 UTC (rev 595)
+@@ -68,6 +68,7 @@
+ advSearch = R&#195;&#169;szletes keres&#195;&#169;s
+ Stations = R&#195;&#161;di&#195;&#179;k
+ Topics = T&#195;&#169;m&#195;&#161;k
++Partner = t&#195;&#161;rs / egy&#195;&#188;ttm&#195;&#188;k&#195;&#182;d&#195;&#169;s ?? !!
+ 
+ #Admin tabs &amp; general
+ Network = H&#195;&#161;l&#195;&#179;zat &#195;&#169;s &#195;&#161;ltal&#195;&#161;nos
+
+Modified: node/branches/payable/code/templates/main.htm
+===================================================================
+--- node/branches/payable/code/templates/main.htm	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/code/templates/main.htm	2006-11-15 14:43:20 UTC (rev 595)
+@@ -50,51 +50,51 @@
+ 
+ &lt;body background=&quot;{$IMAGE_URL}/bg.gif&quot; leftmargin=&quot;0&quot; topmargin=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot;&gt;
+ 
+-&lt;div align=&quot;center&quot;&gt; 
++&lt;div align=&quot;center&quot;&gt;
+ 
+   &lt;table width=&quot;{#pageW#}&quot; height=&quot;100%&quot; border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;
+ 
+-    &lt;tr&gt; 
++    &lt;tr&gt;
+ 
+-      &lt;td background=&quot;{$IMAGE_URL}/bg_main_LEFT.gif&quot;&gt; 
++      &lt;td background=&quot;{$IMAGE_URL}/bg_main_LEFT.gif&quot;&gt;
+ 
+         &lt;div align=&quot;center&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/bg_main_LEFT.gif&quot; width=&quot;7&quot; height=&quot;6&quot;&gt;&lt;/div&gt;
+ 
+       &lt;/td&gt;
+ 
+-      &lt;td width=&quot;{#pageW#}&quot; valign=&quot;top&quot; bgcolor=&quot;#FFFFFF&quot;&gt; 
++      &lt;td width=&quot;{#pageW#}&quot; valign=&quot;top&quot; bgcolor=&quot;#FFFFFF&quot;&gt;
+ 
+         &lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;{#pageW#}&quot;&gt;
+ 
+           &lt;!-- fwtable fwsrc=&quot;stream1.png&quot; fwbase=&quot;top.gif&quot; fwstyle=&quot;Dreamweaver&quot; fwdocid = &quot;742308039&quot; fwnested=&quot;1&quot; --&gt;
+ 
+-          &lt;tr&gt; 
++          &lt;tr&gt;
+ 
+             &lt;td bgcolor=&quot;#000000&quot;&gt;&lt;img name=&quot;top_r1_c1&quot; src=&quot;{$IMAGE_URL}/top_r1_c1.gif&quot; width=&quot;700&quot; height=&quot;17&quot; border=&quot;0&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+ 
+           &lt;/tr&gt;
+ 
+-          &lt;tr&gt; 
++          &lt;tr&gt;
+ 
+             &lt;td&gt;
+ 
+               &lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;{#pageW#}&quot;&gt;
+ 
+-                &lt;tr&gt; 
++                &lt;tr&gt;
+ 
+-                  &lt;td height=&quot;60&quot; bgcolor=&quot;#CEDDFC&quot;&gt; 
++                  &lt;td height=&quot;60&quot; bgcolor=&quot;#CEDDFC&quot;&gt;
+ 
+-                    &lt;div align=&quot;right&quot;&gt; 
++                    &lt;div align=&quot;right&quot;&gt;
+ 
+                       &lt;table width=&quot;100%&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;
+ 
+-                        &lt;tr&gt; 
++                        &lt;tr&gt;
+ 
+-                          &lt;td background=&quot;{$IMAGE_URL}/top_r2_c1.gif&quot; class=tablebg&gt; 
++                          &lt;td background=&quot;{$IMAGE_URL}/top_r2_c1.gif&quot; class=tablebg&gt;
+ 
+                             &lt;table cellSpacing=0 cellPadding=6 width=&quot;100%&quot; border=0&gt;
+ 
+-                              &lt;tr&gt; 
++                              &lt;tr&gt;
+ 
+                                      &lt;form&gt;
+ 
+@@ -132,8 +132,8 @@
+ 
+                     &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#stop#}&quot; onClick=&quot;redir(this.form,'{$ROOT_URL}/listen.php?stop=1')&quot; /&gt;
+ 
+-                                     
+ 
++
+                                   {/if}
+ 
+ 
+@@ -150,7 +150,7 @@
+ 
+                                    &lt;select name=&quot;uilang&quot; onChange=&quot;this.form.submit()&quot;&gt;
+ 
+-                                     {foreach item=item from=$UI_LANGS}                 
++                                     {foreach item=item from=$UI_LANGS}
+ 
+                                        &lt;option value=&quot;{$item[0]}&quot; {if $LANG eq $item[0]}SELECTED=&quot;1&quot;{/if} &gt;{$item[1]}&lt;/option&gt;
+ 
+@@ -186,13 +186,13 @@
+ 
+           &lt;/tr&gt;
+ 
+-          &lt;tr&gt; 
++          &lt;tr&gt;
+ 
+-            &lt;td width=&quot;{#pageW#}&quot; height=&quot;18&quot; bgcolor=&quot;#FFFFFF&quot;&gt; 
++            &lt;td width=&quot;{#pageW#}&quot; height=&quot;18&quot; bgcolor=&quot;#FFFFFF&quot;&gt;
+ 
+               &lt;table width=&quot;100%&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;2&quot;&gt;
+ 
+-                &lt;tr&gt; 
++                &lt;tr&gt;
+ 
+                   &lt;td class=&quot;menu&quot;&gt;
+ 
+@@ -200,21 +200,23 @@
+ 
+                       &lt;!-- begin navbar --&gt;
+ 
+-                      &lt;a class=&quot;menu&quot; href=&quot;{$ROOT_URL}/&quot;&gt;{#Home#}&lt;/a&gt; 
++                      &lt;a class=&quot;menu&quot; href=&quot;{$ROOT_URL}/&quot;&gt;{#Home#}&lt;/a&gt;
+ 
+-                      | &lt;a class=&quot;menu&quot; href=&quot;{$ROOT_URL}/advsearch.php&quot;&gt;{#Search#}&lt;/a&gt; 
++                      | &lt;a class=&quot;menu&quot; href=&quot;{$ROOT_URL}/advsearch.php&quot;&gt;{#Search#}&lt;/a&gt;
+ 
+-                      | &lt;a class=&quot;menu&quot; href=&quot;{$ROOT_URL}/stations.php&quot;&gt;{#Stations#}&lt;/a&gt; 
++                      | &lt;a class=&quot;menu&quot; href=&quot;{$ROOT_URL}/stations.php&quot;&gt;{#Stations#}&lt;/a&gt;
+ 
+-                      | &lt;a class=&quot;menu&quot; href=&quot;{$ROOT_URL}/topics.php&quot;&gt;{#Topics#}&lt;/a&gt; 
++                      | &lt;a class=&quot;menu&quot; href=&quot;{$ROOT_URL}/topics.php&quot;&gt;{#Topics#}&lt;/a&gt;
+ 
++                      | &lt;a class=&quot;menu&quot; href=&quot;{$ROOT_URL}/partner.php&quot;&gt;{#Partner#}&lt;/a&gt;                      
++
+                       {if $loggedIn}
+ 
+                         | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/playlist.php&quot;&gt;{#Playlist#}&lt;/a&gt;
+ 
+                       {/if}
+ 
+-                      {if $IS_EDITOR} | &lt;a class=&quot;menu&quot; href=&quot;{$ROOT_URL}/editor.php&quot;&gt;{#EditorPage#}&lt;/a&gt; {/if} 
++                      {if $IS_EDITOR} | &lt;a class=&quot;menu&quot; href=&quot;{$ROOT_URL}/editor.php&quot;&gt;{#EditorPage#}&lt;/a&gt; {/if}
+ 
+                       {if hasPerm('node', 'change', 'authorize') } | &lt;a class=&quot;menu&quot; href=&quot;{$ROOT_URL}/admin.php&quot;&gt;{#AdminPage#}&lt;/a&gt; {/if}
+ 
+@@ -256,13 +258,13 @@
+ 
+           &lt;/tr&gt;
+ 
+-          &lt;tr&gt; 
++          &lt;tr&gt;
+ 
+             &lt;td background=&quot;{$IMAGE_URL}/top_r4_c2.gif&quot;&gt;
+ 
+               &lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;{#pageW#}&quot;&gt;
+ 
+-                &lt;tr&gt; 
++                &lt;tr&gt;
+ 
+                   &lt;td&gt;&lt;img name=&quot;top_r4_c1&quot; src=&quot;{$IMAGE_URL}/top_r4_c1.gif&quot; width=&quot;2&quot; height=&quot;6&quot; border=&quot;0&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+ 
+@@ -282,7 +284,7 @@
+ 
+             {foreach from=$STATUS_MESSAGES item=MSG}
+ 
+-                &lt;tr&gt; 
++                &lt;tr&gt;
+ 
+                   &lt;td class=&quot;status&quot;&gt;
+ 
+@@ -296,7 +298,7 @@
+ 
+           {/if} --&gt;
+ 
+-          &lt;tr&gt; 
++          &lt;tr&gt;
+ 
+             &lt;td&gt;
+ 
+@@ -306,15 +308,15 @@
+ 
+                 &lt;hr&gt;
+ 
+-                &lt;font size=&quot;-1&quot;&gt; 
++                &lt;font size=&quot;-1&quot;&gt;
+ 
+-                &lt;div style=&quot;text-align : center; font-size: 8pt&quot;&gt; 
++                &lt;div style=&quot;text-align : center; font-size: 8pt&quot;&gt;
+ 
+-		{#contact_node_admin#} {mailto address=&quot;$ADMIN_EMAIL&quot; encode=&quot;javascript&quot;}
++                {#contact_node_admin#} {mailto address=&quot;$ADMIN_EMAIL&quot; encode=&quot;javascript&quot;}
+ 
+                 &lt;/div&gt;
+ 
+-                &lt;/font&gt; 
++                &lt;/font&gt;
+ 
+               &lt;/p&gt;
+ 
+@@ -349,4 +351,3 @@
+   {/if}
+ 
+ &lt;/script&gt;
+-
+
+Modified: node/branches/payable/code/templates/main_frame_left.htm
+===================================================================
+--- node/branches/payable/code/templates/main_frame_left.htm	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/code/templates/main_frame_left.htm	2006-11-15 14:43:20 UTC (rev 595)
+@@ -10,26 +10,26 @@
+ &lt;script src=&quot;{$IMAGE_URL}/base.js&quot;&gt;&lt;/script&gt;
+ &lt;/head&gt;
+ &lt;body background=&quot;{$IMAGE_URL}/bg.gif&quot; leftmargin=&quot;0&quot; topmargin=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot;&gt;
+-&lt;div align=&quot;center&quot;&gt; 
++&lt;div align=&quot;center&quot;&gt;
+   &lt;table width=&quot;100%&quot; height=&quot;100%&quot; border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;
+-    &lt;tr&gt; 
+-      &lt;td width=&quot;100%&quot; valign=&quot;top&quot; bgcolor=&quot;#FFFFFF&quot;&gt; 
++    &lt;tr&gt;
++      &lt;td width=&quot;100%&quot; valign=&quot;top&quot; bgcolor=&quot;#FFFFFF&quot;&gt;
+         &lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;{#pageW#}&quot;&gt;
+           &lt;!-- fwtable fwsrc=&quot;stream1.png&quot; fwbase=&quot;top.gif&quot; fwstyle=&quot;Dreamweaver&quot; fwdocid = &quot;742308039&quot; fwnested=&quot;1&quot; --&gt;
+-          &lt;tr&gt; 
++          &lt;tr&gt;
+             &lt;td bgcolor=&quot;#000000&quot;&gt;&lt;img name=&quot;top_r1_c1&quot; src=&quot;{$IMAGE_URL}/top_r1_c1.gif&quot; width=&quot;700&quot; height=&quot;17&quot; border=&quot;0&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+           &lt;/tr&gt;
+-          &lt;tr&gt; 
++          &lt;tr&gt;
+             &lt;td&gt;
+               &lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;{#pageW#}&quot;&gt;
+-                &lt;tr&gt; 
+-                  &lt;td height=&quot;60&quot; bgcolor=&quot;#CEDDFC&quot;&gt; 
+-                    &lt;div align=&quot;right&quot;&gt; 
++                &lt;tr&gt;
++                  &lt;td height=&quot;60&quot; bgcolor=&quot;#CEDDFC&quot;&gt;
++                    &lt;div align=&quot;right&quot;&gt;
+                       &lt;table width=&quot;100%&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;
+-                        &lt;tr&gt; 
+-                          &lt;td background=&quot;{$IMAGE_URL}/top_r2_c1.gif&quot; class=tablebg&gt; 
++                        &lt;tr&gt;
++                          &lt;td background=&quot;{$IMAGE_URL}/top_r2_c1.gif&quot; class=tablebg&gt;
+                             &lt;table cellSpacing=0 cellPadding=6 width=&quot;100%&quot; border=0&gt;
+-                              &lt;tr&gt; 
++                              &lt;tr&gt;
+                                 &lt;td&gt;
+                                   &lt;script language=&quot;Javascript1.2&quot; src=&quot;{$IMAGE_URL}/cal.js&quot;&gt;&lt;/script&gt;
+                                   &lt;script language=&quot;Javascript1.2&quot;&gt;
+@@ -47,7 +47,7 @@
+                                                        {/if}
+                     &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#reconnect#}&quot; onClick=&quot;redir(this.form,'{$ROOT_URL}/listen.php?reconnect=1')&quot; /&gt;
+                     &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#stop#}&quot; onClick=&quot;redir(this.form,'{$ROOT_URL}/listen.php?stop=1')&quot; /&gt;
+-                                     
++
+                                   {/if}
+ 
+                                 &lt;/td&gt;
+@@ -56,7 +56,7 @@
+                                 &lt;td&gt;
+                                    &lt;input type=&quot;hidden&quot; name=&quot;okURL&quot; value=&quot;{$smarty.server.REQUEST_URI|escape}&quot; /&gt;
+                                    &lt;select name=&quot;uilang&quot; onChange=&quot;this.form.submit()&quot;&gt;
+-                                     {foreach item=item from=$UI_LANGS}                 
++                                     {foreach item=item from=$UI_LANGS}
+                                        &lt;option value=&quot;{$item[0]}&quot; {if $LANG eq $item[0]}SELECTED=&quot;1&quot;{/if} &gt;{$item[1]}&lt;/option&gt;
+                                      {/foreach}
+                                    &lt;/select&gt;
+@@ -74,20 +74,21 @@
+ 
+             &lt;/td&gt;
+           &lt;/tr&gt;
+-          &lt;tr&gt; 
+-            &lt;td width=&quot;{#pageW#}&quot; height=&quot;18&quot; bgcolor=&quot;#FFFFFF&quot;&gt; 
++          &lt;tr&gt;
++            &lt;td width=&quot;{#pageW#}&quot; height=&quot;18&quot; bgcolor=&quot;#FFFFFF&quot;&gt;
+               &lt;table width=&quot;100%&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;2&quot;&gt;
+-                &lt;tr&gt; 
++                &lt;tr&gt;
+                   &lt;td class=&quot;menu&quot;&gt;
+                     &lt;p&gt;&lt;strong&gt;
+                       &lt;!-- begin navbar --&gt;
+-                      &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/&quot;&gt;{#Home#}&lt;/a&gt; 
+-                      | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/advsearch.php&quot;&gt;{#Search#}&lt;/a&gt; 
+-                      | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/stations.php&quot;&gt;{#Stations#}&lt;/a&gt; 
++                      &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/&quot;&gt;{#Home#}&lt;/a&gt;
++                      | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/advsearch.php&quot;&gt;{#Search#}&lt;/a&gt;
++                      | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/stations.php&quot;&gt;{#Stations#}&lt;/a&gt;
++                      | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/partner.php&quot;&gt;{#Partner#}&lt;/a&gt;   
+                       {if $loggedIn}
+                         | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/playlist.php&quot;&gt;{#Playlist#}&lt;/a&gt;
+                       {/if}
+-                      {if $IS_EDITOR} | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/editor.php&quot;&gt;{#EditorPage#}&lt;/a&gt; {/if} 
++                      {if $IS_EDITOR} | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/editor.php&quot;&gt;{#EditorPage#}&lt;/a&gt; {/if}
+                       {if hasPerm('node', 'change', 'authorize') } | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/admin.php&quot;&gt;{#AdminPage#}&lt;/a&gt; {/if}
+                       {if $loggedIn}
+                       | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/register.php?okURL={$smarty.server.REQUEST_URI|escape:&quot;url&quot;}&quot;&gt;{#Personal#} ({$USERNAME})&lt;/a&gt;
+@@ -95,17 +96,17 @@
+                       {else}
+                       | &lt;a target=&quot;_top&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/login.php?okURL={$smarty.server.REQUEST_URI|escape:&quot;url&quot;}&quot;&gt;{#Login#}&lt;/a&gt;
+                       {/if}
+-                      | &lt;a target=&quot;_blank&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/help.php?action={$ACTION}&amp;lang={$LANG}&quot;&gt;{#Help#}&lt;/a&gt; 
++                      | &lt;a target=&quot;_blank&quot; class=&quot;menu&quot; href=&quot;{$ROOT_URL}/help.php?action={$ACTION}&amp;lang={$LANG}&quot;&gt;{#Help#}&lt;/a&gt;
+                       &lt;!-- end navbar --&gt;
+                   &lt;/td&gt;
+                 &lt;/tr&gt;
+               &lt;/table&gt;
+             &lt;/td&gt;
+           &lt;/tr&gt;
+-          &lt;tr&gt; 
++          &lt;tr&gt;
+             &lt;td background=&quot;{$IMAGE_URL}/top_r4_c2.gif&quot;&gt;
+               &lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;{#pageW#}&quot;&gt;
+-                &lt;tr&gt; 
++                &lt;tr&gt;
+                   &lt;td&gt;&lt;img name=&quot;top_r4_c1&quot; src=&quot;{$IMAGE_URL}/top_r4_c1.gif&quot; width=&quot;2&quot; height=&quot;6&quot; border=&quot;0&quot; alt=&quot;&quot;&gt;&lt;/td&gt;
+                 &lt;/tr&gt;
+               &lt;/table&gt;
+@@ -115,24 +116,24 @@
+         &lt;table width=&quot;100%&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;5&quot;&gt;
+           &lt;!-- {if $STATUS_MESSAGES}
+             {foreach from=$STATUS_MESSAGES item=MSG}
+-                &lt;tr&gt; 
++                &lt;tr&gt;
+                   &lt;td class=&quot;status&quot;&gt;
+                       {$MSG}
+                   &lt;/td&gt;
+                 &lt;/tr&gt;
+             {/foreach}
+           {/if} --&gt;
+-          &lt;tr&gt; 
++          &lt;tr&gt;
+             &lt;td&gt;
+               &lt;div align=&quot;left&quot;&gt; {include file=&quot;$ACTION.htm&quot;} &lt;/div&gt;
+                 &lt;p align=&quot;center&quot;&gt;
+                 &lt;hr&gt;
+-                &lt;font size=&quot;-1&quot;&gt; 
+-                &lt;div style=&quot;text-align : center; font-size: 8pt&quot;&gt; Copyright &copy; 
+-                  2002 &lt;a href=&quot;<A HREF="http://www.streamonthefly.com">http://www.streamonthefly.com</A>&quot;&gt;StreamOnTheFly 
+-                  project&lt;/a&gt;, &lt;a  href=&quot;<A HREF="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</A>&quot;&gt;GPL&lt;/a&gt; 
++                &lt;font size=&quot;-1&quot;&gt;
++                &lt;div style=&quot;text-align : center; font-size: 8pt&quot;&gt; Copyright &copy;
++                  2002 &lt;a href=&quot;<A HREF="http://www.streamonthefly.com">http://www.streamonthefly.com</A>&quot;&gt;StreamOnTheFly
++                  project&lt;/a&gt;, &lt;a  href=&quot;<A HREF="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</A>&quot;&gt;GPL&lt;/a&gt;
+                 &lt;/div&gt;
+-                &lt;/font&gt; 
++                &lt;/font&gt;
+               &lt;/p&gt;
+             &lt;/td&gt;
+           &lt;/tr&gt;
+@@ -149,4 +150,4 @@
+   {if $STATUS_MESSAGES or $ERROR_MESSAGES }
+        alert(&quot;{foreach from=$ERROR_MESSAGES item=MSG}{$MSG|escape:&quot;html&quot;}\n{/foreach}{foreach from=$STATUS_MESSAGES item=MSG}{$MSG|escape:&quot;html&quot;}\n{/foreach}&quot;);
+   {/if}
+-&lt;/script&gt;
++&lt;/script&gt;
+\ No newline at end of file
+
+Modified: node/branches/payable/www/about.php
+===================================================================
+--- node/branches/payable/www/about.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/about.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,14 +1,22 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  */
+ 
+ require(&quot;init.inc.php&quot;);
+ 
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = '&#220;ber uns - about.php';
++   include($config['counterURL']);
++}
++
+ $page-&gt;send();
+ 
+ ?&gt;
+
+Modified: node/branches/payable/www/advsearch.php
+===================================================================
+--- node/branches/payable/www/advsearch.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/advsearch.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,236 +1,245 @@
+-&lt;?php  // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php  // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  */
+ 
+ require(&quot;init.inc.php&quot;);
+ require($config['classdir'] . &quot;/sotf_AdvSearch.class.php&quot;);
+-require($config['classdir'] . &quot;/sotf_ParamCache.class.php&quot;);				//paramcache
++require($config['classdir'] . &quot;/sotf_ParamCache.class.php&quot;);                                //paramcache
+ 
+-$paramcache = &amp; new sotf_ParamCache();					//paramcache
+-$paramcache-&gt;setMaxCache(10);						//paramcache
+-//sotf_Utils::getParameter						//paramcache
+-//$paramcache-&gt;getRegistered						//paramcache
++$paramcache = &amp; new sotf_ParamCache();                                        //paramcache
++$paramcache-&gt;setMaxCache(10);                                                //paramcache
++//sotf_Utils::getParameter                                                //paramcache
++//$paramcache-&gt;getRegistered                                                //paramcache
+ 
+-if ($paramcache-&gt;getProcessed())					//paramcache, if already adde, deleted, do not do it again
++if ($paramcache-&gt;getProcessed())                                        //paramcache, if already adde, deleted, do not do it again
+ {
+-	$paramcache-&gt;setParameter(&quot;save&quot;, false);
+-	$paramcache-&gt;setParameter(&quot;deleteq&quot;, false);
++        $paramcache-&gt;setParameter(&quot;save&quot;, false);
++        $paramcache-&gt;setParameter(&quot;deleteq&quot;, false);
+ }
+ 
+ //1. Add terms to the query
+-$SQLlink = $paramcache-&gt;getRegistered('SQLlink');			//linker (OR or AND)
+-$SQLfield = $paramcache-&gt;getRegistered('SQLfield');		//name ot the term to add
+-$add = $paramcache-&gt;getRegistered('add');				//add term button
+-$new = $paramcache-&gt;getRegistered('new');				//new query button
++$SQLlink = $paramcache-&gt;getRegistered('SQLlink');                        //linker (OR or AND)
++$SQLfield = $paramcache-&gt;getRegistered('SQLfield');                //name ot the term to add
++$add = $paramcache-&gt;getRegistered('add');                                //add term button
++$new = $paramcache-&gt;getRegistered('new');                                //new query button
+ 
+ //2. Run query
+-$sort1 = $paramcache-&gt;getRegistered('sort1');			//sort order 1
+-$sort2 = $paramcache-&gt;getRegistered('sort2');			//sort order 2
+-$dir1 = $paramcache-&gt;getRegistered('dir1');			//sort order direction 1
+-$dir2 = $paramcache-&gt;getRegistered('dir2');			//sort order direction 2
+-$run = $paramcache-&gt;getRegistered('run');				//run query button
+-$run_image = $paramcache-&gt;getRegistered('image_x');		//TRANSPARENT_run query button (default by enter)
+-$portal_http = $paramcache-&gt;getRegistered('upload_http');	//if upload pressed, the portal field
++$sort1 = $paramcache-&gt;getRegistered('sort1');                        //sort order 1
++$sort2 = $paramcache-&gt;getRegistered('sort2');                        //sort order 2
++$dir1 = $paramcache-&gt;getRegistered('dir1');                        //sort order direction 1
++$dir2 = $paramcache-&gt;getRegistered('dir2');                        //sort order direction 2
++$run = $paramcache-&gt;getRegistered('run');                                //run query button
++$run_image = $paramcache-&gt;getRegistered('image_x');                //TRANSPARENT_run query button (default by enter)
++$portal_http = $paramcache-&gt;getRegistered('upload_http');        //if upload pressed, the portal field
+ 
+ //3. Manage your queries
+-$loadfrom = $paramcache-&gt;getRegistered('loadfrom');		//dropdown box with the saved queries
+-$load = $paramcache-&gt;getRegistered('load');			//load button
+-$default = $paramcache-&gt;getRegistered('default');			//make my default button
+-$deleteq = $paramcache-&gt;getRegistered('deleteq');			//delete query button
+-$save = $paramcache-&gt;getRegistered('save');			//save button
+-$saveas = $paramcache-&gt;getRegistered('saveas');			//text field
++$loadfrom = $paramcache-&gt;getRegistered('loadfrom');                //dropdown box with the saved queries
++$load = $paramcache-&gt;getRegistered('load');                        //load button
++$default = $paramcache-&gt;getRegistered('default');                        //make my default button
++$deleteq = $paramcache-&gt;getRegistered('deleteq');                        //delete query button
++$save = $paramcache-&gt;getRegistered('save');                        //save button
++$saveas = $paramcache-&gt;getRegistered('saveas');                        //text field
+ 
+ //Current query
+-$SQLeq = $paramcache-&gt;getRegistered('SQLeq');			//= &lt; &gt; ... values array
+-$SQLstring = $paramcache-&gt;getRegistered('SQLstring');		//last parameter value array
++$SQLeq = $paramcache-&gt;getRegistered('SQLeq');                        //= &lt; &gt; ... values array
++$SQLstring = $paramcache-&gt;getRegistered('SQLstring');                //last parameter value array
+ 
+-$SQLquerySerial = $paramcache-&gt;getRegistered('SQLquerySerial');		//the serialized query come from ADVSEARCH.PHP (hidden field)
+-if ($SQLquerySerial == &quot;&quot;) $SQLquerySerial = $_SESSION[&quot;SQLquerySerial&quot;];	//  from ADVSEARCHRESULTS.PHP or somewhere else (session)
++$SQLquerySerial = $paramcache-&gt;getRegistered('SQLquerySerial');                //the serialized query come from ADVSEARCH.PHP (hidden field)
++if ($SQLquerySerial == &quot;&quot;) $SQLquerySerial = $_SESSION[&quot;SQLquerySerial&quot;];        //  from ADVSEARCHRESULTS.PHP or somewhere else (session)
+ 
+-if ($SQLquerySerial == &quot;&quot;)			//make a new query if first time here
++if ($SQLquerySerial == &quot;&quot;)                        //make a new query if first time here
+ {
+-	$SQLquery = $_SESSION[&quot;SQLquery&quot;];		//get array from session
+-	$advsearch = new sotf_AdvSearch($SQLquery);	//create search object object with this array
++        $SQLquery = $_SESSION[&quot;SQLquery&quot;];                //get array from session
++        $advsearch = new sotf_AdvSearch($SQLquery);        //create search object object with this array
+ }
+-else 						//else careate query from loaded
++else                                                 //else careate query from loaded
+ {
+-	$advsearch = new sotf_AdvSearch();		//create new search object object
+-	$SQLquery = $advsearch-&gt;Deserialize($SQLquerySerial);	//deserialize the content of the hidden field
++        $advsearch = new sotf_AdvSearch();                //create new search object object
++        $SQLquery = $advsearch-&gt;Deserialize($SQLquerySerial);        //deserialize the content of the hidden field
+ }
+ 
+-if ($SQLquery == NULL) $advsearch-&gt;SetSortOrder();	//set DEFAULT sort order for new queries
++if ($SQLquery == NULL) $advsearch-&gt;SetSortOrder();        //set DEFAULT sort order for new queries
+ 
+ if (isset($sort1) AND isset($sort2))
+-	{
+-		$advsearch-&gt;SetSortOrder($sort1, $sort2);	//set sort order
+-		$advsearch-&gt;setDir($dir1, $dir2);		//set sort order direction
+-	}
++        {
++                $advsearch-&gt;SetSortOrder($sort1, $sort2);        //set sort order
++                $advsearch-&gt;setDir($dir1, $dir2);                //set sort order direction
++        }
+ 
+ 
+ $max = count($SQLeq);
+ $k = 0;
+-for ($i=0; $i &lt; $max; $i++)			//go through all the values on the form
++for ($i=0; $i &lt; $max; $i++)                        //go through all the values on the form
+ {
+-	$SQLquery[$i][2] = $SQLeq[$i];
+-	if ($SQLquery[$i][4] == &quot;date&quot;)
+-	{
+-		$SQLquery[$i][3] = mktime(0,0,0,$SQLstring[$k+1],$SQLstring[$k+2],$SQLstring[$k]);	//	mktime(0,0,0,$month,$day,$year);
+-		$k += 2;
+-	}
+-	elseif ($SQLquery[$i][4] == &quot;length&quot;)
+-	{
+-		$SQLquery[$i][3] = abs($SQLstring[$k]);
+-	}
+-	else	$SQLquery[$i][3] = $SQLstring[$k];
+-	$k++;
++        $SQLquery[$i][2] = $SQLeq[$i];
++        if ($SQLquery[$i][4] == &quot;date&quot;)
++        {
++                $SQLquery[$i][3] = mktime(0,0,0,$SQLstring[$k+1],$SQLstring[$k+2],$SQLstring[$k]);        //        mktime(0,0,0,$month,$day,$year);
++                $k += 2;
++        }
++        elseif ($SQLquery[$i][4] == &quot;length&quot;)
++        {
++                $SQLquery[$i][3] = abs($SQLstring[$k]);
++        }
++        else        $SQLquery[$i][3] = $SQLstring[$k];
++        $k++;
+ }
+-$advsearch-&gt;sotf_AdvSearch($SQLquery);			//set the inner variables of the class as well
++$advsearch-&gt;sotf_AdvSearch($SQLquery);                        //set the inner variables of the class as well
+ 
+-if($add)									////add term button pressed
++if($add)                                                                        ////add term button pressed
+ {
+-	//nagyon kell figyelni a speci karektereket, nehogy SQL parancsot tegyen bele
+-	$SQLquery = $advsearch-&gt;AddRow($SQLlink, $SQLfield);
+-//	var_dump($SQLlink.&quot;!&quot;.$SQLfield);
++        //nagyon kell figyelni a speci karektereket, nehogy SQL parancsot tegyen bele
++        $SQLquery = $advsearch-&gt;AddRow($SQLlink, $SQLfield);
++//        var_dump($SQLlink.&quot;!&quot;.$SQLfield);
+ }
+-elseif (($run or ($run_image==&quot;0&quot;)) and $SQLquery!=NULL)			////run query button pressed, run if any terms
++elseif (($run or ($run_image==&quot;0&quot;)) and $SQLquery!=NULL)                        ////run query button pressed, run if any terms
+ {
+-	//$_SESSION[&quot;SQLquery&quot;] = $SQLquery;
+-	//$_SESSION[&quot;SQLquerySerial&quot;] = $advsearch-&gt;Serialize();
+-	$SQLquerySerial = $advsearch-&gt;Serialize();
+-	$_SESSION[&quot;SQLquerySerial&quot;] = $SQLquerySerial;	//save the new query to the session
+-	$page-&gt;redirect(&quot;advsearchresults.php?SQLquerySerial=$SQLquerySerial&quot;);
++        //$_SESSION[&quot;SQLquery&quot;] = $SQLquery;
++        //$_SESSION[&quot;SQLquerySerial&quot;] = $advsearch-&gt;Serialize();
++        $SQLquerySerial = $advsearch-&gt;Serialize();
++        $_SESSION[&quot;SQLquerySerial&quot;] = $SQLquerySerial;        //save the new query to the session
++        $page-&gt;redirect(&quot;advsearchresults.php?SQLquerySerial=$SQLquerySerial&quot;);
+ }
+-elseif ($new)									////new query button pressed
++elseif ($new)                                                                        ////new query button pressed
+ {
+-	$SQLquery = $advsearch-&gt;DeleteQuery();
+-	$advsearch-&gt;SetSortOrder();		//set back default sort order for new queries
++        $SQLquery = $advsearch-&gt;DeleteQuery();
++        $advsearch-&gt;SetSortOrder();                //set back default sort order for new queries
+ }
+-elseif ($load)									////load button pressed
++elseif ($load)                                                                        ////load button pressed
+ {
+-	//print($loadfrom);					//dropdown box with the saved queries
+-	//$serial=&quot;title|Bproduction_date|AAND|Bstation|Bis|BRadioSZTAKI|Bstation|AAND|Bproduction_date|Bbigger|B1035583200|Bdate|AOR|Bentry_date|Bbigger|B1035583200|Bdate|AAND|Btitle|Bdoes_not_contain|Bmusic|Bstring|AAND|Blanguage|Bis|Ben|Blang|AOR|Blanguage|Bis|Bde|Blang|AOR|Blanguage|Bis_not|Bhu|Blang&quot;;
+-	$prefs = $user-&gt;getPreferences();
+-	$serial=$prefs-&gt;savedQueries[$loadfrom][&quot;query&quot;];
+-	$SQLquery = $advsearch-&gt;Deserialize($serial);
++        //print($loadfrom);                                        //dropdown box with the saved queries
++        //$serial=&quot;title|Bproduction_date|AAND|Bstation|Bis|BRadioSZTAKI|Bstation|AAND|Bproduction_date|Bbigger|B1035583200|Bdate|AOR|Bentry_date|Bbigger|B1035583200|Bdate|AAND|Btitle|Bdoes_not_contain|Bmusic|Bstring|AAND|Blanguage|Bis|Ben|Blang|AOR|Blanguage|Bis|Bde|Blang|AOR|Blanguage|Bis_not|Bhu|Blang&quot;;
++        $prefs = $user-&gt;getPreferences();
++        $serial=$prefs-&gt;savedQueries[$loadfrom][&quot;query&quot;];
++        $SQLquery = $advsearch-&gt;Deserialize($serial);
+ }
+-elseif ($default)									////Make deafult button pressed
++elseif ($default)                                                                        ////Make deafult button pressed
+ {
+-	//$loadfrom;					//dropdown box with the saved queries
+-	$prefs = $user-&gt;getPreferences();
+-	$savedQueries = $prefs-&gt;savedQueries;
+-	foreach($savedQueries as $key =&gt; $value) $prefs-&gt;savedQueries[$key][&quot;default&quot;] = 0;
+-	$prefs-&gt;savedQueries[$loadfrom][&quot;default&quot;] = 1;
+-	$prefs-&gt;save();
++        //$loadfrom;                                        //dropdown box with the saved queries
++        $prefs = $user-&gt;getPreferences();
++        $savedQueries = $prefs-&gt;savedQueries;
++        foreach($savedQueries as $key =&gt; $value) $prefs-&gt;savedQueries[$key][&quot;default&quot;] = 0;
++        $prefs-&gt;savedQueries[$loadfrom][&quot;default&quot;] = 1;
++        $prefs-&gt;save();
+ }
+-elseif ($deleteq)									////Delete query button pressed
++elseif ($deleteq)                                                                        ////Delete query button pressed
+ {
+-	$prefs = $user-&gt;getPreferences();
+-	$prefs-&gt;savedQueries = array_merge(array_slice($prefs-&gt;savedQueries, 0, $loadfrom), array_slice($prefs-&gt;savedQueries, $loadfrom+1));
+-	$prefs-&gt;save();
+-	//print(&quot;&lt;pre&gt;&quot;);
+-	//var_dump($prefs-&gt;savedQueries);
+-	//print(&quot;&lt;/pre&gt;&quot;);
++        $prefs = $user-&gt;getPreferences();
++        $prefs-&gt;savedQueries = array_merge(array_slice($prefs-&gt;savedQueries, 0, $loadfrom), array_slice($prefs-&gt;savedQueries, $loadfrom+1));
++        $prefs-&gt;save();
++        //print(&quot;&lt;pre&gt;&quot;);
++        //var_dump($prefs-&gt;savedQueries);
++        //print(&quot;&lt;/pre&gt;&quot;);
+ }
+-elseif (($save) and $SQLquery!=NULL)						////save button pressed, save if any term
++elseif (($save) and $SQLquery!=NULL)                                                ////save button pressed, save if any term
+ {
+-	$serial = $advsearch-&gt;Serialize();
+-	if ($saveas != &quot;&quot; AND $serial != &quot;&quot;)
+-	{
+-		$prefs = $user-&gt;getPreferences();
+-		
+-		//$prefs-&gt;savedQueries =  array();
+-		$prefs-&gt;savedQueries[] = array(&quot;name&quot; =&gt; $saveas,
+-						&quot;query&quot; =&gt; $serial,
+-						&quot;default&quot; =&gt; 0);
+-		$prefs-&gt;save();
+-		//print($saveas.&quot; = &quot;.$serial);
+-	}
++        $serial = $advsearch-&gt;Serialize();
++        if ($saveas != &quot;&quot; AND $serial != &quot;&quot;)
++        {
++                $prefs = $user-&gt;getPreferences();
++
++                //$prefs-&gt;savedQueries =  array();
++                $prefs-&gt;savedQueries[] = array(&quot;name&quot; =&gt; $saveas,
++                                                &quot;query&quot; =&gt; $serial,
++                                                &quot;default&quot; =&gt; 0);
++                $prefs-&gt;save();
++                //print($saveas.&quot; = &quot;.$serial);
++        }
+ }
+-else								////- or + button pressed?
++else                                                                ////- or + button pressed?
+ {
+-	$max = count($SQLquery);
+-	$i = 0;
+-	for(; $i &lt; $max ;$i++)
+-	{
+-		//go through - buttons
+-		if ($paramcache-&gt;getRegistered(&quot;DEL&quot;.$i.&quot;_x&quot;) != NULL)
+-			$SQLquery = $advsearch-&gt;DelRow($i);
+-		//go through + buttons
+-		if ($paramcache-&gt;getRegistered(&quot;ADD&quot;.$i.&quot;_x&quot;) != NULL)
+-			$SQLquery = $advsearch-&gt;AddRow($SQLlink, $SQLfield, $i);
+-	}
++        $max = count($SQLquery);
++        $i = 0;
++        for(; $i &lt; $max ;$i++)
++        {
++                //go through - buttons
++                if ($paramcache-&gt;getRegistered(&quot;DEL&quot;.$i.&quot;_x&quot;) != NULL)
++                        $SQLquery = $advsearch-&gt;DelRow($i);
++                //go through + buttons
++                if ($paramcache-&gt;getRegistered(&quot;ADD&quot;.$i.&quot;_x&quot;) != NULL)
++                        $SQLquery = $advsearch-&gt;AddRow($SQLlink, $SQLfield, $i);
++        }
+ }
+ 
+-$_SESSION[&quot;SQLquerySerial&quot;] = $advsearch-&gt;Serialize();	//save the new query to the session
++$_SESSION[&quot;SQLquerySerial&quot;] = $advsearch-&gt;Serialize();        //save the new query to the session
+ 
+ ////SMARTY
+ //terms
+-$smarty-&gt;assign(&quot;SQLquery&quot;, $SQLquery);					//the query
+-$smarty-&gt;assign(&quot;SQLquerySerial&quot;, $advsearch-&gt;Serialize());		//the serialized query
+-$smarty-&gt;assign(&quot;SQLqueryfields&quot;, $advsearch-&gt;GetSQLqueryfields());	//translated name for all rows of the query
++$smarty-&gt;assign(&quot;SQLquery&quot;, $SQLquery);                                        //the query
++$smarty-&gt;assign(&quot;SQLquerySerial&quot;, $advsearch-&gt;Serialize());                //the serialized query
++$smarty-&gt;assign(&quot;SQLqueryfields&quot;, $advsearch-&gt;GetSQLqueryfields());        //translated name for all rows of the query
+ 
+-$smarty-&gt;assign(&quot;EQdate&quot;, $advsearch-&gt;GetEQdate());			//EQ dropdown for date
+-$smarty-&gt;assign(&quot;EQstring&quot;, $advsearch-&gt;GetEQstring());			//EQ dropdown for string
+-$smarty-&gt;assign(&quot;EQtopic&quot;, $advsearch-&gt;GetEQtopic());			//EQ dropdown for topics
+-$smarty-&gt;assign(&quot;EQlang&quot;, $advsearch-&gt;GetEQlang());			//EQ dropdown for lang
+-$smarty-&gt;assign(&quot;EQlength&quot;, $advsearch-&gt;GetEQlength());			//EQ dropdown for length
+-$smarty-&gt;assign(&quot;EQnumber&quot;, $advsearch-&gt;GetEQnumber());			//EQ dropdown for numbers
++$smarty-&gt;assign(&quot;EQdate&quot;, $advsearch-&gt;GetEQdate());                        //EQ dropdown for date
++$smarty-&gt;assign(&quot;EQstring&quot;, $advsearch-&gt;GetEQstring());                        //EQ dropdown for string
++$smarty-&gt;assign(&quot;EQtopic&quot;, $advsearch-&gt;GetEQtopic());                        //EQ dropdown for topics
++$smarty-&gt;assign(&quot;EQlang&quot;, $advsearch-&gt;GetEQlang());                        //EQ dropdown for lang
++$smarty-&gt;assign(&quot;EQlength&quot;, $advsearch-&gt;GetEQlength());                        //EQ dropdown for length
++$smarty-&gt;assign(&quot;EQnumber&quot;, $advsearch-&gt;GetEQnumber());                        //EQ dropdown for numbers
+ 
+-$smarty-&gt;assign(&quot;Languages&quot;, $advsearch-&gt;GetLanguages());		//all possible languages
+-$smarty-&gt;assign(&quot;Stations&quot;, $advsearch-&gt;GetStations());			//all possible stationnames
+-$smarty-&gt;assign(&quot;Genres&quot;, $advsearch-&gt;GetGenres());			//all possible genrenames
+-$smarty-&gt;assign(&quot;Ratings&quot;, $advsearch-&gt;getRatings());			//all possible ratings + a half value between all
+-$smarty-&gt;assign(&quot;SQLstring&quot;, $SQLstring);				//selected values
++$smarty-&gt;assign(&quot;Languages&quot;, $advsearch-&gt;GetLanguages());                //all possible languages
++$smarty-&gt;assign(&quot;Stations&quot;, $advsearch-&gt;GetStations());                        //all possible stationnames
++$smarty-&gt;assign(&quot;Genres&quot;, $advsearch-&gt;GetGenres());                        //all possible genrenames
++$smarty-&gt;assign(&quot;Ratings&quot;, $advsearch-&gt;getRatings());                        //all possible ratings + a half value between all
++$smarty-&gt;assign(&quot;SQLstring&quot;, $SQLstring);                                //selected values
+ 
+ //box 1
+-$smarty-&gt;assign(&quot;SQLfields&quot;, $advsearch-&gt;GetSQLfields());		//name of all possibble columns
+-$smarty-&gt;assign(&quot;SQLfieldDefault&quot;, key($advsearch-&gt;GetSQLfields()));	//set default selected to the first element
++$smarty-&gt;assign(&quot;SQLfields&quot;, $advsearch-&gt;GetSQLfields());                //name of all possibble columns
++$smarty-&gt;assign(&quot;SQLfieldDefault&quot;, key($advsearch-&gt;GetSQLfields()));        //set default selected to the first element
+ 
+ //box 2
+-$smarty-&gt;assign(&quot;OrderFields&quot;, $advsearch-&gt;getOrderFields());		//name of all possibble columns
+-$smarty-&gt;assign(&quot;sort1&quot;, $advsearch-&gt;GetSort1());			//current sort 1
+-$smarty-&gt;assign(&quot;sort2&quot;, $advsearch-&gt;GetSort2());			//current sort 2
+-$smarty-&gt;assign(&quot;dir1&quot;, $advsearch-&gt;getDir1());			//current sort dir 1
+-$smarty-&gt;assign(&quot;dir2&quot;, $advsearch-&gt;getDir2());			//current sort dir 2
++$smarty-&gt;assign(&quot;OrderFields&quot;, $advsearch-&gt;getOrderFields());                //name of all possibble columns
++$smarty-&gt;assign(&quot;sort1&quot;, $advsearch-&gt;GetSort1());                        //current sort 1
++$smarty-&gt;assign(&quot;sort2&quot;, $advsearch-&gt;GetSort2());                        //current sort 2
++$smarty-&gt;assign(&quot;dir1&quot;, $advsearch-&gt;getDir1());                        //current sort dir 1
++$smarty-&gt;assign(&quot;dir2&quot;, $advsearch-&gt;getDir2());                        //current sort dir 2
+ 
+ if ($portal_http == &quot;&quot;) $portal_http = NULL;
+ if (isset($portal_http))
+ {
+-	if (substr($portal_http, 0, 7) != &quot;<A HREF="http://">http://</A>&quot;) $portal_http = &quot;<A HREF="http://">http://</A>&quot;.$portal_http;
+-	$smarty-&gt;assign(&quot;old_upload&quot;, $portal_http);	//save given URL (next time no nedd to write it again)
+-	$portal_http_new = str_replace(&quot;/portal.php/&quot;, &quot;/portal_upload.php/&quot;, $portal_http);		//replace portal.php name with the php file responsible for upload
+-	if (strstr($portal_http_new, &quot;/portal_upload.php/&quot;)) $file = @fopen ( $portal_http_new, &quot;r&quot;);		//open file if string could be replaced
+-	if (!$file) $smarty-&gt;assign(&quot;upload_query&quot;, &quot;<A HREF="http://">http://</A>&quot;);	//if not exist
+-	else	
+-		{
+-			$smarty-&gt;assign(&quot;upload_query&quot;, $portal_http_new);		//if exists
+-//			echo &quot;OK&quot;;
+-			$_SESSION['portal_http'] = $portal_http;		//TODO save to user properties
+-		}
+-		$paramcache-&gt;setParameter('upload_http', NULL);		//so it will be processed only ones
++        if (substr($portal_http, 0, 7) != &quot;<A HREF="http://">http://</A>&quot;) $portal_http = &quot;<A HREF="http://">http://</A>&quot;.$portal_http;
++        $smarty-&gt;assign(&quot;old_upload&quot;, $portal_http);        //save given URL (next time no nedd to write it again)
++        $portal_http_new = str_replace(&quot;/portal.php/&quot;, &quot;/portal_upload.php/&quot;, $portal_http);                //replace portal.php name with the php file responsible for upload
++        if (strstr($portal_http_new, &quot;/portal_upload.php/&quot;)) $file = @fopen ( $portal_http_new, &quot;r&quot;);                //open file if string could be replaced
++        if (!$file) $smarty-&gt;assign(&quot;upload_query&quot;, &quot;<A HREF="http://">http://</A>&quot;);        //if not exist
++        else
++                {
++                        $smarty-&gt;assign(&quot;upload_query&quot;, $portal_http_new);                //if exists
++//                        echo &quot;OK&quot;;
++                        $_SESSION['portal_http'] = $portal_http;                //TODO save to user properties
++                }
++                $paramcache-&gt;setParameter('upload_http', NULL);                //so it will be processed only ones
+ }
+-else $smarty-&gt;assign(&quot;old_upload&quot;, $_SESSION['portal_http']);		//TODO load from user properties
++else $smarty-&gt;assign(&quot;old_upload&quot;, $_SESSION['portal_http']);                //TODO load from user properties
+ 
+ //box 3
+-if ($user != &quot;&quot;)	//only if logged in
++if ($user != &quot;&quot;)        //only if logged in
+ {
+-	if (!isset($prefs)) $prefs = $user-&gt;getPreferences();
+-	$savedQueries = $prefs-&gt;savedQueries;
+-	$saved = array();
+-	foreach($savedQueries as $key =&gt; $value) $saved[$key] = $value[&quot;name&quot;];
+-	if (count($saved) == 0) $saved = &quot;&quot;;
+-	$smarty-&gt;assign(&quot;saved&quot;, $saved);					//saved fields
++        if (!isset($prefs)) $prefs = $user-&gt;getPreferences();
++        $savedQueries = $prefs-&gt;savedQueries;
++        $saved = array();
++        foreach($savedQueries as $key =&gt; $value) $saved[$key] = $value[&quot;name&quot;];
++        if (count($saved) == 0) $saved = &quot;&quot;;
++        $smarty-&gt;assign(&quot;saved&quot;, $saved);                                        //saved fields
+ }
+ else $smarty-&gt;assign(&quot;notLoggedIn&quot;, true);
+ 
+-$paramcache-&gt;setProcessed();						//paramcache, against reload
+-//$paramcache-&gt;addResult(&quot;SQLquerySerial&quot;, $advsearch-Serialize());	//save serialized query
++$paramcache-&gt;setProcessed();                                                //paramcache, against reload
++//$paramcache-&gt;addResult(&quot;SQLquerySerial&quot;, $advsearch-Serialize());        //save serialized query
+ 
++
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Erweiterte Suche - advsearch.php';
++   include($config['counterURL']);
++}
++
+ $page-&gt;send();
+ 
+ ?&gt;
+
+Modified: node/branches/payable/www/advsearchresults.php
+===================================================================
+--- node/branches/payable/www/advsearchresults.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/advsearchresults.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,43 +1,43 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  */
+ 
+ require(&quot;init.inc.php&quot;);
+ require($config['classdir'] . &quot;/sotf_AdvSearch.class.php&quot;);
+ 
+-$SQLquerySerial = sotf_Utils::getParameter('SQLquerySerial');			//the serialized query in the hidden field
+-$advsearch = new sotf_AdvSearch();						//create new search object object with this array
++$SQLquerySerial = sotf_Utils::getParameter('SQLquerySerial');                        //the serialized query in the hidden field
++$advsearch = new sotf_AdvSearch();                                                //create new search object object with this array
+ 
+-//if ($SQLquerySerial == &quot;&quot;)							//get old search query from session if none in url
+-//	$SQLquerySerial = $_SESSION[&quot;SQLquerySerial&quot;];				//get array from session
++//if ($SQLquerySerial == &quot;&quot;)                                                        //get old search query from session if none in url
++//        $SQLquerySerial = $_SESSION[&quot;SQLquerySerial&quot;];                                //get array from session
+ 
+-$SQLquery = $advsearch-&gt;Deserialize($SQLquerySerial);				//deserialize the content of the hidden field
++$SQLquery = $advsearch-&gt;Deserialize($SQLquerySerial);                                //deserialize the content of the hidden field
+ 
+-if (sotf_Utils::getParameter('back') != NULL)					//if go back pressed
++if (sotf_Utils::getParameter('back') != NULL)                                        //if go back pressed
+ {
+-	$_SESSION[&quot;SQLquerySerial&quot;] = $SQLquerySerial;					//save the new quey to the session
+-	$page-&gt;redirect(&quot;advsearch.php&quot;);
++        $_SESSION[&quot;SQLquerySerial&quot;] = $SQLquerySerial;                                        //save the new quey to the session
++        $page-&gt;redirect(&quot;advsearch.php&quot;);
+ }
+ 
+ 
+ $query = $advsearch-&gt;GetSQLCommand();
+ 
+-$max = $db-&gt;getAll(&quot;SELECT count(*) FROM (&quot;.$query.&quot;) as count&quot;);	//get the number of results
++$max = $db-&gt;getAll(&quot;SELECT count(*) FROM (&quot;.$query.&quot;) as count&quot;);        //get the number of results
+ $max = $max[0][&quot;count&quot;];
+ 
+ $limit = $page-&gt;splitList($max, &quot;?SQLquerySerial=$SQLquerySerial&quot;);
+ $result = $db-&gt;getAll($query.$limit[&quot;limit&quot;]);
+ 
+-$allfields = $advsearch-&gt;GetSQLfields();		//get all possible fileld names with translation
++$allfields = $advsearch-&gt;GetSQLfields();                //get all possible fileld names with translation
+ 
+-$max = count($SQLquery);				//$fields will contain all the USED field names
++$max = count($SQLquery);                                //$fields will contain all the USED field names
+ for($i =0; $i&lt;$max; $i++)
+-	$fields[$SQLquery[$i][1]] = $allfields[$SQLquery[$i][1]];
++        $fields[$SQLquery[$i][1]] = $allfields[$SQLquery[$i][1]];
+ 
+ //$fields[$advsearch-&gt;GetSort1()] = $allfields[$advsearch-&gt;GetSort1()];
+ //$fields[$advsearch-&gt;GetSort2()] = $allfields[$advsearch-&gt;GetSort2()];
+@@ -48,77 +48,86 @@
+ 
+ if (array_key_exists(&quot;title&quot;, $fields))
+ {
+-	$fields[alternative_title] = $page-&gt;getlocalized(&quot;alternative_title&quot;);		//if title presented this two
+-	$fields[episode_title] = $page-&gt;getlocalized(&quot;episode_title&quot;);			  //fields are needed as well
++        $fields[alternative_title] = $page-&gt;getlocalized(&quot;alternative_title&quot;);                //if title presented this two
++        $fields[episode_title] = $page-&gt;getlocalized(&quot;episode_title&quot;);                          //fields are needed as well
+ }
+-else $fields[title] = $page-&gt;getlocalized(&quot;title&quot;);		//the title field always need to be present
++else $fields[title] = $page-&gt;getlocalized(&quot;title&quot;);                //the title field always need to be present
+ 
+ 
+ $selected = array();
+ $max = count($result);
+-for($i =0; $i&lt;$max; $i++)	//$selected will contain all the information about the programmes that where present in the query
++for($i =0; $i&lt;$max; $i++)        //$selected will contain all the information about the programmes that where present in the query
+ {
+   foreach($result[$i] as $key =&gt; $value) {
+-	 if (array_key_exists($key, $fields) AND $key != 'title') {		//title is presented on a diferent level
+-		if ($key == 'language' AND $value != &quot;&quot;)			//language need to be translated
+-		{
+-			$languages = explode(',', $value);
+-			foreach ($languages as $language)
+-			{
+-				if ($values[$fields[$key]] == &quot;&quot;) $values[$fields[$key]] .= $page-&gt;getlocalized($language);
+-				else $values[$fields[$key]] .= &quot;, &quot;.$page-&gt;getlocalized($language);
+-			}
+-		}
+-		else {
+-		  $values[$fields[$key]] = $value;
+-		}
+-	 }
++         if (array_key_exists($key, $fields) AND $key != 'title') {                //title is presented on a diferent level
++                if ($key == 'language' AND $value != &quot;&quot;)                        //language need to be translated
++                {
++                        $languages = explode(',', $value);
++                        foreach ($languages as $language)
++                        {
++                                if ($values[$fields[$key]] == &quot;&quot;) $values[$fields[$key]] .= $page-&gt;getlocalized($language);
++                                else $values[$fields[$key]] .= &quot;, &quot;.$page-&gt;getlocalized($language);
++                        }
++                }
++                else {
++                  $values[$fields[$key]] = $value;
++                }
++         }
+   }
+-  if (array_key_exists(&quot;person&quot;, $fields))		//person is a special filed
+-	 {
+-		$persons = $advsearch-&gt;getPersons($result[$i][&quot;id&quot;]);
+-		foreach($persons as $person)
+-		if ($person[&quot;name&quot;] != &quot;&quot;)
+-		{
+-			$allnames = $person[&quot;name&quot;].&quot; (&quot;.$person[&quot;alias&quot;].&quot;, &quot;.$person[&quot;acronym&quot;].&quot;)&quot;;
+-			$allnames = str_replace(&quot;, )&quot;, &quot;)&quot;, $allnames);
+-			$allnames = str_replace(&quot;(,&quot;, &quot;(&quot;, $allnames);
+-			$allnames = str_replace(&quot;()&quot;, &quot;&quot;, $allnames);
+-			if ( $values[$person[&quot;role&quot;]] != &quot;&quot;) $values[$person[&quot;role&quot;]] .= &quot;; &quot;.$allnames;
+-			else $values[$person[&quot;role&quot;]] = $allnames;
+-		}
+-	}
+-	if (array_key_exists(&quot;topic&quot;, $fields))		//topic is a special filed
+-	{
+-		$topicname = $page-&gt;getlocalized(&quot;topic&quot;);
+-		$topics = $advsearch-&gt;getTopics($result[$i][&quot;id&quot;]);
+-		foreach($topics as $topic)
+-		if ($topic[&quot;name&quot;] != &quot;&quot;)
+-			if ($values[$topicname] == &quot;&quot;) $values[$topicname] = $topic[&quot;name&quot;];
+-			else $values[$topicname] .= &quot;; &quot;.$topic[&quot;name&quot;];
+-	}
++  if (array_key_exists(&quot;person&quot;, $fields))                //person is a special filed
++         {
++                $persons = $advsearch-&gt;getPersons($result[$i][&quot;id&quot;]);
++                foreach($persons as $person)
++                if ($person[&quot;name&quot;] != &quot;&quot;)
++                {
++                        $allnames = $person[&quot;name&quot;].&quot; (&quot;.$person[&quot;alias&quot;].&quot;, &quot;.$person[&quot;acronym&quot;].&quot;)&quot;;
++                        $allnames = str_replace(&quot;, )&quot;, &quot;)&quot;, $allnames);
++                        $allnames = str_replace(&quot;(,&quot;, &quot;(&quot;, $allnames);
++                        $allnames = str_replace(&quot;()&quot;, &quot;&quot;, $allnames);
++                        if ( $values[$person[&quot;role&quot;]] != &quot;&quot;) $values[$person[&quot;role&quot;]] .= &quot;; &quot;.$allnames;
++                        else $values[$person[&quot;role&quot;]] = $allnames;
++                }
++        }
++        if (array_key_exists(&quot;topic&quot;, $fields))                //topic is a special filed
++        {
++                $topicname = $page-&gt;getlocalized(&quot;topic&quot;);
++                $topics = $advsearch-&gt;getTopics($result[$i][&quot;id&quot;]);
++                foreach($topics as $topic)
++                if ($topic[&quot;name&quot;] != &quot;&quot;)
++                        if ($values[$topicname] == &quot;&quot;) $values[$topicname] = $topic[&quot;name&quot;];
++                        else $values[$topicname] .= &quot;; &quot;.$topic[&quot;name&quot;];
++        }
+ 
+-	$item['title'] = $result[$i][title];
+-	$item['id'] = $result[$i][id];
+-	$item['icon'] = sotf_Blob::cacheIcon2($result[$i]);
+-	$item['values'] = $values;
+-	$selected[] = $item;
+-	$item = &quot;&quot;;
+-	$values = &quot;&quot;;
++        $item['title'] = $result[$i][title];
++        $item['id'] = $result[$i][id];
++        $item['icon'] = sotf_Blob::cacheIcon2($result[$i]);
++        $item['values'] = $values;
++        $selected[] = $item;
++        $item = &quot;&quot;;
++        $values = &quot;&quot;;
+ }
+ //var_dump($selected);
+ 
+ //if (DB::isError($result)) die($result-&gt;getMessage());
+ //print(&quot;&lt;BR /&gt;&quot;.count($result));
+ 
+-$smarty-&gt;assign(&quot;SQLquery&quot;, $SQLquery);					//the query
+-$smarty-&gt;assign(&quot;SQLquerySerial&quot;, $SQLquerySerial);			//the serialized query
+-//$smarty-&gt;assign(&quot;SQLqueryfields&quot;, $advsearch-&gt;GetSQLqueryfields());	//translated name for all fieldnames of the query
+-//$smarty-&gt;assign(&quot;SQLqueryEQs&quot;, $advsearch-&gt;GetSQLqueryEQs());		//translated name for all EQs (&lt;, &gt;, = ...) of the query
+-$smarty-&gt;assign(&quot;HumanReadable&quot;, $advsearch-&gt;GetHumanReadable());	//human readable format for the query fileds
++$smarty-&gt;assign(&quot;SQLquery&quot;, $SQLquery);                                        //the query
++$smarty-&gt;assign(&quot;SQLquerySerial&quot;, $SQLquerySerial);                        //the serialized query
++//$smarty-&gt;assign(&quot;SQLqueryfields&quot;, $advsearch-&gt;GetSQLqueryfields());        //translated name for all fieldnames of the query
++//$smarty-&gt;assign(&quot;SQLqueryEQs&quot;, $advsearch-&gt;GetSQLqueryEQs());                //translated name for all EQs (&lt;, &gt;, = ...) of the query
++$smarty-&gt;assign(&quot;HumanReadable&quot;, $advsearch-&gt;GetHumanReadable());        //human readable format for the query fileds
+ 
+-$smarty-&gt;assign(&quot;result&quot;, $selected);						//result array
++$smarty-&gt;assign(&quot;result&quot;, $selected);                                                //result array
+ 
++
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Ergebnisseite der erweiterten Suche - advsearchresults.php';
++   include($config['counterURL']);
++}
++
+ $page-&gt;send();
+ 
+ ?&gt;
+
+Modified: node/branches/payable/www/config.inc.php.template
+===================================================================
+--- node/branches/payable/www/config.inc.php.template	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/config.inc.php.template	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,11 +1,11 @@
+-&lt;?php  // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php  // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+- * 
++ *
+  *  Copy this file into config.inc.php and edit to reflect your site settings.
+  *
+  */
+@@ -68,6 +68,10 @@
+ //$config['payableMode'] = true;
+ //$config['currency'] = 'EUR';
+ 
++// online Counter chCounter 3.1.1 (GPL licenced) for detailled webstatistics - <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">webmaster at christoph-bachner.net</A>
++//$config['counterMode'] = true;
++//$config['counterURL'] = &quot;../../webstatistics/counter.php&quot;;
++
+ // regexp determining the IP addresses (or hostnames if web server does hostname lookup)
+ // from which admin tasks (such as cron.php) can be run
+ //$config['adminDomain'] = '^10\.0\.0\.';
+@@ -115,7 +119,7 @@
+ // path to PHP scripts and images
+ $config['wwwdir'] = $config['basedir'] . &quot;/www&quot;;
+ 
+-// The URL prefix for code/www subdir 
++// The URL prefix for code/www subdir
+ // i.e. <A HREF="http://&lt;your-host">http://&lt;your-host</A>&gt;/$config['localPrefix'] will open the home page of the node
+ $config['localPrefix'] = &quot;/node/www&quot;;
+ 
+@@ -123,7 +127,7 @@
+ // STREAMING --------------------------------------------
+ //////////////////////////////////////////////////////////////////////////
+ 
+-// In StreamOnTheFly node network finally we agreed to use HTTP streaming, so please set this to true 
++// In StreamOnTheFly node network finally we agreed to use HTTP streaming, so please set this to true
+ // Other configs in this section thus are meaningless.
+ $config['httpStreaming'] = true;
+ 
+@@ -136,14 +140,14 @@
+ // this is an alternative way for streaming with tamburine
+ // works only on Unix
+ // Example: /usr/local/bin/tbrcmd
+-$config['tamburineCMD'] = ''; 
++$config['tamburineCMD'] = '';
+ 
+ // Parameters for connection to icecast streaming server
+ $config['iceServer'] = &quot;your.host.name&quot;;
+ $config['icePort'] = &quot;8000&quot;;
+ $config['encoderPassword'] = &quot;hackme&quot;;
+ 
+-// The command to start streaming: 
++// The command to start streaming:
+ $config['streamCmd'] = &quot;/usr/bin/perl &quot; . $config['basedir'] . &quot;/code/contrib/iceplay -b __BITRATE__ -s &quot; . $config['iceServer'] . &quot; -P &quot; . $config['icePort'] . &quot; -p &quot; . $config['encoderPassword'] . &quot; -l __PLAYLIST__ -n __NAME__ &gt;&gt;&quot; . $config['basedir'] . &quot;/logs/play.log 2&gt;&amp;1 &amp;&quot;;
+ // __XX__ style tokens are replaced with the actual value
+ // __PLAYLIST__ = file containing playlist
+@@ -173,11 +177,11 @@
+ 
+ // selectable languages for user interface
+ $config['outputLanguages'] = array(
+-								           array(&quot;eng&quot;, &quot;in English&quot;),
+-											  array(&quot;ger&quot;, &quot;Deutsch&quot;),
+-											  array(&quot;hun&quot;, &quot;magyarul&quot;),
+-											  array(&quot;fra&quot;, &quot;en Francais&quot;),
+-											);
++                                                                           array(&quot;eng&quot;, &quot;in English&quot;),
++                                                                                          array(&quot;ger&quot;, &quot;Deutsch&quot;),
++                                                                                          array(&quot;hun&quot;, &quot;magyarul&quot;),
++                                                                                          array(&quot;fra&quot;, &quot;en Francais&quot;),
++                                                                                        );
+ 
+ // default language if user's language cannot be determined
+ $config['defaultLanguage'] = &quot;eng&quot;;
+@@ -192,8 +196,8 @@
+ /**
+ * Specifies a directory where converters can be found.
+ *
+-* @package	StreamOnTheFly
+-* @variable	string	$config['helperdir']
++* @package        StreamOnTheFly
++* @variable        string        $config['helperdir']
+ */
+ $config['helperdir'] = &quot;C:\sotf\helpers&quot;;
+ 
+@@ -201,8 +205,8 @@
+ * Path of LAME.
+ *
+ * LAME can encode and decode MP3 files.
+-* @package	StreamOnTheFly
+-* @variable	string	$config['lame']
++* @package        StreamOnTheFly
++* @variable        string        $config['lame']
+ */
+ $config['lame'] = $config['helperdir'].&quot;/lame&quot;;
+ 
+@@ -210,8 +214,8 @@
+ * Path of SoX.
+ *
+ * SoX is able to generate a stereo PCM data array from a mono one.
+-* @package	StreamOnTheFly
+-* @variable	string	$config['sox']
++* @package        StreamOnTheFly
++* @variable        string        $config['sox']
+ */
+ $config['sox'] = $config['helperdir'].&quot;/sox&quot;;
+ 
+@@ -219,8 +223,8 @@
+ * Path of oggenc.
+ *
+ * oggenc can encode Ogg Vorbis audio streams.
+-* @package	StreamOnTheFly
+-* @variable	string	$config['oggenc']
++* @package        StreamOnTheFly
++* @variable        string        $config['oggenc']
+ */
+ $config['oggenc'] = $config['helperdir'].&quot;/oggenc&quot;;
+ 
+@@ -228,40 +232,40 @@
+ * Path of oggdec.
+ *
+ * oggdec can decode Ogg Vorbis audio streams.
+-* @package	StreamOnTheFly
+-* @variable	string	$config['oggdec']
++* @package        StreamOnTheFly
++* @variable        string        $config['oggdec']
+ */
+ $config['oggdec'] = $config['helperdir'].&quot;/oggdec&quot;;
+ 
+ /**
+ * Progress bar character.
+ *
+-* @package	StreamOnTheFly
+-* @variable	string	$config['progressBarChar']
++* @package        StreamOnTheFly
++* @variable        string        $config['progressBarChar']
+ */
+ $config['progressBarChar'] = '|';
+ 
+ /**
+ * Length of progress bar.
+ *
+-* @package	StreamOnTheFly
+-* @variable	string	$config['progressBarLength']
++* @package        StreamOnTheFly
++* @variable        string        $config['progressBarLength']
+ */
+ $config['progressBarLength'] = 100;
+ 
+ /**
+ * Perl regexp for parse oggenc output.
+ *
+-* @package	StreamOnTheFly
+-* @variable	string	$config['oggencRegexp']
++* @package        StreamOnTheFly
++* @variable        string        $config['oggencRegexp']
+ */
+ $config['oggencRegexp'] = &quot;/^\t\[(...)\..%\].*$/&quot;;
+ 
+ /**
+ * Perl regexp for parse lame output during encode.
+ *
+-* @package	StreamOnTheFly
+-* @variable	string	$config['lameencRegexp']
++* @package        StreamOnTheFly
++* @variable        string        $config['lameencRegexp']
+ */
+ $config['lameencRegexp'] = &quot;/^.{6}?\/.{7}?\((..)%\)\|.*$/&quot;;
+ 
+@@ -270,8 +274,8 @@
+ *
+ * Specifies how much can differ the current avarage bitrate
+ * from one of the predefined values for variable bitrate streams.
+-* @package	StreamOnTheFly
+-* @variable	float	$config['bitrateTolerance']
++* @package        StreamOnTheFly
++* @variable        float        $config['bitrateTolerance']
+ */
+ $config['bitrateTolerance'] = 10;
+ 
+@@ -280,26 +284,26 @@
+ * Required formats.
+ *
+ * Array of associative arrays contains information about the audio format.
+-* @package	StreamOnTheFly
+-* @variable	array	$config['audioFormats']
++* @package        StreamOnTheFly
++* @variable        array        $config['audioFormats']
+ */
+ $config['audioFormats'] = array(
+-					array(
+-						'format' =&gt; 'mp3',
+-						'bitrate' =&gt; '24',
+-						'channels' =&gt; '1',
+-						'samplerate' =&gt; '22050'),
+-					array(
+-						'format' =&gt; 'mp3',
+-						'bitrate' =&gt; '128',
+-						'channels' =&gt; '2',
+-						'samplerate' =&gt; '44100'),
+-					array(
+-						'format' =&gt; 'ogg',
+-						'bitrate' =&gt; '64',
+-						'channels' =&gt; '2',
+-						'samplerate' =&gt; '22050'),
+-				);
++                                        array(
++                                                'format' =&gt; 'mp3',
++                                                'bitrate' =&gt; '24',
++                                                'channels' =&gt; '1',
++                                                'samplerate' =&gt; '22050'),
++                                        array(
++                                                'format' =&gt; 'mp3',
++                                                'bitrate' =&gt; '128',
++                                                'channels' =&gt; '2',
++                                                'samplerate' =&gt; '44100'),
++                                        array(
++                                                'format' =&gt; 'ogg',
++                                                'bitrate' =&gt; '64',
++                                                'channels' =&gt; '2',
++                                                'samplerate' =&gt; '22050'),
++                                );
+ 
+ // index of the preferred streaming format from the list above
+ $config['preferredStreamingFormat'] = 1;
+@@ -314,17 +318,17 @@
+ 
+ // MIME types to determine type of uploaded documents
+ $config['mimetypes'] = array(
+-				'doc'=&gt;'application/msword',
+-				'gif'=&gt;'image/gif',
+-				'htm'=&gt;'text/html',
+-				'html'=&gt;'text/html',
+-				'jpg'=&gt;'image/jpeg',
+-				'mp3'=&gt;'audio/mp3',
+-				'm3u'=&gt;'audio/x-mpeg',
+-				'pdf'=&gt;'application/pdf',
+-				'ps'=&gt;'application/postscript',
+-				'txt'=&gt;'text/plain',
+-				'xls'=&gt;'application/vnd.ms-excel'
+-				);
++                                'doc'=&gt;'application/msword',
++                                'gif'=&gt;'image/gif',
++                                'htm'=&gt;'text/html',
++                                'html'=&gt;'text/html',
++                                'jpg'=&gt;'image/jpeg',
++                                'mp3'=&gt;'audio/mp3',
++                                'm3u'=&gt;'audio/x-mpeg',
++                                'pdf'=&gt;'application/pdf',
++                                'ps'=&gt;'application/postscript',
++                                'txt'=&gt;'text/plain',
++                                'xls'=&gt;'application/vnd.ms-excel'
++                                );
+ 
+-?&gt;
++?&gt;
+\ No newline at end of file
+
+Modified: node/branches/payable/www/get.php
+===================================================================
+--- node/branches/payable/www/get.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/get.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,9 +1,9 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#239;&#191;&#189;s Micsik, M&#239;&#191;&#189;t&#239;&#191;&#189; Pataki, Tam&#239;&#191;&#189;s D&#239;&#191;&#189;ri 
++ * Authors: Andr&#239;&#191;&#189;s Micsik, M&#239;&#191;&#189;t&#239;&#191;&#189; Pataki, Tam&#239;&#191;&#189;s D&#239;&#191;&#189;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  */
+ 
+@@ -19,25 +19,25 @@
+ 
+   $prg = &amp;$repository-&gt;getObject($id);
+   if(!$prg)
+-	 raiseError(&quot;no_such_object&quot;, $id);
++         raiseError(&quot;no_such_object&quot;, $id);
+ 
+   if(!$prg-&gt;getBool('published')) {
+-	 if(!hasPerm($prg-&gt;id, 'change')) {
+-		raiseError(&quot;not_published_yet&quot;, $id);
+-		exit;
+-	 }
+-	 $smarty-&gt;assign(&quot;UNPUBLISHED&quot;, 1);
++         if(!hasPerm($prg-&gt;id, 'change')) {
++                raiseError(&quot;not_published_yet&quot;, $id);
++                exit;
++         }
++         $smarty-&gt;assign(&quot;UNPUBLISHED&quot;, 1);
+   }
+ 
+   $page-&gt;setTitle($prg-&gt;get('title'));
+ 
+   $subPage = 'getNormalContent';
+   if(!$prg-&gt;getBool('free_content')) {
+-	 $subPage = 'getProtectedContent';
++         $subPage = 'getProtectedContent';
+   } elseif($prg-&gt;getBool('promoted')) {
+-	 $subPage = 'getPromotedContent';
++         $subPage = 'getPromotedContent';
+   }
+-    
++
+   $smarty-&gt;assign(&quot;SUBPAGE&quot;, $subPage);
+ 
+   // general data
+@@ -67,30 +67,30 @@
+   // rights sections
+   $smarty-&gt;assign('RIGHTS', $prg-&gt;getAssociatedObjects('sotf_rights', 'start_time'));
+ 
+-  // audio files 
++  // audio files
+   $audioFiles = $prg-&gt;getAssociatedObjects('sotf_media_files', 'main_content DESC, filename');
+   $to = count($audioFiles);
+   for($i=0; $i&lt;$to; $i++) {
+-	 if($prg-&gt;isLocal()) {
+-		// if local, we check if file disappeared in the meantime
+-		$path = $prg-&gt;getFilePath($audioFiles[$i]);
+-		if(!is_readable($path)) {
+-		  debug(&quot;DISAPPEARED FILE&quot;, $path);
+-		  unset($audioFiles[$i]);
+-		  continue;
+-		}
+-	 }
++         if($prg-&gt;isLocal()) {
++                // if local, we check if file disappeared in the meantime
++                $path = $prg-&gt;getFilePath($audioFiles[$i]);
++                if(!is_readable($path)) {
++                  debug(&quot;DISAPPEARED FILE&quot;, $path);
++                  unset($audioFiles[$i]);
++                  continue;
++                }
++         }
+     $audioFiles[$i] =  array_merge($audioFiles[$i], sotf_AudioFile::decodeFormatFilename($audioFiles[$i]['format']));
+-	$d = getdate($audioFiles[$i]['play_length']);
+-	$d['hours']--;
+-	$audioFiles[$i]['playtime_string'] = ($d['hours'] ? $d['hours'].':' : '') . sprintf('%02d',$d['minutes']) . ':' . sprintf('%02d',$d['seconds']);
++        $d = getdate($audioFiles[$i]['play_length']);
++        $d['hours']--;
++        $audioFiles[$i]['playtime_string'] = ($d['hours'] ? $d['hours'].':' : '') . sprintf('%02d',$d['minutes']) . ':' . sprintf('%02d',$d['seconds']);
+   }
+   $smarty-&gt;assign('AUDIO_FILES', $audioFiles);
+ 
+   // other files
+   $otherFiles = $prg-&gt;getAssociatedObjects('sotf_other_files', 'filename');
+   $smarty-&gt;assign('OTHER_FILES', $otherFiles);
+-  
++
+   // links
+   $smarty-&gt;assign('LINKS', $prg-&gt;getAssociatedObjects('sotf_links', 'caption'));
+ 
+@@ -113,10 +113,10 @@
+   $smarty-&gt;assign('MY_RATING', $myRating);
+ 
+   if(nodeConfig('payableMode')) {
+-	 $smarty-&gt;assign('CURRENCY', $config['currency']);
+-	 if(!$prg-&gt;isFree()) {
+-		$smarty-&gt;assign('LISTEN_GROUPS', sotf_Group::listGroupsOfObject($id, 'listen'));
+-	 }
++         $smarty-&gt;assign('CURRENCY', $config['currency']);
++         if(!$prg-&gt;isFree()) {
++                $smarty-&gt;assign('LISTEN_GROUPS', sotf_Group::listGroupsOfObject($id, 'listen'));
++         }
+   }
+ 
+   if ($page-&gt;loggedIn()) {
+@@ -127,6 +127,15 @@
+ 
+ $db-&gt;commit();
+ 
++
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Programm-Detailansicht - get.php';
++   include($config['counterURL']);
++}
++
+ if(sotf_Utils::getParameter('popup')) {
+   $smarty-&gt;assign('POPUP', 1);
+   $page-&gt;sendPopup();
+@@ -134,4 +143,4 @@
+   $page-&gt;send();
+ }
+ 
+-?&gt;
+\ No newline at end of file
++?&gt;
+
+Modified: node/branches/payable/www/getFile.php
+===================================================================
+--- node/branches/payable/www/getFile.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/getFile.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,9 +1,9 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  */
+ 
+@@ -18,10 +18,10 @@
+ 
+ if(empty($fid)) {
+   if(empty($id)) {
+-	 raiseError(&quot;Missing parameters!&quot;, 'id');
++         raiseError(&quot;Missing parameters!&quot;, 'id');
+   }
+   if(empty($filename)) {
+-	 raiseError(&quot;Missing parameters!&quot;, 'filename');
++         raiseError(&quot;Missing parameters!&quot;, 'filename');
+   }
+ }
+ 
+@@ -31,7 +31,7 @@
+   debug (&quot;fid&quot;, $fid);
+   $fobj = &amp;$repository-&gt;getObject($fid);
+   if(!$fobj)
+-	 raiseError(&quot;no_such_object&quot;, $fid);
++         raiseError(&quot;no_such_object&quot;, $fid);
+   $prg = $repository-&gt;getObject($fobj-&gt;get('prog_id'));
+   $mainAudio = $fobj-&gt;get('main_content') == 't';
+   $filename = $fobj-&gt;get('filename');
+@@ -70,21 +70,21 @@
+ $file = &amp; new sotf_File($filename);
+ if ($file-&gt;type != &quot;none&quot;)
+ {
+-	header(&quot;Content-type: &quot; . $file-&gt;mimetype . &quot;\n&quot;);
+-	header(&quot;Content-length: &quot; . filesize($filename) . &quot;\n&quot;);   
+-	//if($mainAudio) {  //this is somehow needed for iPodder
+-	//  header(&quot;Accept-Ranges: bytes&quot;);
+-	//  header('ETag: &quot;' . md5(file_get_contents($filename)) . '&quot;');
+-	//} else {
+-	  header(&quot;Content-transfer-encoding: binary\n&quot;); 
+-	  //}
+-	// send file
+-	
+-	// wreutz: added this to get rid of fid_123mf12 filename and save as the real filename of the file
++        header(&quot;Content-type: &quot; . $file-&gt;mimetype . &quot;\n&quot;);
++        header(&quot;Content-length: &quot; . filesize($filename) . &quot;\n&quot;);
++        //if($mainAudio) {  //this is somehow needed for iPodder
++        //  header(&quot;Accept-Ranges: bytes&quot;);
++        //  header('ETag: &quot;' . md5(file_get_contents($filename)) . '&quot;');
++        //} else {
++          header(&quot;Content-transfer-encoding: binary\n&quot;);
++          //}
++        // send file
++
++        // wreutz: added this to get rid of fid_123mf12 filename and save as the real filename of the file
+     header( &quot;Content-Disposition: filename=&quot;.basename($filename).&quot;;\n&quot; );
+     // wreutz: end
+ 
+-	readfile($filename);
++        readfile($filename);
+ }
+ else
+   raiseError(&quot;download_problem&quot;, $filename);
+@@ -93,6 +93,14 @@
+ $prg-&gt;addStat($file-&gt;id, &quot;downloads&quot;);
+ 
+ 
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Progamm Download - getFile.php';
++   include($config['counterURL']);
++}
++
+ $page-&gt;logRequest();
+ 
+-?&gt;
+\ No newline at end of file
++?&gt;
+
+Modified: node/branches/payable/www/help.php
+===================================================================
+--- node/branches/payable/www/help.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/help.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,9 +1,9 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  */
+ 
+@@ -14,4 +14,12 @@
+ 
+ header(&quot;Location: &quot; . $config['localPrefix'] . &quot;/help/index.$lang.html#$action&quot;);
+ 
+-?&gt;
+\ No newline at end of file
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Hilfe - help.php';
++   include($config['counterURL']);
++}
++
++?&gt;
+
+Modified: node/branches/payable/www/index.php
+===================================================================
+--- node/branches/payable/www/index.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/index.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,9 +1,9 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  */
+ 
+@@ -76,10 +76,10 @@
+ 
+     $advsearch-&gt;Deserialize($defQuery);
+     $query = $advsearch-&gt;GetSQLCommand();
+-  
++
+     debug(&quot;query&quot;, $query);
+     //get the number of results
+-    $max = $db-&gt;getOne(&quot;SELECT count(*) FROM ( $query ) as foo &quot;);       
++    $max = $db-&gt;getOne(&quot;SELECT count(*) FROM ( $query ) as foo &quot;);
+     $smarty-&gt;assign(&quot;DEF_QUERY_MAX&quot;, $max);
+ 
+     $res = $db-&gt;limitQuery($query, 0, $maxItemsIndexPage);
+@@ -94,9 +94,9 @@
+ } else {
+   // get new programmes
+   if(nodeConfig('payableMode'))
+-	 $mode = 'free';
++         $mode = 'free';
+   else
+-	 $mode = 'all';
++         $mode = 'all';
+   $smarty-&gt;assign('NEWS', sotf_Programme::getNewProgrammes($fromDay, $maxItemsIndexPage, $mode));
+ }
+ 
+@@ -108,6 +108,15 @@
+ // get topics with most content
+ $smarty-&gt;assign('TOPICS', $vocabularies-&gt;getTopTopics(5));
+ 
++
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Hauptseite - index.php';
++   include($config['counterURL']);
++}
++
+ $db-&gt;commit();
+ 
+ $page-&gt;send();
+
+Modified: node/branches/payable/www/listen.php
+===================================================================
+--- node/branches/payable/www/listen.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/listen.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,9 +1,9 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  */
+ 
+@@ -37,23 +37,23 @@
+   // play the jingle of station/series
+   $obj = $repository-&gt;getObject($id);
+   if(!$obj)
+-	 raiseError(&quot;no_such_object&quot;, $id);
++         raiseError(&quot;no_such_object&quot;, $id);
+   if(!$obj-&gt;isLocal()) {
+-	 // have to send user to home node of this programme
+-	 sotf_Node::redirectToHomeNode($obj, 'listen.php');
+-	 exit;
++         // have to send user to home node of this programme
++         sotf_Node::redirectToHomeNode($obj, 'listen.php');
++         exit;
+   }
+   $playlist-&gt;addJingle($obj);
+ } else {
+-  // add normal programme 
++  // add normal programme
+   $prg = $repository-&gt;getObject($id);
+   if(!$prg)
+-	 raiseError(&quot;no_such_object&quot;, $id);
++         raiseError(&quot;no_such_object&quot;, $id);
+ 
+   if(!$prg-&gt;isLocal()) {
+-	 // have to send user to home node of this programme
+-	 sotf_Node::redirectToHomeNode($prg, 'listen.php');
+-	 exit;
++         // have to send user to home node of this programme
++         sotf_Node::redirectToHomeNode($prg, 'listen.php');
++         exit;
+   }
+ 
+   if(!$prg-&gt;isPublished()) raiseError(&quot;not_published_yet&quot;);
+@@ -61,13 +61,13 @@
+   if($fobj and !$fobj-&gt;getBool('stream_access')) raiseError(&quot;no access&quot;);
+ 
+   if(!$prg-&gt;canListen()) {
+-	 $page-&gt;redirect($config['localPrefix'].'/protected.php');
+-	 exit;
++         $page-&gt;redirect($config['localPrefix'].'/protected.php');
++         exit;
+   }
+-  
++
+   $playlist-&gt;addProg($prg, $fileid);
+ }
+-  
++
+ $playlist-&gt;startStreaming();
+ 
+ // must start stream before! otherwise we don't know stream url
+@@ -75,4 +75,11 @@
+ 
+ $page-&gt;logRequest();
+ 
+-?&gt;
+\ No newline at end of file
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Programm abspielend - listen.php';
++   include($config['counterURL']);
++}
++
++?&gt;
+
+Modified: node/branches/payable/www/login.php
+===================================================================
+--- node/branches/payable/www/login.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/login.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,9 +1,9 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  */
+ 
+@@ -15,29 +15,29 @@
+ 
+ if($username &amp;&amp; $password)
+ {
+-	$errorMsg = sotf_User::login($username, $password);
+-	if(!$errorMsg)
+-	{
+-		if ($okURL)
+-		{
+-			$page-&gt;redirect($okURL);
+-		}
+-		else
+-		{
+-			$page-&gt;redirect('index.php');
+-		}
+-		exit;
+-	}
++        $errorMsg = sotf_User::login($username, $password);
++        if(!$errorMsg)
++        {
++                if ($okURL)
++                {
++                        $page-&gt;redirect($okURL);
++                }
++                else
++                {
++                        $page-&gt;redirect('index.php');
++                }
++                exit;
++        }
+ }
+ else
+ {
+-	if($page-&gt;loggedIn())
+-	{
+-		$errorMsg = $page-&gt;getlocalized(&quot;relogin&quot;);
+-		$username = $userid;
+-	}
+-	elseif($username || $password)
+-		$errorMsg = $page-&gt;getlocalized(&quot;missing_parameters&quot;);
++        if($page-&gt;loggedIn())
++        {
++                $errorMsg = $page-&gt;getlocalized(&quot;relogin&quot;);
++                $username = $userid;
++        }
++        elseif($username || $password)
++                $errorMsg = $page-&gt;getlocalized(&quot;missing_parameters&quot;);
+ }
+ 
+ $smarty-&gt;assign(
+@@ -49,7 +49,16 @@
+                 );
+ 
+ excludeRobots();
+-                      
++
++
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Anmelden - login.php';
++   include($config['counterURL']);
++}
++
+ $page-&gt;send();
+ 
+ ?&gt;
+
+Modified: node/branches/payable/www/protected.php
+===================================================================
+--- node/branches/payable/www/protected.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/protected.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,11 +1,19 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
+-
+-/*  
+- * $Id: get.php 541 2006-02-15 15:27:56Z wreutz $
+- */
+-
+-require(&quot;init.inc.php&quot;);
+-
+-$page-&gt;send();
+-
+-?&gt;
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
++
++/*
++ * $Id: get.php 541 2006-02-15 15:27:56Z wreutz $
++ */
++
++require(&quot;init.inc.php&quot;);
++
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Premium Bezahlseite - protected.php';
++   include($config['counterURL']);
++}
++
++$page-&gt;send();
++
++?&gt;
+\ No newline at end of file
+
+Modified: node/branches/payable/www/register.php
+===================================================================
+--- node/branches/payable/www/register.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/register.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,11 +1,11 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+- * 
++ *
+  * MODIFIED by Martin Schmidt <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">ptmschmidt at fh-stpoelten.ac.at</A>
+  */
+ 
+@@ -29,106 +29,106 @@
+ 
+ if($filled)
+ {
+-	// save changes
+-	// check data
+-		
+-	$error = false;
++        // save changes
++        // check data
+ 
+-	if(strlen($username) == 0)
+-	{
+-		$error = true;
+-		$smarty-&gt;assign('INVALID_USERNAME',true);
+-		//$errorMsg = appendWith($errorMsg, $page-&gt;getlocalized(&quot;invalid_username&quot;));
+-	}
+-	// check if username acceptible
+-	
+-	if(!$error) {
+-		$name1 = sotf_Utils::makeValidName($username, 32);
+-		if ($name1 != $username) {
+-		  $username = $name1;
+-		  $smarty-&gt;assign('ERRORMSG',$page-&gt;getlocalized(&quot;illegal_name&quot;));
+-		  $error = true;
+-		}
+-		if(!$change &amp;&amp; sotf_User::userNameCheck($username))
+-		{  // check if username is not already in use
+-			$error = true;
+-			$smarty-&gt;assign('USERNAME_RESERVED',true);
+-			//$errorMsg = appendWith($errorMsg, userNameCheck($username));
+-		}
+-	}
+-	
+-	if(!$change &amp;&amp; strlen($password) &lt; 2)
+-	{
+-		$error = true;
+-		$smarty-&gt;assign('PASSWORD_SHORT',true);
+-		//$errorMsg = appendWith($errorMsg, $page-&gt;getlocalized(&quot;password_too_short&quot;));
+-	}
+-	if($password != $password2)
+-	{
+-		$error = true;
+-		$smarty-&gt;assign('PASSWORD_MISMATCH',true);
+-		//$errorMsg = appendWith($errorMsg, $page-&gt;getlocalized(&quot;password_mismatch&quot;));
+-	}
++        $error = false;
+ 
+-	// ADDED BY Martin Schmidt 05-11-21
+-	
+-	if($email!=&quot;&quot;){
+-		$regex_email='/[a-z0-9_-]+(\.[a-z0-9_-]+)*@([0-9a-z][0-9a-z-]*[0-9a-z]\.)+([a-z]{2,4}|museum)/i';
+-		if(!preg_match($regex_email, $email)){
+-			$smarty-&gt;assign('BAD_EMAIL',true);
+-			$error = true;
+-		}
+-	}
+-	else {
+-		$smarty-&gt;assign('EMAIL_MISSING',true);
+-		$error = true;
+-	}
++        if(strlen($username) == 0)
++        {
++                $error = true;
++                $smarty-&gt;assign('INVALID_USERNAME',true);
++                //$errorMsg = appendWith($errorMsg, $page-&gt;getlocalized(&quot;invalid_username&quot;));
++        }
++        // check if username acceptible
+ 
+-	
+-	if($page-&gt;loggedIn()){
+-	  $storage = $user-&gt;getStorageObject();
+-	  $fields['password'] = $password_old;
+-	  $fields['username'] = $username;
+-	  $valid_pwd = $storage-&gt;userCheckPwd($fields);
+-		
+-		if($password_old==&quot;&quot;){
+-			$error = true;
+-			$smarty-&gt;assign('PASSWORD_EMPTY',true);
+-		}
+-		elseif(!$valid_pwd){
+-			$error = true;
+-			$smarty-&gt;assign('PASSWORD_MISMATCH_OLD',true);
+-		}
+-	
+-	}
+-	// ------------------
++        if(!$error) {
++                $name1 = sotf_Utils::makeValidName($username, 32);
++                if ($name1 != $username) {
++                  $username = $name1;
++                  $smarty-&gt;assign('ERRORMSG',$page-&gt;getlocalized(&quot;illegal_name&quot;));
++                  $error = true;
++                }
++                if(!$change &amp;&amp; sotf_User::userNameCheck($username))
++                {  // check if username is not already in use
++                        $error = true;
++                        $smarty-&gt;assign('USERNAME_RESERVED',true);
++                        //$errorMsg = appendWith($errorMsg, userNameCheck($username));
++                }
++        }
+ 
+-	if(!$error) {
+-	  $page-&gt;setUILanguage($language);
+-	  if($change) { // existing user
+-		 $user-&gt;realname = $realname;
+-		 $user-&gt;language = $language;
+-		 $user-&gt;email = $email;
+-		 $user-&gt;save($password);
+-	  } else { 
+-		 // new user
+-		 $error = sotf_User::register($password, $username, $realname, $language, $email);
+-		 if(!$error) {
+-			$error = sotf_User::login($username, $password);
+-		 }
+-		 if($error)
+-			$smarty-&gt;assign('ERRORMSG',$error);
+-	  }
+-	  sotf_UserData::saveData($user-&gt;id);
+-	  if(!$error) {
+-		 if ($okURL) {
+-			$page-&gt;redirect($okURL);
+-		 } else {
+-			$page-&gt;redirect('index.php');
+-		 }
+-		 exit;
+-	  }
+-	}
++        if(!$change &amp;&amp; strlen($password) &lt; 2)
++        {
++                $error = true;
++                $smarty-&gt;assign('PASSWORD_SHORT',true);
++                //$errorMsg = appendWith($errorMsg, $page-&gt;getlocalized(&quot;password_too_short&quot;));
++        }
++        if($password != $password2)
++        {
++                $error = true;
++                $smarty-&gt;assign('PASSWORD_MISMATCH',true);
++                //$errorMsg = appendWith($errorMsg, $page-&gt;getlocalized(&quot;password_mismatch&quot;));
++        }
++
++        // ADDED BY Martin Schmidt 05-11-21
++
++        if($email!=&quot;&quot;){
++                $regex_email='/[a-z0-9_-]+(\.[a-z0-9_-]+)*@([0-9a-z][0-9a-z-]*[0-9a-z]\.)+([a-z]{2,4}|museum)/i';
++                if(!preg_match($regex_email, $email)){
++                        $smarty-&gt;assign('BAD_EMAIL',true);
++                        $error = true;
++                }
++        }
++        else {
++                $smarty-&gt;assign('EMAIL_MISSING',true);
++                $error = true;
++        }
++
++
++        if($page-&gt;loggedIn()){
++          $storage = $user-&gt;getStorageObject();
++          $fields['password'] = $password_old;
++          $fields['username'] = $username;
++          $valid_pwd = $storage-&gt;userCheckPwd($fields);
++
++                if($password_old==&quot;&quot;){
++                        $error = true;
++                        $smarty-&gt;assign('PASSWORD_EMPTY',true);
++                }
++                elseif(!$valid_pwd){
++                        $error = true;
++                        $smarty-&gt;assign('PASSWORD_MISMATCH_OLD',true);
++                }
++
++        }
++        // ------------------
++
++        if(!$error) {
++          $page-&gt;setUILanguage($language);
++          if($change) { // existing user
++                 $user-&gt;realname = $realname;
++                 $user-&gt;language = $language;
++                 $user-&gt;email = $email;
++                 $user-&gt;save($password);
++          } else {
++                 // new user
++                 $error = sotf_User::register($password, $username, $realname, $language, $email);
++                 if(!$error) {
++                        $error = sotf_User::login($username, $password);
++                 }
++                 if($error)
++                        $smarty-&gt;assign('ERRORMSG',$error);
++          }
++          sotf_UserData::saveData($user-&gt;id);
++          if(!$error) {
++                 if ($okURL) {
++                        $page-&gt;redirect($okURL);
++                 } else {
++                        $page-&gt;redirect('index.php');
++                 }
++                 exit;
++          }
++        }
+ } elseif(isset($user)) {
+   $username = $user-&gt;name;
+   $realname = $user-&gt;realname;
+@@ -140,12 +140,12 @@
+ $smarty-&gt;assign('LANGUAGES',$config['outputLanguages']);
+ 
+ $smarty-&gt;assign(array(
+-					&quot;USERID&quot;     =&gt; $username,
+-					&quot;REALNAME&quot;   =&gt; $realname,
+-					&quot;LANGUAGE&quot;   =&gt; $language,
+-					&quot;EMAIL&quot;      =&gt; $email,
+-					&quot;OK_URL&quot; =&gt; htmlspecialchars($okURL),
+-					&quot;REGISTER_URL&quot; =&gt; &quot;register.php?okURL=&quot; . urlencode($okURL)
++                                        &quot;USERID&quot;     =&gt; $username,
++                                        &quot;REALNAME&quot;   =&gt; $realname,
++                                        &quot;LANGUAGE&quot;   =&gt; $language,
++                                        &quot;EMAIL&quot;      =&gt; $email,
++                                        &quot;OK_URL&quot; =&gt; htmlspecialchars($okURL),
++                                        &quot;REGISTER_URL&quot; =&gt; &quot;register.php?okURL=&quot; . urlencode($okURL)
+ ));
+ 
+ if($user) $userid = $user-&gt;id;
+@@ -154,18 +154,27 @@
+ $smarty-&gt;assign(&quot;if_logged_in&quot;, $page-&gt;loggedIn());
+ 
+ if($page-&gt;loggedIn())
+-	{
+-		$smarty-&gt;assign(&quot;USER_FIELD&quot;, &quot;$username&lt;INPUT type=\&quot;hidden\&quot; name=\&quot;username\&quot; value=\&quot;$username\&quot;&gt;&lt;INPUT type=\&quot;hidden\&quot; name=\&quot;change\&quot; value=\&quot;1\&quot;&gt;&quot;);
+-		$smarty-&gt;assign(&quot;SUBMIT_TEXT&quot;, $page-&gt;getlocalized(&quot;Change&quot;));
+-	}
++        {
++                $smarty-&gt;assign(&quot;USER_FIELD&quot;, &quot;$username&lt;INPUT type=\&quot;hidden\&quot; name=\&quot;username\&quot; value=\&quot;$username\&quot;&gt;&lt;INPUT type=\&quot;hidden\&quot; name=\&quot;change\&quot; value=\&quot;1\&quot;&gt;&quot;);
++                $smarty-&gt;assign(&quot;SUBMIT_TEXT&quot;, $page-&gt;getlocalized(&quot;Change&quot;));
++        }
+ else
+-	{
+-		$smarty-&gt;assign(&quot;USER_FIELD&quot;, &quot;&lt;INPUT type=\&quot;text\&quot; name=\&quot;username\&quot; value=\&quot;$username\&quot;&gt; (*)&quot;);
+-		$smarty-&gt;assign(&quot;SUBMIT_TEXT&quot;, $page-&gt;getlocalized(&quot;Register&quot;));
+-	}
++        {
++                $smarty-&gt;assign(&quot;USER_FIELD&quot;, &quot;&lt;INPUT type=\&quot;text\&quot; name=\&quot;username\&quot; value=\&quot;$username\&quot;&gt; (*)&quot;);
++                $smarty-&gt;assign(&quot;SUBMIT_TEXT&quot;, $page-&gt;getlocalized(&quot;Register&quot;));
++        }
+ 
+ excludeRobots();
+ 
++
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Registrierung - register.php';
++   include($config['counterURL']);
++}
++
+ $page-&gt;send();
+ 
+ ?&gt;
+
+Modified: node/branches/payable/www/search.php
+===================================================================
+--- node/branches/payable/www/search.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/search.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,9 +1,9 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  */
+ 
+@@ -18,13 +18,13 @@
+ if($pattern) {
+   //  debug(&quot;language&quot;, $language);
+   //  if(strpos($pattern, '?') || strpos($pattern, '*') || strpos($pattern, '+')) {
+-  //	 $invalidPattern = 1;
++  //         $invalidPattern = 1;
+   //}
+   $pattern = str_replace(array('?','*','+'), array(), $pattern);
+ 
+   if ($language == &quot;any_language&quot;) $language = false;
+ 
+-  $advsearch = new sotf_AdvSearch();						//create new search object object with this array
++  $advsearch = new sotf_AdvSearch();                                                //create new search object object with this array
+ 
+   $total = $advsearch-&gt;simpleSearch($pattern, $language, $station);
+   $limit = $page-&gt;splitList($total, &quot;?pattern=&quot; . urlencode($pattern) . &quot;&amp;language=$language&quot;);
+@@ -50,6 +50,14 @@
+ $smarty-&gt;assign('searchLangs', $searchLangs);
+ $smarty-&gt;assign('langNames', $langNames);
+ 
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Einfache Suche - search.php';
++   include($config['counterURL']);
++}
++
+ $page-&gt;send();
+ 
+ ?&gt;
+
+Modified: node/branches/payable/www/showContact.php
+===================================================================
+--- node/branches/payable/www/showContact.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/showContact.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,9 +1,9 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  */
+ 
+@@ -18,8 +18,8 @@
+   $contact-&gt;set('email', $contactId);
+   $contact-&gt;find();
+   if($contact-&gt;exists()) {
+-	 $foundByEmail = 1;
+-	 $contactId = $contact-&gt;id;
++         $foundByEmail = 1;
++         $contactId = $contact-&gt;id;
+   }
+ }
+ 
+@@ -45,14 +45,14 @@
+   $role = $row['role_id'];
+   if($repository-&gt;getTable($id) != 'sotf_programmes') {
+     $obj = $repository-&gt;getObject($id);
+-	 if(!$obj) {
+-		logError(&quot;DB integrity error: role $role for $id which does not exist&quot;);
+-		continue;
+-	 }
++         if(!$obj) {
++                logError(&quot;DB integrity error: role $role for $id which does not exist&quot;);
++                continue;
++         }
+     $class = get_class($obj);
+     $data = array();
+     $data['role'] = $vocabularies-&gt;getRoleName($role);
+-	 $data['name'] = $obj-&gt;get('name');
++         $data['name'] = $obj-&gt;get('name');
+     if($class == 'sotf_station') {
+       $data['url'] = $config['rootUrl'] . &quot;/showStation.php/$id&quot;;
+       $data['mid'] = $page-&gt;getlocalized('of_station');
+@@ -72,6 +72,15 @@
+ }
+ $smarty-&gt;assign('REFS',$ins);
+ 
++
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Kontaktseiten - showContact.php';
++   include($config['counterURL']);
++}
++
+ $page-&gt;sendPopup();
+ 
+ ?&gt;
+
+Modified: node/branches/payable/www/stations.php
+===================================================================
+--- node/branches/payable/www/stations.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/stations.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,9 +1,9 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-/*  
++/*
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  */
+ 
+@@ -20,9 +20,9 @@
+   $mode = sotf_Utils::getParameter('mode');
+   $language = sotf_Utils::getParameter('language');
+   if(!setcookie('sortMode', $mode))
+-	 debug(&quot;could not set cookie for sort&quot;);
++         debug(&quot;could not set cookie for sort&quot;);
+   if(!setcookie('filterLang', $language))
+-	 debug(&quot;could not set cookie for filter&quot;);
++         debug(&quot;could not set cookie for filter&quot;);
+ } else {
+   $mode = $_COOKIE['sortMode'];
+   $language = $_COOKIE['filterLang'];
+@@ -31,9 +31,9 @@
+ if ($delete) {
+   $station = sotf_Utils::getParameter('station');
+   if(!hasPerm('node','delete') &amp;&amp; !hasPerm($station,'admin')) {
+-	 $permTransl = $page-&gt;getlocalized('perm_delete');
+-	 $msg = $page-&gt;getlocalizedWithParams('no_permission', $permTransl);
+-	 raiseError($msg);
++         $permTransl = $page-&gt;getlocalized('perm_delete');
++         $msg = $page-&gt;getlocalizedWithParams('no_permission', $permTransl);
++         raiseError($msg);
+   }
+   $st = &amp; $repository-&gt;getObject($station);
+   $st-&gt;delete();
+@@ -50,9 +50,9 @@
+ $stations = sotf_Station::listStations($limit[&quot;from&quot;] , $limit[&quot;maxresults&quot;], $mode, $language);
+ 
+ for($i=0; $i&lt;count($stations); $i++) {
+-	
++
+   $sprops = $stations[$i]-&gt;getAllWithIcon();
+-  
++
+   $sprops['numProgs'] = $stations[$i]-&gt;numProgrammes();
+   $sprops['isLocal'] = $stations[$i]-&gt;isLocal();
+   $sprops['languages'] = $stations[$i]-&gt;getLanguagesLocalized();
+@@ -71,6 +71,14 @@
+ $smarty-&gt;assign('STATION_LANGS', sotf_Station::listStationLanguages());
+ 
+ 
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Station anzeigen - stations.php';
++   include($config['counterURL']);
++}
++
+ $page-&gt;send();
+ 
+ ?&gt;
+
+Modified: node/branches/payable/www/topicSearch.php
+===================================================================
+--- node/branches/payable/www/topicSearch.php	2006-11-09 14:55:33 UTC (rev 594)
++++ node/branches/payable/www/topicSearch.php	2006-11-15 14:43:20 UTC (rev 595)
+@@ -1,133 +1,76 @@
+-&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
+ 
+-
+-
+-/*  
+-
++/*
+  * $Id$
+-
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+-
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
+-
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+-
+  */
+ 
+-
+-
+ require(&quot;init.inc.php&quot;);
+ 
+-
+-
+ $treeId = sotf_Utils::getParameter('tree');
+-
+ $ID = sotf_Utils::getParameter('ID');
+-
+ //$NAME = sotf_Utils::getParameter('NAME');
+ 
+-
+-
+ if(!$ID) {
+-
+   $ID = $vocabularies-&gt;getTopicTreeRoot($treeId);
+-
+ }
+ 
+-
+-
+ if($ID) {
+-
+   $info = $vocabularies-&gt;getTopicInfo($ID, $lang);
+-
+   $smarty-&gt;assign(&quot;TOPIC&quot;, $info);
+-
+   $treeId = $info['tree_id'];
+-
+   $NAME = $info['name'];
+-
+ }
+ 
+-
+-
+ // collect subtopics
+-
+ $subtopics = $vocabularies-&gt;getSubTopics($ID, $lang);
+-
+ $smarty-&gt;assign('SUBTOPICS', $subtopics);
+ 
+-
+-
+ // collect supertopics
+-
+ $super = $vocabularies-&gt;getSuperTopic($ID, $lang);
+-
+ while($super) {
+-
+   $supertopics[] = $super;
+-
+   $super = $vocabularies-&gt;getSuperTopic($super['id'], $lang);
+-
+ }
+-
+ if($supertopics) {
+-
+   $smarty-&gt;assign('SUPERTOPICS', array_reverse($supertopics));
+-
+ }
+ 
+-
+-
+ if(!$supertopics) {
+-
+   // collect info on topic tree
+-
+   $smarty-&gt;assign('TREE', $vocabularies-&gt;getTopicTreeInfo($treeId, $lang));
+-
+   // list all topic trees
+-
+   $smarty-&gt;assign('TREES', $vocabularies-&gt;listTopicTrees($lang));
+-
+ }
+ 
+-
+-
+ $max = $vocabularies-&gt;countProgsForTopic($ID);
+ 
+-
+-
+ if($max &gt; 0) {
+-
+   $limit = $page-&gt;splitList($max, &quot;?ID=$ID&quot;);
+ 
+-
+-
+   $result = $vocabularies-&gt;getProgsForTopic($ID, $limit[&quot;from&quot;], $limit[&quot;maxresults&quot;]);
+ 
+-
+-
+   // cache icons for results
+-
+   for($i=0; $i&lt;count($result); $i++) {
+-
+-	 $result[$i]['icon'] = sotf_Blob::cacheIcon2($result[$i]);
+-
++         $result[$i]['icon'] = sotf_Blob::cacheIcon2($result[$i]);
+   }
+-
+ }
+ 
++$smarty-&gt;assign(&quot;ID&quot;, $ID);                                                //topic id
++$smarty-&gt;assign(&quot;NAME&quot;, $NAME);                                                //topic name
++$smarty-&gt;assign(&quot;query&quot;, $query);                                        //query
++$smarty-&gt;assign(&quot;result&quot;, $result);                                        //result array
+ 
+ 
+-$smarty-&gt;assign(&quot;ID&quot;, $ID);						//topic id
++// online counter for statistics
++if ($config['counterMode']) {
++   $chCounter_status = 'active';
++   $chCounter_visible = 0;
++   $chCounter_page_title = 'Themen-Suche - topicSearch.php';
++   include($config['counterURL']);
++}
+ 
+-$smarty-&gt;assign(&quot;NAME&quot;, $NAME);						//topic name
+-
+-$smarty-&gt;assign(&quot;query&quot;, $query);					//query
+-
+-$smarty-&gt;assign(&quot;result&quot;, $result);					//result array
+-
+-
+-
+ $page-&gt;send(&quot;main_frame_left.htm&quot;);
+-
+-?&gt;
+\ No newline at end of file
++?&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000297.html">[Sotf-general] Interview in Budapest
+</A></li>
+	<LI>Next message: <A HREF="000292.html">[Sotf-general] r596 - in node/branches/payable: code/doc code/share	code/templates www www/static
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#291">[ date ]</a>
+              <a href="thread.html#291">[ thread ]</a>
+              <a href="subject.html#291">[ subject ]</a>
+              <a href="author.html#291">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

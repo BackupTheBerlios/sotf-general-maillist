@@ -1,0 +1,3940 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r558 - in node/branches/video_test: code      code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos      code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share      code/templates www www/static
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r558%20-%20in%20node/branches/video_test%3A%20code%20%0A%20%20%20%20%20code/classes%20code/configs%20code/getid3-1.7.5%20code/getid3-1.7.5/demos%20%0A%20%20%20%20%20code/getid3-1.7.5/getid3%20code/getid3-1.7.5/helperapps%20code/share%20%0A%20%20%20%20%20code/templates%20www%20www/static&In-Reply-To=%3C56661.195.177.250.3.1146935389.squirrel%40195.177.250.3%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000181.html">
+   <LINK REL="Next"  HREF="000183.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r558 - in node/branches/video_test: code      code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos      code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share      code/templates www www/static</H1>
+    <B>roland</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r558%20-%20in%20node/branches/video_test%3A%20code%20%0A%20%20%20%20%20code/classes%20code/configs%20code/getid3-1.7.5%20code/getid3-1.7.5/demos%20%0A%20%20%20%20%20code/getid3-1.7.5/getid3%20code/getid3-1.7.5/helperapps%20code/share%20%0A%20%20%20%20%20code/templates%20www%20www/static&In-Reply-To=%3C56661.195.177.250.3.1146935389.squirrel%40195.177.250.3%3E"
+       TITLE="[Sotf-general] r558 - in node/branches/video_test: code      code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos      code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share      code/templates www www/static">janki at yaya23.net
+       </A><BR>
+    <I>Sat May  6 19:09:49 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000181.html">[Sotf-general] r558 - in node/branches/video_test: code code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share code/templates www www/static
+</A></li>
+        <LI>Next message: <A HREF="000183.html">[Sotf-general] r558 - in node/branches/video_test: code     code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos      code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share      code/templates www www/static
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#182">[ date ]</a>
+              <a href="thread.html#182">[ thread ]</a>
+              <a href="subject.html#182">[ subject ]</a>
+              <a href="author.html#182">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hello video_test branch developpers!
+
+just tried to test the new video_test branch, seems like there are problems
+with getID3 lib
+
+using version 1.6.2 (as suggested in config.ing.php.template) rises an error:
+------------------------------------------
+Fatal error: Cannot instantiate non-existent class: getid3 in
+/data/hosting/xaoknode/node/code/classes/sotf_FileList.class.php on line
+66
+------------------------------------------
+
+
+version 1.7.5 does not seem to be implemented yet:
+
+------------------------------------------
+Warning: main(/data/hosting/xaoknode/node/code/getid3-1.7.5/getid3.php):
+failed to open stream: No such file or directory in
+/data/hosting/xaoknode/node/code/classes/sotf_FileList.class.php on line 3
+
+Fatal error: main(): Failed opening required
+'/data/hosting/xaoknode/node/code/getid3-1.7.5/getid3.php'
+(include_path='.:/usr/share/php:/usr/share/pear') in
+/data/hosting/xaoknode/node/code/classes/sotf_FileList.class.php on line 3
+------------------------------------------
+
+any ideas? has there been any effort to port to getid3 1.7.5 yet?
+cheers
+roland jankowski
+
+
+
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">buddhafly at berlios.de</A> said:
+&gt;<i> Author: buddhafly
+</I>&gt;<i> Date: 2006-05-04 16:34:58 +0200 (Thu, 04 May 2006)
+</I>&gt;<i> New Revision: 558
+</I>&gt;<i>
+</I>&gt;<i> Added:
+</I>&gt;<i>    node/branches/video_test/code/classes/sotf_ContentCheck.class.php
+</I>&gt;<i>    node/branches/video_test/code/classes/sotf_VideoCheck.class.php
+</I>&gt;<i>    node/branches/video_test/code/classes/sotf_VideoFile.class.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/changelog.txt
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/demos/
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/demos/demo.audioinfo.class.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/demos/demo.basic.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/demos/demo.browse.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/demos/demo.cache.dbm.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/demos/demo.cache.mysql.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/demos/demo.joinmp3.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/demos/demo.mimeonly.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/demos/demo.mysql.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/demos/demo.simple.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/demos/demo.simple.write.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/demos/demo.write.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/demos/index.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/dependencies.txt
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/extension.cache.dbm.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/extension.cache.mysql.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/getid3.lib.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/getid3.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.archive.gzip.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.archive.rar.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.archive.szip.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.archive.tar.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.archive.zip.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio-video.asf.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio-video.bink.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio-video.flv.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio-video.matroska.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio-video.mpeg.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio-video.nsv.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio-video.quicktime.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio-video.real.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio-video.riff.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio-video.swf.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.aac.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.ac3.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.au.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.avr.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.bonk.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.flac.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.la.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.lpac.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.midi.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.mod.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.monkey.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.mp3.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.mpc.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.ogg.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.optimfrog.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.rkau.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.shorten.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.tta.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.voc.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.vqf.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.audio.wavpack.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.graphic.bmp.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.graphic.gif.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.graphic.jpg.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.graphic.pcd.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.graphic.png.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.graphic.tiff.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.misc.exe.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.misc.iso.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.tag.apetag.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.tag.id3v1.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.tag.id3v2.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/module.tag.lyrics3.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/write.apetag.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/write.id3v1.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/write.id3v2.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/write.lyrics3.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/write.metaflac.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/write.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/write.real.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/getid3/write.vorbiscomment.php
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/helperapps/
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/helperapps/readme.txt
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/license.txt
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/readme.txt
+</I>&gt;<i>    node/branches/video_test/code/getid3-1.7.5/structure.txt
+</I>&gt;<i>    node/branches/video_test/code/templates/advsearch.orig.htm
+</I>&gt;<i>    node/branches/video_test/www/flvplayer.swf
+</I>&gt;<i>    node/branches/video_test/www/static/rss.gif
+</I>&gt;<i>    node/branches/video_test/www/transcode.php
+</I>&gt;<i>    node/branches/video_test/www/videoplayer.swf
+</I>&gt;<i> Modified:
+</I>&gt;<i>    node/branches/video_test/code/classes/sotf_AdvSearch.class.php
+</I>&gt;<i>    node/branches/video_test/code/classes/sotf_AudioCheck.class.php
+</I>&gt;<i>    node/branches/video_test/code/classes/sotf_AudioFile.class.php
+</I>&gt;<i>    node/branches/video_test/code/classes/sotf_File.class.php
+</I>&gt;<i>    node/branches/video_test/code/classes/sotf_FileList.class.php
+</I>&gt;<i>    node/branches/video_test/code/classes/sotf_PlayList.class.php
+</I>&gt;<i>    node/branches/video_test/code/classes/sotf_Programme.class.php
+</I>&gt;<i>    node/branches/video_test/code/configs/eng.conf
+</I>&gt;<i>    node/branches/video_test/code/configs/fra.conf
+</I>&gt;<i>    node/branches/video_test/code/configs/ger.conf
+</I>&gt;<i>    node/branches/video_test/code/configs/hun.conf
+</I>&gt;<i>    node/branches/video_test/code/share/db.sql
+</I>&gt;<i>    node/branches/video_test/code/share/update.sql
+</I>&gt;<i>    node/branches/video_test/code/templates/advsearch.htm
+</I>&gt;<i>    node/branches/video_test/code/templates/advsearchresults.htm
+</I>&gt;<i>    node/branches/video_test/code/templates/editFiles.htm
+</I>&gt;<i>    node/branches/video_test/code/templates/get.htm
+</I>&gt;<i>    node/branches/video_test/code/templates/index.htm
+</I>&gt;<i>    node/branches/video_test/code/templates/search.htm
+</I>&gt;<i>    node/branches/video_test/code/templates/showSeries.htm
+</I>&gt;<i>    node/branches/video_test/code/templates/showStation.htm
+</I>&gt;<i>    node/branches/video_test/www/admin.php
+</I>&gt;<i>    node/branches/video_test/www/advsearch.php
+</I>&gt;<i>    node/branches/video_test/www/advsearchresults.php
+</I>&gt;<i>    node/branches/video_test/www/convert.php
+</I>&gt;<i>    node/branches/video_test/www/editFiles.php
+</I>&gt;<i>    node/branches/video_test/www/editMeta.php
+</I>&gt;<i>    node/branches/video_test/www/editor.php
+</I>&gt;<i>    node/branches/video_test/www/get.php
+</I>&gt;<i>    node/branches/video_test/www/getFile.php
+</I>&gt;<i>    node/branches/video_test/www/init.inc.php
+</I>&gt;<i>    node/branches/video_test/www/podcast.php
+</I>&gt;<i>    node/branches/video_test/www/search.php
+</I>&gt;<i>    node/branches/video_test/www/static/main.css
+</I>&gt;<i> Log:
+</I>&gt;<i> sotf video extension, current status
+</I>&gt;<i> this version has already been merged with the newest trunk revision, but
+</I>&gt;<i> not yet cleaned (-&gt; getid3-1.7.5)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Modified: node/branches/video_test/code/classes/sotf_AdvSearch.class.php
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> ---
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_AdvSearch.class.php	2006-05-04
+</I>&gt;<i> 11:04:36 UTC (rev 557)
+</I>&gt;<i> +++
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_AdvSearch.class.php	2006-05-04
+</I>&gt;<i> 14:34:58 UTC (rev 558)
+</I>&gt;<i> @@ -1,801 +1,553 @@
+</I>&gt;<i>  &lt;?php
+</I>&gt;<i>
+</I>&gt;<i>  /*
+</I>&gt;<i> -
+</I>&gt;<i>   * This class represents a query for the advanced search
+</I>&gt;<i> -
+</I>&gt;<i>   *
+</I>&gt;<i> -
+</I>&gt;<i>   * @author Mate Pataki MTA SZTAKI DSD
+</I>&gt;<i> -
+</I>&gt;<i>   *
+</I>&gt;<i> -
+</I>&gt;<i>   */
+</I>&gt;<i>
+</I>&gt;<i>  class sotf_AdvSearch
+</I>&gt;<i> -
+</I>&gt;<i>  {
+</I>&gt;<i>
+</I>&gt;<i> -	var $SQLquery, $sort1, $sort2, $allid;
+</I>&gt;<i> +  var $SQLquery, $sort1, $sort2, $allid;
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>    /** Used by deserialize only */
+</I>&gt;<i> +  //var $SQLFields =
+</I>&gt;<i> array('station','production_date','language','person','title','seriestitle','topic','length','rating','genre_id','keywords','abstract','seriesdescription','entry_date','expiry_date','modify_date','broadcast_date','spatial_coverage','temporal_coverage','contenttype');
+</I>&gt;<i> +
+</I>&gt;<i> +  var $SQLFields = array( // SQLFields arranged logically for addAll() -
+</I>&gt;<i> Martin Schmidt
+</I>&gt;<i> +  'title',
+</I>&gt;<i> +  'abstract',
+</I>&gt;<i> +  'keywords',
+</I>&gt;<i> +
+</I>&gt;<i> +  'station',
+</I>&gt;<i> +  'seriestitle',
+</I>&gt;<i> +  'seriesdescription',
+</I>&gt;<i> +
+</I>&gt;<i> +  'language',
+</I>&gt;<i> +  'genre_id',
+</I>&gt;<i> +  'topic',
+</I>&gt;<i> +
+</I>&gt;<i> +  'contenttype',
+</I>&gt;<i> +  'length',
+</I>&gt;<i> +  'rating',
+</I>&gt;<i> +
+</I>&gt;<i> +  'person',
+</I>&gt;<i> +
+</I>&gt;<i> +  'production_date',
+</I>&gt;<i> +  'broadcast_date',
+</I>&gt;<i> +  'entry_date',
+</I>&gt;<i> +  'modify_date',
+</I>&gt;<i> +  'expiry_date'
+</I>&gt;<i> +  //'spatial_coverage',
+</I>&gt;<i> +  //'temporal_coverage',
+</I>&gt;<i> +  );
+</I>&gt;<i>
+</I>&gt;<i> -  var $SQLFields =
+</I>&gt;<i> array('station','production_date','language','person','title','seriestitle','topic','length','rating','genre_id','keywords','abstract','seriesdescription','entry_date','expiry_date','modify_date','broadcast_date','spatial_coverage','temporal_coverage');
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  	function sotf_AdvSearch($array = &quot;&quot;)			//constuctor with a starting
+</I>&gt;<i> query
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		if ($array != &quot;&quot;) $this-&gt;SQLquery = $array;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function GetQuery()					//gives back the current query
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		return $this-&gt;SQLquery;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function GetSort1()					//gives back the current sort order 1
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		$pos = strpos($this-&gt;sort1, &quot; DESC&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		if (!$pos) return $this-&gt;sort1;
+</I>&gt;<i> -
+</I>&gt;<i>  		return substr($this-&gt;sort1, 0, $pos);
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function GetSort2()					//gives back the current sort order 2
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		$pos = strpos($this-&gt;sort2, &quot; DESC&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		if (!$pos) return $this-&gt;sort2;
+</I>&gt;<i> -
+</I>&gt;<i>  		return substr($this-&gt;sort2, 0, $pos);
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function getDir1()					//gives back if the current sort order direction
+</I>&gt;<i> 1 is DESC or not
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		$pos = strpos($this-&gt;sort1, &quot; DESC&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		if (!$pos) return false;
+</I>&gt;<i> -
+</I>&gt;<i>  		return &quot;DESC&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function getDir2()					//gives back if the current sort order direction
+</I>&gt;<i> 2 is DESC or not
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		$pos = strpos($this-&gt;sort2, &quot; DESC&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		if (!$pos) return false;
+</I>&gt;<i> -
+</I>&gt;<i>  		return &quot;DESC&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function DeleteQuery()					//start a new query
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		$this-&gt;SQLquery = NULL;
+</I>&gt;<i> -
+</I>&gt;<i>  		return $this-&gt;SQLquery;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function Serialize()					//make a string from array
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		$serial= $this-&gt;sort1.&quot;|B&quot;.$this-&gt;sort2;
+</I>&gt;<i> -
+</I>&gt;<i>  		$max = count($this-&gt;SQLquery);
+</I>&gt;<i> -
+</I>&gt;<i>  		for($i=0; $i &lt; $max; $i++)
+</I>&gt;<i> -
+</I>&gt;<i>  		{			//Need | char as a sepecial char so replace it
+</I>&gt;<i> -
+</I>&gt;<i>  			$serial = $serial.&quot;|A&quot;.strtr($this-&gt;SQLquery[$i][0], &quot;|&quot;,
+</I>&gt;<i> &quot;I&quot;).&quot;|B&quot;.strtr($this-&gt;SQLquery[$i][1], &quot;|&quot;,
+</I>&gt;<i> &quot;I&quot;).&quot;|B&quot;.strtr($this-&gt;SQLquery[$i][2], &quot;|&quot;,
+</I>&gt;<i> &quot;I&quot;).&quot;|B&quot;.strtr($this-&gt;SQLquery[$i][3], &quot;|&quot;,
+</I>&gt;<i> &quot;I&quot;).&quot;|B&quot;.strtr($this-&gt;SQLquery[$i][4], &quot;|&quot;, &quot;I&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		}
+</I>&gt;<i> -
+</I>&gt;<i>  		return $serial;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  	function Deserialize($serial)					//make an array from string
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		$this-&gt;SQLquery = array();
+</I>&gt;<i> -
+</I>&gt;<i>  		$terms = explode(&quot;|A&quot;, $serial);
+</I>&gt;<i> -
+</I>&gt;<i>  		$max = count($terms);
+</I>&gt;<i> -
+</I>&gt;<i>  		$term = explode(&quot;|B&quot;, $terms[0]);		//sort order is the first array
+</I>&gt;<i> -
+</I>&gt;<i>  		$pos1 = strpos($term[0], &quot; DESC&quot;);			//SORT 1
+</I>&gt;<i> -
+</I>&gt;<i>  		$pos2 = strpos($term[1], &quot; DESC&quot;);			//SORT 2
+</I>&gt;<i> -
+</I>&gt;<i>  		if ($pos1) $term[0] = substr($term[0], 0, $pos1);		//remove DESC
+</I>&gt;<i> -
+</I>&gt;<i>  		if ($pos2) $term[1] = substr($term[1], 0, $pos2);		//remove DESC
+</I>&gt;<i> -
+</I>&gt;<i>  		if (array_key_exists($term[0], $this-&gt;getOrderFields()) AND
+</I>&gt;<i> array_key_exists($term[1], $this-&gt;getOrderFields()))
+</I>&gt;<i> $this-&gt;SetSortOrder($term[0], $term[1]);	//SetSortOrder
+</I>&gt;<i> -
+</I>&gt;<i>  		else $this-&gt;SetSortOrder();		//set default
+</I>&gt;<i> -
+</I>&gt;<i>  		$this-&gt;setDir($pos1, $pos2);		//set direction after field is set
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  		if ($max &lt; 1) return $this-&gt;SQLquery;		//at least sort order nedded
+</I>&gt;<i> -
+</I>&gt;<i>  		if (count($term) != 2) return $this-&gt;SQLquery;	//two sort orders needed
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  		for($i=1; $i &lt; $max; $i++)
+</I>&gt;<i> -
+</I>&gt;<i>  		{			//TODO: | char as a sepecial char so replace it
+</I>&gt;<i> -
+</I>&gt;<i>  			$term = explode(&quot;|B&quot;, $terms[$i]);
+</I>&gt;<i> -
+</I>&gt;<i>  			if (count($term == 5) AND in_array($term[1], $this-&gt;SQLFields))			//to
+</I>&gt;<i> be sure :-)
+</I>&gt;<i> -
+</I>&gt;<i>  				$this-&gt;SQLquery[]=$term;
+</I>&gt;<i> -
+</I>&gt;<i>  		}
+</I>&gt;<i> -
+</I>&gt;<i>  		return $this-&gt;SQLquery;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function getEQSign($sign, $value)
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		switch ($sign) {			//= &lt; &gt; != ...
+</I>&gt;<i> -
+</I>&gt;<i>  		    case &quot;bigger&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			return &quot; &gt;= &quot;.$value;
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  		    case &quot;smaller&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			return &quot; &lt;= &quot;.$value;
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  		    case &quot;is&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			return &quot; = &quot;.$value;
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  		    case &quot;is_equal&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			return &quot; ~* '^&quot;.substr($value, 1, -1).&quot;$'&quot;;
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  		    case &quot;is_not_equal&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			return &quot; != &quot;.$value;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;is_not&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			return &quot; != &quot;.$value;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;contains&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			return &quot; ~* '.*&quot;.substr($value, 1, -1).&quot;.*'&quot;;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;begins_with&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			return &quot; ~* '^&quot;.substr($value, 1, -1).&quot;'&quot;;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;does_not_contain&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			return &quot; !~* '.*&quot;.substr($value, 1, -1).&quot;.*'&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		}
+</I>&gt;<i> -
+</I>&gt;<i>  		return false;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function GetSQLCommand()			//gives back the SQL command for the search
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $lang;
+</I>&gt;<i> -
+</I>&gt;<i>  		$topic = false;		//stores whether there was a search for topic;
+</I>&gt;<i> -
+</I>&gt;<i>  		$max = count($this-&gt;SQLquery);					//all rows of the advsearch
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  		for($i = 0; $i &lt; $max; $i++)
+</I>&gt;<i> -
+</I>&gt;<i>  			if ($this-&gt;SQLquery[$i][1] == &quot;topic&quot;)	{$topic = true;	break;}
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  		$query=&quot;SELECT distinct programmes.* FROM (&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		$query.=&quot; SELECT sotf_programmes.*, sotf_stations.name as station,
+</I>&gt;<i> sotf_series.name as seriestitle, sotf_series.description as
+</I>&gt;<i> seriesdescription, sotf_prog_rating.rating_value as rating&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		if ($topic) $query.=&quot;, sotf_topics.topic_name as topic_name&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		$query.=&quot; FROM sotf_programmes&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		$query.=&quot; LEFT JOIN sotf_stations ON sotf_programmes.station_id =
+</I>&gt;<i> sotf_stations.id&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		$query.=&quot; LEFT JOIN sotf_series ON sotf_programmes.series_id =
+</I>&gt;<i> sotf_series.id&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		$query.=&quot; LEFT JOIN sotf_prog_rating ON sotf_programmes.id =
+</I>&gt;<i> sotf_prog_rating.id&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  		if ($topic)		// added the topics as left join for performance reasons
+</I>&gt;<i> -
+</I>&gt;<i>  		{
+</I>&gt;<i> -
+</I>&gt;<i>  			$query .= &quot; LEFT JOIN sotf_prog_topics ON sotf_programmes.id =
+</I>&gt;<i> sotf_prog_topics.prog_id&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  			$query .= &quot; LEFT JOIN sotf_topics ON sotf_prog_topics.topic_id =
+</I>&gt;<i> sotf_topics.topic_id&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  		$query.=&quot;) as programmes WHERE published = 't'&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  		for($i = 0; $i &lt; $max ;$i++)		//go through all terms
+</I>&gt;<i> -
+</I>&gt;<i>  		{
+</I>&gt;<i> -
+</I>&gt;<i>  			//AND or OR words
+</I>&gt;<i> -
+</I>&gt;<i> -			if ($i != 0) $query .= &quot; &quot;.$this-&gt;SQLquery[$i][0];
+</I>&gt;<i> -
+</I>&gt;<i> +			//if ($i != 0) $query .= &quot; &quot;.$this-&gt;SQLquery[$i][0];
+</I>&gt;<i> +
+</I>&gt;<i> +			// MODIFIED BY Martin Schmidt
+</I>&gt;<i> +			//if ($i != 0) {
+</I>&gt;<i> +				if($this-&gt;SQLquery[$i][0]==&quot;IGNORE&quot;) continue;
+</I>&gt;<i> +				elseif ($i != 0) $query .= &quot; &quot;.$this-&gt;SQLquery[$i][0];
+</I>&gt;<i> +			//}
+</I>&gt;<i> +			///////////////////////////////
+</I>&gt;<i> +
+</I>&gt;<i>  			else $query .= &quot; AND&quot;;
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  			//set begining of round bracket
+</I>&gt;<i> -
+</I>&gt;<i>  			if ( (($this-&gt;SQLquery[$i][0] == &quot;AND&quot;) || ($i == 0)) &amp;&amp;
+</I>&gt;<i> ($this-&gt;SQLquery[$i+1][0] == &quot;OR&quot;) ) $query = $query.&quot; (&quot;;
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  			//field name eq sign and value
+</I>&gt;<i>
+</I>&gt;<i>  			if ($this-&gt;SQLquery[$i][4] == &quot;date&quot;)
+</I>&gt;<i> -
+</I>&gt;<i>  			{
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= &quot; &quot;.$this-&gt;SQLquery[$i][1];
+</I>&gt;<i> -
+</I>&gt;<i>  				$date = getdate($this-&gt;SQLquery[$i][3]);
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= $this-&gt;getEQSign($this-&gt;SQLquery[$i][2],
+</I>&gt;<i> &quot;'&quot;.$date[&quot;year&quot;].&quot;-&quot;.$date[&quot;mon&quot;].&quot;-&quot;.$date[&quot;mday&quot;].&quot;'&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  			}
+</I>&gt;<i>
+</I>&gt;<i>  			elseif ($this-&gt;SQLquery[$i][1] == &quot;topic&quot;)
+</I>&gt;<i> -
+</I>&gt;<i>  			{
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= &quot; (&quot;.
+</I>&gt;<i> -
+</I>&gt;<i>  					&quot; programmes.topic_name&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  //					&quot; sotf_topics.topic_name&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= $this-&gt;getEQSign($this-&gt;SQLquery[$i][2],
+</I>&gt;<i> &quot;'&quot;.$this-&gt;SQLquery[$i][3].&quot;'&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= &quot;)&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  			}
+</I>&gt;<i> +
+</I>&gt;<i> +			//ADDED BY Martin Schmidt
+</I>&gt;<i> +			elseif ($this-&gt;SQLquery[$i][1] == &quot;contenttype&quot;)
+</I>&gt;<i> +			{
+</I>&gt;<i> +				$query .= &quot; (&quot;.
+</I>&gt;<i> +					&quot; programmes.type&quot;;
+</I>&gt;<i> +					//echo $this-&gt;SQLquery[$i][2].&quot; |&quot;.$this-&gt;SQLquery[$i][3];
+</I>&gt;<i> +				$query .= $this-&gt;getEQSign($this-&gt;SQLquery[$i][2],
+</I>&gt;<i> &quot;'&quot;.$this-&gt;SQLquery[$i][3].&quot;'&quot;);
+</I>&gt;<i> +				$query .= &quot;)&quot;;
+</I>&gt;<i> +			}
+</I>&gt;<i> +			/////////////////////////////////////////////////
+</I>&gt;<i>
+</I>&gt;<i>  			elseif ($this-&gt;SQLquery[$i][1] == &quot;title&quot;)
+</I>&gt;<i> -
+</I>&gt;<i>  			{
+</I>&gt;<i> -
+</I>&gt;<i>  				if (strpos($this-&gt;SQLquery[$i][2], &quot;not&quot;) == false) $andor = &quot;OR&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				else $andor = &quot;AND&quot;;	//if does not contain or not equal then NONE
+</I>&gt;<i> should contain it
+</I>&gt;<i>
+</I>&gt;<i>  				$query .= &quot; (coalesce(title,'')&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= $this-&gt;getEQSign($this-&gt;SQLquery[$i][2],
+</I>&gt;<i> &quot;'&quot;.$this-&gt;SQLquery[$i][3].&quot;'&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= &quot; $andor coalesce(alternative_title,'')&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= $this-&gt;getEQSign($this-&gt;SQLquery[$i][2],
+</I>&gt;<i> &quot;'&quot;.$this-&gt;SQLquery[$i][3].&quot;'&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= &quot; $andor coalesce(episode_title,'')&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= $this-&gt;getEQSign($this-&gt;SQLquery[$i][2],
+</I>&gt;<i> &quot;'&quot;.$this-&gt;SQLquery[$i][3].&quot;'&quot;).&quot;)&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  			}
+</I>&gt;<i>
+</I>&gt;<i>  			elseif ($this-&gt;SQLquery[$i][1] == &quot;person&quot;)
+</I>&gt;<i> -
+</I>&gt;<i>  			{
+</I>&gt;<i> -
+</I>&gt;<i>  				if ($this-&gt;SQLquery[$i][2] == &quot;does_not_contain&quot;)
+</I>&gt;<i> -
+</I>&gt;<i>  				{
+</I>&gt;<i> -
+</I>&gt;<i>  					$qi2 = &quot;contains&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  					$not = &quot;not&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				}
+</I>&gt;<i>
+</I>&gt;<i>  				elseif  ($this-&gt;SQLquery[$i][2] == &quot;is_not_equal&quot;)
+</I>&gt;<i> -
+</I>&gt;<i>  				{
+</I>&gt;<i> -
+</I>&gt;<i>  					$qi2 = &quot;is_equal&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  					$not = &quot;not&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				}
+</I>&gt;<i>
+</I>&gt;<i>  				else
+</I>&gt;<i> -
+</I>&gt;<i>  				{
+</I>&gt;<i> -
+</I>&gt;<i>  					$qi2 = $this-&gt;SQLquery[$i][2];
+</I>&gt;<i> -
+</I>&gt;<i>  					$not = &quot;&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= &quot; id $not in (SELECT sotf_object_roles.object_id as id FROM
+</I>&gt;<i> sotf_object_roles WHERE sotf_object_roles.contact_id =
+</I>&gt;<i> sotf_contacts.id AND&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= &quot; ( coalesce(sotf_contacts.name,'')&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= $this-&gt;getEQSign($qi2, &quot;'&quot;.$this-&gt;SQLquery[$i][3].&quot;'&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= &quot; OR coalesce(sotf_contacts.alias,'')&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= $this-&gt;getEQSign($qi2, &quot;'&quot;.$this-&gt;SQLquery[$i][3].&quot;'&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= &quot; OR coalesce(sotf_contacts.acronym,'')&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= $this-&gt;getEQSign($qi2,
+</I>&gt;<i> &quot;'&quot;.$this-&gt;SQLquery[$i][3].&quot;'&quot;).&quot;))&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  			}
+</I>&gt;<i>
+</I>&gt;<i>  			elseif (($this-&gt;SQLquery[$i][4] == &quot;number&quot;) or
+</I>&gt;<i> ($this-&gt;SQLquery[$i][4] == &quot;genre&quot;))
+</I>&gt;<i> -
+</I>&gt;<i>  			{
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= &quot; &quot;.$this-&gt;SQLquery[$i][1].&quot; &quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= $this-&gt;getEQSign($this-&gt;SQLquery[$i][2],
+</I>&gt;<i> $this-&gt;SQLquery[$i][3]);
+</I>&gt;<i> -
+</I>&gt;<i> +				//echo $this-&gt;SQLquery[$i][2].&quot; |&quot;.$this-&gt;SQLquery[$i][3];
+</I>&gt;<i>  			}
+</I>&gt;<i>
+</I>&gt;<i>  			else
+</I>&gt;<i> -
+</I>&gt;<i>  			{
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= &quot; &quot;.$this-&gt;SQLquery[$i][1].&quot; &quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  				$query .= $this-&gt;getEQSign($this-&gt;SQLquery[$i][2],
+</I>&gt;<i> &quot;'&quot;.$this-&gt;SQLquery[$i][3].&quot;'&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  			}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  			//set end of round bracket
+</I>&gt;<i> -
+</I>&gt;<i>  			if (($this-&gt;SQLquery[$i][0] == &quot;OR&quot;) &amp;&amp; ($this-&gt;SQLquery[$i+1][0] !=
+</I>&gt;<i> &quot;OR&quot;)) $query = $query.&quot; )&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		}
+</I>&gt;<i>
+</I>&gt;<i>  		$query = $query.&quot; ORDER BY &quot;.$this-&gt;sort1.&quot;, &quot;.$this-&gt;sort2;			//ISBN,
+</I>&gt;<i> TITLE
+</I>&gt;<i>
+</I>&gt;<i>  		//print($query);
+</I>&gt;<i> -
+</I>&gt;<i>  		//die();
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  		return $query;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  	function getPersons($program_id)			//gives back the persons that have to
+</I>&gt;<i> do with the program
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $db, $lang;
+</I>&gt;<i>
+</I>&gt;<i>  		$query=&quot;SELECT sotf_contacts.name, sotf_contacts.alias,
+</I>&gt;<i> sotf_contacts.acronym, sotf_role_names.name as role FROM sotf_contacts,
+</I>&gt;<i> sotf_role_names WHERE sotf_contacts.id = sotf_object_roles.contact_id
+</I>&gt;<i> AND sotf_object_roles.object_id = '$program_id' AND
+</I>&gt;<i> sotf_object_roles.role_id = sotf_role_names.role_id AND
+</I>&gt;<i> sotf_role_names.language='$lang'&quot;;
+</I>&gt;<i>
+</I>&gt;<i>  		return $db-&gt;getAll($query);
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  	function getTopics($program_id)			//gives back the topics for the
+</I>&gt;<i> program
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $db, $lang;
+</I>&gt;<i>
+</I>&gt;<i>  		$query=&quot;SELECT sotf_topics.topic_name as name FROM sotf_topics WHERE
+</I>&gt;<i> sotf_topics.language = '$lang' AND sotf_prog_topics.topic_id =
+</I>&gt;<i> sotf_topics.topic_id AND sotf_prog_topics.prog_id = '$program_id'&quot;;
+</I>&gt;<i>
+</I>&gt;<i>  		return $db-&gt;getAll($query);
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i>  	function AddRow($SQLlink, $SQLfield, $where = -1)			//add a row to the
+</I>&gt;<i> query
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i>
+</I>&gt;<i>  		if ($SQLlink == &quot;AND&quot;) $new[0] = &quot;AND&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		else $new[0] = &quot;OR&quot;;
+</I>&gt;<i>
+</I>&gt;<i>  		$new[1] = $SQLfield;		//name of the field
+</I>&gt;<i> -
+</I>&gt;<i>  		$new[2] = &quot;&quot;;			//=, !=, &lt;, &gt;
+</I>&gt;<i> -
+</I>&gt;<i>  		$new[3] = &quot;&quot;;			//text or date
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  		switch ($SQLfield) {		//set type of the field
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;station&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;station&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;production_date&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;date&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;language&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;lang&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;series&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;string&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;track&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;string&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;topic&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;topic&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;entry_date&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;date&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;expiry_date&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;date&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;modify_date&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;date&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;broadcast_date&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;date&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;owner&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;string&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;person&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;string&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;title&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;string&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;seriestitle&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;string&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;seriesdescription&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;string&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;keywords&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;string&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;genre_id&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;genre&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;abstract&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;string&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;length&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;length&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;contact_email&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;string&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;contact_phone&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;string&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;spatial_coverage&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;string&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;temporal_coverage&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;date&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		    case &quot;rating&quot;:
+</I>&gt;<i> -
+</I>&gt;<i>  			$new[4] = &quot;rating&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		        break;
+</I>&gt;<i> +
+</I>&gt;<i> +			case &quot;contenttype&quot;: //ADDED BY Martin Schmidt
+</I>&gt;<i> +			$new[4] = &quot;contenttype&quot;;
+</I>&gt;<i> +		        break;
+</I>&gt;<i>
+</I>&gt;<i>  		}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  		if ($where == -1)
+</I>&gt;<i> -
+</I>&gt;<i>  		{
+</I>&gt;<i> -
+</I>&gt;<i>  			$this-&gt;SQLquery[] = $new;
+</I>&gt;<i> -
+</I>&gt;<i>  		}
+</I>&gt;<i>
+</I>&gt;<i>  		else
+</I>&gt;<i> -
+</I>&gt;<i>  		{
+</I>&gt;<i> -
+</I>&gt;<i>  			$max = count($this-&gt;SQLquery);
+</I>&gt;<i> -
+</I>&gt;<i>  			$output1 = array_slice($this-&gt;SQLquery, 0, $where+1);
+</I>&gt;<i> -
+</I>&gt;<i>  			if ($where &lt; $max) $output2 = array_slice($this-&gt;SQLquery, $where+1);
+</I>&gt;<i> -
+</I>&gt;<i>  			//var_dump($output);
+</I>&gt;<i> -
+</I>&gt;<i>  			$output1[]=$new;
+</I>&gt;<i> -
+</I>&gt;<i>  			$this-&gt;SQLquery = array_merge($output1, $output2);
+</I>&gt;<i> -
+</I>&gt;<i>  		}
+</I>&gt;<i> -
+</I>&gt;<i>  		return $this-&gt;SQLquery;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	function addAll(){ //ADDED BY Martin Schmidt
+</I>&gt;<i> +		for($i=0;$i&lt;count($this-&gt;SQLFields);$i++){
+</I>&gt;<i> +			$this-&gt;AddRow(&quot;OR&quot;, $this-&gt;SQLFields[$i]);
+</I>&gt;<i> +		}
+</I>&gt;<i> +		return $this-&gt;SQLquery;
+</I>&gt;<i> +	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  	function DelRow($where)		//set the sort order
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		$max = count($this-&gt;SQLquery);
+</I>&gt;<i> -
+</I>&gt;<i>  		if ($where &gt; 0) $output1 = array_slice($this-&gt;SQLquery, 0, $where);
+</I>&gt;<i> -
+</I>&gt;<i>  		if ($where &lt; $max) $output2 = array_slice($this-&gt;SQLquery, $where+1);
+</I>&gt;<i> -
+</I>&gt;<i> -		$this-&gt;SQLquery = array_merge($output1, $output2);
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i> +		//$this-&gt;SQLquery = array_merge($output1, $output2);
+</I>&gt;<i> +
+</I>&gt;<i> +		//php5 hack - martin schmidt
+</I>&gt;<i> +		if(is_array($output1)) $this-&gt;SQLquery = array_merge($output1,
+</I>&gt;<i> $output2);
+</I>&gt;<i> +		else $this-&gt;SQLquery = $output2;
+</I>&gt;<i> +
+</I>&gt;<i>  		return $this-&gt;SQLquery;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function SetSortOrder($sort1 = &quot;entry_date DESC&quot;, $sort2 =
+</I>&gt;<i> &quot;station&quot;)		//set the sort order
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		$pos = strpos($this-&gt;sort1, &quot; DESC&quot;);			//SORT 1
+</I>&gt;<i> -
+</I>&gt;<i>  		if ($pos) $this-&gt;sort1 = $sort1.&quot; DESC&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		else  $this-&gt;sort1 = $sort1;
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  		$pos = strpos($this-&gt;sort2, &quot; DESC&quot;);			//SORT 2
+</I>&gt;<i> -
+</I>&gt;<i>  		if ($pos) $this-&gt;sort2 = $sort2.&quot; DESC&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		else  $this-&gt;sort2 = $sort2;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i> -
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  	function setDir($dir1 = false, $dir2 = false)					//gives back if the
+</I>&gt;<i> current sort order direction 1 is DESC or not
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		$pos = strpos($this-&gt;sort1, &quot; DESC&quot;);			//SORT 1
+</I>&gt;<i> -
+</I>&gt;<i>  		if (!$pos AND $dir1) $this-&gt;sort1 .= &quot; DESC&quot;;		//add DESC
+</I>&gt;<i> -
+</I>&gt;<i>  		elseif ($pos AND !$dir1) $this-&gt;sort1 = substr($this-&gt;sort1, 0,
+</I>&gt;<i> $pos);		//remove DESC
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  		$pos = strpos($this-&gt;sort2, &quot; DESC&quot;);			//SORT 2
+</I>&gt;<i> -
+</I>&gt;<i>  		if (!$pos AND $dir2) $this-&gt;sort2 .= &quot; DESC&quot;;		//add DESC
+</I>&gt;<i> -
+</I>&gt;<i>  		elseif ($pos AND !$dir2) $this-&gt;sort2 = substr($this-&gt;sort2, 0,
+</I>&gt;<i> $pos);		//remove DESC
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function GetHumanReadable()			//translates fieldnames for all rows of
+</I>&gt;<i> the query
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $page;
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfields = &quot;&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  		$max = count($this-&gt;SQLquery);
+</I>&gt;<i>
+</I>&gt;<i>  		for($i=0; $i &lt; $max; $i++)
+</I>&gt;<i> -
+</I>&gt;<i>  			{
+</I>&gt;<i> -
+</I>&gt;<i>  			$SQLfield[0] = $page-&gt;getlocalized($this-&gt;SQLquery[$i][0]);
+</I>&gt;<i> -
+</I>&gt;<i>  			$SQLfield[1] = $page-&gt;getlocalized($this-&gt;SQLquery[$i][1]);
+</I>&gt;<i> -
+</I>&gt;<i>  			$SQLfield[2] = $page-&gt;getlocalized($this-&gt;SQLquery[$i][2]);
+</I>&gt;<i>
+</I>&gt;<i>  			if ($this-&gt;SQLquery[$i][4] == &quot;date&quot;) $SQLfield[3] = date(&quot;Y-m-d&quot;,
+</I>&gt;<i> $this-&gt;SQLquery[$i][3]);
+</I>&gt;<i> -
+</I>&gt;<i>  				elseif ($this-&gt;SQLquery[$i][4] == &quot;lang&quot;) $SQLfield[3] =
+</I>&gt;<i> $page-&gt;getlocalized($this-&gt;SQLquery[$i][3]);
+</I>&gt;<i> -
+</I>&gt;<i>  				else $SQLfield[3] = $this-&gt;SQLquery[$i][3];
+</I>&gt;<i>
+</I>&gt;<i>  			$SQLfield[4] = $this-&gt;SQLquery[$i][4];
+</I>&gt;<i> -
+</I>&gt;<i>  			$SQLfields[] = $SQLfield;
+</I>&gt;<i> -
+</I>&gt;<i>  			}
+</I>&gt;<i>
+</I>&gt;<i>  		return $SQLfields;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  	function GetSQLqueryfields()			//translates fieldnames for all rows of
+</I>&gt;<i> the query
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $page;
+</I>&gt;<i> -
+</I>&gt;<i>  		$max = count($this-&gt;SQLquery);
+</I>&gt;<i> -
+</I>&gt;<i>  		for($i=0; $i &lt; $max; $i++)
+</I>&gt;<i> -
+</I>&gt;<i>  			$SQLfield[] = $page-&gt;getlocalized($this-&gt;SQLquery[$i][1]);
+</I>&gt;<i>
+</I>&gt;<i>  		return $SQLfield;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> @@ -823,369 +575,270 @@
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  	function GetSQLfields()		//translates fieldnames for dropdown box
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $page;
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  		$SQLfiels['station'] = $page-&gt;getlocalized(&quot;station&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['production_date'] = $page-&gt;getlocalized(&quot;production_date&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['language'] = $page-&gt;getlocalized(&quot;language&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['person'] = $page-&gt;getlocalized(&quot;person&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['title'] = $page-&gt;getlocalized(&quot;title&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['seriestitle'] = $page-&gt;getlocalized(&quot;seriestitle&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['topic'] = $page-&gt;getlocalized(&quot;topic&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['length'] = $page-&gt;getlocalized(&quot;length&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['rating'] = $page-&gt;getlocalized(&quot;rating&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		//$SQLfiels['track'] = $page-&gt;getlocalized(&quot;track&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['genre_id'] = $page-&gt;getlocalized(&quot;genre_id&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['keywords'] = $page-&gt;getlocalized(&quot;keywords&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['abstract'] = $page-&gt;getlocalized(&quot;abstract&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['seriesdescription'] =
+</I>&gt;<i> $page-&gt;getlocalized(&quot;seriesdescription&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['entry_date'] = $page-&gt;getlocalized(&quot;entry_date&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['expiry_date'] = $page-&gt;getlocalized(&quot;expiry_date&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['modify_date'] = $page-&gt;getlocalized(&quot;modify_date&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['broadcast_date'] = $page-&gt;getlocalized(&quot;broadcast_date&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['spatial_coverage'] =
+</I>&gt;<i> $page-&gt;getlocalized(&quot;spatial_coverage&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$SQLfiels['temporal_coverage'] =
+</I>&gt;<i> $page-&gt;getlocalized(&quot;temporal_coverage&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>
+</I>&gt;<i> +		//$SQLfiels['contenttype'] = $page-&gt;getlocalized(&quot;contenttype&quot;);
+</I>&gt;<i> +		$SQLfiels['contenttype'] = &quot;Content Type&quot;; //added by Martin Schmidt
+</I>&gt;<i>
+</I>&gt;<i>  		asort($SQLfiels);
+</I>&gt;<i> -
+</I>&gt;<i>  		return $SQLfiels;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function getOrderFields()		//translates fieldnames for dropdown box
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  	  global $page;
+</I>&gt;<i>
+</I>&gt;<i>  		$SQLfiels = $this-&gt;GetSQLfields();
+</I>&gt;<i> -
+</I>&gt;<i>  		foreach($SQLfiels as $key =&gt; $value) if ($key != &quot;person&quot; AND $key !=
+</I>&gt;<i> &quot;topic&quot;) $OrderFields[$key] = $value;
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  		$OrderFields['episode_sequence'] =
+</I>&gt;<i> $page-&gt;getlocalized(&quot;episode_sequence&quot;);
+</I>&gt;<i>
+</I>&gt;<i>  		asort($OrderFields);
+</I>&gt;<i> -
+</I>&gt;<i>  		return $OrderFields;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  	function GetLanguages()		//returns all the languages
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $page, $config;
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  		$max = count($config['languages']);
+</I>&gt;<i> -
+</I>&gt;<i>  		for($i=0; $i&lt;$max;$i++) $Languages[$config['languages'][$i]] =
+</I>&gt;<i> $page-&gt;getlocalized($config['languages'][$i]);
+</I>&gt;<i>
+</I>&gt;<i>  		return $Languages;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  	function GetStations()		//returns all the stations
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		$stationsarray = sotf_Station::listStationNames();
+</I>&gt;<i> -
+</I>&gt;<i>  		$max = count($stationsarray);
+</I>&gt;<i> -
+</I>&gt;<i>  		for($i=0; $i&lt;$max;$i++) $Stations[$stationsarray[$i][name]] =
+</I>&gt;<i> $stationsarray[$i][name];
+</I>&gt;<i>
+</I>&gt;<i>  		return $Stations;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  	function GetGenres()		//returns all the genres
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $vocabularies;
+</I>&gt;<i>
+</I>&gt;<i>  		$genresarray = $vocabularies-&gt;getGenres();
+</I>&gt;<i> -
+</I>&gt;<i>  		$max = count($genresarray);
+</I>&gt;<i> -
+</I>&gt;<i>  		for($i=0; $i&lt;$max;$i++) $Genres[$genresarray[$i][id]] =
+</I>&gt;<i> $genresarray[$i][name];
+</I>&gt;<i>
+</I>&gt;<i>  		return $Genres;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -	function getRatings()		//returns all the genres
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i> +	function getRatings()		//returns all the ratings
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		$rating = new sotf_Rating();
+</I>&gt;<i> -
+</I>&gt;<i>  		for($i=$rating-&gt;minValue; $i&lt;=$rating-&gt;maxValue; $i+=0.5)
+</I>&gt;<i> $ratings[&quot;$i&quot;] = &quot;$i&quot;;
+</I>&gt;<i>
+</I>&gt;<i>  		return $ratings;
+</I>&gt;<i> +	}
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	function GetContentTypes()		//returns all the contenttypes - ADDED BY
+</I>&gt;<i> Martin Schmidt
+</I>&gt;<i> +	{
+</I>&gt;<i> +		/*global $db;
+</I>&gt;<i>
+</I>&gt;<i> +		$query=&quot;SELECT DISTINCT type FROM sotf_programmes&quot;;
+</I>&gt;<i> +
+</I>&gt;<i> +		return $db-&gt;getCol($query);*/
+</I>&gt;<i> +
+</I>&gt;<i> +		$contenttypes=array('sound'=&gt;'Audio', 'video'=&gt;'Video');
+</I>&gt;<i> +		return $contenttypes;
+</I>&gt;<i> +
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  	function GetEQdate()		//returns EQ options for dates
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i>
+</I>&gt;<i>  		global $page;
+</I>&gt;<i>
+</I>&gt;<i>  		$EQdate[bigger] = $page-&gt;getlocalized(&quot;after&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQdate[smaller] = $page-&gt;getlocalized(&quot;before&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQdate[is] = $page-&gt;getlocalized(&quot;is&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQdate[is_not] = $page-&gt;getlocalized(&quot;is_not&quot;);
+</I>&gt;<i>
+</I>&gt;<i>  		return $EQdate;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  	function GetEQstring()		//returns EQ options for strings
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $page;
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  		$EQstring[contains] = $page-&gt;getlocalized(&quot;contains&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQstring[begins_with] = $page-&gt;getlocalized(&quot;begins_with&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQstring[is_equal] = $page-&gt;getlocalized(&quot;is&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQstring[does_not_contain] = $page-&gt;getlocalized(&quot;does_not_contain&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQstring[is_not_equal] = $page-&gt;getlocalized(&quot;is_not_equal&quot;);
+</I>&gt;<i>
+</I>&gt;<i>  		return $EQstring;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function GetEQtopic()		//returns EQ options for topics
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $page;
+</I>&gt;<i>
+</I>&gt;<i>  		$EQstring[contains] = $page-&gt;getlocalized(&quot;contains&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQstring[begins_with] = $page-&gt;getlocalized(&quot;begins_with&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQstring[is_equal] = $page-&gt;getlocalized(&quot;is&quot;);
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  		//$EQstring[does_not_contain] =
+</I>&gt;<i> $page-&gt;getlocalized(&quot;does_not_contain&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		//$EQstring[is_not_equal] = $page-&gt;getlocalized(&quot;is_not_equal&quot;);
+</I>&gt;<i>
+</I>&gt;<i>  		return $EQstring;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  	function GetEQlang()		//returns EQ options for languages and station
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $page;
+</I>&gt;<i>
+</I>&gt;<i>  		$EQlang[is] = $page-&gt;getlocalized(&quot;is&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQlang[contains] = $page-&gt;getlocalized(&quot;contains&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQlang[does_not_contain] = $page-&gt;getlocalized(&quot;does_not_contain&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQlang[is_not] = $page-&gt;getlocalized(&quot;is_not&quot;);
+</I>&gt;<i>
+</I>&gt;<i>  		return $EQlang;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function GetEQlength()		//returns EQ options for length
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $page;
+</I>&gt;<i>
+</I>&gt;<i>  		$EQlength[bigger] = $page-&gt;getlocalized(&quot;longer&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQlength[smaller] = $page-&gt;getlocalized(&quot;shorter&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQlength[is] = $page-&gt;getlocalized(&quot;is&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQlength[is_not] = $page-&gt;getlocalized(&quot;is_not&quot;);
+</I>&gt;<i>
+</I>&gt;<i>  		return $EQlength;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function GetEQnumber()		//returns EQ options for numbers
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $page;
+</I>&gt;<i>
+</I>&gt;<i>  		$EQnumber[bigger] = $page-&gt;getlocalized(&quot;bigger&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQnumber[smaller] = $page-&gt;getlocalized(&quot;smaller&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQnumber[is] = $page-&gt;getlocalized(&quot;is&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  		$EQnumber[is_not] = $page-&gt;getlocalized(&quot;is_not&quot;);
+</I>&gt;<i>
+</I>&gt;<i>  		return $EQnumber;
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i> +
+</I>&gt;<i> +	function GetEQcontenttype()		//returns EQ options for contenttype -
+</I>&gt;<i> ADDED BY Martin Schmidt
+</I>&gt;<i> +	{
+</I>&gt;<i> +		global $page;
+</I>&gt;<i>
+</I>&gt;<i> +		$EQcontenttype[is] = $page-&gt;getlocalized(&quot;is&quot;);
+</I>&gt;<i> +		$EQcontenttype[is_not] = $page-&gt;getlocalized(&quot;is_not&quot;);
+</I>&gt;<i>
+</I>&gt;<i> +		return $EQcontenttype;
+</I>&gt;<i> +	}
+</I>&gt;<i>
+</I>&gt;<i> -	function simpleSearch($words, $language = false, $stationId =
+</I>&gt;<i> '')		//searches the words in the most popular fields
+</I>&gt;<i>
+</I>&gt;<i> +	function simpleSearch($words, $language = false, $stationId = '',
+</I>&gt;<i> $audio=false, $video=false)		//searches the words in the most popular
+</I>&gt;<i> fields
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $db;
+</I>&gt;<i>
+</I>&gt;<i>  		$this-&gt;allid = array();
+</I>&gt;<i> -
+</I>&gt;<i>  		$words = sotf_Utils::magicQuotes(strip_tags($words));		//remove special
+</I>&gt;<i> chars
+</I>&gt;<i> -
+</I>&gt;<i>  		$word = split(&quot; &quot;, $words);			//split into separate words
+</I>&gt;<i> -
+</I>&gt;<i>  		$max = count($word);				//count words
+</I>&gt;<i>
+</I>&gt;<i>  		for ($i=0; $i&lt;$max; $i++)			//go through all words
+</I>&gt;<i> -
+</I>&gt;<i>  		{
+</I>&gt;<i> -
+</I>&gt;<i>  			$word[$i] = trim($word[$i]);			//trim word
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  			if ($word[$i] == &quot;&quot;) continue;			//in empty get next
+</I>&gt;<i>
+</I>&gt;<i>  			//find word at the most common places
+</I>&gt;<i> -
+</I>&gt;<i>  			$serial = str_replace(&quot;XXX&quot;, $word[$i],
+</I>&gt;<i> &quot;production_date|Bstation|AAND|Bperson|Bcontains|BXXX|Bstring|AOR|Btitle|Bcontains|BXXX|Bstring|AOR|Bkeywords|Bcontains|BXXX|Bstring|AOR|Babstract|Bcontains|BXXX|Bstring|AOR|Bspatial_coverage|Bcontains|BXXX|Bstring&quot;);
+</I>&gt;<i>
+</I>&gt;<i>  			if ($language) $serial .=
+</I>&gt;<i> &quot;|AAND|Blanguage|Bis|B&quot;.$language.&quot;|Blang&quot;;		//if language given add
+</I>&gt;<i> to search options
+</I>&gt;<i> +      		if ($stationId) $serial .=
+</I>&gt;<i> &quot;|AAND|Bstation|Bis|B&quot;.$stationId.&quot;|Bstation&quot;;
+</I>&gt;<i> +
+</I>&gt;<i> +			//ADDED BY Martin Schmidt
+</I>&gt;<i> +			if($audio &amp;&amp; $video) $serial .=
+</I>&gt;<i> &quot;|AAND|Bcontenttype|Bis|Bsound|Bcontenttype|AOR|Bcontenttype|Bis|Bvideo|Bcontenttype&quot;;
+</I>&gt;<i> +			elseif ($audio) $serial .=
+</I>&gt;<i> &quot;|AAND|Bcontenttype|Bis|Bsound|Bcontenttype&quot;;
+</I>&gt;<i> +			elseif ($video) $serial .=
+</I>&gt;<i> &quot;|AAND|Bcontenttype|Bis|Bvideo|Bcontenttype&quot;;
+</I>&gt;<i>
+</I>&gt;<i> -      if ($stationId) $serial .=
+</I>&gt;<i> &quot;|AAND|Bstation|Bis|B&quot;.$stationId.&quot;|Bstation&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  			$this-&gt;Deserialize($serial);		//deserialize query
+</I>&gt;<i> -
+</I>&gt;<i>  			$query = $this-&gt;GetSQLCommand();	//get desrialized query
+</I>&gt;<i> -
+</I>&gt;<i>  			$query = &quot;SELECT id FROM (&quot;.$query.&quot;) as a&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  			$result = $db-&gt;getAll($query);
+</I>&gt;<i> -
+</I>&gt;<i>  			$maxk = count($result);				//count words
+</I>&gt;<i>
+</I>&gt;<i>  			for ($k=0; $k&lt;$maxk; $k++)			//go through all results
+</I>&gt;<i> -
+</I>&gt;<i>  			{
+</I>&gt;<i> -
+</I>&gt;<i>  				if (array_key_exists($result[$k][&quot;id&quot;], $this-&gt;allid))
+</I>&gt;<i> $this-&gt;allid[$result[$k][&quot;id&quot;]] += 1;
+</I>&gt;<i> -
+</I>&gt;<i>  				else $this-&gt;allid[$result[$k][&quot;id&quot;]] = 1;
+</I>&gt;<i> -
+</I>&gt;<i>  			}
+</I>&gt;<i> -
+</I>&gt;<i>  		}
+</I>&gt;<i>
+</I>&gt;<i>  		return count($this-&gt;allid);
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  	function getSimpleSearchResults($from, $to)		//gives back the search
+</I>&gt;<i> results from the simpleSearch
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i>  		global $db;
+</I>&gt;<i>
+</I>&gt;<i>  		arsort($this-&gt;allid, SORT_NUMERIC);		//sorts the array, bigger numbers
+</I>&gt;<i> first
+</I>&gt;<i> -
+</I>&gt;<i>  		$result = array();
+</I>&gt;<i> -
+</I>&gt;<i>  		$i = -1;
+</I>&gt;<i>
+</I>&gt;<i>  		foreach($this-&gt;allid as $id =&gt; $value)
+</I>&gt;<i> -
+</I>&gt;<i>  		{
+</I>&gt;<i> -
+</I>&gt;<i>  			$i++;
+</I>&gt;<i> -
+</I>&gt;<i>  			if ($i &lt; $from) continue;
+</I>&gt;<i> -
+</I>&gt;<i>  			if ($i &gt; $to) break;
+</I>&gt;<i> -
+</I>&gt;<i>  			$query = &quot;SELECT * FROM sotf_programmes WHERE id='$id'&quot;;
+</I>&gt;<i> -
+</I>&gt;<i>  			$result = array_merge($result, $db-&gt;getAll($query));
+</I>&gt;<i> -
+</I>&gt;<i>  		}
+</I>&gt;<i>
+</I>&gt;<i>  //		print(&quot;&lt;pre&gt;&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  //		var_dump($result);
+</I>&gt;<i> -
+</I>&gt;<i>  //		print(&quot;&lt;/pre&gt;&quot;);
+</I>&gt;<i>
+</I>&gt;<i>      return($result);
+</I>&gt;<i> -
+</I>&gt;<i>  	}
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  }
+</I>&gt;<i>
+</I>&gt;<i>  ?&gt;
+</I>&gt;<i> \ No newline at end of file
+</I>&gt;<i>
+</I>&gt;<i> Modified: node/branches/video_test/code/classes/sotf_AudioCheck.class.php
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> ---
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_AudioCheck.class.php	2006-05-04
+</I>&gt;<i> 11:04:36 UTC (rev 557)
+</I>&gt;<i> +++
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_AudioCheck.class.php	2006-05-04
+</I>&gt;<i> 14:34:58 UTC (rev 558)
+</I>&gt;<i> @@ -1,7 +1,6 @@
+</I>&gt;<i>  &lt;?php
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>  /**
+</I>&gt;<i>
+</I>&gt;<i>  * This is a class for checking the requested formats, and for converting
+</I>&gt;<i> them
+</I>&gt;<i> @@ -18,9 +17,10 @@
+</I>&gt;<i>
+</I>&gt;<i>  */
+</I>&gt;<i>
+</I>&gt;<i> -class sotf_AudioCheck
+</I>&gt;<i> +class sotf_AudioCheck extends sotf_ContentCheck
+</I>&gt;<i>
+</I>&gt;<i>  {
+</I>&gt;<i> +
+</I>&gt;<i>
+</I>&gt;<i>  	/**
+</I>&gt;<i>
+</I>&gt;<i> @@ -72,8 +72,9 @@
+</I>&gt;<i>
+</I>&gt;<i>  	var $list;
+</I>&gt;<i>
+</I>&gt;<i> +    var $prefix = 'audio';
+</I>&gt;<i> +	var $type = 'audioChecker';
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i>    var $console = false;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> @@ -98,10 +99,7 @@
+</I>&gt;<i>
+</I>&gt;<i>  		global $config;
+</I>&gt;<i>
+</I>&gt;<i> -		global $config;
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  		$this-&gt;list = &amp; $list;
+</I>&gt;<i>
+</I>&gt;<i>  		for($i=0;$i&lt;count($config['audioFormats']);$i++)			// walk thru the
+</I>&gt;<i> requested formats
+</I>&gt;<i> @@ -274,44 +272,29 @@
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -	/**
+</I>&gt;<i> -
+</I>&gt;<i> -	* Gets best quality audio file
+</I>&gt;<i> -
+</I>&gt;<i> + 	/**
+</I>&gt;<i> +	* Encode format to a filename.
+</I>&gt;<i>  	*
+</I>&gt;<i> -
+</I>&gt;<i> -	* @return	mixed	If found return the index of the file, else returns
+</I>&gt;<i> boolean false
+</I>&gt;<i> -
+</I>&gt;<i> +	* @param	integer	$index	Format index of the jingle in the
+</I>&gt;<i> $config['audioFormats'] global variable
+</I>&gt;<i> +	* @return	string	Encoded format. Example: 24kbps_1chn_22050Hz.mp3
+</I>&gt;<i> +	* @use	$config['audioFormats']
+</I>&gt;<i>  	*/
+</I>&gt;<i>
+</I>&gt;<i> -	function getBest()
+</I>&gt;<i> +	function getFormatFilename($index)
+</I>&gt;<i>
+</I>&gt;<i>  	{
+</I>&gt;<i>
+</I>&gt;<i> -		$bitrate = 0;								// set minimum bitrate
+</I>&gt;<i> +		global $config;
+</I>&gt;<i>
+</I>&gt;<i> -		$index = false;								// initialize file index
+</I>&gt;<i>
+</I>&gt;<i> -		for($i=0;$i&lt;count($this-&gt;list-&gt;list);$i++)	// walk thru files
+</I>&gt;<i>
+</I>&gt;<i> -			if ($this-&gt;list-&gt;list[$i]-&gt;type == 'audio')
+</I>&gt;<i> +		return $config['audioFormats'][$index]['bitrate'] . 'kbps_' .
+</I>&gt;<i> $config['audioFormats'][$index]['channels'] . 'chn_' .
+</I>&gt;<i> $config['audioFormats'][$index]['samplerate'] . 'Hz.' .
+</I>&gt;<i> $config['audioFormats'][$index]['format'];
+</I>&gt;<i>
+</I>&gt;<i> -				if ($this-&gt;list-&gt;list[$i]-&gt;average_bitrate &gt; $bitrate)
+</I>&gt;<i> +	} // end func getFormatFilename
+</I>&gt;<i>
+</I>&gt;<i> -				{
+</I>&gt;<i>
+</I>&gt;<i> -					$bitrate = $this-&gt;list-&gt;list[$i]-&gt;average_bitrate;
+</I>&gt;<i>
+</I>&gt;<i> -					$index = $i;
+</I>&gt;<i>
+</I>&gt;<i> -				}
+</I>&gt;<i> -
+</I>&gt;<i> -		return $index;
+</I>&gt;<i> -
+</I>&gt;<i> -	}
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  	/**
+</I>&gt;<i>
+</I>&gt;<i>  	* Gets best quality MP3 file
+</I>&gt;<i> @@ -349,37 +332,21 @@
+</I>&gt;<i>  		return $index;
+</I>&gt;<i>
+</I>&gt;<i>  	}
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	function checkFile($file) {
+</I>&gt;<i>
+</I>&gt;<i> +      if(!is_readable($file)) {
+</I>&gt;<i> +
+</I>&gt;<i> +        raiseError(&quot;conversion_failed&quot;);
+</I>&gt;<i>
+</I>&gt;<i> +      }
+</I>&gt;<i>
+</I>&gt;<i> -	/**
+</I>&gt;<i> +    }
+</I>&gt;<i>
+</I>&gt;<i> -	* Encode format to a filename.
+</I>&gt;<i>
+</I>&gt;<i> -	*
+</I>&gt;<i>
+</I>&gt;<i> -	* @param	integer	$index	Format index of the jingle in the
+</I>&gt;<i> $config['audioFormats'] global variable
+</I>&gt;<i>
+</I>&gt;<i> -	* @return	string	Encoded format. Example: 24kbps_1chn_22050Hz.mp3
+</I>&gt;<i> -
+</I>&gt;<i> -	* @use	$config['audioFormats']
+</I>&gt;<i> -
+</I>&gt;<i> -	*/
+</I>&gt;<i> -
+</I>&gt;<i> -	function getFormatFilename($index)
+</I>&gt;<i> -
+</I>&gt;<i> -	{
+</I>&gt;<i> -
+</I>&gt;<i> -		global $config;
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -		return $config['audioFormats'][$index]['bitrate'] . 'kbps_' .
+</I>&gt;<i> $config['audioFormats'][$index]['channels'] . 'chn_' .
+</I>&gt;<i> $config['audioFormats'][$index]['samplerate'] . 'Hz.' .
+</I>&gt;<i> $config['audioFormats'][$index]['format'];
+</I>&gt;<i> -
+</I>&gt;<i> -	} // end func getFormatFilename
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>    ////////////////////////////////////////////////////////
+</I>&gt;<i>
+</I>&gt;<i>    //
+</I>&gt;<i> @@ -394,26 +361,12 @@
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -    function getTempWavName()
+</I>&gt;<i> +
+</I>&gt;<i>
+</I>&gt;<i> -      {
+</I>&gt;<i>
+</I>&gt;<i> -        global $config;
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> +   /* function progressBar($cmd,$regexp) COMMENTED OUT BY BUDDHAFLY
+</I>&gt;<i>
+</I>&gt;<i> -        $tempname = tempnam($config['tmpDir'],&quot;__&quot;);
+</I>&gt;<i> -
+</I>&gt;<i> -        unlink($tempname);
+</I>&gt;<i> -
+</I>&gt;<i> -        return $tempname. &quot;.wav&quot;;
+</I>&gt;<i> -
+</I>&gt;<i> -      }
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -    function progressBar($cmd,$regexp)
+</I>&gt;<i> -
+</I>&gt;<i>        {
+</I>&gt;<i>
+</I>&gt;<i>          global $config;
+</I>&gt;<i> @@ -500,7 +453,7 @@
+</I>&gt;<i>
+</I>&gt;<i>        exec($cmd);
+</I>&gt;<i>
+</I>&gt;<i> -    }
+</I>&gt;<i> +    }*/
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> @@ -676,7 +629,7 @@
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -    function checkFile($file) {
+</I>&gt;<i> +    /*function checkFile($file) {
+</I>&gt;<i>
+</I>&gt;<i>        if(!is_readable($file)) {
+</I>&gt;<i>
+</I>&gt;<i> @@ -692,7 +645,7 @@
+</I>&gt;<i>
+</I>&gt;<i>        unlink($file) or logError(&quot;Could not delete file: $file&quot;);
+</I>&gt;<i>
+</I>&gt;<i> -    }
+</I>&gt;<i> +    }*/
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Modified: node/branches/video_test/code/classes/sotf_AudioFile.class.php
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> ---
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_AudioFile.class.php	2006-05-04
+</I>&gt;<i> 11:04:36 UTC (rev 557)
+</I>&gt;<i> +++
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_AudioFile.class.php	2006-05-04
+</I>&gt;<i> 14:34:58 UTC (rev 558)
+</I>&gt;<i> @@ -1,157 +1,115 @@
+</I>&gt;<i>  &lt;?php
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  require_once($config['getid3dir'] . &quot;/getid3.php&quot;);
+</I>&gt;<i> -
+</I>&gt;<i>  require_once(&quot;sotf_File.class.php&quot;);
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  /**
+</I>&gt;<i> -
+</I>&gt;<i>  * This is a class for handling audio files.
+</I>&gt;<i> -
+</I>&gt;<i>  *
+</I>&gt;<i> -
+</I>&gt;<i>  * @author	Tamas Kezdi SZTAKI DSD &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">tbyte at sztaki.hu</A>&gt;
+</I>&gt;<i> -
+</I>&gt;<i>  * @package	StreamOnTheFly
+</I>&gt;<i> -
+</I>&gt;<i>  * @version	0.1
+</I>&gt;<i> -
+</I>&gt;<i>  */
+</I>&gt;<i>
+</I>&gt;<i>  class sotf_AudioFile extends sotf_File
+</I>&gt;<i> -
+</I>&gt;<i>  {
+</I>&gt;<i>
+</I>&gt;<i>  	/**
+</I>&gt;<i> -
+</I>&gt;<i>  	* Format of the audio file.
+</I>&gt;<i> -
+</I>&gt;<i>  	*
+</I>&gt;<i> -
+</I>&gt;<i>  	* Currently this member variable can be &quot;mp3&quot; or &quot;ogg&quot;.
+</I>&gt;<i> -
+</I>&gt;<i>  	* @attribute 	string	$format
+</I>&gt;<i> -
+</I>&gt;<i>  	*/
+</I>&gt;<i>
+</I>&gt;<i>  	var $format;
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  	/**
+</I>&gt;<i> -
+</I>&gt;<i>  	* Bitrate of the audio file.
+</I>&gt;<i> -
+</I>&gt;<i>  	*
+</I>&gt;<i> -
+</I>&gt;<i>  	* If this value is numeric, it contains the constant bit rate in kbps,
+</I>&gt;<i> or it can be &quot;VBR&quot;.
+</I>&gt;<i> -
+</I>&gt;<i>  	* @attribute 	mixed	$bitrate
+</I>&gt;<i> -
+</I>&gt;<i>  	*/
+</I>&gt;<i>
+</I>&gt;<i>  	var $bitrate;
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  	/**
+</I>&gt;<i> -
+</I>&gt;<i>  	* Average bitrate of the audio file in kbps.
+</I>&gt;<i> -
+</I>&gt;<i>  	*
+</I>&gt;<i> -
+</I>&gt;<i>  	* @attribute 	float	$average_bitrate
+</I>&gt;<i> -
+</I>&gt;<i>  	*/
+</I>&gt;<i>
+</I>&gt;<i>  	var $average_bitrate;
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  	/**
+</I>&gt;<i> -
+</I>&gt;<i>  	* Sample rate of the audio file in Hz.
+</I>&gt;<i> -
+</I>&gt;<i>  	* @attribute 	integer	$samplerate
+</I>&gt;<i> -
+</I>&gt;<i>  	*/
+</I>&gt;<i>
+</I>&gt;<i>  	var $samplerate;
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  	/**
+</I>&gt;<i> -
+</I>&gt;<i>  	* Number of channels.
+</I>&gt;<i> -
+</I>&gt;<i>  	*
+</I>&gt;<i> -
+</I>&gt;<i>  	* 1 means this is mono, 2 means this is stereo
+</I>&gt;<i> -
+</I>&gt;<i>  	* @attribute 	integer	$channels
+</I>&gt;<i> -
+</I>&gt;<i>  	*/
+</I>&gt;<i>
+</I>&gt;<i>  	var $channels;
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  	/**
+</I>&gt;<i> -
+</I>&gt;<i>  	* Duration of the audio file in seconds.
+</I>&gt;<i> -
+</I>&gt;<i>  	*
+</I>&gt;<i> -
+</I>&gt;<i>  	* @attribute 	float	$duration
+</I>&gt;<i> -
+</I>&gt;<i>  	*/
+</I>&gt;<i>
+</I>&gt;<i>  	var $duration;
+</I>&gt;<i>
+</I>&gt;<i> +    var $allInfo;
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -  var $allInfo;
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  	/**
+</I>&gt;<i> -
+</I>&gt;<i>  	* Sets up sotf_AudioFile object
+</I>&gt;<i> -
+</I>&gt;<i>  	*
+</I>&gt;<i> -
+</I>&gt;<i>  	* @constructor sotf_AudioFile
+</I>&gt;<i> -
+</I>&gt;<i>  	* @param	string	$path	Path of the file
+</I>&gt;<i>
+</I>&gt;<i>  	*/
+</I>&gt;<i>
+</I>&gt;<i>  	function sotf_AudioFile($path)
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  		$parent = get_parent_class($this);
+</I>&gt;<i>
+</I>&gt;<i>  		parent::$parent($path);		// Call the constructor of the parent class.
+</I>&gt;<i> lk. super()
+</I>&gt;<i> +
+</I>&gt;<i> +		// CHANGED BY BUDDHAFLY 06-02-14
+</I>&gt;<i> +		$getID3 = new getID3();
+</I>&gt;<i> +		$fileinfo = $getID3-&gt;analyze($this-&gt;path);
+</I>&gt;<i> +		getid3_lib::CopyTagsToComments($fileinfo);
+</I>&gt;<i> +
+</I>&gt;<i> +		//$fileinfo = GetAllFileInfo($this-&gt;path);
+</I>&gt;<i>
+</I>&gt;<i> -		$fileinfo = GetAllFileInfo($this-&gt;path);
+</I>&gt;<i> +    $this-&gt;allInfo = $fileinfo; //was $fileInfo
+</I>&gt;<i>
+</I>&gt;<i> -    $this-&gt;allInfo = $fileInfo;
+</I>&gt;<i> -
+</I>&gt;<i>  		//if ($audioinfo[&quot;fileformat&quot;] == 'mp3' || $audioinfo[&quot;fileformat&quot;] ==
+</I>&gt;<i> 'ogg') {
+</I>&gt;<i>
+</I>&gt;<i>      //debug(&quot;finfo&quot;, $fileinfo);
+</I>&gt;<i> +	//print_r($fileinfo);
+</I>&gt;<i>
+</I>&gt;<i> +	// ADDED BY BUDDHAFLY 06-02-20
+</I>&gt;<i> +	if (isset ($fileinfo['video']) &amp;&amp;
+</I>&gt;<i> $fileinfo['video']['dataformat']!=&quot;jpg&quot;) $this-&gt;type = &quot;video&quot;;
+</I>&gt;<i> +	else if(isset($fileinfo['audio'])) $this-&gt;type = &quot;audio&quot;;
+</I>&gt;<i> +
+</I>&gt;<i>      if (isset($fileinfo['audio'])) {
+</I>&gt;<i>
+</I>&gt;<i>        $audioinfo = $fileinfo['audio'];
+</I>&gt;<i>
+</I>&gt;<i> +			// ADDED BY BUDDHAFLY 06-02-20
+</I>&gt;<i> +			if (isset ($fileinfo['video'])) $this-&gt;type = &quot;video&quot;;
+</I>&gt;<i> +			else
+</I>&gt;<i> +			// ADDED BY BUDDHAFLY 06-02-20
+</I>&gt;<i>  			$this-&gt;type = &quot;audio&quot;;
+</I>&gt;<i>
+</I>&gt;<i> +			//$this-&gt;format = $fileinfo[&quot;fileformat&quot;];
+</I>&gt;<i>  			$this-&gt;format = $fileinfo[&quot;fileformat&quot;];
+</I>&gt;<i>
+</I>&gt;<i>  			if ($audioinfo[&quot;bitrate_mode&quot;] == 'vbr')
+</I>&gt;<i> @@ -179,17 +137,12 @@
+</I>&gt;<i>  	/**
+</I>&gt;<i>
+</I>&gt;<i>  	* Encode format to a filename.
+</I>&gt;<i> -
+</I>&gt;<i>  	*
+</I>&gt;<i> -
+</I>&gt;<i>  	* @return	string	Encoded format. Example: 24kbps_1chn_22050Hz.mp3
+</I>&gt;<i> -
+</I>&gt;<i>  	* @use	$config['audioFormats'], $config['bitrateTolerance']
+</I>&gt;<i> -
+</I>&gt;<i>  	*/
+</I>&gt;<i>
+</I>&gt;<i>  	function getFormatFilename()
+</I>&gt;<i> -
+</I>&gt;<i>  	{
+</I>&gt;<i>
+</I>&gt;<i>  		global $config;
+</I>&gt;<i> @@ -229,7 +182,4 @@
+</I>&gt;<i>    }
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i> -
+</I>&gt;<i>  } // end class sotf_AudioFile
+</I>&gt;<i> \ No newline at end of file
+</I>&gt;<i>
+</I>&gt;<i> Added: node/branches/video_test/code/classes/sotf_ContentCheck.class.php
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> ---
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_ContentCheck.class.php	2006-05-04
+</I>&gt;<i> 11:04:36 UTC (rev 557)
+</I>&gt;<i> +++
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_ContentCheck.class.php	2006-05-04
+</I>&gt;<i> 14:34:58 UTC (rev 558)
+</I>&gt;<i> @@ -0,0 +1,275 @@
+</I>&gt;<i> +&lt;?php
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +/**
+</I>&gt;<i> +
+</I>&gt;<i> +* DESCRIPTION MISSING
+</I>&gt;<i> +*
+</I>&gt;<i> +* @author	Martin Schmidt &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">ptmschmidt at fh-stpoelten.ac.at</A>&gt;
+</I>&gt;<i> +* @package	StreamOnTheFly
+</I>&gt;<i> +* @version	0.1
+</I>&gt;<i> +*/
+</I>&gt;<i> +
+</I>&gt;<i> +class sotf_ContentCheck
+</I>&gt;<i> +
+</I>&gt;<i> +{
+</I>&gt;<i> +
+</I>&gt;<i> +	var $reqs = array();
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* FileList object.
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* @attribute 	object	$list
+</I>&gt;<i> +	* @see	{@link FileList}
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	var $list;
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +    var $console = false;
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Sets up the object
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* @constructor sotf_ContentCheck
+</I>&gt;<i> +	* @param	object	$list	FileList object contains list of files to be
+</I>&gt;<i> checked
+</I>&gt;<i> +	* @use	$config['audioFormats'], $config['bitrateTolerance']
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	function sotf_ContentCheck($list)
+</I>&gt;<i> +	{
+</I>&gt;<i> +		global $config;
+</I>&gt;<i> +		$this-&gt;list = &amp; $list;
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	} // end func sotf_AudioCheck
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	function selectType(){
+</I>&gt;<i> +
+</I>&gt;<i> +		for($j=0;$j&lt;count($this-&gt;list-&gt;list);$j++)	// walk thru the the files
+</I>&gt;<i> we have
+</I>&gt;<i> +			{
+</I>&gt;<i> +
+</I>&gt;<i> +				if ($this-&gt;list-&gt;list[$j]-&gt;type == &quot;video&quot;){
+</I>&gt;<i> +					$checker = &amp; new sotf_VideoCheck($this-&gt;list);
+</I>&gt;<i> +					return $checker;
+</I>&gt;<i> +				}
+</I>&gt;<i> +
+</I>&gt;<i> +				else if($this-&gt;list-&gt;list[$j]-&gt;type == &quot;audio&quot;){
+</I>&gt;<i> +					$checker = &amp; new sotf_AudioCheck($this-&gt;list);
+</I>&gt;<i> +					return $checker;
+</I>&gt;<i> +				}
+</I>&gt;<i> +			}
+</I>&gt;<i> +	} // end func selectType
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Gets the request index for a sotf_AudioFile
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* @param	object	$audiofile	sotf_AudioFile object to be checked
+</I>&gt;<i> +	* @return	mixed	If the audio file satisfies any requestment returns an
+</I>&gt;<i> integer which is an index of the $config['audioFormats'] global variable.
+</I>&gt;<i> If the file satisfy any requestment returns boolean false
+</I>&gt;<i> +	* @use	$config['audioFormats'], $config['bitrateTolerance']
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	function getRequestIndex($audiofile)
+</I>&gt;<i> +	{
+</I>&gt;<i> +		global $config;
+</I>&gt;<i> +		for($i=0;$i&lt;count($config[$this-&gt;prefix.'Formats']);$i++)			// walk
+</I>&gt;<i> thru the requested formats
+</I>&gt;<i> +		{
+</I>&gt;<i> +
+</I>&gt;<i> +			if ($audiofile-&gt;type != &quot;audio&quot;)
+</I>&gt;<i> +				continue;								// This is not an audio, get another one
+</I>&gt;<i> +
+</I>&gt;<i> +			if ($config[$this-&gt;prefix.'Formats'][$i]['format'] !=
+</I>&gt;<i> $audiofile-&gt;format)
+</I>&gt;<i> +				continue;								// This is not the one we need, get another one
+</I>&gt;<i> +
+</I>&gt;<i> +			//if ($config['audioFormats'][$i]['bitrate'] != $audiofile-&gt;bitrate)
+</I>&gt;<i> +
+</I>&gt;<i> +			//	continue;								// This is not the one we need, get another one
+</I>&gt;<i> +			if (abs($audiofile-&gt;average_bitrate -
+</I>&gt;<i> $config[$this-&gt;prefix.'Formats'][$i]['bitrate']) &gt;
+</I>&gt;<i> $config['bitrateTolerance'])
+</I>&gt;<i> +				continue;							// This is not the one we need, get another one
+</I>&gt;<i> +			if ($config[$this-&gt;prefix.'Formats'][$i]['channels'] !=
+</I>&gt;<i> $audiofile-&gt;channels)
+</I>&gt;<i> +				continue;								// This is not the one we need, get another one
+</I>&gt;<i> +			if ($config[$this-&gt;prefix.'Formats'][$i]['samplerate'] !=
+</I>&gt;<i> $audiofile-&gt;samplerate)
+</I>&gt;<i> +				continue;								// This is not the one we need, get another one
+</I>&gt;<i> +			return $j;									// All conditions matched, that's what we need,
+</I>&gt;<i> return the index
+</I>&gt;<i> +
+</I>&gt;<i> +		}
+</I>&gt;<i> +
+</I>&gt;<i> +		return false;
+</I>&gt;<i> +
+</I>&gt;<i> +	} // end func getRequestIndex
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Gets best quality audio file
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* @return	mixed	If found return the index of the file, else returns
+</I>&gt;<i> boolean false
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	function getBest()
+</I>&gt;<i> +	{
+</I>&gt;<i> +		$bitrate = 0;								// set minimum bitrate
+</I>&gt;<i> +		$index = false;								// initialize file index
+</I>&gt;<i> +
+</I>&gt;<i> +		for($i=0;$i&lt;count($this-&gt;list-&gt;list);$i++)	// walk thru files
+</I>&gt;<i> +			if ($this-&gt;list-&gt;list[$i]-&gt;type == $this-&gt;prefix)
+</I>&gt;<i> +				if ($this-&gt;list-&gt;list[$i]-&gt;average_bitrate &gt; $bitrate)
+</I>&gt;<i> +				{
+</I>&gt;<i> +					$bitrate = $this-&gt;list-&gt;list[$i]-&gt;average_bitrate;
+</I>&gt;<i> +					$index = $i;
+</I>&gt;<i> +				}
+</I>&gt;<i> +		return $index;
+</I>&gt;<i> +	}
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +  ////////////////////////////////////////////////////////
+</I>&gt;<i> +  //
+</I>&gt;<i> +  //  AUDIO CONVERSION
+</I>&gt;<i> +  //
+</I>&gt;<i> +  ///////////////////////////////////////////////////////
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +    function progressBar($cmd,$regexp, $totalframes=0, $returndata=false,
+</I>&gt;<i> $errorRegexp=&quot;&quot;)
+</I>&gt;<i> +
+</I>&gt;<i> +      {
+</I>&gt;<i> +
+</I>&gt;<i> +        global $config;
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +        $line = &quot;&quot;;
+</I>&gt;<i> +
+</I>&gt;<i> +        $out = 0;
+</I>&gt;<i> +
+</I>&gt;<i> +        $left = $config['progressBarLength'];
+</I>&gt;<i> +
+</I>&gt;<i> +		$output=array();
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +        debug('execute',$cmd);
+</I>&gt;<i> +        $fp = popen($cmd . ' 2&gt;&amp;1', 'r');
+</I>&gt;<i> +		//echo $cmd.&quot;&lt;br&gt; &lt;br&gt;&quot;;
+</I>&gt;<i> +		$output['data']=&quot;$cmd\n&quot;;
+</I>&gt;<i> +		$output['error']=&quot;&quot;;
+</I>&gt;<i> +        while(!feof($fp))
+</I>&gt;<i> +
+</I>&gt;<i> +          {
+</I>&gt;<i> +
+</I>&gt;<i> +            $data = fread($fp,1);
+</I>&gt;<i> +			$output ['data'].= $data;
+</I>&gt;<i> +			//echo $data;
+</I>&gt;<i> +            if ((ord($data) == 13) || (ord($data) == 10))
+</I>&gt;<i> +
+</I>&gt;<i> +              {
+</I>&gt;<i> +
+</I>&gt;<i> +                if (preg_match($regexp,$line,$match))
+</I>&gt;<i> +
+</I>&gt;<i> +                  {
+</I>&gt;<i> +				  	if ($totalframes){
+</I>&gt;<i> +
+</I>&gt;<i> +						//echo &quot;&lt;br/&gt;t:$totalframes|&quot;;
+</I>&gt;<i> +						 $curr = (integer) ((((integer) $match[1])/$totalframes*100) *
+</I>&gt;<i> $config['progressBarLength'] / 100);
+</I>&gt;<i> +
+</I>&gt;<i> +						//echo &quot;c:$curr&lt;br/&gt;&quot;;
+</I>&gt;<i> +					}
+</I>&gt;<i> +                    else $curr = (integer) (((integer) $match[1]) *
+</I>&gt;<i> $config['progressBarLength'] / 100);
+</I>&gt;<i> +
+</I>&gt;<i> +					if($curr&lt;=$config['progressBarLength']){
+</I>&gt;<i> +						for ($i=$out;$i&lt;$curr;$i++)
+</I>&gt;<i> +						  {
+</I>&gt;<i> +							echo $config['progressBarChar'];
+</I>&gt;<i> +							$out++;
+</I>&gt;<i> +							$left--;
+</I>&gt;<i> +						  }
+</I>&gt;<i> +					}
+</I>&gt;<i> +                  }
+</I>&gt;<i> +
+</I>&gt;<i> +				 /*if ($errorRegexp &amp;&amp; preg_match($errorRegexp,$line,$match)){
+</I>&gt;<i> +				 	$output['error'].= ucfirst($match[1]).&quot;&lt;br&gt;&quot;;
+</I>&gt;<i> +				 }*/
+</I>&gt;<i> +
+</I>&gt;<i> +				$line = &quot;&quot;;
+</I>&gt;<i> +              }
+</I>&gt;<i> +
+</I>&gt;<i> +            else
+</I>&gt;<i> +              $line .= $data;
+</I>&gt;<i> +            flush();
+</I>&gt;<i> +          }
+</I>&gt;<i> +
+</I>&gt;<i> +        pclose($fp);
+</I>&gt;<i> +
+</I>&gt;<i> +        while($left)
+</I>&gt;<i> +          {
+</I>&gt;<i> +            echo $config['progressBarChar'];
+</I>&gt;<i> +            $left--;
+</I>&gt;<i> +            $out++;
+</I>&gt;<i> +          }
+</I>&gt;<i> +
+</I>&gt;<i> +        flush();
+</I>&gt;<i> +		if($returndata) return $output;
+</I>&gt;<i> +
+</I>&gt;<i> +      }
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +    function exec($cmd) {
+</I>&gt;<i> +
+</I>&gt;<i> +      debug('execute',$cmd);
+</I>&gt;<i> +
+</I>&gt;<i> +      exec($cmd);
+</I>&gt;<i> +
+</I>&gt;<i> +    }
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +    function rmFile($file) {
+</I>&gt;<i> +
+</I>&gt;<i> +      unlink($file) or logError(&quot;Could not delete file: $file&quot;);
+</I>&gt;<i> +
+</I>&gt;<i> +    }
+</I>&gt;<i> +
+</I>&gt;<i> +	 function getTempWavName()
+</I>&gt;<i> +
+</I>&gt;<i> +      {
+</I>&gt;<i> +
+</I>&gt;<i> +        global $config;
+</I>&gt;<i> +
+</I>&gt;<i> +        $tempname = tempnam($config['tmpDir'],&quot;__&quot;);
+</I>&gt;<i> +
+</I>&gt;<i> +        unlink($tempname);
+</I>&gt;<i> +
+</I>&gt;<i> +        return $tempname. &quot;.wav&quot;;
+</I>&gt;<i> +
+</I>&gt;<i> +      }
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +    /** returns array of names of new audio files */
+</I>&gt;<i> +
+</I>&gt;<i> +    function convertAll($id) {
+</I>&gt;<i> +
+</I>&gt;<i> +      global $config;
+</I>&gt;<i> +
+</I>&gt;<i> +      for($i=0; $i&lt;count($config[$this-&gt;prefix.'Formats']); $i++) {
+</I>&gt;<i> +
+</I>&gt;<i> +        $file = $this-&gt;convert($id, $i);
+</I>&gt;<i> +        if($file)
+</I>&gt;<i> +
+</I>&gt;<i> +          $files[] = $file;
+</I>&gt;<i> +
+</I>&gt;<i> +      }
+</I>&gt;<i> +
+</I>&gt;<i> +      return $files;
+</I>&gt;<i> +
+</I>&gt;<i> +    }
+</I>&gt;<i> +
+</I>&gt;<i> +} // end class sotf_AudioCheck
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +?&gt;
+</I>&gt;<i> \ No newline at end of file
+</I>&gt;<i>
+</I>&gt;<i> Modified: node/branches/video_test/code/classes/sotf_File.class.php
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- node/branches/video_test/code/classes/sotf_File.class.php	2006-05-04
+</I>&gt;<i> 11:04:36 UTC (rev 557)
+</I>&gt;<i> +++ node/branches/video_test/code/classes/sotf_File.class.php	2006-05-04
+</I>&gt;<i> 14:34:58 UTC (rev 558)
+</I>&gt;<i> @@ -124,6 +124,14 @@
+</I>&gt;<i>  	{
+</I>&gt;<i>  		return ($this-&gt;type == &quot;audio&quot;);
+</I>&gt;<i>  	} // end func getPath
+</I>&gt;<i> +
+</I>&gt;<i> +	//ADDED BY BUDDHAFLY  06-02-20
+</I>&gt;<i> +
+</I>&gt;<i> +	function isVideo()
+</I>&gt;<i> +	{
+</I>&gt;<i> +		return ($this-&gt;type == &quot;video&quot;);
+</I>&gt;<i> +	}
+</I>&gt;<i> +
+</I>&gt;<i>  } // end class sotf_File
+</I>&gt;<i>
+</I>&gt;<i>  ?&gt;
+</I>&gt;<i> \ No newline at end of file
+</I>&gt;<i>
+</I>&gt;<i> Modified: node/branches/video_test/code/classes/sotf_FileList.class.php
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> ---
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_FileList.class.php	2006-05-04
+</I>&gt;<i> 11:04:36 UTC (rev 557)
+</I>&gt;<i> +++
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_FileList.class.php	2006-05-04
+</I>&gt;<i> 14:34:58 UTC (rev 558)
+</I>&gt;<i> @@ -3,6 +3,7 @@
+</I>&gt;<i>  require_once($config['getid3dir'] . &quot;/getid3.php&quot;);
+</I>&gt;<i>  require_once(&quot;sotf_File.class.php&quot;);
+</I>&gt;<i>  require_once(&quot;sotf_AudioFile.class.php&quot;);
+</I>&gt;<i> +require_once(&quot;sotf_VideoFile.class.php&quot;); //ADDED BY BUDDHAFLY 06-02-20
+</I>&gt;<i>
+</I>&gt;<i>  // $Id$
+</I>&gt;<i>
+</I>&gt;<i> @@ -60,13 +61,26 @@
+</I>&gt;<i>  		{
+</I>&gt;<i>  			if (!$this-&gt;pathExist($path))
+</I>&gt;<i>  			{
+</I>&gt;<i> -				$audioinfo = GetAllFileInfo($path);
+</I>&gt;<i> -				if (isset($audioinfo[&quot;audio&quot;]))
+</I>&gt;<i> +				//CHANGED BY BUDDHAFLY 06-02-14
+</I>&gt;<i> +				//echo $path;
+</I>&gt;<i> +				$getID3 = new getID3();
+</I>&gt;<i> +				$fileinfo = $getID3-&gt;analyze($path);
+</I>&gt;<i> +				getid3_lib::CopyTagsToComments($fileinfo);
+</I>&gt;<i> +
+</I>&gt;<i> +				//print_r ($fileinfo);
+</I>&gt;<i> +
+</I>&gt;<i> +				//$audioinfo = GetAllFileInfo($path);
+</I>&gt;<i> +				if(isset($fileinfo[&quot;video&quot;])){
+</I>&gt;<i> +					$this-&gt;list[] = &amp; new sotf_VideoFile($path);
+</I>&gt;<i> +				}
+</I>&gt;<i> +				else if (isset($fileinfo[&quot;audio&quot;])){
+</I>&gt;<i>  					$this-&gt;list[] = &amp; new sotf_AudioFile($path);
+</I>&gt;<i> -				else
+</I>&gt;<i> +				}
+</I>&gt;<i> +				else{
+</I>&gt;<i>  					$this-&gt;list[] = &amp; new sotf_File($path);
+</I>&gt;<i> -			}
+</I>&gt;<i> -		}
+</I>&gt;<i> +				}  // if-elseif-else
+</I>&gt;<i> +			} //if
+</I>&gt;<i> +		} //if
+</I>&gt;<i>  		return false;
+</I>&gt;<i>  	} // end func add
+</I>&gt;<i>
+</I>&gt;<i> @@ -97,11 +111,34 @@
+</I>&gt;<i>  	/**
+</I>&gt;<i>  	* Removes all non-audio files from the list.
+</I>&gt;<i>  	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	//new functions by buddhafly
+</I>&gt;<i> +
+</I>&gt;<i> +	function removeNonAudioVideo(){
+</I>&gt;<i> +		$paths = array();
+</I>&gt;<i> +		for ($i=0;$i&lt;count($this-&gt;list);$i++)
+</I>&gt;<i> +			if (!$this-&gt;list[$i]-&gt;isAudio() &amp;&amp; !$this-&gt;list[$i]-&gt;isVideo())
+</I>&gt;<i> +				$paths[] = $this-&gt;list[$i]-&gt;getPath();
+</I>&gt;<i> +		for ($i=0;$i&lt;count($paths);$i++)
+</I>&gt;<i> +			$this-&gt;remove($paths[$i]);
+</I>&gt;<i> +	}
+</I>&gt;<i> +
+</I>&gt;<i> +	function removeNonVideo(){
+</I>&gt;<i> +		$paths = array();
+</I>&gt;<i> +		for ($i=0;$i&lt;count($this-&gt;list);$i++)
+</I>&gt;<i> +			if (!$this-&gt;list[$i]-&gt;isVideo())
+</I>&gt;<i> +				$paths[] = $this-&gt;list[$i]-&gt;getPath();
+</I>&gt;<i> +		for ($i=0;$i&lt;count($paths);$i++)
+</I>&gt;<i> +			$this-&gt;remove($paths[$i]);
+</I>&gt;<i> +	}
+</I>&gt;<i> +
+</I>&gt;<i> +	/////////
+</I>&gt;<i> +
+</I>&gt;<i>  	function removeNonAudio()
+</I>&gt;<i>  	{
+</I>&gt;<i>  		$paths = array();
+</I>&gt;<i>  		for ($i=0;$i&lt;count($this-&gt;list);$i++)
+</I>&gt;<i> -			if (!$this-&gt;list[$i]-&gt;isAudio())
+</I>&gt;<i> +			if (!$this-&gt;list[$i]-&gt;isAudio())
+</I>&gt;<i>  				$paths[] = $this-&gt;list[$i]-&gt;getPath();
+</I>&gt;<i>  		for ($i=0;$i&lt;count($paths);$i++)
+</I>&gt;<i>  			$this-&gt;remove($paths[$i]);
+</I>&gt;<i> @@ -125,7 +162,7 @@
+</I>&gt;<i>            if(!$prefix || preg_match(&quot;/^$prefix/&quot;, $filename))
+</I>&gt;<i>
+</I>&gt;<i>  		  	// START ----- added by buddhafly 05-08-30
+</I>&gt;<i> -			if(!preg_match('/^\./', $filename)){
+</I>&gt;<i> +			if(!preg_match('/^\./', $filename) &amp;&amp; $filename!='stills'){
+</I>&gt;<i>
+</I>&gt;<i>  				 $extension = substr($filename, strrpos($filename, '.') +1);
+</I>&gt;<i>
+</I>&gt;<i> @@ -155,6 +192,27 @@
+</I>&gt;<i>  	* @param	string	$path	Path of the directory
+</I>&gt;<i>  	* @return	boolean	If the list was successfully created return true, else
+</I>&gt;<i> false
+</I>&gt;<i>  	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	// new function by buddhafly
+</I>&gt;<i> +
+</I>&gt;<i> +	function getVideoFromDir($path, $prefix='')
+</I>&gt;<i> +	{
+</I>&gt;<i> +		$retval = $this-&gt;getDir($path, $prefix);
+</I>&gt;<i> +		$this-&gt;removeNonVideo();
+</I>&gt;<i> +
+</I>&gt;<i> +		return $retval;
+</I>&gt;<i> +	}
+</I>&gt;<i> +
+</I>&gt;<i> +	function getAudioVideoFromDir($path, $prefix='')
+</I>&gt;<i> +	{
+</I>&gt;<i> +		$retval = $this-&gt;getDir($path, $prefix);
+</I>&gt;<i> +		$this-&gt;removeNonAudioVideo();
+</I>&gt;<i> +
+</I>&gt;<i> +		return $retval;
+</I>&gt;<i> +	}
+</I>&gt;<i> +
+</I>&gt;<i> +	/////////////////////////////////
+</I>&gt;<i> +
+</I>&gt;<i>  	function getAudioFromDir($path, $prefix='')
+</I>&gt;<i>  	{
+</I>&gt;<i>  		$retval = $this-&gt;getDir($path, $prefix);
+</I>&gt;<i>
+</I>&gt;<i> Modified: node/branches/video_test/code/classes/sotf_PlayList.class.php
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> ---
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_PlayList.class.php	2006-05-04
+</I>&gt;<i> 11:04:36 UTC (rev 557)
+</I>&gt;<i> +++
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_PlayList.class.php	2006-05-04
+</I>&gt;<i> 14:34:58 UTC (rev 558)
+</I>&gt;<i> @@ -31,10 +31,16 @@
+</I>&gt;<i>  		}
+</I>&gt;<i>  	 } else {
+</I>&gt;<i>  		// this is a local file
+</I>&gt;<i> -
+</I>&gt;<i> -		$mp3info = GetAllFileInfo($item['path']);
+</I>&gt;<i> +		// CHANGED BY BUDDHAFLY 06-02-20
+</I>&gt;<i> +		$getID3 = new getID3();
+</I>&gt;<i> +		$mp3info = $getID3-&gt;analyze($item['path']);
+</I>&gt;<i> +		getid3_lib::CopyTagsToComments($mp3info);
+</I>&gt;<i> +		//$mp3info = GetAllFileInfo($item['path']);
+</I>&gt;<i>  		//debug('mp3info', $mp3info);
+</I>&gt;<i> -		$bitrate = (string) $mp3info['audio']['bitrate'];
+</I>&gt;<i> +		// CHANGED BY BUDDHAFLY 06-02-20
+</I>&gt;<i> +
+</I>&gt;<i> +		$bitrate = (string) $mp3info['bitrate'];
+</I>&gt;<i> +
+</I>&gt;<i>  		if(!$bitrate)
+</I>&gt;<i>  		  raiseError(&quot;Could not determine bitrate, maybe this audio is
+</I>&gt;<i> temporarily unavailable&quot;);
+</I>&gt;<i>  		$item['bitrate'] = $bitrate;
+</I>&gt;<i>
+</I>&gt;<i> Modified: node/branches/video_test/code/classes/sotf_Programme.class.php
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> ---
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_Programme.class.php	2006-05-04
+</I>&gt;<i> 11:04:36 UTC (rev 557)
+</I>&gt;<i> +++
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_Programme.class.php	2006-05-04
+</I>&gt;<i> 14:34:58 UTC (rev 558)
+</I>&gt;<i> @@ -15,7 +15,13 @@
+</I>&gt;<i>  require_once($config['classdir'] . '/unpackXML.class.php');
+</I>&gt;<i>  //require_once($config['classdir'] . '/packXML.class.php');
+</I>&gt;<i>  require_once($config['classdir'] . '/sotf_Statistics.class.php');
+</I>&gt;<i> -require_once($config['getid3dir'] . &quot;/getid3.putid3.php&quot;);
+</I>&gt;<i> +
+</I>&gt;<i> +//ADDED BY BUDDHAFLY - 06-02-14
+</I>&gt;<i> +require_once($config['getid3dir'] . &quot;/getid3.php&quot;);
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +//require_once($config['getid3dir'] . &quot;/getid3.putid3.php&quot;);
+</I>&gt;<i> +
+</I>&gt;<i>  require_once($config['classdir'] . '/sotf_Metadata.class.php');
+</I>&gt;<i>
+</I>&gt;<i>  class sotf_Programme extends sotf_ComplexNodeObject {
+</I>&gt;<i> @@ -38,6 +44,8 @@
+</I>&gt;<i>    var $links;
+</I>&gt;<i>    var $rights;
+</I>&gt;<i>    var $refs;
+</I>&gt;<i> +
+</I>&gt;<i> +  var $type;
+</I>&gt;<i>
+</I>&gt;<i>    /**
+</I>&gt;<i>  	* constructor
+</I>&gt;<i> @@ -77,7 +85,7 @@
+</I>&gt;<i>  		raiseError(&quot;Could not create unique dir for prog!&quot;);
+</I>&gt;<i>    }
+</I>&gt;<i>
+</I>&gt;<i> -  function create($stationOrSeriesId, $track='') {
+</I>&gt;<i> +  function create($stationOrSeriesId, $track='', $is_video=false) {
+</I>&gt;<i>  	 global $db, $repository;
+</I>&gt;<i>
+</I>&gt;<i>  	 $db-&gt;begin();
+</I>&gt;<i> @@ -103,6 +111,14 @@
+</I>&gt;<i>  	 if(empty($track))
+</I>&gt;<i>  		$track = 'prg';
+</I>&gt;<i>  	 $this-&gt;getStation();
+</I>&gt;<i> +
+</I>&gt;<i> +	 if($is_video){
+</I>&gt;<i> +	 $this-&gt;set('type', 'video');
+</I>&gt;<i> +	 }
+</I>&gt;<i> +	 else {
+</I>&gt;<i> +	 $this-&gt;set('type', 'sound');
+</I>&gt;<i> +	 }
+</I>&gt;<i> +
+</I>&gt;<i>  	 $this-&gt;set('entry_date', date('Y-m-d'));
+</I>&gt;<i>  	 $this-&gt;set('modify_date', date('Y-m-d'));
+</I>&gt;<i>  	 $this-&gt;set('track', sotf_Utils::makeValidName($track, 32));
+</I>&gt;<i> @@ -190,12 +206,14 @@
+</I>&gt;<i>  	 return $this-&gt;getDir();
+</I>&gt;<i>    }
+</I>&gt;<i>
+</I>&gt;<i> -  /** returns directory where audio files are stored for the programme */
+</I>&gt;<i> +  /** returns directory where content files are stored for the programme
+</I>&gt;<i> */
+</I>&gt;<i>    function getAudioDir() {
+</I>&gt;<i> -	 return $this-&gt;getDir() . '/audio';
+</I>&gt;<i> +	 return $this-&gt;getDir() . '/content'; // MOD BY BUDDHAFLY
+</I>&gt;<i>    }
+</I>&gt;<i> +
+</I>&gt;<i>
+</I>&gt;<i> -  /** returns directory where other files are stored for the programme */
+</I>&gt;<i> +
+</I>&gt;<i> +   /** returns directory where other files are stored for the programme
+</I>&gt;<i> */
+</I>&gt;<i>    function getOtherFilesDir() {
+</I>&gt;<i>  	 return $this-&gt;getDir() . '/files';
+</I>&gt;<i>    }
+</I>&gt;<i> @@ -215,8 +233,8 @@
+</I>&gt;<i>  	 if(!is_dir($dir)) {
+</I>&gt;<i>  		mkdir($dir, 0770);
+</I>&gt;<i>  	 }
+</I>&gt;<i> -	 if(!is_dir($dir . '/audio')) {
+</I>&gt;<i> -		mkdir($dir . '/audio', 0770);
+</I>&gt;<i> +	 if(!is_dir($dir . '/content')) { //CHANGED BY BUDDHAFLY
+</I>&gt;<i> +		mkdir($dir . '/content', 0770); //CHANGED BY BUDDHAFLY
+</I>&gt;<i>  	 }
+</I>&gt;<i>  	 if(!is_dir($dir . '/files')) {
+</I>&gt;<i>  		mkdir($dir . '/files', 0770);
+</I>&gt;<i> @@ -462,6 +480,29 @@
+</I>&gt;<i>  	 return $objects;
+</I>&gt;<i>    }
+</I>&gt;<i>
+</I>&gt;<i> +  function isVideoPrg(){ //ADDED BY BUDDHAFLY
+</I>&gt;<i> +
+</I>&gt;<i> +   if ($this-&gt;get('type')=='video') return true;
+</I>&gt;<i> +   else return false;
+</I>&gt;<i> +
+</I>&gt;<i> +  }
+</I>&gt;<i> +
+</I>&gt;<i> +  function isAudioPrg(){ //ADDED BY BUDDHAFLY
+</I>&gt;<i> +
+</I>&gt;<i> +  	if ($this-&gt;get('type')=='sound') return true;
+</I>&gt;<i> +    else return false;
+</I>&gt;<i> +
+</I>&gt;<i> +  }
+</I>&gt;<i> +
+</I>&gt;<i> +  function getType(){ //ADDED BY BUDDHAFLY
+</I>&gt;<i> +
+</I>&gt;<i> +  	return $this-&gt;get('type');
+</I>&gt;<i> +
+</I>&gt;<i> +  }
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i>    function selectFileToListen() {
+</I>&gt;<i>
+</I>&gt;<i>  	 // TODO: write this better
+</I>&gt;<i> @@ -487,9 +528,17 @@
+</I>&gt;<i>  	 if(!is_file($source))
+</I>&gt;<i>  		raiseError(&quot;no such file: $source&quot;);
+</I>&gt;<i>  	 $srcFile = new sotf_AudioFile($source);
+</I>&gt;<i> +
+</I>&gt;<i> +	 //ADDED BY BUDDHAFLY 06-02-20
+</I>&gt;<i> +	 if($srcFile-&gt;isVideo()) $srcFile = new sotf_VideoFile($source);
+</I>&gt;<i> +	// if($srcFile-&gt;isVideo()) $File = new sotf_VideoFile($filepath);
+</I>&gt;<i> +	 //--------------------------
+</I>&gt;<i> +
+</I>&gt;<i>  	 $target = $this-&gt;getAudioDir() .  '/' . $this-&gt;get('track') . '_' .
+</I>&gt;<i> $srcFile-&gt;getFormatFilename();
+</I>&gt;<i> -	 if(!$srcFile-&gt;isAudio())
+</I>&gt;<i> -		raiseError(&quot;this is not an audio file&quot;);
+</I>&gt;<i> +
+</I>&gt;<i> +	 if(!$srcFile-&gt;isAudio() &amp;&amp; !$srcFile-&gt;isVideo()){
+</I>&gt;<i> +		raiseError(&quot;$source is neither an audio nor a video file&quot;); // was THIS
+</I>&gt;<i> +	}
+</I>&gt;<i>  	 //if(is_file($target)) {
+</I>&gt;<i>  	 //	raiseError($page-&gt;getlocalized('format_already_present'));
+</I>&gt;<i>  	 //}
+</I>&gt;<i> @@ -502,7 +551,7 @@
+</I>&gt;<i>  		$diff = abs($this-&gt;get('length') - $length);
+</I>&gt;<i>  		if($diff &gt; 15) {
+</I>&gt;<i>  		  // allow for 15 sec of difference in program length
+</I>&gt;<i> -		  $page-&gt;addStatusMsg(&quot;audio_length_no_match&quot;);
+</I>&gt;<i> +		  if($this-&gt;isAudioPrg()) $page-&gt;addStatusMsg(&quot;audio_length_no_match&quot;);
+</I>&gt;<i> //MODIFIED BY Martin Schmidt
+</I>&gt;<i>  		  //raiseError(&quot;audio_length_no_match&quot;);
+</I>&gt;<i>  		  $this-&gt;set('length', $length);
+</I>&gt;<i>  		  $this-&gt;update();
+</I>&gt;<i> @@ -541,7 +590,7 @@
+</I>&gt;<i>
+</I>&gt;<i>    function saveFileInfo($filepath, $mainContent = false) {
+</I>&gt;<i>  	 global $db;
+</I>&gt;<i> -
+</I>&gt;<i> +
+</I>&gt;<i>  	 // convert boolean into pgsql format
+</I>&gt;<i>  	 if($mainContent)
+</I>&gt;<i>  		$mainContent = 'true';
+</I>&gt;<i> @@ -549,8 +598,14 @@
+</I>&gt;<i>  		$mainContent = 'false';
+</I>&gt;<i>  	 // get audio properties of file
+</I>&gt;<i>  	 $file = new sotf_AudioFile($filepath);
+</I>&gt;<i> +
+</I>&gt;<i> +	 //ADDED BY BUDDHAFLY 06-02-20
+</I>&gt;<i> +	 if($file-&gt;isVideo()) $file = new sotf_VideoFile($filepath);
+</I>&gt;<i> +	 //--------------------------
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i>  	 // find if this is an existing file
+</I>&gt;<i> -	 if($file-&gt;isAudio()) {
+</I>&gt;<i> +	 if($file-&gt;isAudio() || $file-&gt;isVideo()) { //CHANGED BY BUDDHAFLY
+</I>&gt;<i> 06-02-20
+</I>&gt;<i>  		$fileInfo = new sotf_NodeObject('sotf_media_files');
+</I>&gt;<i>  	 } else {
+</I>&gt;<i>  		$fileInfo = new sotf_NodeObject('sotf_other_files');
+</I>&gt;<i> @@ -558,8 +613,11 @@
+</I>&gt;<i>  	 $fileInfo-&gt;set(&quot;prog_id&quot;, $this-&gt;id);
+</I>&gt;<i>  	 $fileInfo-&gt;set(&quot;filename&quot;, $file-&gt;name);
+</I>&gt;<i>  	 $fileInfo-&gt;find();
+</I>&gt;<i> +
+</I>&gt;<i>  	 // save file info into database
+</I>&gt;<i> -	 if($file-&gt;isAudio()) {
+</I>&gt;<i> +
+</I>&gt;<i> +	//ADDED BY BUDDHAFLY 06-02-20
+</I>&gt;<i> +	if($file-&gt;isVideo()) {
+</I>&gt;<i>  		$fileInfo-&gt;set('play_length', round($file-&gt;duration));
+</I>&gt;<i>  		$fileInfo-&gt;set('type', $file-&gt;type);
+</I>&gt;<i>  		if(is_numeric($file-&gt;bitrate)) {
+</I>&gt;<i> @@ -573,7 +631,37 @@
+</I>&gt;<i>  		}
+</I>&gt;<i>  		$fileInfo-&gt;set('format', $file-&gt;getFormatFilename());
+</I>&gt;<i>  		$fileInfo-&gt;set('main_content', $mainContent);
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +		$fileInfo-&gt;set('codec', $file-&gt;codec);
+</I>&gt;<i> +		$fileInfo-&gt;set('frame_rate', $file-&gt;frame_rate);
+</I>&gt;<i> +		$fileInfo-&gt;set('resolution_x', $file-&gt;resolution_x);
+</I>&gt;<i> +		$fileInfo-&gt;set('resolution_y', $file-&gt;resolution_y);
+</I>&gt;<i> +		$fileInfo-&gt;set('pixel_aspect_ratio', $file-&gt;pixel_aspect_ratio);
+</I>&gt;<i> +
+</I>&gt;<i> +		//manage access rights for video
+</I>&gt;<i> +		$fileInfo-&gt;set('download_access', 't');
+</I>&gt;<i> +		$fileInfo-&gt;set('stream_access', 'f');
+</I>&gt;<i> +
+</I>&gt;<i>  	 }
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	 else if($file-&gt;isAudio()) {
+</I>&gt;<i> +		$fileInfo-&gt;set('play_length', round($file-&gt;duration));
+</I>&gt;<i> +		$fileInfo-&gt;set('type', $file-&gt;type);
+</I>&gt;<i> +		if(is_numeric($file-&gt;bitrate)) {
+</I>&gt;<i> +		  // constant bitrate
+</I>&gt;<i> +		  $fileInfo-&gt;set('kbps', round($file-&gt;bitrate));
+</I>&gt;<i> +		  $fileInfo-&gt;set('vbr', 'f');
+</I>&gt;<i> +		} else {
+</I>&gt;<i> +		  // variable bitrate
+</I>&gt;<i> +		  $fileInfo-&gt;set('kbps', round($file-&gt;average_bitrate));
+</I>&gt;<i> +		  $fileInfo-&gt;set('vbr', 't');
+</I>&gt;<i> +		}
+</I>&gt;<i> +		$fileInfo-&gt;set('format', $file-&gt;getFormatFilename());
+</I>&gt;<i> +		$fileInfo-&gt;set('main_content', $mainContent);
+</I>&gt;<i> +	 }
+</I>&gt;<i> +
+</I>&gt;<i>  	 $fstat = stat($filepath);
+</I>&gt;<i>  	 $fileInfo-&gt;set('filesize', $fstat['size']);
+</I>&gt;<i>  	 $fileInfo-&gt;set('last_modified', $db-&gt;getTimestampTz($fstat['mtime']));
+</I>&gt;<i> @@ -593,8 +681,30 @@
+</I>&gt;<i>    function saveID3($file) {
+</I>&gt;<i>  	 global $config;
+</I>&gt;<i>  	 $fileInfo = $file-&gt;allInfo;
+</I>&gt;<i> +	 //----------------- CHANGED BY BUDDHAFLY 06-02-19
+</I>&gt;<i>  	 $id3 = $fileInfo['id3v1'];
+</I>&gt;<i> -	 //$id3['comment'] =  substr(substr($config['rootUrl'], 7), 0, 30);
+</I>&gt;<i> +
+</I>&gt;<i> +	require_once($config['getid3dir'] . &quot;/write.php&quot;);
+</I>&gt;<i> +	 $tagwriter = new getid3_writetags;
+</I>&gt;<i> +	 $tagwriter-&gt;filename   = $file;
+</I>&gt;<i> +	 $TagData['comment'][] = &quot;id: &quot; . $this-&gt;id;
+</I>&gt;<i> +	 debug(&quot;writing ID3V1&quot;, $id3);
+</I>&gt;<i> +
+</I>&gt;<i> +	// write tags
+</I>&gt;<i> +	if ($tagwriter-&gt;WriteTags()) {
+</I>&gt;<i> +		//echo 'Successfully wrote tags&lt;br&gt;';
+</I>&gt;<i> +		if (!empty($tagwriter-&gt;warnings)) {
+</I>&gt;<i> +			logError('Wrtiting ID3V1 Tags: There were some
+</I>&gt;<i> warnings:&lt;br&gt;'.implode('&lt;br&gt;&lt;br&gt;', $tagwriter-&gt;warnings));
+</I>&gt;<i> +		}
+</I>&gt;<i> +	} else {
+</I>&gt;<i> +		logError(&quot;Could not change ID3V1 tags in file &quot;. $file-&gt;path);
+</I>&gt;<i> +	}
+</I>&gt;<i> +
+</I>&gt;<i> +	//---------------------------------------------------
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	/*
+</I>&gt;<i> +	//$id3['comment'] =  substr(substr($config['rootUrl'], 7), 0, 30);
+</I>&gt;<i>  	 $id3['comment'] = &quot;id: &quot; . $this-&gt;id;
+</I>&gt;<i>  	 //$id3['album'] =  &quot;id: &quot; . $this-&gt;id;
+</I>&gt;<i>  	 //if(!$id3['title'])
+</I>&gt;<i> @@ -602,10 +712,11 @@
+</I>&gt;<i>  	 //if(!$id3['artist'])
+</I>&gt;<i>  	 //	$id3['artist'] = substr($this-&gt;getCreatorNames(), 0, 30);
+</I>&gt;<i>  	 debug(&quot;writing ID3V1&quot;, $id3);
+</I>&gt;<i> -	 //$succ = WriteID3v1($file-&gt;path, $id3['title'], $id3['artist'],
+</I>&gt;<i> $id3['album'], $id3['year'], $id3['comment'], $id3['genre'], NULL
+</I>&gt;<i> /*track*/);
+</I>&gt;<i> -	 $succ = WriteID3v1($file-&gt;path, $id3['comment'], NULL /*track*/);
+</I>&gt;<i> +	 //$succ = WriteID3v1($file-&gt;path, $id3['title'], $id3['artist'],
+</I>&gt;<i> $id3['album'], $id3['year'], $id3['comment'], $id3['genre'], NULL
+</I>&gt;<i> /*track*//*);
+</I>&gt;<i> +	 $succ = WriteID3v1($file-&gt;path, $id3['comment'], NULL /*track*//*);
+</I>&gt;<i>  	 if(!$succ)
+</I>&gt;<i>  		logError(&quot;Could not change ID3V1 tags in file &quot;. $file-&gt;path);
+</I>&gt;<i> +	*/
+</I>&gt;<i>    }
+</I>&gt;<i>
+</I>&gt;<i>    function deleteFile($fid) {
+</I>&gt;<i> @@ -947,7 +1058,7 @@
+</I>&gt;<i>  	 // convert missing formats!
+</I>&gt;<i>  	 $audioFiles = &amp; new sotf_FileList();
+</I>&gt;<i>  	 $audioFiles-&gt;getAudioFromDir($newPrg-&gt;getAudioDir());
+</I>&gt;<i> -	 $checker = &amp; new sotf_AudioCheck($audioFiles);
+</I>&gt;<i> +	 $checker = &amp; new sotf_ContentCheck($audioFiles); //MOD BY BUDDHAFLY
+</I>&gt;<i>  	 $checker-&gt;console = $console; // if we don't want progress bars
+</I>&gt;<i>  	 $targets = $checker-&gt;convertAll($newPrg-&gt;id);
+</I>&gt;<i>  	 if(is_array($targets)) {
+</I>&gt;<i>
+</I>&gt;<i> Added: node/branches/video_test/code/classes/sotf_VideoCheck.class.php
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> ---
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_VideoCheck.class.php	2006-05-04
+</I>&gt;<i> 11:04:36 UTC (rev 557)
+</I>&gt;<i> +++
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_VideoCheck.class.php	2006-05-04
+</I>&gt;<i> 14:34:58 UTC (rev 558)
+</I>&gt;<i> @@ -0,0 +1,397 @@
+</I>&gt;<i> +&lt;?php
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +function print_r_html($arr, $style = &quot;display: none; margin-left: 10px;&quot;)
+</I>&gt;<i> +{
+</I>&gt;<i> +//print_r($arr);
+</I>&gt;<i> +//return;
+</I>&gt;<i> +
+</I>&gt;<i> +static $i = 0; $i++;
+</I>&gt;<i> +  echo &quot;\n&lt;div id=\&quot;array_tree_$i\&quot; class=\&quot;array_tree\&quot;&gt;\n&quot;;
+</I>&gt;<i> +  foreach($arr as $key =&gt; $val)
+</I>&gt;<i> +  { switch (gettype($val))
+</I>&gt;<i> +   { case &quot;array&quot;:
+</I>&gt;<i> +       echo &quot;&lt;a
+</I>&gt;<i> onclick=\&quot;document.getElementById('array_tree_element_$i').style.display =
+</I>&gt;<i> &quot;;
+</I>&gt;<i> +       echo &quot;document.getElementById('array_tree_element_$i&quot;;
+</I>&gt;<i> +       echo &quot;').style.display == 'block' ?&quot;;
+</I>&gt;<i> +       echo &quot;'none' : 'block';\&quot;\n&quot;;
+</I>&gt;<i> +       echo &quot;name=\&quot;array_tree_link_$i\&quot;
+</I>&gt;<i> href=\&quot;#array_tree_link_$i\&quot;&gt;&quot;.htmlspecialchars($key).&quot;&lt;/a&gt;&lt;br /&gt;\n&quot;;
+</I>&gt;<i> +       echo &quot;&lt;div class=\&quot;array_tree_element_\&quot;
+</I>&gt;<i> id=\&quot;array_tree_element_$i\&quot; style=\&quot;$style\&quot;&gt;&quot;;
+</I>&gt;<i> +       echo print_r_html($val);
+</I>&gt;<i> +       echo &quot;&lt;/div&gt;&quot;;
+</I>&gt;<i> +     break;
+</I>&gt;<i> +     case &quot;integer&quot;:
+</I>&gt;<i> +       echo &quot;&lt;b&gt;&quot;.htmlspecialchars($key).&quot;&lt;/b&gt; =&gt;
+</I>&gt;<i> &lt;i&gt;&quot;.htmlspecialchars($val).&quot;&lt;/i&gt;&lt;br /&gt;&quot;;
+</I>&gt;<i> +     break;
+</I>&gt;<i> +     case &quot;double&quot;:
+</I>&gt;<i> +       echo &quot;&lt;b&gt;&quot;.htmlspecialchars($key).&quot;&lt;/b&gt; =&gt;
+</I>&gt;<i> &lt;i&gt;&quot;.htmlspecialchars($val).&quot;&lt;/i&gt;&lt;br /&gt;&quot;;
+</I>&gt;<i> +     break;
+</I>&gt;<i> +     case &quot;boolean&quot;:
+</I>&gt;<i> +       echo &quot;&lt;b&gt;&quot;.htmlspecialchars($key).&quot;&lt;/b&gt; =&gt; &quot;;
+</I>&gt;<i> +       if ($val)
+</I>&gt;<i> +       { echo &quot;true&quot;; }
+</I>&gt;<i> +       else
+</I>&gt;<i> +       { echo &quot;false&quot;; }
+</I>&gt;<i> +       echo  &quot;&lt;br /&gt;\n&quot;;
+</I>&gt;<i> +     break;
+</I>&gt;<i> +     case &quot;string&quot;:
+</I>&gt;<i> +       echo &quot;&lt;b&gt;&quot;.htmlspecialchars($key).&quot;&lt;/b&gt; =&gt;
+</I>&gt;<i> &lt;code&gt;&quot;.htmlspecialchars($val).&quot;&lt;/code&gt;&lt;br /&gt;&quot;;
+</I>&gt;<i> +     break;
+</I>&gt;<i> +     default:
+</I>&gt;<i> +       echo &quot;&lt;b&gt;&quot;.htmlspecialchars($key).&quot;&lt;/b&gt; =&gt; &quot;.gettype($val).&quot;&lt;br
+</I>&gt;<i> /&gt;&quot;;
+</I>&gt;<i> +     break; }
+</I>&gt;<i> +   echo &quot;\n&quot;; }
+</I>&gt;<i> +  echo &quot;&lt;/div&gt;\n&quot;; }
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +/**
+</I>&gt;<i> +* This is a class for checking the requested VIDEO formats, and for
+</I>&gt;<i> converting them
+</I>&gt;<i> +*
+</I>&gt;<i> +* @author	Tamas Kezdi SZTAKI DSD &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">tbyte at sztaki.hu</A>&gt;
+</I>&gt;<i> +* @package	StreamOnTheFly
+</I>&gt;<i> +* @version	0.1
+</I>&gt;<i> +*/
+</I>&gt;<i> +
+</I>&gt;<i> +class sotf_VideoCheck extends sotf_ContentCheck
+</I>&gt;<i> +{
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Array of the arrays describes which requestments can be satisfied.
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* The description of the requestment can be found at the same index
+</I>&gt;<i> where the requestment was
+</I>&gt;<i> +	* found in the $config['videoFormats'] array. The first element of these
+</I>&gt;<i> arrays is a boolean indicates
+</I>&gt;<i> +	* whether the conditions are matched. If it is true the second elements
+</I>&gt;<i> of these arrays show
+</I>&gt;<i> +	* where is the matching file in the $list member variable. If the first
+</I>&gt;<i> element is false, the
+</I>&gt;<i> +	* second element can be an index shows from which file can be generated
+</I>&gt;<i> the requested file,
+</I>&gt;<i> +	* or it can be false if there was not so file. For example we need a 128
+</I>&gt;<i> and a 24 kbps mp3
+</I>&gt;<i> +	* but we have only the 128. The first element will be (true,0) so we
+</I>&gt;<i> have the file at index 0,
+</I>&gt;<i> +	* the second element will be (false,0) so we haven't the 24 kbps file
+</I>&gt;<i> but it can be generated
+</I>&gt;<i> +	* from the 128 kbps file that has the index 0. If we needed a 192 kbps
+</I>&gt;<i> mp3, we got (false,false),
+</I>&gt;<i> +	* so we haven't so file, and we cannot generate it from 128, because 128
+</I>&gt;<i> is less than 192.
+</I>&gt;<i> +	* @attribute 	array	$reqs
+</I>&gt;<i> +	* @see	{@link $config['videoFormats']}
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	var $reqs = array();
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* FileList object.
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* @attribute 	object	$list
+</I>&gt;<i> +	* @see	{@link FileList}
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	var $list;
+</I>&gt;<i> +
+</I>&gt;<i> +	var $prefix = 'video';
+</I>&gt;<i> +	var $type = 'videoChecker';
+</I>&gt;<i> +
+</I>&gt;<i> +  var $console = false;
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Sets up the object
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* @constructor sotf_AudioCheck
+</I>&gt;<i> +	* @param	object	$list	FileList object contains list of files to be
+</I>&gt;<i> checked
+</I>&gt;<i> +	* @use	$config['videoFormats'], $config['bitrateTolerance']
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	function sotf_VideoCheck($list)
+</I>&gt;<i> +	{
+</I>&gt;<i> +		global $config;
+</I>&gt;<i> +
+</I>&gt;<i> +		$display_arr=false;
+</I>&gt;<i> +
+</I>&gt;<i> +		$this-&gt;list = &amp; $list;
+</I>&gt;<i> +
+</I>&gt;<i> +		for($i=0;$i&lt;count($config['videoFormats']);$i++)			// walk thru the
+</I>&gt;<i> requested formats
+</I>&gt;<i> +
+</I>&gt;<i> +		{
+</I>&gt;<i> +			$found = false;								// indicates whether the current audio format
+</I>&gt;<i> has been found
+</I>&gt;<i> +			for($j=0;$j&lt;count($this-&gt;list-&gt;list);$j++)	// walk thru the the files
+</I>&gt;<i> we have
+</I>&gt;<i> +			{
+</I>&gt;<i> +
+</I>&gt;<i> +				// $this-&gt;list-&gt;list[$j] means the current AudioFile object
+</I>&gt;<i> +				if ($this-&gt;list-&gt;list[$j]-&gt;type != &quot;video&quot;){
+</I>&gt;<i> +					continue;							// This is not an video, get another one
+</I>&gt;<i> +				}
+</I>&gt;<i> +
+</I>&gt;<i> +				if ($config['videoFormats'][$i]['format'] !=
+</I>&gt;<i> $this-&gt;list-&gt;list[$j]-&gt;format){
+</I>&gt;<i> +					if($display_arr) print &quot;$i$j wrong format:
+</I>&gt;<i> &quot;.$this-&gt;list-&gt;list[$j]-&gt;format.&quot;, should be
+</I>&gt;<i> &quot;.$config['videoFormats'][$i]['format'].&quot;&lt;br&gt;&quot;.print_r_html($this-&gt;list-&gt;list[$j]).&quot;&lt;br&gt;
+</I>&lt;br&gt;&quot;;
+&gt;<i> +					continue;							// This is not the one we need, get another one
+</I>&gt;<i> +				}
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +				/*if($this-&gt;list-&gt;list[$j]-&gt;format!=&quot;flv&quot;){
+</I>&gt;<i> +					if (abs($this-&gt;list-&gt;list[$j]-&gt;average_bitrate -
+</I>&gt;<i> ($config['videoFormats'][$i]['video_bitrate']+$config['videoFormats'][$i]['audio_bitrate']))
+</I>&gt;<i> &gt; $config['bitrateToleranceVideo']){
+</I>&gt;<i> +						if($display_arr) print &quot;$i$j wrong bitrate:
+</I>&gt;<i> &quot;.$this-&gt;list-&gt;list[$j]-&gt;average_bitrate.&quot;, should be
+</I>&gt;<i> &quot;.($config['videoFormats'][$i]['video_bitrate']+$config['videoFormats'][$i]['audio_bitrate']).&quot;&lt;br&gt;&quot;.print_r_html($this-&gt;list-&gt;list[$j]).&quot;&lt;br&gt;
+</I>&lt;br&gt;&quot;;
+&gt;<i> +						continue;							// This is not the one we need, get another one
+</I>&gt;<i> +					}
+</I>&gt;<i> +
+</I>&gt;<i> +					else
+</I>&gt;<i> +
+</I>&gt;<i> +					{
+</I>&gt;<i> +						$this-&gt;list-&gt;list[$j]-&gt;bitrate =
+</I>&gt;<i> $config['videoFormats'][$i]['video_bitrate']+$config['videoFormats'][$i]['audio_bitrate'];
+</I>&gt;<i> +						$this-&gt;list-&gt;list[$j]-&gt;average_bitrate =
+</I>&gt;<i> $config['videoFormats'][$i]['video_bitrate']+$config['videoFormats'][$i]['audio_bitrate'];
+</I>&gt;<i> +					}
+</I>&gt;<i> +
+</I>&gt;<i> +					if ($config['videoFormats'][$i]['audio_channels'] !=
+</I>&gt;<i> $this-&gt;list-&gt;list[$j]-&gt;channels){
+</I>&gt;<i> +						if($display_arr) print &quot;$i$j wrong channels:
+</I>&gt;<i> &quot;.$this-&gt;list-&gt;list[$j]-&gt;channels.&quot;, should be
+</I>&gt;<i> &quot;.$config['videoFormats'][$i]['audio_channels'].&quot;&lt;br&gt;&quot;.print_r_html($this-&gt;list-&gt;list[$j]).&quot;&lt;br&gt;
+</I>&lt;br&gt;&quot;;
+&gt;<i> +						continue;							// This is not the one we need, get another one
+</I>&gt;<i> +					}
+</I>&gt;<i> +				}*/
+</I>&gt;<i> +
+</I>&gt;<i> +				if ($config['videoFormats'][$i]['audio_samplerate'] !=
+</I>&gt;<i> $this-&gt;list-&gt;list[$j]-&gt;samplerate){
+</I>&gt;<i> +					if($display_arr) print &quot;$i$j wrong samplerate:
+</I>&gt;<i> &quot;.$this-&gt;list-&gt;list[$j]-&gt;samplerate.&quot;, should be
+</I>&gt;<i> &quot;.$config['videoFormats'][$i]['audio_samplerate'].&quot;&lt;br&gt;&quot;.print_r_html($this-&gt;list-&gt;list[$j]).&quot;&lt;br&gt;
+</I>&lt;br&gt;&quot;;
+&gt;<i> +					continue;							// This is not the one we need, get another one
+</I>&gt;<i> +				}
+</I>&gt;<i> +
+</I>&gt;<i> +				$found = $j;							// All conditions matched, that's what we need,
+</I>&gt;<i> store its position
+</I>&gt;<i> +				break;									// don't need to search for another, leave the loop
+</I>&gt;<i> +
+</I>&gt;<i> +			}
+</I>&gt;<i> +
+</I>&gt;<i> +			if ($found !== false)
+</I>&gt;<i> +			{
+</I>&gt;<i> +				$this-&gt;reqs[] = array(true,$found);		// store the position of the
+</I>&gt;<i> matched file
+</I>&gt;<i> +				continue;								// get the next requested format
+</I>&gt;<i> +			}
+</I>&gt;<i> +
+</I>&gt;<i> +			$this-&gt;reqs[] = array(false,false);			// There was nothing we could
+</I>&gt;<i> have use
+</I>&gt;<i> +		}
+</I>&gt;<i> +	} // end func sotf_AudioCheck
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Gets the request index for a sotf_AudioFile
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* @param	object	$audiofile	sotf_AudioFile object to be checked
+</I>&gt;<i> +	* @return	mixed	If the audio file satisfies any requestment returns an
+</I>&gt;<i> integer which is an index of the $config['videoFormats'] global variable.
+</I>&gt;<i> If the file satisfy any requestment returns boolean false
+</I>&gt;<i> +	* @use	$config['videoFormats'], $config['bitrateTolerance']
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	function getRequestIndex($videofile)
+</I>&gt;<i> +	{
+</I>&gt;<i> +		global $config;
+</I>&gt;<i> +		for($i=0;$i&lt;count($config['videoFormats']);$i++)			// walk thru the
+</I>&gt;<i> requested formats
+</I>&gt;<i> +
+</I>&gt;<i> +		{
+</I>&gt;<i> +			if ($videofile-&gt;type != &quot;video&quot;)
+</I>&gt;<i> +				continue;								// This is not an audio, get another one
+</I>&gt;<i> +
+</I>&gt;<i> +			if ($config['videoFormats'][$i]['format'] != $videofile-&gt;format)
+</I>&gt;<i> +				continue;								// This is not the one we need, get another one
+</I>&gt;<i> +
+</I>&gt;<i> +			//if($videofile-&gt;format!=&quot;flv&quot;){
+</I>&gt;<i> +				if (abs($videofile-&gt;average_bitrate -
+</I>&gt;<i> $config['videoFormats'][$i]['video_bitrate']+$videofile-&gt;average_bitrate -
+</I>&gt;<i> $config['videoFormats'][$i]['audio_bitrate']) &gt;
+</I>&gt;<i> $config['bitrateToleranceVideo'])
+</I>&gt;<i> +					continue;							// This is not the one we need, get another one
+</I>&gt;<i> +
+</I>&gt;<i> +				if ($config['videoFormats'][$i]['audio_channels'] !=
+</I>&gt;<i> $videofile-&gt;channels)
+</I>&gt;<i> +					continue;								// This is not the one we need, get another one
+</I>&gt;<i> +			//}
+</I>&gt;<i> +			if ($config['videoFormats'][$i]['audio_samplerate'] !=
+</I>&gt;<i> $videofile-&gt;samplerate)
+</I>&gt;<i> +				continue;								// This is not the one we need, get another one
+</I>&gt;<i> +
+</I>&gt;<i> +			return $j;									// All conditions matched, that's what we need,
+</I>&gt;<i> return the index
+</I>&gt;<i> +
+</I>&gt;<i> +		}
+</I>&gt;<i> +
+</I>&gt;<i> +		return false;
+</I>&gt;<i> +
+</I>&gt;<i> +	} // end func getRequestIndex
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Encode format to a filename.
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* @param	integer	$index	Format index of the jingle in the
+</I>&gt;<i> $config['audioFormats'] global variable
+</I>&gt;<i> +	* @return	string	Encoded format. Example: 24kbps_1chn_22050Hz.mp3
+</I>&gt;<i> +	* @use	$config['audioFormats']
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	function getFormatFilename($index)
+</I>&gt;<i> +
+</I>&gt;<i> +	{
+</I>&gt;<i> +
+</I>&gt;<i> +		global $config;
+</I>&gt;<i> +
+</I>&gt;<i> +		return
+</I>&gt;<i> ($config['videoFormats'][$index]['video_bitrate']+$config['videoFormats'][$index]['audio_bitrate'])
+</I>&gt;<i> . 'kbps_' . $config['videoFormats'][$index]['audio_channels'] . 'chn_' .
+</I>&gt;<i> $config['videoFormats'][$index]['audio_samplerate'] . 'Hz.' .
+</I>&gt;<i> $config['videoFormats'][$index]['format'];
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	} // end func getFormatFilename
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +function fileOK($file) {
+</I>&gt;<i> +
+</I>&gt;<i> +	$getID3 = new getID3();
+</I>&gt;<i> +	$fileinfo = $getID3-&gt;analyze($file);
+</I>&gt;<i> +	getid3_lib::CopyTagsToComments($fileinfo);
+</I>&gt;<i> +
+</I>&gt;<i> +	if(is_file($file.&quot;.txt&quot;)){
+</I>&gt;<i> +
+</I>&gt;<i> +		$handle = fopen ($file.&quot;.txt&quot;, &quot;r&quot;);
+</I>&gt;<i> +		$buffer=&quot;&quot;;
+</I>&gt;<i> +		while (!feof($handle)) {
+</I>&gt;<i> +		   $buffer .= fgets($handle, 4096);
+</I>&gt;<i> +		}
+</I>&gt;<i> +		fclose ($handle);
+</I>&gt;<i> +		$finished = stristr($buffer,'muxing overhead');
+</I>&gt;<i> +
+</I>&gt;<i> +	}
+</I>&gt;<i> +	else $finished = false;
+</I>&gt;<i> +
+</I>&gt;<i> +	if(!is_readable($file) || filesize($file)==0 ||
+</I>&gt;<i> (!isset($fileinfo['audio'])&amp;&amp;!isset($fileinfo['video'])) || !$finished) {
+</I>&gt;<i> +		return false;
+</I>&gt;<i> +	}
+</I>&gt;<i> +	else{
+</I>&gt;<i> +
+</I>&gt;<i> +		return true;
+</I>&gt;<i> +	}
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +	function getTotalFrames($source, $index){
+</I>&gt;<i> +
+</I>&gt;<i> +		global $config;
+</I>&gt;<i> +
+</I>&gt;<i> +		$getID3 = new getID3();
+</I>&gt;<i> +		$fileinfo = $getID3-&gt;analyze($source);
+</I>&gt;<i> +		getid3_lib::CopyTagsToComments($fileinfo);
+</I>&gt;<i> +
+</I>&gt;<i> +		$totalframes=round($fileinfo[&quot;playtime_seconds&quot;]*$config['videoFormats'][$index]['framerate']);
+</I>&gt;<i> +
+</I>&gt;<i> +		return $totalframes;
+</I>&gt;<i> +	}
+</I>&gt;<i> +
+</I>&gt;<i> +	function getPercentageOrError($tempfile, $totalframes){
+</I>&gt;<i> +
+</I>&gt;<i> +		if(is_file($tempfile.&quot;.txt&quot;)){
+</I>&gt;<i> +			$handle = fopen ($tempfile.&quot;.txt&quot;, &quot;r&quot;);
+</I>&gt;<i> +			$buffer=&quot;&quot;;
+</I>&gt;<i> +			while (!feof($handle)) {
+</I>&gt;<i> +			   $buffer .= fgets($handle, 4096);
+</I>&gt;<i> +			}
+</I>&gt;<i> +			fclose ($handle);
+</I>&gt;<i> +
+</I>&gt;<i> +			$returnarray=array();
+</I>&gt;<i> +
+</I>&gt;<i> +			preg_match_all(&quot;/frame=(.{1,9})q=/&quot;, $buffer, $results);
+</I>&gt;<i> +			$curframe=$results[1][count($results[1])-1];
+</I>&gt;<i> +			$timediff= time()-filemtime($tempfile);
+</I>&gt;<i> +
+</I>&gt;<i> +			if (empty($results[1]) &amp;&amp; is_file($tempfile) &amp;&amp;
+</I>&gt;<i> preg_match_all(&quot;/\n\[.*@ 0x.*\n/&quot;, $buffer, $errors) &amp;&amp; $timediff&gt;3){
+</I>&gt;<i> +				$returnarray['errors']=$errors[0];
+</I>&gt;<i> +				logError('conversion failed: '.$tempfile);
+</I>&gt;<i> +				logError('ffmpeg output: '. $buffer);
+</I>&gt;<i> +			}
+</I>&gt;<i> +			$percentage=round($curframe/$totalframes*100);
+</I>&gt;<i> +			$returnarray['percentage']=$percentage;
+</I>&gt;<i> +			return $returnarray;
+</I>&gt;<i> +		}
+</I>&gt;<i> +	}
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +  ////////////////////////////////////////////////////////
+</I>&gt;<i> +  //
+</I>&gt;<i> +  //  VIDEO CONVERSION
+</I>&gt;<i> +  //
+</I>&gt;<i> +  ///////////////////////////////////////////////////////
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +    function transcodeWithFfmpeg($cmd, $totalframes)
+</I>&gt;<i> +      {
+</I>&gt;<i> +
+</I>&gt;<i> +		global $config, $page;
+</I>&gt;<i> +
+</I>&gt;<i> +        if($this-&gt;console) {
+</I>&gt;<i> +          //echo &quot;&lt;p&gt;&quot;; // . $page-&gt;getlocalized('transcoding_video') .
+</I>&gt;<i> &quot;&lt;br /&gt;\n&quot;;
+</I>&gt;<i> +          flush();
+</I>&gt;<i> +
+</I>&gt;<i> +          $output = $this-&gt;progressBar($cmd,$config['ffmpegRegexp'],
+</I>&gt;<i> $totalframes, true, $config['ffmpegErrorRegexp']);
+</I>&gt;<i> +          echo &quot;&lt;br/&gt;\n&quot;;
+</I>&gt;<i> +          flush();
+</I>&gt;<i> +		  return $output;
+</I>&gt;<i> +        } else {
+</I>&gt;<i> +          $this-&gt;exec($cmd);
+</I>&gt;<i> +        }
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +      }
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +    /** returns name of new audio file */
+</I>&gt;<i> +
+</I>&gt;<i> +    function convert($id, $index) {
+</I>&gt;<i> +
+</I>&gt;<i> +      global $config, $page;
+</I>&gt;<i> +
+</I>&gt;<i> +      debug('conversion started', $this-&gt;getFormatFilename($index));
+</I>&gt;<i> +
+</I>&gt;<i> +      if ($this-&gt;reqs[$index][0] === true) {
+</I>&gt;<i> +        debug(&quot;We have this format already&quot;, $index);
+</I>&gt;<i> +        return;
+</I>&gt;<i> +      }
+</I>&gt;<i> +
+</I>&gt;<i> +      $sourceindex = $this-&gt;reqs[$index][1];
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +      $audioFiles = &amp; $this-&gt;list;
+</I>&gt;<i> +      $source = $audioFiles-&gt;list[$sourceindex]-&gt;getPath();
+</I>&gt;<i> +
+</I>&gt;<i> +      debug(&quot;source&quot;, $source);
+</I>&gt;<i> +
+</I>&gt;<i> +      $target = $config['tmpDir'] . '/' . $id . '_' . time() . '_' .
+</I>&gt;<i> $this-&gt;getFormatFilename($index);
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +      $bitrate = $config['videoFormats'][$index][&quot;audio_bitrate&quot;];
+</I>&gt;<i> +      $samplerate = $config['videoFormats'][$index][&quot;audio_samplerate&quot;];
+</I>&gt;<i> +      if ($config['videoFormats'][$index][&quot;audio_channels&quot;] == 1)
+</I>&gt;<i> +        $mode = &quot;mono&quot;;
+</I>&gt;<i> +      else
+</I>&gt;<i> +        $mode = &quot;joint&quot;;
+</I>&gt;<i> +
+</I>&gt;<i> +		$this-&gt;getTotalFrames($source, $index);
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +		$cmd=&quot;nohup nice -n 15 &quot;.$config['ffmpeg'].' -i '.$source.'
+</I>&gt;<i> '.$config['videoFormats'][$index]['ffmpeg_params']./*' -minrate '.
+</I>&gt;<i> ($config['videoFormats'][$index]['video_bitrate']) .' -maxrate '.
+</I>&gt;<i> ($config['videoFormats'][$index]['video_bitrate']+$config['bitrateToleranceVideo'])
+</I>&gt;<i> .' -bufsize 4096 '.*/' '.$target.&quot; 1&gt;&quot;.$target.&quot;.txt 2&gt;&amp;1 &amp;&quot;;
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +      if($this-&gt;console){
+</I>&gt;<i> +        echo &quot;&lt;br&gt;&quot; . $page-&gt;getlocalized('conversion_started') . ' ' .
+</I>&gt;<i> $this-&gt;getFormatFilename($index) . &quot;&lt;br&gt;\n&quot;;
+</I>&gt;<i> +		$output=$this-&gt;transcodeWithFfmpeg($cmd, $totalframes);
+</I>&gt;<i> +	  }
+</I>&gt;<i> +           $this-&gt;transcodeWithFfmpeg($cmd, $totalframes);
+</I>&gt;<i> +
+</I>&gt;<i> +       /*
+</I>&gt;<i> +	   $videoFileOK = $this-&gt;fileOK($target);
+</I>&gt;<i> +	   	if(!$videoFileOK) {
+</I>&gt;<i> +			logError('conversion failed: '.$target);
+</I>&gt;<i> +			if($output)logError('ffmpeg output: '. $output['data']);
+</I>&gt;<i> +			if($this-&gt;console){
+</I>&gt;<i> +				echo &quot;&lt;span style='color:#c00'&gt;[ffmpeg error] Transcoding failed. The
+</I>&gt;<i> error has been logged.&lt;/span&gt;&quot;;
+</I>&gt;<i> +				echo &quot;&lt;br&gt; &quot;;
+</I>&gt;<i> +			}
+</I>&gt;<i> +		}
+</I>&gt;<i> +		else unlink($target.&quot;.txt&quot;);
+</I>&gt;<i> +		*/
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +      debug('conversion finished', $target);
+</I>&gt;<i> +
+</I>&gt;<i> +      return $target;
+</I>&gt;<i> +    }
+</I>&gt;<i> +
+</I>&gt;<i> +} // end class sotf_AudioCheck
+</I>&gt;<i> +
+</I>&gt;<i> +?&gt;
+</I>&gt;<i> \ No newline at end of file
+</I>&gt;<i>
+</I>&gt;<i> Added: node/branches/video_test/code/classes/sotf_VideoFile.class.php
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> ---
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_VideoFile.class.php	2006-05-04
+</I>&gt;<i> 11:04:36 UTC (rev 557)
+</I>&gt;<i> +++
+</I>&gt;<i> node/branches/video_test/code/classes/sotf_VideoFile.class.php	2006-05-04
+</I>&gt;<i> 14:34:58 UTC (rev 558)
+</I>&gt;<i> @@ -0,0 +1,255 @@
+</I>&gt;<i> +&lt;?php
+</I>&gt;<i> +
+</I>&gt;<i> +require_once($config['getid3dir'] . &quot;/getid3.php&quot;);
+</I>&gt;<i> +require_once(&quot;sotf_File.class.php&quot;);
+</I>&gt;<i> +
+</I>&gt;<i> +/**
+</I>&gt;<i> +* This is a class for handling audio files.
+</I>&gt;<i> +* MODIFIED FOR HANDLING VIDEO FILES BY BUDDHAFLY
+</I>&gt;<i> +* @author	Tamas Kezdi SZTAKI DSD &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">tbyte at sztaki.hu</A>&gt;
+</I>&gt;<i> +* @package	StreamOnTheFly
+</I>&gt;<i> +* @version	0.1
+</I>&gt;<i> +*/
+</I>&gt;<i> +
+</I>&gt;<i> +class sotf_VideoFile extends sotf_File
+</I>&gt;<i> +{
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Format of the audio file.
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* Currently this member variable can be &quot;mp3&quot; or &quot;ogg&quot;.
+</I>&gt;<i> +	* @attribute 	string	$format
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	var $format;
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Bitrate of the audio file.
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* If this value is numeric, it contains the constant bit rate in kbps,
+</I>&gt;<i> or it can be &quot;VBR&quot;.
+</I>&gt;<i> +	* @attribute 	mixed	$bitrate
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	var $bitrate;
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Average bitrate of the audio file in kbps.
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* @attribute 	float	$average_bitrate
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	var $average_bitrate;
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Sample rate of the audio file in Hz.
+</I>&gt;<i> +	* @attribute 	integer	$samplerate
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	var $samplerate;
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Number of channels.
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* 1 means this is mono, 2 means this is stereo
+</I>&gt;<i> +	* @attribute 	integer	$channels
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	var $channels;
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Duration of the audio file in seconds.
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* @attribute 	float	$duration
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	var $duration;
+</I>&gt;<i> +
+</I>&gt;<i> +	var $codec;
+</I>&gt;<i> +
+</I>&gt;<i> +	var $frame_rate;
+</I>&gt;<i> +
+</I>&gt;<i> +	var $resolution_x;
+</I>&gt;<i> +
+</I>&gt;<i> +	var $resolution_y;
+</I>&gt;<i> +
+</I>&gt;<i> +	var $pixel_aspect_ratio;
+</I>&gt;<i> +
+</I>&gt;<i> +    var $allInfo;
+</I>&gt;<i> +
+</I>&gt;<i> +	var $totalframes;
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +	* Sets up sotf_AudioFile object
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* @constructor sotf_AudioFile
+</I>&gt;<i> +	* @param	string	$path	Path of the file
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	function sotf_VideoFile($path)
+</I>&gt;<i> +	{
+</I>&gt;<i> +
+</I>&gt;<i> +		$parent = get_parent_class($this);
+</I>&gt;<i> +
+</I>&gt;<i> +		parent::$parent($path);		// Call the constructor of the parent class.
+</I>&gt;<i> lk. super()
+</I>&gt;<i> +
+</I>&gt;<i> +		// CHANGED BY BUDDHAFLY 06-02-14
+</I>&gt;<i> +		$getID3 = new getID3();
+</I>&gt;<i> +		$fileinfo = $getID3-&gt;analyze($path);
+</I>&gt;<i> +		getid3_lib::CopyTagsToComments($fileinfo);
+</I>&gt;<i> +		//print_r($fileinfo);
+</I>&gt;<i> +		//$fileinfo = GetAllFileInfo($this-&gt;path);
+</I>&gt;<i> +
+</I>&gt;<i> +   		 $this-&gt;allInfo = $fileinfo; //was $fileInfo
+</I>&gt;<i> +
+</I>&gt;<i> +		//if ($audioinfo[&quot;fileformat&quot;] == 'mp3' || $audioinfo[&quot;fileformat&quot;] ==
+</I>&gt;<i> 'ogg') {
+</I>&gt;<i> +
+</I>&gt;<i> +    //debug(&quot;finfo&quot;, $fileinfo);
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +    if (isset($fileinfo['video'])) {
+</I>&gt;<i> +
+</I>&gt;<i> +     	 $videoinfo = $fileinfo['video'];
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +			$this-&gt;type = &quot;video&quot;;
+</I>&gt;<i> +
+</I>&gt;<i> +			//$this-&gt;format = $fileinfo[&quot;fileformat&quot;];
+</I>&gt;<i> +
+</I>&gt;<i> +			$this-&gt;format = $videoinfo[&quot;dataformat&quot;];
+</I>&gt;<i> +
+</I>&gt;<i> +			if($this-&gt;format == &quot;quicktime&quot;) $this-&gt;format = &quot;mov&quot;;
+</I>&gt;<i> +
+</I>&gt;<i> +			if($fileinfo['quicktime']['ftyp']['signature']==&quot;3gp4&quot;) $this-&gt;format
+</I>&gt;<i> = &quot;3gp&quot;;
+</I>&gt;<i> +			else if($this-&gt;format == &quot;mpeg4&quot;) $this-&gt;format = &quot;mp4&quot;;
+</I>&gt;<i> +
+</I>&gt;<i> +			if($this-&gt;format == &quot;asf&quot;) $this-&gt;format = &quot;wmv&quot;;
+</I>&gt;<i> +			if($this-&gt;format == &quot;mpeg&quot;) $this-&gt;format = &quot;mpg&quot;;
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +			if ($videoinfo[&quot;bitrate_mode&quot;] == 'vbr') $this-&gt;bitrate = &quot;VBR&quot;;
+</I>&gt;<i> +
+</I>&gt;<i> +      		$this-&gt;bitrate = round($fileinfo[&quot;bitrate&quot;]/1000);
+</I>&gt;<i> +
+</I>&gt;<i> +			$this-&gt;average_bitrate = round($fileinfo[&quot;bitrate&quot;]/1000);
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +			$this-&gt;duration = round($fileinfo[&quot;playtime_seconds&quot;]);
+</I>&gt;<i> +
+</I>&gt;<i> +			$this-&gt;mimetype = $this-&gt;determineMimeType($this-&gt;format);
+</I>&gt;<i> +
+</I>&gt;<i> +			$this-&gt;codec = $videoinfo[&quot;codec&quot;];
+</I>&gt;<i> +
+</I>&gt;<i> +			$this-&gt;frame_rate = round($videoinfo[&quot;frame_rate&quot;]);
+</I>&gt;<i> +
+</I>&gt;<i> +			$this-&gt;resolution_x = $videoinfo[&quot;resolution_x&quot;];
+</I>&gt;<i> +
+</I>&gt;<i> +			$this-&gt;resolution_y = $videoinfo[&quot;resolution_y&quot;];
+</I>&gt;<i> +
+</I>&gt;<i> +			$this-&gt;lossless = $videoinfo[&quot;lossless&quot;];
+</I>&gt;<i> +
+</I>&gt;<i> +			$this-&gt;pixel_aspect_ratio = $videoinfo[&quot;pixel_aspect_ratio&quot;];
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +			if(isset($fileinfo['audio'])){
+</I>&gt;<i> +			 $audioinfo = $fileinfo['audio'];
+</I>&gt;<i> +			 $this-&gt;samplerate = $audioinfo[&quot;sample_rate&quot;];
+</I>&gt;<i> +			$this-&gt;channels = $audioinfo[&quot;channels&quot;];
+</I>&gt;<i> +			}
+</I>&gt;<i> +			else {
+</I>&gt;<i> +			$this-&gt;samplerate = 0;
+</I>&gt;<i> +			$this-&gt;channels = 0;
+</I>&gt;<i> +
+</I>&gt;<i> +			}
+</I>&gt;<i> +
+</I>&gt;<i> +		}
+</I>&gt;<i> +
+</I>&gt;<i> +	} // end func sotf_AudioFile
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	function createStills($file, $length, $id){
+</I>&gt;<i> +
+</I>&gt;<i> +		global $config;
+</I>&gt;<i> +
+</I>&gt;<i> +		//echo $file.&quot;&lt;br&gt;&quot;;
+</I>&gt;<i> +		//echo $id.&quot;&lt;br&gt;&quot;;
+</I>&gt;<i> +		//echo $dir.&quot;&lt;br&gt;&quot;;
+</I>&gt;<i> +
+</I>&gt;<i> +		$temppath=$config['wwwdir'].&quot;/tmp&quot;;
+</I>&gt;<i> +
+</I>&gt;<i> +		for($i=1;$i&lt;=5;$i++){
+</I>&gt;<i> +			$position = round((($i+($i-1.5))/10)*$length);
+</I>&gt;<i> +			$target = $temppath.&quot;/still_&quot;.$id.&quot;_&quot;.$i.&quot;.gif&quot;;
+</I>&gt;<i> +			$cmd = &quot;nohup nice -n 15 &quot;.$config['ffmpeg'].&quot; -i $file -f image2 -img
+</I>&gt;<i> gif -ss $position -t 1 -r 1 -s sqcif -y $target 1&gt;$target.txt 2&gt;&amp;1 &amp;&quot;;
+</I>&gt;<i> +			//echo $cmd.&quot;&lt;br&gt;&quot;;
+</I>&gt;<i> +			exec($cmd);
+</I>&gt;<i> +		}
+</I>&gt;<i> +
+</I>&gt;<i> +		//die();
+</I>&gt;<i> +	}
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +	/**
+</I>&gt;<i> +
+</I>&gt;<i> +	* Encode format to a filename.
+</I>&gt;<i> +	*
+</I>&gt;<i> +	* @return	string	Encoded format. Example: 24kbps_1chn_22050Hz.mp3
+</I>&gt;<i> +	* @use	$config['audioFormats'], $config['bitrateTolerance']
+</I>&gt;<i> +	*/
+</I>&gt;<i> +
+</I>&gt;<i> +	function getFormatFilename()
+</I>&gt;<i> +	{
+</I>&gt;<i> +
+</I>&gt;<i> +		global $config;
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +		$bitrate = $this-&gt;bitrate;
+</I>&gt;<i> +
+</I>&gt;<i> +		for ($i=0;$i&lt;count($config['videoFormats']);$i++)
+</I>&gt;<i> +
+</I>&gt;<i> +			if
+</I>&gt;<i> (abs(($config['videoFormats'][$i]['audio_bitrate']+$config['videoFormats'][$i]['video_bitrate'])
+</I>&gt;<i> - $this-&gt;bitrate) &lt; $config['bitrateTolerance'])
+</I>&gt;<i> +
+</I>&gt;<i> +				$bitrate =
+</I>&gt;<i> $config['videoFormats'][$i]['audio_bitrate']+$config['videoFormats'][$i]['video_bitrate'];
+</I>&gt;<i> +
+</I>&gt;<i> +		return round($bitrate) . 'kbps_' . $this-&gt;channels . 'chn_' .
+</I>&gt;<i> $this-&gt;samplerate . 'Hz.'. $this-&gt;format;
+</I>&gt;<i> +
+</I>&gt;<i> +		//return round($bitrate) . 'kbps_' . $this-&gt;channels . 'chn_' .
+</I>&gt;<i> $this-&gt;samplerate . 'Hz_' . convert_special_chars($this-&gt;codec) . '.' .
+</I>&gt;<i> $this-&gt;format;
+</I>&gt;<i> +
+</I>&gt;<i> +	} // end func getFormatFilename
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +  /** static method converts format encoded into filename back to array
+</I>&gt;<i> of format characteristics. */
+</I>&gt;<i> +
+</I>&gt;<i> +  function decodeFormatFilename($filename) {
+</I>&gt;<i> +
+</I>&gt;<i> +    preg_match('/(\d+)kbps_(\d)chn_(\d+)Hz.(.*)/', $filename, $matches);
+</I>&gt;<i> +
+</I>&gt;<i> +    return array('bitrate' =&gt; $matches[1],
+</I>&gt;<i> +
+</I>&gt;<i> +                 'channels' =&gt; $matches[2],
+</I>&gt;<i> +
+</I>&gt;<i> +                 'samplerate' =&gt; $matches[3],
+</I>&gt;<i> +
+</I>&gt;<i> +                 'format' =&gt; $matches[5]);
+</I>&gt;<i> +
+</I>&gt;<i> +  }
+</I>&gt;<i> +
+</I>&gt;<i> + /* function transcode(){
+</I>&gt;<i> +
+</I>&gt;<i> +  $path = $this-&gt;path;
+</I>&gt;<i> +
+</I>&gt;<i> +  	exec(&quot;ffmpeg -i $path -r 16 -i 100 -s qcif -ar 22050 -ab 48 -ac 1
+</I>&gt;<i> $flvpath/mov.flv&quot;, $output_array);
+</I>&gt;<i> +	print_r($output_array);
+</I>&gt;<i> +	exec(&quot;ffmpeg -i $path -r 16 -i 100 -s qcif -ar 22050 -ab 48 -ac 1
+</I>&gt;<i> $flvpath/mov.flv&quot;, $output_array);
+</I>&gt;<i> +	print_r($output_array);
+</I>&gt;<i> +  	exec(&quot;ffmpeg -i $path -r 16 -i 100 -s qcif -ar 22050 -ab 48 -ac 1
+</I>&gt;<i> $flvpath/mov.flv&quot;, $output_array);
+</I>&gt;<i> +	print_r($output_array);
+</I>&gt;<i> +
+</I>&gt;<i> +  }*/
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +} // end class sotf_AudioFile
+</I>&gt;<i> \ No newline at end of file
+</I>&gt;<i>
+</I>&gt;<i> Modified: node/branches/video_test/code/configs/eng.conf
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- node/branches/video_test/code/configs/eng.conf	2006-05-04 11:04:36 UTC
+</I>&gt;<i> (rev 557)
+</I>&gt;<i> +++ node/branches/video_test/code/configs/eng.conf	2006-05-04 14:34:58 UTC
+</I>&gt;<i> (rev 558)
+</I>&gt;<i> @@ -130,7 +130,7 @@
+</I>&gt;<i>  title=Title
+</I>&gt;<i>  keywords=Keywords
+</I>&gt;<i>  abstract=Abstract
+</I>&gt;<i> -length=Lengts
+</I>&gt;<i> +length=Length
+</I>&gt;<i>  rating=Rating
+</I>&gt;<i>  contact_email=Contact Email
+</I>&gt;<i>  contact_phone=Contact Phone
+</I>&gt;<i> @@ -143,6 +143,9 @@
+</I>&gt;<i>  episode_title=Episode title
+</I>&gt;<i>  episode_sequence = Episode sequence
+</I>&gt;<i>
+</I>&gt;<i> +#ADDED BY Martin Schmidt
+</I>&gt;<i> +contenttype = Content Type
+</I>&gt;<i> +
+</I>&gt;<i>  # audio conversion messages
+</I>&gt;<i>  conversion_started = Converting into:
+</I>&gt;<i>  encoding_mp3 = Encoding MP3 file...
+</I>&gt;<i> @@ -639,6 +642,11 @@
+</I>&gt;<i>  URL_missing=URL not found
+</I>&gt;<i>
+</I>&gt;<i>  box3=3. Manage your queries
+</I>&gt;<i> +
+</I>&gt;<i> +#ADDED BY Martin Schmidt
+</I>&gt;<i> +manage_queries=Manage your queries
+</I>&gt;<i> +combine=Combine one or more criterias to perform an advanced search on
+</I>&gt;<i> programmes
+</I>&gt;<i> +
+</I>&gt;<i>  load=Load query
+</I>&gt;<i>  default=Make my default
+</I>&gt;<i>  deleteq=Delete query
+</I>&gt;<i> @@ -893,7 +901,7 @@
+</I>&gt;<i>  change = Change
+</I>&gt;<i>  delete = Delete
+</I>&gt;<i>  change_caption = Change caption
+</I>&gt;<i> -add_content = Add other formats of audio content
+</I>&gt;<i> +add_content = Add other formats of content
+</I>&gt;<i>  add_files = Add files
+</I>&gt;<i>  missing = missing
+</I>&gt;<i>  convert = Convert from others
+</I>&gt;<i> @@ -904,7 +912,7 @@
+</I>&gt;<i>
+</I>&gt;<i>  no_files = No files
+</I>&gt;<i>  no_user_files = No user files
+</I>&gt;<i> -Prg_files = Programme audio
+</I>&gt;<i> +Prg_files = Programme files
+</I>&gt;<i>  Files = Associated files
+</I>&gt;<i>  audio_file_list = Audio files:
+</I>&gt;<i>  other_file_list = Other files:
+</I>&gt;<i> @@ -1047,7 +1055,7 @@
+</I>&gt;<i>  [createNeighbour]
+</I>&gt;<i>  create_neighbour = Create new neighbour
+</I>&gt;<i>  create_from_nodes = Use an existing node as neighbour
+</I>&gt;<i> -create_new_node = Create a new neighbour node
+</I>&gt;<i> +create_new_node = Create a new neighbour connection
+</I>&gt;<i>  create = Create
+</I>&gt;<i>  id = Node id
+</I>&gt;<i>  name = Name
+</I>&gt;<i>
+</I>&gt;<i> Modified: node/branches/video_test/code/configs/fra.conf
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- node/branches/video_test/code/configs/fra.conf	2006-05-04 11:04:36 UTC
+</I>&gt;<i> (rev 557)
+</I>&gt;<i> +++ node/branches/video_test/code/configs/fra.conf	2006-05-04 14:34:58 UTC
+</I>&gt;<i> (rev 558)
+</I>&gt;<i> @@ -144,6 +144,9 @@
+</I>&gt;<i>  episode_title= titre d'&#195;&#169;pisode
+</I>&gt;<i>  episode_sequence = ordre d'&#195;&#169;pisode
+</I>&gt;<i>
+</I>&gt;<i> +#ADDED BY Martin Schmidt
+</I>&gt;<i> +contenttype = Type de contenu
+</I>&gt;<i> +
+</I>&gt;<i>  # audio conversion messages
+</I>&gt;<i>  conversion_started = convertir en:
+</I>&gt;<i>  encoding_mp3 = codage de dossier MP3
+</I>&gt;<i> @@ -636,6 +639,11 @@
+</I>&gt;<i>  URL_missing= URL non trouv&#195;&#169;
+</I>&gt;<i>
+</I>&gt;<i>  box3=3. Manage your queries
+</I>&gt;<i> +
+</I>&gt;<i> +#ADDED BY Martin Schmidt
+</I>&gt;<i> +manage_queries=Manage your queries
+</I>&gt;<i> +combine=Choisissez un ou plusieurs champs pour faire votre question
+</I>&gt;<i> +
+</I>&gt;<i>  load= Chargez question
+</I>&gt;<i>  default= Faites mon d&#195;&#169;faut
+</I>&gt;<i>  deleteq= Effacez question
+</I>&gt;<i> @@ -886,7 +894,7 @@
+</I>&gt;<i>  change = changez
+</I>&gt;<i>  delete = effacez
+</I>&gt;<i>  change_caption = changez la l&#195;&#169;gende
+</I>&gt;<i> -add_content = Ajoutez d'autres formats de contenu audio
+</I>&gt;<i> +add_content = Ajoutez d'autres formats de contenu
+</I>&gt;<i>  add_files = Ajoutez les dossiers
+</I>&gt;<i>  missing = manquer
+</I>&gt;<i>  convert = convertissez d'autres
+</I>&gt;<i> @@ -897,7 +905,7 @@
+</I>&gt;<i>
+</I>&gt;<i>  no_files = Aucuns dossiers
+</I>&gt;<i>  no_user_files = Aucuns dossiers d'utilisateur
+</I>&gt;<i> -Prg_files = audio programme
+</I>&gt;<i> +Prg_files = Dossiers de la programme
+</I>&gt;<i>  Files = Dossiers associ&#195;&#169;s
+</I>&gt;<i>  audio_file_list = Dossiers audio:
+</I>&gt;<i>  other_file_list = d'autres dossiers:
+</I>&gt;<i>
+</I>&gt;<i> Modified: node/branches/video_test/code/configs/ger.conf
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- node/branches/video_test/code/configs/ger.conf	2006-05-04 11:04:36 UTC
+</I>&gt;<i> (rev 557)
+</I>&gt;<i> +++ node/branches/video_test/code/configs/ger.conf	2006-05-04 14:34:58 UTC
+</I>&gt;<i> (rev 558)
+</I>&gt;<i> @@ -143,6 +143,9 @@
+</I>&gt;<i>  episode_title = Episoden-Titel
+</I>&gt;<i>  episode_sequence = Episode
+</I>&gt;<i>
+</I>&gt;<i> +#ADDED BY Martin Schmidt
+</I>&gt;<i> +contenttype = Art des Programmes
+</I>&gt;<i> +
+</I>&gt;<i>  # audio conversion messages
+</I>&gt;<i>  conversion_started = Konvertieren in:
+</I>&gt;<i>  encoding_mp3 = In MP3 Datei wandeln...
+</I>&gt;<i> @@ -642,6 +645,11 @@
+</I>&gt;<i>  URL_missing = URL nicht gefunden
+</I>&gt;<i>
+</I>&gt;<i>  box3 = 3. Suche/n verwalten
+</I>&gt;<i> +
+</I>&gt;<i> +#ADDED BY Martin Schmidt
+</I>&gt;<i> +manage_queries=Suche/n verwalten
+</I>&gt;<i> +combine=W&#195;&#164;hlen Sie ein oder mehrere Feld(er), um eine erweiterte Suche
+</I>&gt;<i> durchzuf&#195;&#188;hren
+</I>&gt;<i> +
+</I>&gt;<i>  load = Suche laden
+</I>&gt;<i>  default = Zu Standard machen
+</I>&gt;<i>  deleteq = Suche l&#195;&#188;schen
+</I>&gt;<i> @@ -895,7 +903,7 @@
+</I>&gt;<i>  change = &#195;&#132;ndern
+</I>&gt;<i>  delete = L&#195;&#182;schen
+</I>&gt;<i>  change_caption = Benennung ver&#195;&#164;ndern
+</I>&gt;<i> -add_content = Andere format hinzuf&#195;&#188;gen
+</I>&gt;<i> +add_content = Andere Programm-Dateien hinzuf&#195;&#188;gen
+</I>&gt;<i>  add_files = Datei(en) hinzuf&#195;&#188;gen
+</I>&gt;<i>  missing = fehlt
+</I>&gt;<i>  convert = Von anderen konvertieren
+</I>&gt;<i> @@ -906,7 +914,7 @@
+</I>&gt;<i>
+</I>&gt;<i>  no_files = Keine Dateien
+</I>&gt;<i>  no_user_files = Keine Benutzer-Dateien
+</I>&gt;<i> -Prg_files = Programm Audio
+</I>&gt;<i> +Prg_files = Programm-Dateien
+</I>&gt;<i>  Files = verbundene Dateien
+</I>&gt;<i>  audio_file_list = Audio-Dateien:
+</I>&gt;<i>  other_file_list = Andere Dateien:
+</I>&gt;<i>
+</I>&gt;<i> Modified: node/branches/video_test/code/configs/hun.conf
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- node/branches/video_test/code/configs/hun.conf	2006-05-04 11:04:36 UTC
+</I>&gt;<i> (rev 557)
+</I>&gt;<i> +++ node/branches/video_test/code/configs/hun.conf	2006-05-04 14:34:58 UTC
+</I>&gt;<i> (rev 558)
+</I>&gt;<i> @@ -143,6 +143,9 @@
+</I>&gt;<i>  episode_title = Epiz&#195;&#179;dc&#195;&#173;m
+</I>&gt;<i>  episode_sequence = Epiz&#195;&#179;d sorsz&#195;&#161;m
+</I>&gt;<i>
+</I>&gt;<i> +#ADDED BY Martin Schmidt
+</I>&gt;<i> +contenttype = Content Type
+</I>&gt;<i> +
+</I>&gt;<i>  # audio conversion messages
+</I>&gt;<i>  conversion_started = Konvert&#195;&#161;l&#195;&#161;s:
+</I>&gt;<i>  encoding_mp3 = Konvert&#195;&#161;l&#195;&#161;s MP3 form&#195;&#161;ba...
+</I>&gt;<i> @@ -633,6 +636,11 @@
+</I>&gt;<i>  URL_missing = Az URL hi&#195;&#161;nyzik!
+</I>&gt;<i>
+</I>&gt;<i>  box3 = 3. Keres&#197;&#145;k&#195;&#169;rd&#195;&#169;sek kezel&#195;&#169;se
+</I>&gt;<i> +
+</I>&gt;<i> +#ADDED BY Martin Schmidt
+</I>&gt;<i> +manage_queries= Keres&#197;&#145;k&#195;&#169;rd&#195;&#169;sek kezel&#195;&#169;se
+</I>&gt;<i> +combine=Combine one or more criterias to perform an advanced search on
+</I>&gt;<i> programmes
+</I>&gt;<i> +
+</I>&gt;<i>  load = Bet&#195;&#182;lt&#195;&#169;s
+</I>&gt;<i>  default = Legyen alap&#195;&#169;rtelmezett
+</I>&gt;<i>  deleteq = T&#195;&#182;rl&#195;&#169;s
+</I>&gt;<i> @@ -879,6 +887,7 @@
+</I>&gt;<i>  format = Form&#195;&#161;tum
+</I>&gt;<i>  mime_type = MIME t&#195;&#173;pus
+</I>&gt;<i>  url = URL
+</I>&gt;<i> +
+</I>&gt;<i>  actions = Utas&#195;&#173;t&#195;&#161;sok
+</I>&gt;<i>  public = Nyilv&#195;&#161;nos
+</I>&gt;<i>  add_link = &#195;&#154;j ugr&#195;&#179;pont hozz&#195;&#161;ad&#195;&#161;sa
+</I>&gt;<i> @@ -886,7 +895,10 @@
+</I>&gt;<i>  change = M&#195;&#179;dos&#195;&#173;t&#195;&#161;s
+</I>&gt;<i>  delete = T&#195;&#182;rl&#195;&#169;s
+</I>&gt;<i>  change_caption = Le&#195;&#173;r&#195;&#161;s m&#195;&#179;dos&#195;&#173;t&#195;&#161;sa
+</I>&gt;<i> +
+</I>&gt;<i> +#to_translate#
+</I>&gt;<i>  add_content = M&#197;&#177;sor hanganyag&#195;&#161;nak felt&#195;&#182;lt&#195;&#169;se m&#195;&#161;s form&#195;&#161;tumban
+</I>&gt;<i> +
+</I>&gt;<i>  add_files = &#195;&#154;j f&#195;&#161;jl t&#195;&#161;rs&#195;&#173;t&#195;&#161;sa
+</I>&gt;<i>  missing = hi&#195;&#161;nyzik
+</I>&gt;<i>  convert = Gener&#195;&#161;ld a t&#195;&#182;bbib&#197;&#145;l
+</I>&gt;<i> @@ -897,10 +909,14 @@
+</I>&gt;<i>
+</I>&gt;<i>  no_files = Nincsenek f&#195;&#161;jlok
+</I>&gt;<i>  no_user_files = Nincsenek felt&#195;&#182;lt&#195;&#182;tt f&#195;&#161;jlok
+</I>&gt;<i> +
+</I>&gt;<i> +#to_translate#
+</I>&gt;<i>  Prg_files = A m&#197;&#177;sor hanganyaga
+</I>&gt;<i> +
+</I>&gt;<i>  Files = Kapcsolt f&#195;&#161;jlok
+</I>&gt;<i>  audio_file_list = Hangf&#195;&#161;jlok
+</I>&gt;<i>  other_file_list = Egy&#195;&#169;b f&#195;&#161;jlok
+</I>&gt;<i> +
+</I>&gt;<i>  Add_to_audio = &lt;&lt;&lt; Add to audio files &lt;&lt;&lt; (*) ??
+</I>&gt;<i>  Add_to_other = &lt;&lt;&lt; Add to other files &lt;&lt;&lt; (*) ??
+</I>&gt;<i>  Add_as_icon = &lt;&lt;&lt; Set as icon &lt;&lt;&lt; (*) ??
+</I>&gt;<i>
+</I>&gt;<i> Added: node/branches/video_test/code/getid3-1.7.5/changelog.txt
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- node/branches/video_test/code/getid3-1.7.5/changelog.txt	2006-05-04
+</I>&gt;<i> 11:04:36 UTC (rev 557)
+</I>&gt;<i> +++ node/branches/video_test/code/getid3-1.7.5/changelog.txt	2006-05-04
+</I>&gt;<i> 14:34:58 UTC (rev 558)
+</I>&gt;<i> @@ -0,0 +1,2436 @@
+</I>&gt;<i> +/////////////////////////////////////////////////////////////////
+</I>&gt;<i> +/// getID3() by James Heinrich &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">info at getid3.org</A>&gt;               //
+</I>&gt;<i> +//  available at <A HREF="http://getid3.sourceforge.net">http://getid3.sourceforge.net</A>                 //
+</I>&gt;<i> +//            or <A HREF="http://www.getid3.org">http://www.getid3.org</A>                         //
+</I>&gt;<i> +/////////////////////////////////////////////////////////////////
+</I>&gt;<i> +//                                                             //
+</I>&gt;<i> +// changelog.txt - part of getID3()                            //
+</I>&gt;<i> +// See readme.txt for more details                             //
+</I>&gt;<i> +//                                                            ///
+</I>&gt;<i> +/////////////////////////////////////////////////////////////////
+</I>&gt;<i> +
+</I>&gt;<i> +        &#187;  denotes a major feature addition/change
+</I>&gt;<i> +        &#164;  denotes a change in the returned structure
+</I>&gt;<i> +* Bugfix:  denotes a fixed bug
+</I>&gt;<i> +
+</I>&gt;<i> +Version History
+</I>&gt;<i> +===============
+</I>&gt;<i> +
+</I>&gt;<i> +1.7.5: [2005-12-29] James Heinrich
+</I>&gt;<i> +    &#187; Added FLV (FLash Video) support -- new file:
+</I>&gt;<i> +      module.audio-video.flv.php
+</I>&gt;<i> +      (thanks Seth Kaufman &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">seth at whirl-i-gig.com</A>&gt; for code)
+</I>&gt;<i> +    &#187; Real tags can now be written (previous Real tag writing
+</I>&gt;<i> +      code was not supposed to be in public releases, as it
+</I>&gt;<i> +      was not complete)
+</I>&gt;<i> +    &#187; GETID3_HELPERAPPSDIR now autodetected under Windows
+</I>&gt;<i> +    &#164; ASF lyrics now returned under [comments][lyrics]
+</I>&gt;<i> +    * Bugfix: removed &quot;--lowpass xxxxx&quot; info from guessed
+</I>&gt;<i> +      LAME presets when source frequency &lt;= 32kHz
+</I>&gt;<i> +    * Bugfix: ID3v2 extended header errors
+</I>&gt;<i> +    * Bugfix: missing ob_end_clean() in write.id3v2.php
+</I>&gt;<i> +      (thanks rasher&#216;gmail*com)
+</I>&gt;<i> +
+</I>&gt;<i> +1.7.4: [2005-05-04] James Heinrich
+</I>&gt;<i> +    &#164; Added ['quicktime']['hinting'] key (boolean)
+</I>&gt;<i> +      (thanks jon&#216;webignition*net)
+</I>&gt;<i> +    * Bugfix: major UTF-8 to UTF-16/ISO-8859-1 conversion
+</I>&gt;<i> +      bug (empty string returned) when using iconv_fallback
+</I>&gt;<i> +      (thanks chris&#216;fmgp*com)
+</I>&gt;<i> +    * Bugfix: Missing 'lossless' key in RIFF-WAV
+</I>&gt;<i> +      (thanks bobbfwed&#216;comcast*net)
+</I>&gt;<i> +
+</I>&gt;<i> +1.7.3: [2005-04-22] James Heinrich
+</I>&gt;<i> +    &#187; Added TAR support -- new file: module.archive.tar.php
+</I>&gt;<i> +      (thanks Mike Mozolin &lt;teddybear&#216;mail*ru&gt; for code!)
+</I>&gt;<i> +    &#187; Added GZIP support -- new file: module.archive.gzip.php
+</I>&gt;<i> +      (thanks Mike Mozolin &lt;teddybear&#216;mail*ru&gt; for code!)
+</I>&gt;<i> +    * Bugfix: demo.browse.php now displays embedded images
+</I>&gt;<i> +      internally instead of passing local filename as IMG
+</I>&gt;<i> +      SRC (should allow demo.browse.php to correctly show
+</I>&gt;<i> +      embedded images over a network)
+</I>&gt;<i> +      (thanks patpowerman&#216;hotmail*com)
+</I>&gt;<i> +    * Bugfix: minor UTF-8 display issues in demo.browse.php
+</I>&gt;<i> +    * Bugfix: demo.browse.php now works even if the evil
+</I>&gt;<i> +      setting magic_quotes_gpc is turned on
+</I>&gt;<i> +      (thanks patpowerman&#216;hotmail*com)
+</I>&gt;<i> +    * Bugfix: incorrect MIDI playtime for some files
+</I>&gt;<i> +      (thanks joel&#216;oneporpoise*com)
+</I>&gt;<i> +    * Bugfix: 'url_source' typo in module.tag.id3v2.php
+</I>&gt;<i> +      (thanks richardlynch&#216;users*sourceforge*net)
+</I>&gt;<i> +    * Bugfix: Quicktime 'mvhd' matrix values were wrong
+</I>&gt;<i> +      (thanks web&#216;bobbymac*net)
+</I>&gt;<i> +    &#164; ID3v2 now returns xx/yy for ['track'] (if
+</I>&gt;<i> +      available), with xx in ['tracknum'] and yy in
+</I>&gt;<i> +      ['totaltracks']. Previously ['tracknum'] was not
+</I>&gt;<i> +      available and ['track'] had only xx.
+</I>&gt;<i> +    Bugfixes and improvements to /demo/demo.mysql.php:
+</I>&gt;<i> +      - remix/version parsed from tags and stored in
+</I>&gt;<i> +        database, can be used when renaming files
+</I>&gt;<i> +      - track number can be used for renaming files
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +1.7.2: [2004-10-18] Allan Hansen
+</I>&gt;<i> +    &#187; Added support for WavPack v4.0+
+</I>&gt;<i> +      (thanks ah&#216;artemis*dk)
+</I>&gt;<i> +    &#187; Removed code for parsing EXE files
+</I>&gt;<i> +      (thanks ah&#216;artemis*dk)
+</I>&gt;<i> +      Removed file: module.misc.exe.php
+</I>&gt;<i> +    * Bugfix: Large ID3v2 tags inside ASF not parsed
+</I>&gt;<i> +      properly under PHP5.
+</I>&gt;<i> +    * Bugfix: Certain Wavpack3 files failed under PHP5 due
+</I>&gt;<i> +      to new undocumented tmpfile() limit (same problem as
+</I>&gt;<i> +      above).
+</I>&gt;<i> +    * Bugfix: New iTunes crashes PHP - temp fix - no tags
+</I>&gt;<i> +      on those files.
+</I>&gt;<i> +    * Bugfix: ['nsv']['NSVs']['framerate_index'] might be
+</I>&gt;<i> +      wrong  (thanks ah&#216;artemis*dk)
+</I>&gt;<i> +    * Bugfix: transparent color was wrong from truecolor
+</I>&gt;<i> +      PNG  (thanks ah&#216;artemis*dk)
+</I>&gt;<i> +    * Bugfix: Changed MPC SV7 header size from 30 to 28,
+</I>&gt;<i> +      this will change hash values for MPC files
+</I>&gt;<i> +      (thanks ah&#216;artemis*dk)
+</I>&gt;<i> +    * Bugfix: Changed MPC SV4-6 header size from 28 to 8,
+</I>&gt;<i> +      this will change hash values for MPC files
+</I>&gt;<i> +      (thanks ah&#216;artemis*dk)
+</I>&gt;<i> +    &#164; Trim/unset wavpack encoder_options to match 2.0.0b2
+</I>&gt;<i> +      output.
+</I>&gt;<i> +    &#164; Commented-out unknown/unused values in NSV and ISO
+</I>&gt;<i> +      modules  (thanks ah&#216;artemis*dk)
+</I>&gt;<i> +
+</I>&gt;<i> +
+</I>&gt;<i> +1.7.1b1: [July-26-2004] James Heinrich
+</I>&gt;<i> +    &#187; Added support for Apple Lossless Audio Codec
+</I>&gt;<i> +    &#187; Added support for RealAudio Lossless
+</I>&gt;<i> +    &#187; Added support for TTA v3
+</I>&gt;<i> +    &#187; Added support for TIFF
+</I>&gt;<i> +      New file: /getid3/module.graphic.tiff.php
+</I>&gt;<i> +    &#187; Modified iconv_fallback to work with UTF-8, UTF-16, UTF-16LE,
+</I>&gt;<i> +      UTF-16BE and ISO-8859-1 even if iconv() and/or XML support is
+</I>&gt;<i> +      not available. This means that iconv() is no longer required
+</I>&gt;<i> +      for most users of getID3()
+</I>&gt;<i> +      (thanks Jeremia, khlee&#216;bitpass*com)
+</I>&gt;<i> +    &#187; Added support for Monkey's Audio v3.98+ (thanks ah&#216;artemis*dk)
+</I>&gt;<i> +    &#187; Included new demo showing most-basic getID3() usage
+</I>&gt;<i> +      New file: /demos/demo.basic.php
+</I>&gt;<i> +    * Bugfix: LAME3.94+ presets cached incorrectly if multiple files
+</I>&gt;<i> +      are scanned in one batch and first file is LAME3.93 or earlier
+</I>&gt;<i> +      (thanks enoyand&#216;yahoo*com)
+</I>&gt;<i> +    * Bugfix: Added warning if compressed ID3v2 frame decompression
+</I>&gt;<i> +      fails. (thanks Mike Billings)
+</I>&gt;<i> +    * Bugfix: Assorted small fixes to ensure compatability with PHP5
+</I>&gt;<i> +    * Bugfix: ID3v1 genre &quot;Blues&quot; could not be written
+</I>&gt;<i> +      (thanks Jeremia)
+</I>&gt;<i> +    * Bugfix: ['bitrate_mode'] typo in module.audio-video.real.php
+</I>&gt;<i> +      (thanks asukakenji&#216;users*sourceforge*net)
+</I>&gt;<i> +    * Bugfix: ['zip']['files'] is now populated with filenames even
+</I>&gt;<i> +      if End Of Central Directory couldn't be parsed
+</I>&gt;<i> +    * Bugfix: ['audio']['lossless'] was incorrect for FLAC
+</I>&gt;<i> +      (thanks WaldoMonster)
+</I>&gt;<i> +    * Bugfix: MD5 File was incorrect in directory browse mode for
+</I>&gt;<i> +      /demo/getid3.browse.php
+</I>&gt;<i> +    * Bugfix: PHP v5 compatability changes (float array keys, fread()
+</I>&gt;<i> +      calls with zero data length)
+</I>&gt;<i> +      (thanks getid3&#216;jsc*pp*ru)
+</I>&gt;<i> +    * Bugfix: was dying if on compressed ID3v2 frames if
+</I>&gt;<i> +      gzuncompress() function was unavailable
+</I>&gt;<i> +    * Bugfix: ['vqf']['COMM'] was always empty
+</I>&gt;<i> +    * Bugfix: MIDI playtime was missing for single-track MIDI files
+</I>&gt;<i> +    * Bugfix: removed
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000181.html">[Sotf-general] r558 - in node/branches/video_test: code code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share code/templates www www/static
+</A></li>
+	<LI>Next message: <A HREF="000183.html">[Sotf-general] r558 - in node/branches/video_test: code     code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos      code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share      code/templates www www/static
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#182">[ date ]</a>
+              <a href="thread.html#182">[ thread ]</a>
+              <a href="subject.html#182">[ subject ]</a>
+              <a href="author.html#182">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

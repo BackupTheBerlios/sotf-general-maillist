@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r541 - node/trunk/www
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r541%20-%20node/trunk/www&In-Reply-To=%3C200602151527.k1FFRxsI002207%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000100.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r541 - node/trunk/www</H1>
+    <B>wreutz at BerliOS</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r541%20-%20node/trunk/www&In-Reply-To=%3C200602151527.k1FFRxsI002207%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r541 - node/trunk/www">wreutz at berlios.de
+       </A><BR>
+    <I>Wed Feb 15 16:27:59 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000100.html">[Sotf-general] podzinger!!
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#98">[ date ]</a>
+              <a href="thread.html#98">[ thread ]</a>
+              <a href="subject.html#98">[ subject ]</a>
+              <a href="author.html#98">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wreutz
+Date: 2006-02-15 16:27:56 +0100 (Wed, 15 Feb 2006)
+New Revision: 541
+
+Modified:
+   node/trunk/www/get.php
+Log:
+andras: fixed bug in get.php causing audiofiles having wrong length
+
+Modified: node/trunk/www/get.php
+===================================================================
+--- node/trunk/www/get.php	2005-12-06 23:17:43 UTC (rev 540)
++++ node/trunk/www/get.php	2006-02-15 15:27:56 UTC (rev 541)
+@@ -3,7 +3,7 @@
+ /*  
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
++ * Authors: Andr&#239;&#191;&#189;s Micsik, M&#239;&#191;&#189;t&#239;&#191;&#189; Pataki, Tam&#239;&#191;&#189;s D&#239;&#191;&#189;ri 
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  */
+ 
+@@ -72,7 +72,9 @@
+ 		}
+ 	 }
+     $audioFiles[$i] =  array_merge($audioFiles[$i], sotf_AudioFile::decodeFormatFilename($audioFiles[$i]['format']));
+-	 $audioFiles[$i]['playtime_string'] = strftime('%M:%S', $audioFiles[$i]['play_length']);
++	$d = getdate($audioFiles[$i]['play_length']);
++	$d['hours']--;
++	$audioFiles[$i]['playtime_string'] = ($d['hours'] ? $d['hours'].':' : '') . sprintf('%02d',$d['minutes']) . ':' . sprintf('%02d',$d['seconds']);
+   }
+   $smarty-&gt;assign('AUDIO_FILES', $audioFiles);
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000100.html">[Sotf-general] podzinger!!
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#98">[ date ]</a>
+              <a href="thread.html#98">[ thread ]</a>
+              <a href="subject.html#98">[ subject ]</a>
+              <a href="author.html#98">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

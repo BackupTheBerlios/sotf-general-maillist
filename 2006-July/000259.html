@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] exit signal File size limit exceeded (25)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20exit%20signal%20File%20size%20limit%20exceeded%20%2825%29&In-Reply-To=%3C44CB6CFF.3030005%40no-na.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000257.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] exit signal File size limit exceeded (25)</H1>
+    <B>Herbert Gnauer</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20exit%20signal%20File%20size%20limit%20exceeded%20%2825%29&In-Reply-To=%3C44CB6CFF.3030005%40no-na.net%3E"
+       TITLE="[Sotf-general] exit signal File size limit exceeded (25)">hg at no-na.net
+       </A><BR>
+    <I>Sat Jul 29 16:13:19 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000257.html">[Sotf-general] GUI Redesign | Problem with subtopics listing	(wrong	total numbers)
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#259">[ date ]</a>
+              <a href="thread.html#259">[ thread ]</a>
+              <a href="subject.html#259">[ subject ]</a>
+              <a href="author.html#259">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>today our node <A HREF="http://sendungsarchiv.o94.at/">http://sendungsarchiv.o94.at/</A> surprisingly returned empty 
+pages on any requests. as a result of some investigations if found the 
+problem - the /var/www/node/logs/log swelled &gt;2gb.
+
+to avoid that for future i recommend use of logrotate, following 
+configuration should fit (feel free to suggest better solutions):
+
+/var/www/node/logs/log {
+         weekly
+         rotate 20
+         copytruncate
+         delaycompress
+         compress
+         notifempty
+         create 644 www-data www-data
+}
+
+
+some debug info - on standard log-level concerned syslog entry was:
+
+LOG:  unexpected EOF on client connection
+
+on increased debug-level (syslog):
+
+DEBUG:  00000: CommitTransactionCommand
+LOCATION:  finish_xact_command, postgres.c:1756
+STATEMENT:  SELECT name, value FROM sotf_vars
+LOG:  08P01: unexpected EOF on client connection
+LOCATION:  SocketBackend, postgres.c:281
+DEBUG:  00000: proc_exit(0)
+LOCATION:  proc_exit, ipc.c:95
+DEBUG:  00000: shmem_exit(0)
+LOCATION:  shmem_exit, ipc.c:126
+DEBUG:  00000: exit(0)
+LOCATION:  proc_exit, ipc.c:113
+DEBUG:  00000: reaping dead processes
+LOCATION:  reaper, postmaster.c:1819
+DEBUG:  00000: child process (PID 21226) exited with exit code 0
+LOCATION:  LogChildExit, postmaster.c:2078
+
+most important info was found at http error.log:
+
+DEBUG:  InitPostgres
+[Sat Jul 29 14:58:19 2006] [notice] child pid 21297 exit signal File 
+size limit exceeded (25)
+
+the carefully worded &amp; rescuing hint was found at:
+<A HREF="http://www.faqts.com/knowledge_base/view.phtml/aid/10067">http://www.faqts.com/knowledge_base/view.phtml/aid/10067</A>
+
+best
+herbert
+
+
+
+-- 
+________________________________________________
+debugging is finished when the last user is dead
+<A HREF="http://no-na.net">http://no-na.net</A>               wer will kann mal
+
+public pgp key              <A HREF="http://no-na.net/pgp">http://no-na.net/pgp</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000257.html">[Sotf-general] GUI Redesign | Problem with subtopics listing	(wrong	total numbers)
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#259">[ date ]</a>
+              <a href="thread.html#259">[ thread ]</a>
+              <a href="subject.html#259">[ subject ]</a>
+              <a href="author.html#259">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

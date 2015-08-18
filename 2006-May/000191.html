@@ -1,0 +1,618 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r564 - in node/branches/video_test: code/classes code/configs code/templates www
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r564%20-%20in%20node/branches/video_test%3A%20code/classes%20code/configs%20code/templates%20www&In-Reply-To=%3C200605091204.k49C4A1i016393%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000190.html">
+   <LINK REL="Next"  HREF="000192.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r564 - in node/branches/video_test: code/classes code/configs code/templates www</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r564%20-%20in%20node/branches/video_test%3A%20code/classes%20code/configs%20code/templates%20www&In-Reply-To=%3C200605091204.k49C4A1i016393%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r564 - in node/branches/video_test: code/classes code/configs code/templates www">buddhafly at berlios.de
+       </A><BR>
+    <I>Tue May  9 14:04:10 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000190.html">[Sotf-general] www.streamonthefly.org redirect
+</A></li>
+        <LI>Next message: <A HREF="000192.html">[Sotf-general] r565 - node/branches/video_test/www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#191">[ date ]</a>
+              <a href="thread.html#191">[ thread ]</a>
+              <a href="subject.html#191">[ subject ]</a>
+              <a href="author.html#191">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-05-09 14:03:56 +0200 (Tue, 09 May 2006)
+New Revision: 564
+
+Modified:
+   node/branches/video_test/code/classes/sotf_File.class.php
+   node/branches/video_test/code/classes/sotf_Programme.class.php
+   node/branches/video_test/code/classes/sotf_VideoFile.class.php
+   node/branches/video_test/code/configs/eng.conf
+   node/branches/video_test/code/configs/fra.conf
+   node/branches/video_test/code/configs/ger.conf
+   node/branches/video_test/code/configs/hun.conf
+   node/branches/video_test/code/templates/editFiles.htm
+   node/branches/video_test/code/templates/index.htm
+   node/branches/video_test/www/editFiles.php
+   node/branches/video_test/www/functions.inc.php
+   node/branches/video_test/www/get.php
+   node/branches/video_test/www/index.php
+Log:
+detailed audio/video-stats on index.php
+some cleaning up in the code
+recognition of totally black preview stills
+
+
+Modified: node/branches/video_test/code/classes/sotf_File.class.php
+===================================================================
+--- node/branches/video_test/code/classes/sotf_File.class.php	2006-05-08 11:30:26 UTC (rev 563)
++++ node/branches/video_test/code/classes/sotf_File.class.php	2006-05-09 12:03:56 UTC (rev 564)
+@@ -132,6 +132,10 @@
+ 		return ($this-&gt;type == &quot;video&quot;);
+ 	}
+ 	
++	
++	
++
++	
+ } // end class sotf_File
+ 
+ ?&gt;
+\ No newline at end of file
+
+Modified: node/branches/video_test/code/classes/sotf_Programme.class.php
+===================================================================
+--- node/branches/video_test/code/classes/sotf_Programme.class.php	2006-05-08 11:30:26 UTC (rev 563)
++++ node/branches/video_test/code/classes/sotf_Programme.class.php	2006-05-09 12:03:56 UTC (rev 564)
+@@ -346,9 +346,9 @@
+   }
+ 
+   /** static */
+-  function getFileStats() {
++  function getFileStats($type='sound') { //added parameter by Martin Schmidt
+ 	 global $db;
+-	 return $db-&gt;getRow(&quot;SELECT sum(f.filesize) AS filesize, sum(f.play_length) AS play_length FROM sotf_media_files f LEFT JOIN sotf_programmes p ON f.prog_id=p.id WHERE p.id IS NOT NULL &quot;);
++	 return $db-&gt;getRow(&quot;SELECT sum(f.filesize) AS filesize, sum(f.play_length) AS play_length FROM sotf_media_files f LEFT JOIN sotf_programmes p ON f.prog_id=p.id WHERE p.id IS NOT NULL AND p.type='$type'&quot;);
+   }
+ 
+   function getRefs() {
+@@ -386,10 +386,10 @@
+ 	* @method static countAll
+ 	* @return count of available objects
+   */
+-  function countAll() {
++  function countAll($type='sound') { //added parameter by Martin Schmidt
+ 	 global $db;
+ 
+-	 return $db-&gt;getOne(&quot;SELECT count(*) FROM sotf_programmes WHERE published='t'&quot;);
++	 return $db-&gt;getOne(&quot;SELECT count(*) FROM sotf_programmes WHERE published='t' AND type='$type'&quot;);
+   }
+ 
+   /** static returns programmes owned/edited by current user */
+
+Modified: node/branches/video_test/code/classes/sotf_VideoFile.class.php
+===================================================================
+--- node/branches/video_test/code/classes/sotf_VideoFile.class.php	2006-05-08 11:30:26 UTC (rev 563)
++++ node/branches/video_test/code/classes/sotf_VideoFile.class.php	2006-05-09 12:03:56 UTC (rev 564)
+@@ -172,25 +172,97 @@
+ 	function createStills($file, $length, $id){
+ 	
+ 		global $config;
++
+ 		
+-		//echo $file.&quot;&lt;br&gt;&quot;;
+-		//echo $id.&quot;&lt;br&gt;&quot;;
+-		//echo $dir.&quot;&lt;br&gt;&quot;;
+-		
+ 		$temppath=$config['wwwdir'].&quot;/tmp&quot;;
+ 		
+ 		for($i=1;$i&lt;=5;$i++){
+-			$position = round((($i+($i-1.5))/10)*$length);
++			$position = round((($i+($i-1))/10)*$length);
+ 			$target = $temppath.&quot;/still_&quot;.$id.&quot;_&quot;.$i.&quot;.gif&quot;;
+ 			$cmd = &quot;nohup nice -n 15 &quot;.$config['ffmpeg'].&quot; -i $file -f image2 -img gif -ss $position -t 1 -r 1 -s sqcif -y $target 1&gt;$target.txt 2&gt;&amp;1 &amp;&quot;;
+-			//echo $cmd.&quot;&lt;br&gt;&quot;;
+ 			exec($cmd);
+ 		}
+ 		
+-		//die();
+ 	}
+ 
++	
++	function searchForStill($prg){
++	
++		global $config;
++		
++		$still_found=false;
++		
++		if ($directory = opendir($prg-&gt;getOtherFilesDir())) {
++		   while (false !== ($filename = readdir($directory))) {
++				if(preg_match(&quot;/^still_&quot;.$id.&quot;_[12345]\.gif$/&quot;,$filename)){
++					$still_found=true;
++			   }
++		   }
++		   closedir($directory);
++		}
++		
++		$temppath=$config['wwwdir'].&quot;/tmp/&quot;;
++		
++		if ($tempdir = opendir($temppath)) {
++		   while (false !== ($filename = readdir($tempdir))) {
++				if(preg_match(&quot;/^still_&quot;.$id.&quot;_[12345]\.gif$/&quot;,$filename)){
++					if(!isUnicolorImage($temppath.$filename)){
++						$still_found=true;
++					}
++			   }
++		   }
++		   closedir($tempdir);
++		}
++		
++		return $still_found;
++	}
++	
++	
++	function scanTranscodingQueue($repository, $prg, $checker){
++	
++	global $config;
++	
++	$id=$prg-&gt;get('id');
++	
++	$obj = $repository-&gt;getObject($id);
++	if(!$obj) raiseError(&quot;object does not exist!&quot;);
++	
++	$temppath=$config['wwwdir'].&quot;/tmp/&quot;;
++	$list_changed = false;
++	
++	if ($tempdir = opendir($temppath)) {
++	   while (false !== ($filename = readdir($tempdir))) {
++			if(preg_match(&quot;/^&quot;.$id.&quot;_/&quot;,$filename)){
++				if($checker-&gt;fileOK($temppath.$filename)) {
++					if(is_file($temppath.$filename.&quot;.txt&quot;)) unlink($temppath.$filename.&quot;.txt&quot;);
++					$obj-&gt;setAudio($temppath.$filename);
++					$list_changed=true;
++				}
++			
++			}if(preg_match(&quot;/^still_&quot;.$id.&quot;_[12345]\.gif$/&quot;,$filename)){
++				if(!isUnicolorImage($temppath.$filename)){ 
++					$obj_id=$prg-&gt;setOtherFile($temppath.$filename);
++					$fileInfo = &amp;$repository-&gt;getObject($obj_id);
++					$fileInfo-&gt;set('public_access', 'f');
++					$fileInfo-&gt;update();
++					if(is_file($temppath.$filename.&quot;.txt&quot;)) unlink($temppath.$filename.&quot;.txt&quot;);
+ 
++				}
++				else{
++					if(is_file($temppath.$filename.&quot;.txt&quot;)) unlink($temppath.$filename.&quot;.txt&quot;);
++					unlink($temppath.$filename);
++				}
++				$list_changed=true;
++		   }
++	   }
++	   closedir($tempdir);
++	}
++	
++	return $list_changed;
++	}
++	
++	
++
+ 	/**
+ 
+ 	* Encode format to a filename.
+
+Modified: node/branches/video_test/code/configs/eng.conf
+===================================================================
+--- node/branches/video_test/code/configs/eng.conf	2006-05-08 11:30:26 UTC (rev 563)
++++ node/branches/video_test/code/configs/eng.conf	2006-05-09 12:03:56 UTC (rev 564)
+@@ -20,6 +20,9 @@
+ optional = optional
+ Metadata = Metadata
+ 
++#added by Martin Schmidt
++audio = audio
++video = video
+ contact_node_admin = You may contact the node administrator at:
+ 
+ # stream info
+@@ -202,6 +205,11 @@
+ listens_and_downloads = listens and downloads
+ users = registered users
+ 
++#added by Martin Schmidt
++mb_of_audiovideo = MB of content
++hours_of_audiovideo = hours of content
++audiovideoProgs = programmes
++
+ contacts = Contacts
+ node_admin = Node operator
+ contacts_text = &lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://www.streamonthefly.org">http://www.streamonthefly.org</A>&quot;&gt;StreamOnTheFly project&lt;/a&gt;&lt;br&gt;&lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>&quot;&gt;MTA SZTAKI DSD&lt;/a&gt;&lt;br&gt;&lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://dict.sztaki.hu">http://dict.sztaki.hu</A>&quot;&gt;dict.sztaki.hu&lt;/a&gt;
+
+Modified: node/branches/video_test/code/configs/fra.conf
+===================================================================
+--- node/branches/video_test/code/configs/fra.conf	2006-05-08 11:30:26 UTC (rev 563)
++++ node/branches/video_test/code/configs/fra.conf	2006-05-09 12:03:56 UTC (rev 564)
+@@ -20,6 +20,9 @@
+ optional = facultatif
+ Metadata = m&#233;ta-donn&#233;es
+ 
++#added by Martin Schmidt
++audio = audio
++video = video
+ contact_node_admin = Vous pouvez contacter l'administrateur de noeud &#224;:
+ 
+ # stream info
+@@ -203,6 +206,11 @@
+ listens_and_downloads = &#233;coutez et t&#233;l&#233;chargements
+ users = utilisateurs enregistr&#233;s
+ 
++#added by Martin Schmidt
++mb_of_audiovideo = MB of content
++hours_of_audiovideo = hours of content
++audiovideoProgs = programmes
++
+ contacts = contacts
+ node_admin = op&#233;rateur de noeud
+ contacts_text = &lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://www.streamonthefly.org">http://www.streamonthefly.org</A>&quot;&gt;StreamOnTheFly project&lt;/a&gt;&lt;br&gt;&lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>&quot;&gt;MTA SZTAKI DSD&lt;/a&gt;&lt;br&gt;&lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://dict.sztaki.hu/franco-hongrois">http://dict.sztaki.hu/franco-hongrois</A>&quot;&gt;SZTAKI Dictionnaire&lt;/a&gt;
+
+Modified: node/branches/video_test/code/configs/ger.conf
+===================================================================
+--- node/branches/video_test/code/configs/ger.conf	2006-05-08 11:30:26 UTC (rev 563)
++++ node/branches/video_test/code/configs/ger.conf	2006-05-09 12:03:56 UTC (rev 564)
+@@ -20,6 +20,9 @@
+ optional = optional
+ Metadata = Metadaten
+ 
++#added by Martin Schmidt
++audio = audio
++video = video
+ contact_node_admin = Node administrator:
+ 
+ # stream info
+@@ -202,6 +205,12 @@
+ listens_and_downloads = H&#246;rer und Downloads
+ users = Registrierte User
+ 
++#added by Martin Schmidt
++mb_of_audiovideo = MB of content
++hours_of_audiovideo = hours of content
++audiovideoProgs = programmes
++
++
+ contacts = Kontakt
+ node_admin = Node operator
+ contacts_text = &lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://www.streamonthefly.org">http://www.streamonthefly.org</A>&quot;&gt;StreamOnTheFly Projekt&lt;/a&gt;&lt;br&gt;&lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>&quot;&gt;SZTAKI DSD&lt;/a&gt;&lt;br&gt;&lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://dict.sztaki.hu/deutsch-ungarisch">http://dict.sztaki.hu/deutsch-ungarisch</A>&quot;&gt;W&#246;rterbuch&lt;/a&gt;
+
+Modified: node/branches/video_test/code/configs/hun.conf
+===================================================================
+--- node/branches/video_test/code/configs/hun.conf	2006-05-08 11:30:26 UTC (rev 563)
++++ node/branches/video_test/code/configs/hun.conf	2006-05-09 12:03:56 UTC (rev 564)
+@@ -20,6 +20,10 @@
+ optional = opcion&#225;lis
+ Metadata = Metaadatok
+ 
++#added by Martin Schmidt
++audio = audio
++video = video
++
+ contact_node_admin = A csom&#243;pont rendszergazd&#225;ja ezen a c&#237;men &#233;rhet&#337; el:
+ 
+ # stream info
+@@ -196,6 +200,12 @@
+ listens_and_downloads = let&#246;lt&#233;s vagy meghallgat&#225;s
+ users = regisztr&#225;lt felhaszn&#225;l&#243;
+ 
++#added by Martin Schmidt
++mb_of_audiovideo = MB of content
++hours_of_audiovideo = hours of content
++audiovideoProgs = programmes
++
++
+ contacts = Kapcsolat
+ node_admin = Rendszergazda
+ contacts_text = &lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://www.streamonthefly.org">http://www.streamonthefly.org</A>&quot;&gt;StreamOnTheFly projekt&lt;/a&gt;&lt;br&gt;&lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>&quot;&gt;MTA SZTAKI DSD&lt;/a&gt;&lt;br&gt;&lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://szotar.sztaki.hu">http://szotar.sztaki.hu</A>&quot;&gt;szotar.sztaki.hu&lt;/a&gt;
+
+Modified: node/branches/video_test/code/templates/editFiles.htm
+===================================================================
+--- node/branches/video_test/code/templates/editFiles.htm	2006-05-08 11:30:26 UTC (rev 563)
++++ node/branches/video_test/code/templates/editFiles.htm	2006-05-09 12:03:56 UTC (rev 564)
+@@ -123,11 +123,11 @@
+                  &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#add_content#}&quot; onClick=&quot;popup('addFiles.php?main=1&amp;prgid={$PRG_ID}','AddFiles',500,500,true)&quot; /&gt;
+               &lt;/td&gt;
+               &lt;td colspan=&quot;8&quot; align=&quot;right&quot;&gt;
+-			  {if !$CONVERTING}
+-                {if $MAIN_AUDIO_COUNT gt 0 and $MISSING and $PRG_DATA.type!='video'}
++			  {if !$CONVERTING and $MISSING and $MAIN_AUDIO_COUNT gt 0}
++                {if $PRG_DATA.type!='video'}
+                    &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b2&quot; value=&quot;{#convert_all#}&quot; onClick=&quot;window.open('convert.php?id={$PRG_ID}&amp;all=1','convert_progress','menubar=no, status=no, toolbar=no, width=350, height=600')&quot; /&gt;
+                 
+-				{else if $MAIN_AUDIO_COUNT gt 0 and $MISSING and $PRG_DATA.type=='video'}
++				{else if $PRG_DATA.type=='video'}
+ 					&lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b2&quot; value=&quot;{#convert_all#}&quot; onClick=&quot;javascript:document.location.href='editFiles.php?id={$PRG_ID}&amp;convertall=1&amp;videoconversion=1'&quot; /&gt;&lt;br&gt;
+ 				{/if}
+ 				
+
+Modified: node/branches/video_test/code/templates/index.htm
+===================================================================
+--- node/branches/video_test/code/templates/index.htm	2006-05-08 11:30:26 UTC (rev 563)
++++ node/branches/video_test/code/templates/index.htm	2006-05-09 12:03:56 UTC (rev 564)
+@@ -177,16 +177,22 @@
+                     {if $numNodes gt 1}{$numNodes} {#nodes#}&lt;br&gt;{/if}
+ 
+                       {$numStations} {#stations#}
+-
++                      &lt;br&gt;{$numAllProgs} {#audiovideoProgs#} ({$numAudioProgs} {#audio#}/{$numVideoProgs} {#video#})
++                      &lt;br&gt;{$allFiles.size_mb} {#mb_of_audiovideo#} ({$audioFiles.size_mb} {#audio#}/{$videoFiles.size_mb} {#video#})
++                      &lt;br&gt;{$allFiles.length_hour} {#hours_of_audiovideo#} ({$audioFiles.length_hour} {#audio#}/{$videoFiles.length_hour} {#video#})
++					  
++                      &lt;br&gt;{$access.l_and_d} {#listens_and_downloads#}
++                      &lt;br&gt;{$numUsers} {#users#}
++					  
++					  {*
++					  {if $numNodes gt 1}{$numNodes} {#nodes#}&lt;br&gt;{/if}
++                      {$numStations} {#stations#}
+                       &lt;br&gt;{$numProgs} {#progs#}
+-
+                       &lt;br&gt;{$files.size_mb} {#mb_of_audio#}
+-
+                       &lt;br&gt;{$files.length_hour} {#hours_of_audio#}
+-
+                       &lt;br&gt;{$access.l_and_d} {#listens_and_downloads#}
+-
+                       &lt;br&gt;{$numUsers} {#users#}
++					  *}
+ 
+                   &lt;/td&gt;
+ 
+
+Modified: node/branches/video_test/www/editFiles.php
+===================================================================
+--- node/branches/video_test/www/editFiles.php	2006-05-08 11:30:26 UTC (rev 563)
++++ node/branches/video_test/www/editFiles.php	2006-05-09 12:03:56 UTC (rev 564)
+@@ -17,6 +17,12 @@
+ $convertindex=sotf_Utils::getParameter('convertindex');
+ $createstills=sotf_Utils::getParameter('createstills');
+ 
++
++if(!$prg-&gt;isLocal()) {
++  raiseError(&quot;You can only edit programmes locally!&quot;);
++}
++
++
+ if($new) {
+   $smarty-&gt;assign(&quot;PAGETITLE&quot;, $page-&gt;getlocalized(&quot;New_prog_step1&quot;));
+ } else {
+@@ -123,30 +129,9 @@
+ 
+ 
+ 
+-
+-
+ if($video){
+-	$still_found=false;
+-	
+-	if ($directory = opendir($prg-&gt;getOtherFilesDir())) {
+-	   while (false !== ($filename = readdir($directory))) {
+-			if(preg_match(&quot;/^still_&quot;.$id.&quot;_[12345]\.gif$/&quot;,$filename)){
+-				$still_found=true;
+-		   }
+-	   }
+-	   closedir($directory);
+-	}
+-	
+-	if ($tempdir = opendir($config['wwwdir'].&quot;/tmp&quot;)) {
+-	   while (false !== ($filename = readdir($tempdir))) {
+-			if(preg_match(&quot;/^still_&quot;.$id.&quot;_[12345]\.gif$/&quot;,$filename)){
+-				$still_found=true;
+-		   }
+-	   }
+-	   closedir($tempdir);
+-	}
+-	
+-	if(!$still_found &amp;&amp; $createstills) {
++	$still_found=sotf_VideoFile::searchForStill($prg);
++	if (!$still_found &amp;&amp; $createstills){
+ 		sotf_VideoFile::createStills($files[0]-&gt;path, $files[0]-&gt;duration, $id);
+ 	}
+ }
+@@ -164,33 +149,9 @@
+ 
+ //check for recently converted files or transcoding in progress
+ if($video &amp;&amp; $prgAudiolist-&gt;count()){
+-	$temppath=$config['wwwdir'].&quot;/tmp/&quot;;
+-	$obj = $repository-&gt;getObject($id);
+-	if(!$obj) raiseError(&quot;object does not exist!&quot;);
+-	
+-	$list_changed=false;
+-	
+-	if ($tempdir = opendir($config['wwwdir'].&quot;/tmp&quot;)) {
+-	   while (false !== ($filename = readdir($tempdir))) {
+-			if(preg_match(&quot;/^&quot;.$id.&quot;_/&quot;,$filename)){
+-				if($checker-&gt;fileOK($temppath.$filename)) {
+-					if(is_file($temppath.$filename.&quot;.txt&quot;)) unlink($temppath.$filename.&quot;.txt&quot;);
+-					$obj-&gt;setAudio($temppath.$filename);
+-					$list_changed=true;
+-				}
+-			
+-			}if(preg_match(&quot;/^still_&quot;.$id.&quot;_[12345]\.gif$/&quot;,$filename)){
+-				$obj_id=$prg-&gt;setOtherFile($temppath.$filename);
+-				//$still=new sotf_NodeObject('sotf_other_files', $obj_id);
+-					$fileInfo = &amp;$repository-&gt;getObject($obj_id);
+-					$fileInfo-&gt;set('public_access', 'f');
+-					$fileInfo-&gt;update();
+-				$list_changed=true;
+-		   }
+-	   }
+-	   closedir($tempdir);
+-	}
+-	
++
++	$list_changed=sotf_VideoFile::scanTranscodingQueue($repository, $prg, $checker);
++		
+ 	if($list_changed) {
+ 	  $page-&gt;redirectSelf();
+ 	  exit;
+
+Modified: node/branches/video_test/www/functions.inc.php
+===================================================================
+--- node/branches/video_test/www/functions.inc.php	2006-05-08 11:30:26 UTC (rev 563)
++++ node/branches/video_test/www/functions.inc.php	2006-05-09 12:03:56 UTC (rev 564)
+@@ -342,4 +342,22 @@
+ }
+ //----------------------------------------------------------------------
+ 
++
++//ADDED BY Martin Schmidt
++
++  function isUnicolorImage($file){
++  		global $config;
++		$isOneColor = false;
++		$cmd = $config['magickDir'] . &quot;/identify -verbose $file 2&gt;&amp;1 &amp;&quot;;	
++		debug(&quot;check unicolor command&quot;, $cmd);
++		
++		$fp = popen($cmd, 'r');
++        while(!feof($fp))
++          {
++		  	$output = fread($fp, 2096);
++			if (stristr($output, 'Colors: 1 ')) $isOneColor = true;
++          }
++        pclose($fp);
++        return $isOneColor;
++  }
+ ?&gt;
+\ No newline at end of file
+
+Modified: node/branches/video_test/www/get.php
+===================================================================
+--- node/branches/video_test/www/get.php	2006-05-08 11:30:26 UTC (rev 563)
++++ node/branches/video_test/www/get.php	2006-05-09 12:03:56 UTC (rev 564)
+@@ -68,28 +68,8 @@
+   $checker = &amp; new sotf_ContentCheck($prgAudiolist); //todo $prgAudioList MEANT CONTENT
+   $checker = $checker-&gt;selectType();
+ 
+-	$temppath=$config['wwwdir'].&quot;/tmp/&quot;;
+-	
+-	if ($tempdir = opendir($config['wwwdir'].&quot;/tmp&quot;)) {
+-	   while (false !== ($filename = readdir($tempdir))) {
+-	   		if(preg_match(&quot;/&quot;.$id.&quot;_/&quot;,$filename)){
+-				if(preg_match(&quot;/^&quot;.$id.&quot;_/&quot;,$filename)){
+-					if($checker-&gt;fileOK($temppath.$filename)) {
+-						if(is_file($temppath.$filename.&quot;.txt&quot;)) unlink($temppath.$filename.&quot;.txt&quot;);
+-						$prg-&gt;setAudio($temppath.$filename);
+-					}
+-				
+-				}if(preg_match(&quot;/^still_&quot;.$id.&quot;_[12345]\.gif$/&quot;,$filename)){
+-					$obj_id=$prg-&gt;setOtherFile($temppath.$filename);
+-					if(is_file($temppath.$filename.&quot;.txt&quot;)) unlink($temppath.$filename.&quot;.txt&quot;);
+-					$fileInfo = &amp;$repository-&gt;getObject($obj_id);
+-					$fileInfo-&gt;set('public_access', 'f');
+-					$fileInfo-&gt;update();
+-			   }
+-			}
+-	   }
+-	   closedir($tempdir);
+-	}
++  sotf_VideoFile::scanTranscodingQueue($repository, $prg, $checker);
++
+ }
+ 
+   // content files 
+@@ -136,12 +116,12 @@
+   // other files
+   $otherFiles = $prg-&gt;getAssociatedObjects('sotf_other_files', 'filename');
+   
++  
+   //select stills from other files
+   $stills=array();
+   for($k=count($otherFiles)-1;$k&gt;=0;$k--){
+   	if(preg_match('/^still_'.$id.'_[12345].gif$/', $otherFiles[$k]['filename'])){
+-		array_push($stills, $otherFiles[$k]);
+-		//unset ($otherFiles[$k]);
++			array_push($stills, $otherFiles[$k]);
+ 	}
+   }
+   $stills=array_reverse($stills);
+
+Modified: node/branches/video_test/www/index.php
+===================================================================
+--- node/branches/video_test/www/index.php	2006-05-08 11:30:26 UTC (rev 563)
++++ node/branches/video_test/www/index.php	2006-05-09 12:03:56 UTC (rev 564)
+@@ -21,18 +21,32 @@
+      $data['numNodes']=1;
+ }
+ $data['numStations'] = sotf_Station::countAll();
+-$data['numProgs'] = sotf_Programme::countAll();
+-$data['numProgs'] = sotf_Programme::countAll();
+ 
++$data['numAudioProgs'] = sotf_Programme::countAll('sound'); //MOD BY Martin Schmidt
++$data['numVideoProgs'] = sotf_Programme::countAll('video'); //MOD BY Martin Schmidt
++
++
+ $allStats = sotf_Statistics::networkStats();
+ $allStats['l_and_d'] = $allStats['listens'] + $allStats['downloads'];
+ $data['access'] = $allStats;
+ 
+-$fileStats = sotf_Programme::getFileStats();
+-$fileStats['size_mb'] = sprintf('%d', $fileStats['filesize'] / 1024 /1024);
+-$fileStats['length_hour'] = sprintf('%d', $fileStats['play_length'] / 60 / 60);
+-$data['files'] = $fileStats;
++$audioFileStats = sotf_Programme::getFileStats('sound'); //MOD BY Martin Schmidt
++$audioFileStats['size_mb'] = sprintf('%d', $audioFileStats['filesize'] / 1024 /1024); //MOD BY Martin Schmidt
++$audioFileStats['length_hour'] = sprintf('%d', $audioFileStats['play_length'] / 60 / 60); //MOD BY Martin Schmidt
+ 
++
++//ADDED BY Martin Schmidt
++$videoFileStats = sotf_Programme::getFileStats('video'); 
++$videoFileStats['size_mb'] = sprintf('%d', $videoFileStats['filesize'] / 1024 /1024);
++$videoFileStats['length_hour'] = sprintf('%d', $videoFileStats['play_length'] / 60 / 60);
++/////////////////////////
++
++$data['audioFiles'] = $audioFileStats;
++$data['videoFiles'] = $videoFileStats;
++$data['allFiles']['size_mb'] = $videoFileStats['size_mb']+$audioFileStats['size_mb'];
++$data['allFiles']['length_hour'] = $videoFileStats['length_hour']+$audioFileStats['length_hour'];
++$data['numAllProgs']=$data['numAudioProgs']+$data['numVideoProgs'];
++
+ $data['numUsers'] = sotf_User::countUsers();
+ 
+ $smarty-&gt;assign($data);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000190.html">[Sotf-general] www.streamonthefly.org redirect
+</A></li>
+	<LI>Next message: <A HREF="000192.html">[Sotf-general] r565 - node/branches/video_test/www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#191">[ date ]</a>
+              <a href="thread.html#191">[ thread ]</a>
+              <a href="subject.html#191">[ subject ]</a>
+              <a href="author.html#191">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

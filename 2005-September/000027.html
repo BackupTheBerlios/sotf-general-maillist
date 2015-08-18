@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] [Fwd: Re: still problems]
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2005-September/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20%5BFwd%3A%20Re%3A%20still%20problems%5D&In-Reply-To=%3C43280A48.6010408%40orange.or.at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000024.html">
+   <LINK REL="Next"  HREF="000028.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] [Fwd: Re: still problems]</H1>
+    <B>herbert gnauer</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20%5BFwd%3A%20Re%3A%20still%20problems%5D&In-Reply-To=%3C43280A48.6010408%40orange.or.at%3E"
+       TITLE="[Sotf-general] [Fwd: Re: still problems]">hg at orange.or.at
+       </A><BR>
+    <I>Wed Sep 14 13:32:24 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000024.html">[Sotf-general] CVS converted to SVN
+</A></li>
+        <LI>Next message: <A HREF="000028.html">[Sotf-general] contributor's privacy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#27">[ date ]</a>
+              <a href="thread.html#27">[ thread ]</a>
+              <a href="subject.html#27">[ subject ]</a>
+              <a href="author.html#27">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi node-admins,
+
+we're still working on some trobles with sync, please could you execute 
+the following sql-command:
+
+update sotf_nodes set url='<A HREF="http://sendungsarchiv.o94.at/">http://sendungsarchiv.o94.at/</A>' where 
+node_id='94';
+
+many thanks
+herbert
+
+-------- Original Message --------
+Subject: Re: still problems
+Date: Wed, 14 Sep 2005 13:16:42 +0200
+From: Micsik Andr&#225;s &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">micsik at dsd.sztaki.hu</A>&gt;
+To: Herbert Gnauer &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">hg at orange.or.at</A>&gt;,	roland jankowski 
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">janki at teichenberg.at</A>&gt;
+References: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">4327CFD0.8080101 at dsd.sztaki.hu</A>&gt; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">4327F6F5.6000709 at orange.or.at</A>&gt;
+
+Here is the problem:
+
+when you call the cron.php, the rootUrl is localhost, otherwise correct.
+
+How do you call cron.php? The suggested method is this:
+
+/usr/bin/wget -T 1800 -q -t 1 -O /dev/null 
+<A HREF="http://radio.sztaki.hu/node/cron.php">http://radio.sztaki.hu/node/cron.php</A>
+
+Please don't call it from command line! You see now in the log what is the
+rootUrl detected by PHP.
+
+When you fix this, send a mail that all nodes execute this statement:
+
+update sotf_nodes set url='<A HREF="http://sendungsarchiv.o94.at/">http://sendungsarchiv.o94.at/</A>' where 
+node_id='94';
+
+ONly then will sync start to work...
+
+Andras
+
+Herbert Gnauer wrote:
+&gt;<i> hi,
+</I>&gt;<i> 
+</I>&gt;<i> i've been in the orange chat but i've to leave now. i fear i wont be at 
+</I>&gt;<i> a computer again before evening.
+</I>&gt;<i> 
+</I>&gt;<i> Micsik Andr&#225;s schrieb:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> The problem is that o94 advertises itself as on <A HREF="http://localhost.">http://localhost.</A>
+</I>&gt;&gt;<i> The node URI is checked before each sync and it is rewritten to 
+</I>&gt;&gt;<i> myGetenv('SERVER_NAME') line 56 www/init.inc.php.
+</I>&gt;&gt;<i> So you should insert a line after 56:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> debug(&quot;rootUrl&quot;, $config['rootUrl'] );
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ok, i've inserted the line at requested place.
+</I>&gt;<i> 
+</I>&gt;<i> all the best &amp; thanks for helping us!
+</I>&gt;<i> herbert
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+-- 
+
+P.S.: Ende Oktober 2005 zieht ORANGE 94.0 um. Das neue Quartier befindet 
+sich Ecke Gausssplatz/Klosterneuburgerstrasse, in unmittelbarer N&#228;he des 
+Augartens:
+
+Klosterneuburger Stra&#223;e 1
+A-1200 Wien
+
+--
+
+HERBERT GNAUER
+Systemadministration, IT
+
+ORANGE 94.0
+Verein Freies Radio Wien
+A-1090 Wien, Schubertgasse 10
+
+TEL +43 - 1 319 09 99 - 12
+FAX +43 - 1 319 09 99 - 14
+E-MAIL <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">hg at o94.at</A>
+WEB o94.at
+UKW 94.0
+UPC 92.7 Telekabel
+WAP wap.o94.at
+
+
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000024.html">[Sotf-general] CVS converted to SVN
+</A></li>
+	<LI>Next message: <A HREF="000028.html">[Sotf-general] contributor's privacy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#27">[ date ]</a>
+              <a href="thread.html#27">[ thread ]</a>
+              <a href="subject.html#27">[ subject ]</a>
+              <a href="author.html#27">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

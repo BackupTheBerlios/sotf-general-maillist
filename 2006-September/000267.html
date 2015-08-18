@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] Bugfix for SOTF
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20Bugfix%20for%20SOTF&In-Reply-To=%3C%22H000dbab01c8080e.1158673291.scalix.fh-stpoelten.ac.at%2A%22%40MHS%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000266.html">
+   <LINK REL="Next"  HREF="000270.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] Bugfix for SOTF</H1>
+    <B>Husinsky Matthias</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20Bugfix%20for%20SOTF&In-Reply-To=%3C%22H000dbab01c8080e.1158673291.scalix.fh-stpoelten.ac.at%2A%22%40MHS%3E"
+       TITLE="[Sotf-general] Bugfix for SOTF">Matthias.Husinsky at fh-stpoelten.ac.at
+       </A><BR>
+    <I>Tue Sep 19 15:41:32 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000266.html">[Sotf-general] Dornbirn node has a new IP address!
+</A></li>
+        <LI>Next message: <A HREF="000270.html">[Sotf-general] Bugfix for SOTF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#267">[ date ]</a>
+              <a href="thread.html#267">[ thread ]</a>
+              <a href="subject.html#267">[ subject ]</a>
+              <a href="author.html#267">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+While developing the new interface for the SOTF node we found a minor bug (and a way to fix it). If you are not into the developement of SOTF you might stop reading here :)
+
+Description:
+On any of the runnung nodes in the network go to the node interface, section &quot;Stations&quot;. The station count is 36 (at the moment), but changes to 37 when you change the sort/filter mode. You can also experience this even worse on our testnodes (eg: <A HREF="http://sotf.fh-stpoelten.ac.at/node_881/stations.php">http://sotf.fh-stpoelten.ac.at/node_881/stations.php</A> ) where we have 3 stations at first and 10 after changing sort mode (if you want to reproduce this behaviour you have to delete the browser cookie).
+
+The reason for this is the following:
+In
+
+stations.php - line 46: $count = sotf_Station::countStations($language);
+
+is called. The Problem is that $language does not have a value set at first. When looking at the function declaration of countStations in sotf_Stations.class.php - line 168 it looks like this:
+
+function countStations($language = 'none'){
+...
+} 
+
+It seems like it was intended to assign $language a value, if it does not have one already. Unfortunately this only works when countStations() is called without any value at all (and not with an &quot;empty&quot; value, like it is done now). 
+Btw, the database query with an empty value like &quot;&quot; instead of &quot;none&quot; returns only the programs that do have a language assigned to them. On our testnodes this is only the case for 3 of our testnodes, in the network it is true for all except one station.
+
+The bug can be fixed easily, just add the line 
+
+	if ($language == &quot;&quot;) $language = 'none';  
+
+either in the beginning of function countStations (instead of the assignment in the function definition) or in stations.php before countStations is called. This should fix it.
+
+Could anybody of the developers with permission to submit at berlios fix this?
+Greetings,
+
+Matthias
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000266.html">[Sotf-general] Dornbirn node has a new IP address!
+</A></li>
+	<LI>Next message: <A HREF="000270.html">[Sotf-general] Bugfix for SOTF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#267">[ date ]</a>
+              <a href="thread.html#267">[ thread ]</a>
+              <a href="subject.html#267">[ subject ]</a>
+              <a href="author.html#267">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

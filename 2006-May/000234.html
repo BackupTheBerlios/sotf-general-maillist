@@ -1,0 +1,454 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r577 - in node/branches/video_test: code/classes code/templates www
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r577%20-%20in%20node/branches/video_test%3A%20code/classes%20code/templates%20www&In-Reply-To=%3C200605291204.k4TC4DI1002017%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000237.html">
+   <LINK REL="Next"  HREF="000235.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r577 - in node/branches/video_test: code/classes code/templates www</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r577%20-%20in%20node/branches/video_test%3A%20code/classes%20code/templates%20www&In-Reply-To=%3C200605291204.k4TC4DI1002017%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r577 - in node/branches/video_test: code/classes code/templates www">buddhafly at berlios.de
+       </A><BR>
+    <I>Mon May 29 14:04:13 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000237.html">[Sotf-general] Re: XMBF Metadata Format
+</A></li>
+        <LI>Next message: <A HREF="000235.html">[Sotf-general] r578 - in node/branches/video_test: code/classes code/templates www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#234">[ date ]</a>
+              <a href="thread.html#234">[ thread ]</a>
+              <a href="subject.html#234">[ subject ]</a>
+              <a href="author.html#234">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-05-29 14:04:06 +0200 (Mon, 29 May 2006)
+New Revision: 577
+
+Modified:
+   node/branches/video_test/code/classes/sotf_AudioFile.class.php
+   node/branches/video_test/code/classes/sotf_File.class.php
+   node/branches/video_test/code/classes/sotf_FileList.class.php
+   node/branches/video_test/code/classes/sotf_PlayList.class.php
+   node/branches/video_test/code/classes/sotf_VideoCheck.class.php
+   node/branches/video_test/code/classes/sotf_VideoFile.class.php
+   node/branches/video_test/code/templates/editFiles.htm
+   node/branches/video_test/code/templates/get.htm
+   node/branches/video_test/www/config.inc.php.template
+   node/branches/video_test/www/convert.php
+   node/branches/video_test/www/editMeta.php
+   node/branches/video_test/www/editor.php
+   node/branches/video_test/www/get.php
+Log:
+added new variable $config['skipGetID3FileTypes'] -&gt;  file extensions for which to skip getID3 checks.
+important in the case of flv's.
+
+now &quot;go to step 2 of 2&quot;, not &quot;edit metadata&quot; in the case of a conversion running in editFiles.php.
+
+
+Modified: node/branches/video_test/code/classes/sotf_AudioFile.class.php
+===================================================================
+--- node/branches/video_test/code/classes/sotf_AudioFile.class.php	2006-05-25 19:04:01 UTC (rev 576)
++++ node/branches/video_test/code/classes/sotf_AudioFile.class.php	2006-05-29 12:04:06 UTC (rev 577)
+@@ -76,14 +76,13 @@
+ 
+ 	function sotf_AudioFile($path, $fileinfo='')
+ 	{
++		global $config;
+ 		
+ 		$parent = get_parent_class($this);
+ 
+ 		parent::$parent($path);		// Call the constructor of the parent class. lk. super()
+ 		
+-
+-		
+-		if(!$fileinfo &amp;&amp; substr($path, strrpos($path, '.') +1)!='flv'){
++		if(!in_array(sotf_File::getExtension($this-&gt;path),$config['skipGetID3FileTypes'])){
+ 			// CHANGED BY BUDDHAFLY 06-02-14
+ 			$getID3 = new getID3();
+ 			$fileinfo = $getID3-&gt;analyze($this-&gt;path);
+@@ -91,13 +90,10 @@
+ 			
+ 			//$fileinfo = GetAllFileInfo($this-&gt;path);
+ 		}
++		else $fileinfo['video']=true;
+ 		
+ 		if($fileinfo) $this-&gt;allInfo = $fileinfo; //was $fileInfo
+ 		
+-		if(substr($path, strrpos($path, '.') +1)=='flv'){
+-			$fileinfo['video']=true;
+-		}
+-
+ 		//if ($audioinfo[&quot;fileformat&quot;] == 'mp3' || $audioinfo[&quot;fileformat&quot;] == 'ogg') {
+ 
+     //debug(&quot;finfo&quot;, $fileinfo);
+
+Modified: node/branches/video_test/code/classes/sotf_File.class.php
+===================================================================
+--- node/branches/video_test/code/classes/sotf_File.class.php	2006-05-25 19:04:01 UTC (rev 576)
++++ node/branches/video_test/code/classes/sotf_File.class.php	2006-05-29 12:04:06 UTC (rev 577)
+@@ -108,8 +108,9 @@
+ 	*
+ 	* @return	string	File extension
+ 	*/
+-	function getExtension()
++	function getExtension($path='')
+ 	{
++		if($path) return substr(strrchr($path, '.'), 1);
+ 		return substr(strrchr($this-&gt;path, '.'), 1);
+ 	} // end func getExtension
+ 
+
+Modified: node/branches/video_test/code/classes/sotf_FileList.class.php
+===================================================================
+--- node/branches/video_test/code/classes/sotf_FileList.class.php	2006-05-25 19:04:01 UTC (rev 576)
++++ node/branches/video_test/code/classes/sotf_FileList.class.php	2006-05-29 12:04:06 UTC (rev 577)
+@@ -56,6 +56,8 @@
+ 	*/
+ 	function add($path)
+ 	{
++		global $config;
++		
+ 		$path = realpath(trim($path));
+ 		if (is_file($path))
+ 		{
+@@ -63,7 +65,7 @@
+ 			{
+ 				//CHANGED BY BUDDHAFLY 06-02-14
+ 				//echo $path;
+-				if(substr($path, strrpos($path, '.') +1) !='flv'){
++				if(!in_array(sotf_File::getExtension($path),$config['skipGetID3FileTypes'])){
+ 					$getID3 = new getID3();
+ 					$fileinfo = $getID3-&gt;analyze($path);      
+ 					getid3_lib::CopyTagsToComments($fileinfo);
+
+Modified: node/branches/video_test/code/classes/sotf_PlayList.class.php
+===================================================================
+--- node/branches/video_test/code/classes/sotf_PlayList.class.php	2006-05-25 19:04:01 UTC (rev 576)
++++ node/branches/video_test/code/classes/sotf_PlayList.class.php	2006-05-29 12:04:06 UTC (rev 577)
+@@ -32,9 +32,12 @@
+ 	 } else {
+ 		// this is a local file
+ 		// CHANGED BY BUDDHAFLY 06-02-20
+-		$getID3 = new getID3();
+-		$mp3info = $getID3-&gt;analyze($item['path']);
+-		getid3_lib::CopyTagsToComments($mp3info);
++	    if(!in_array(sotf_File::getExtension($item['path']),$config['skipGetID3FileTypes'])){
++			$getID3 = new getID3();
++			$mp3info = $getID3-&gt;analyze($item['path']);
++			getid3_lib::CopyTagsToComments($mp3info);
++		}
++		else $fileinfo['video']=true;
+ 		//$mp3info = GetAllFileInfo($item['path']);
+ 		//debug('mp3info', $mp3info);
+ 		// CHANGED BY BUDDHAFLY 06-02-20
+
+Modified: node/branches/video_test/code/classes/sotf_VideoCheck.class.php
+===================================================================
+--- node/branches/video_test/code/classes/sotf_VideoCheck.class.php	2006-05-25 19:04:01 UTC (rev 576)
++++ node/branches/video_test/code/classes/sotf_VideoCheck.class.php	2006-05-29 12:04:06 UTC (rev 577)
+@@ -117,7 +117,7 @@
+ 			if ($config['videoFormats'][$i]['format'] != $videofile-&gt;format)
+ 				continue;								// This is not the one we need, get another one
+ 
+-			if($videofile-&gt;format!=&quot;flv&quot;){
++			if(!in_array(sotf_File::getExtension($path),$config['skipGetID3FileTypes'])){
+ 				if (abs($videofile-&gt;average_bitrate - $config['videoFormats'][$i]['video_bitrate']+$videofile-&gt;average_bitrate - $config['videoFormats'][$i]['audio_bitrate']) &gt; $config['bitrateToleranceVideo'])
+ 					continue;							// This is not the one we need, get another one
+ 	
+@@ -170,7 +170,7 @@
+ 
+ 	global $config;
+ 
+-	if(substr($file, strrpos($file, '.') +1)!='flv'){
++	if(!in_array(sotf_File::getExtension($file),$config['skipGetID3FileTypes'])){
+ 		$getID3 = new getID3();
+ 		$fileinfo = $getID3-&gt;analyze($file);
+ 		getid3_lib::CopyTagsToComments($fileinfo);
+@@ -202,15 +202,15 @@
+ 	function getTotalFrames($source, $index){
+ 		
+ 		global $config;
+-		if(substr($source, strrpos($source, '.') +1)!='flv'){
++		if(!in_array(sotf_File::getExtension($source),$config['skipGetID3FileTypes'])){
+ 			$getID3 = new getID3();
+ 			$fileinfo = $getID3-&gt;analyze($source);
+ 			getid3_lib::CopyTagsToComments($fileinfo);
+ 			$totalframes=round($fileinfo[&quot;playtime_seconds&quot;]*$config['videoFormats'][$index]['framerate']);
++					return $totalframes;
+ 		}
+-		else $totalframes=1;
++		else return 1;
+ 
+-		return $totalframes;
+ 	}
+ 	
+ 	function getPercentageOrError($tempfile, $totalframes){
+@@ -254,7 +254,7 @@
+ 				logError('ffmpeg output: '. $buffer); 
+ 			}
+ 			$percentage='';
+-			if(substr($tempfile, strrpos($file, '.') +1)!='flv') @$percentage=round($curframe/$totalframes*100);
++			if(!in_array(sotf_File::getExtension($path),$config['skipGetID3FileTypes'])) @$percentage=round($curframe/$totalframes*100);
+ 			$returnarray['percentage']=$percentage;
+ 			return $returnarray;
+ 		}
+
+Modified: node/branches/video_test/code/classes/sotf_VideoFile.class.php
+===================================================================
+--- node/branches/video_test/code/classes/sotf_VideoFile.class.php	2006-05-25 19:04:01 UTC (rev 576)
++++ node/branches/video_test/code/classes/sotf_VideoFile.class.php	2006-05-29 12:04:06 UTC (rev 577)
+@@ -87,12 +87,13 @@
+ 
+ 	function sotf_VideoFile($path, $fileinfo='')
+ 	{
++		global $config;
+ 		
+ 		$parent = get_parent_class($this);
+ 
+ 		parent::$parent($path);		// Call the constructor of the parent class. lk. super()
+ 		
+-		if(!$fileinfo &amp;&amp; substr($path, strrpos($path, '.') +1)!='flv'){
++		if(!in_array(sotf_File::getExtension($path),$config['skipGetID3FileTypes'])){
+ 			// CHANGED BY BUDDHAFLY 06-02-14
+ 			$getID3 = new getID3();
+ 			$fileinfo = $getID3-&gt;analyze($path);
+@@ -100,20 +101,16 @@
+ 			//print_r_html($fileinfo);
+ 			//$fileinfo = GetAllFileInfo($this-&gt;path);
+ 		}
+-		
++		else $fileinfo['video']=true;
+ 		 
+    		 if($fileinfo) $this-&gt;allInfo = $fileinfo; //was $fileInfo
+-		 
+-		 if(substr($path, strrpos($path, '.') +1)=='flv'){
+-			$fileinfo['video']=true;
+-		}
+ 
+ 		//if ($audioinfo[&quot;fileformat&quot;] == 'mp3' || $audioinfo[&quot;fileformat&quot;] == 'ogg') {
+ 
+     //debug(&quot;finfo&quot;, $fileinfo);
+ 	
+ 
+-    if (isset($fileinfo['video']) &amp;&amp; substr($path, strrpos($path, '.') +1)!='flv') {
++    if(!in_array(sotf_File::getExtension($path),$config['skipGetID3FileTypes'])) {
+ 
+      	 $videoinfo = $fileinfo['video'];
+ 
+@@ -174,10 +171,8 @@
+ 		
+ 		else if (isset($fileinfo['video'])){
+ 			$this-&gt;type = &quot;video&quot;;
+-
+-			$this-&gt;format = &quot;flv&quot;;
+-			
+-			$this-&gt;mimetype = &quot;video/x-flv&quot;;
++			$this-&gt;format = sotf_File::getExtension($path);
++			$this-&gt;mimetype = $config['mimetypes']['format'];
+ 			$this-&gt;bitrate = 0;
+ 			$this-&gt;samplerate = 0;
+ 			$this-&gt;channels = 0;
+@@ -239,7 +234,7 @@
+ 	}
+ 	
+ 	
+-	function processTranscodingQueue($repository, $prg, $checker){
++	function processTranscodingQueue($repository, $prg){
+ 	
+ 		global $config;
+ 		
+@@ -252,7 +247,7 @@
+ 		if ($tempdir = opendir($temppath)) {
+ 		   while (false !== ($filename = readdir($tempdir))) {
+ 				if(preg_match(&quot;/^&quot;.$id.&quot;_/&quot;,$filename)){
+-					if($checker-&gt;fileOK($temppath.$filename)) {
++					if(sotf_VideoCheck::fileOK($temppath.$filename)) {
+ 						if(is_file($temppath.$filename.&quot;.txt&quot;)) unlink($temppath.$filename.&quot;.txt&quot;);
+ 						$prg-&gt;setAudio($temppath.$filename);
+ 						$list_changed=true;
+
+Modified: node/branches/video_test/code/templates/editFiles.htm
+===================================================================
+--- node/branches/video_test/code/templates/editFiles.htm	2006-05-25 19:04:01 UTC (rev 576)
++++ node/branches/video_test/code/templates/editFiles.htm	2006-05-29 12:04:06 UTC (rev 577)
+@@ -34,7 +34,11 @@
+ {else}
+ &lt;H3&gt;{#Edit_files#}: &lt;a class=&quot;goto_object&quot; href=&quot;get.php?id={$PRG_DATA.id}&quot;&gt;{$PRG_DATA.title}&lt;/a&gt;&lt;/h3&gt;
+     &lt;div align=&quot;right&quot;&gt;
++	  {if $CONVERTING}
++	  &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#goto_step2#}&quot; onClick=&quot;redir(this.form, 'editMeta.php?new=1&amp;id={$PRG_ID}')&quot; /&gt;
++	  {else}
+       &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#edit_meta#}&quot; onClick=&quot;redir(this.form, 'editMeta.php?id={$PRG_ID}')&quot; /&gt;
++	  {/if}
+     &lt;/div&gt;
+ {/if}
+ &lt;/form&gt;
+
+Modified: node/branches/video_test/code/templates/get.htm
+===================================================================
+--- node/branches/video_test/code/templates/get.htm	2006-05-25 19:04:01 UTC (rev 576)
++++ node/branches/video_test/code/templates/get.htm	2006-05-29 12:04:06 UTC (rev 577)
+@@ -482,7 +482,9 @@
+             &lt;td valign=&quot;top&quot;&gt;
+               {if $loggedIn}
+                 &lt;form method=&quot;post&quot; action=&quot;{$ROOT_URL}/get.php?id={$ID}&quot;&gt;
++				{if !$VIDEO_PRG}
+                 &lt;input type=&quot;button&quot; name=&quot;put_into_playlist&quot; value=&quot;{#put_into_playlist#}&quot; onclick=&quot;javascript:setvalue('addplaylist', '{$ID}', 'add');this.disabled='true';return true;&quot; {if $inplaylist}disabled=&quot;true&quot;{/if} /&gt;
++				{/if}
+                 &lt;input type=&quot;button&quot; value=&quot;{#upload_to_portal#}&quot; onclick=&quot;javascript:window.open('{$ROOT_URL}/portal_upload.php?type=prg&amp;data={$ID}','','scrollbars=yes,width=640,height=340,left=320,top=200');&quot; /&gt;
+                 &lt;/form&gt;
+               {/if}
+
+Modified: node/branches/video_test/www/config.inc.php.template
+===================================================================
+--- node/branches/video_test/www/config.inc.php.template	2006-05-25 19:04:01 UTC (rev 576)
++++ node/branches/video_test/www/config.inc.php.template	2006-05-29 12:04:06 UTC (rev 577)
+@@ -301,7 +301,21 @@
+ $config['preferredStreamingFormat'] = 1;
+ 
+ 
++/**
++* Formats for which to skip getID3()
++*
++* Array containing the extensions of files for which NOT to run getID3 on.
++* This must include 'flv' as long as getID3 does not provide a more performant solution for checking flash videos.
++* Notice that no details (as duration, bitrate, etc.) of the converted file will be available to display!
++*
++* @package	StreamOnTheFly
++* @variable	array	$config['skipGetID3FileTypes']
++*/
+ 
++$config['skipGetID3FileTypes']=array('flv');
++
++
++
+ //////////////////////////////////////////////////////////////////////////
+ // VIDEO OPTIONS ---------------------------------------------------------
+ //////////////////////////////////////////////////////////////////////////
+
+Modified: node/branches/video_test/www/convert.php
+===================================================================
+--- node/branches/video_test/www/convert.php	2006-05-25 19:04:01 UTC (rev 576)
++++ node/branches/video_test/www/convert.php	2006-05-29 12:04:06 UTC (rev 577)
+@@ -193,10 +193,14 @@
+ }
+ 
+ function fileOK($file) {
++	global $config;
+ 
+-	$getID3 = new getID3();
+-	$fileinfo = $getID3-&gt;analyze($file);
+-	getid3_lib::CopyTagsToComments($fileinfo);
++	if(!in_array(sotf_File::getExtension($file),$config['skipGetID3FileTypes'])){
++		$getID3 = new getID3();
++		$fileinfo = $getID3-&gt;analyze($file);
++		getid3_lib::CopyTagsToComments($fileinfo);
++	}
++	else $fileinfo['video']=true;
+ 	
+   if(!is_readable($file) || filesize($file)==0 || !isset($fileinfo['audio'])) {
+ 	return false;
+
+Modified: node/branches/video_test/www/editMeta.php
+===================================================================
+--- node/branches/video_test/www/editMeta.php	2006-05-25 19:04:01 UTC (rev 576)
++++ node/branches/video_test/www/editMeta.php	2006-05-29 12:04:06 UTC (rev 577)
+@@ -47,10 +47,13 @@
+   	    $file =  $prg-&gt;getAudioDir() . '/' . $audioFiles[0] ['filename'];
+   	 
+ 	 	if($new){
+-		
+-			$getID3 = new getID3();
+-			$ThisFileInfo = $getID3-&gt;analyze($file);
+-			getid3_lib::CopyTagsToComments($ThisFileInfo);
++			if(!in_array(sotf_File::getExtension($file),$config['skipGetID3FileTypes'])){
++				$getID3 = new getID3();
++				$ThisFileInfo = $getID3-&gt;analyze($file);
++				getid3_lib::CopyTagsToComments($ThisFileInfo);
++			}
++			else $fileinfo['video']=true;
++
+ 			
+ 			//$ThisFileInfo = GetAllFileInfo($file, 'mp3', false, false, false) ;
+ 			
+
+Modified: node/branches/video_test/www/editor.php
+===================================================================
+--- node/branches/video_test/www/editor.php	2006-05-25 19:04:01 UTC (rev 576)
++++ node/branches/video_test/www/editor.php	2006-05-29 12:04:06 UTC (rev 577)
+@@ -33,10 +33,15 @@
+   checkPerm($station, 'create');
+   
+   //ADDED BY BUDDHAFLY
++  if(!in_array(sotf_File::getExtension($user-&gt;getUserDir().'/'.$fname),$config['skipGetID3FileTypes'])){
++
+ 	$getID3 = new getID3();
+ 	$fileinfo = $getID3-&gt;analyze($user-&gt;getUserDir().'/'.$fname);
+ 	getid3_lib::CopyTagsToComments($fileinfo);
+-	if (isset ($fileinfo['video'])) $is_video = true;
++  }
++  else $fileinfo['video']=true;
++
++  if (isset ($fileinfo['video'])) $is_video = true;
+   //--------------------------------------------
+   //logError(print_r($fileinfo, true));
+   $newPrg = new sotf_Programme();
+
+Modified: node/branches/video_test/www/get.php
+===================================================================
+--- node/branches/video_test/www/get.php	2006-05-25 19:04:01 UTC (rev 576)
++++ node/branches/video_test/www/get.php	2006-05-29 12:04:06 UTC (rev 577)
+@@ -66,12 +66,7 @@
+ //check for recently converted files or transcoding in progress
+ 
+ if($prg-&gt;isVideoPrg()){
+-  $prgAudiolist = &amp; new sotf_FileList();
+-  $prgAudiolist-&gt;getAudioVideoFromDir($prg-&gt;getAudioDir());
+-	
+-  $checker = &amp; new sotf_ContentCheck($prgAudiolist); //todo $prgAudioList MEANT CONTENT
+-  $checker = $checker-&gt;selectType();
+-  sotf_VideoFile::processTranscodingQueue($repository, $prg, $checker);
++  sotf_VideoFile::processTranscodingQueue($repository, $prg);
+ }
+ 
+   // content files 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000237.html">[Sotf-general] Re: XMBF Metadata Format
+</A></li>
+	<LI>Next message: <A HREF="000235.html">[Sotf-general] r578 - in node/branches/video_test: code/classes code/templates www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#234">[ date ]</a>
+              <a href="thread.html#234">[ thread ]</a>
+              <a href="subject.html#234">[ subject ]</a>
+              <a href="author.html#234">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] the waiting is over - happy sotf video node      testing!!!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20the%20waiting%20is%20over%20-%20happy%20sotf%20video%20node%20%0A%20%20%20%20%20testing%21%21%21&In-Reply-To=%3C41287.195.177.250.8.1148399363.squirrel%40195.177.250.8%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000203.html">
+   <LINK REL="Next"  HREF="000224.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] the waiting is over - happy sotf video node      testing!!!</H1>
+    <B>roland</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20the%20waiting%20is%20over%20-%20happy%20sotf%20video%20node%20%0A%20%20%20%20%20testing%21%21%21&In-Reply-To=%3C41287.195.177.250.8.1148399363.squirrel%40195.177.250.8%3E"
+       TITLE="[Sotf-general] the waiting is over - happy sotf video node      testing!!!">janki at yaya23.net
+       </A><BR>
+    <I>Tue May 23 17:49:23 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000203.html">[Sotf-general] the waiting is over - happy sotf video node     testing!!!
+</A></li>
+        <LI>Next message: <A HREF="000224.html">[Sotf-general] the waiting is over - happy sotf video node     testing!!!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#222">[ date ]</a>
+              <a href="thread.html#222">[ thread ]</a>
+              <a href="subject.html#222">[ subject ]</a>
+              <a href="author.html#222">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hey all,
+
+just finished to install the video_test branch on <A HREF="http://video.xaok.org,">http://video.xaok.org,</A>
+first of all congratulations to the developers, thats a big step forward for
+sotf.
+
+some findings:
+
+
+1.) installation
+
+1a.)
+db.sql had to be created manually on the command line, there was no more
+&quot;create nodedb&quot; button in install/install.php
+-&gt; maybe because an empty DB was created manually before?
+
+1b.)
+view 'ftp_auth' had to be redefined to prefix BASEDIR in 'homedir' field
+(maybe an sideeffect from 1a?)
+
+
+2.) video specific issues
+
+2a.)
+flash player seems to consume enormous amounts of mem with huge files:
+
+when trying to preview <A HREF="http://video.xaok.org/get.php?id=911pr1">http://video.xaok.org/get.php?id=911pr1</A>
+with  memory_limit = 128M  in php.ini this error rises:
+---------
+Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to
+allocate 143070438 bytes) in
+/data/hosting/xaoknode/node/code/getid3-1.7.5/getid3/module.audio-video.flv.php
+on line 26
+---------
+
+setting memory_limit = 256M (which is of course not very reasonable...)
+kicks apache in a very unstable state consuming 99.5% cpu and 200megs+ of
+memory.
+
+<A HREF="http://video.xaok.org/get.php?id=911pr1">http://video.xaok.org/get.php?id=911pr1</A> claims that there is no flash
+preview available or the scripts times out (randomly)
+
+2b)
+transcode functions
+as i can see from the process list several ffmpegs are fired up when
+pressing &quot;convert all required...&quot;
+
+this is ok on an openmosix cluster environment with several cpu's but on a
+single cpu machine this could easily take down the whole machine, imagine
+30 ffmpegs trying to convert 1GB of video data each... for production use
+there should be a queue and a max-concurrent-transcode-process config
+value
+
+
+
+2c)
+support of open formats - OGG/THEORA video
+
+this i more a feature request than a bug. in the present state ogg/theora
+video format is not supported at all, neither as input format nor as an
+convert target.
+
+for the node to be attractive to creative commons producers and/or the
+indymedia univers it would be crucial to support this free format.
+
+martin, is there any easy way to get theora support in there? relavant
+command line tools are ffmpeg2theora (<A HREF="http://v2v.cc/~j/ffmpeg2theora/">http://v2v.cc/~j/ffmpeg2theora/</A>)
+
+ffmpeg supports decoding anyway (from the ffmpeg site: &quot;Put another way,
+FFmpeg supports Theora video decoding&quot;)
+
+if you are not interested to integrate it, could you give me some hints
+where to start, eg. wich classes have to be modified?
+
+i'll keep you informed on new findings,
+
+cheers,
+roland jankowski
+
+
+btw, alternatives for the embedded flash player could
+<A HREF="http://www.flumotion.net/cortado/">http://www.flumotion.net/cortado/</A> (the world social forum was using this
+for video broadcasting last year)
+
+
+
+
+Martin Schmidt said:
+&gt;<i> hello,
+</I>&gt;<i>
+</I>&gt;<i> i'm proud to present you the brand new sotf video node! :)
+</I>&gt;<i>
+</I>&gt;<i> some of the features are:
+</I>&gt;<i>     - wide variety of video formats supported (all ffmpeg can eat... *g*)
+</I>&gt;<i>     - conversion per default into
+</I>&gt;<i>         3gp (for mobile phones)
+</I>&gt;<i>         mp4 (for quicktime player, compatible with ipod video!)
+</I>&gt;<i>         wmv (for windows media player)
+</I>&gt;<i>     - ffmpeg commands might be individually edited in config.inc.php
+</I>&gt;<i>     - preview on get.php realized with
+</I>&gt;<i>         stills (100% black, green or whatever frames are omitted)
+</I>&gt;<i>         flash video-player
+</I>&gt;<i>     - dynamic output of conversion progress in editFiles.php
+</I>&gt;<i>     - metadata can be edited while conversion is still running
+</I>&gt;<i>     - user-friendly advanced search (!!!)
+</I>&gt;<i>     - statistics on index.php with detailed audio/video-information
+</I>&gt;<i>     - getid3-1.7.5 implemented -&gt; makes things easier
+</I>&gt;<i>     - the new topic tree... :)
+</I>&gt;<i>
+</I>&gt;<i> known bugs:
+</I>&gt;<i>     - some page content is not translated yet in all four languages
+</I>&gt;<i>     - the flash video-player is not placed directly on get.php, but in a
+</I>&gt;<i>     popup (see pps for details)
+</I>&gt;<i>     - videos are not yet converted into psp-compatible format
+</I>&gt;<i>
+</I>&gt;<i> you can see (and test) the whole thing running on:
+</I>&gt;<i>     &gt;&gt; <A HREF="http://sotf.fh-stpoelten.ac.at/node_881">http://sotf.fh-stpoelten.ac.at/node_881</A>
+</I>&gt;<i>
+</I>&gt;<i> there is a little neighbourhood installed - for sync testing:
+</I>&gt;<i>     node_881 &lt;<A HREF="http://sotf.fh-stpoelten.ac.at/node_881">http://sotf.fh-stpoelten.ac.at/node_881</A>&gt; (video) -&gt;
+</I>&gt;<i> node_882 &lt;<A HREF="http://sotf.fh-stpoelten.ac.at/node_882">http://sotf.fh-stpoelten.ac.at/node_882</A>&gt;  (audio) -&gt; node_883
+</I>&gt;<i> &lt;<A HREF="http://sotf.fh-stpoelten.ac.at/node_883">http://sotf.fh-stpoelten.ac.at/node_883</A>&gt;  (video)
+</I>&gt;<i>
+</I>&gt;<i> notice that node 883 gets its video programmes only via the &quot;normal&quot;
+</I>&gt;<i> audio node, whose sync routine has not been changed at all! however, the
+</I>&gt;<i> video programmes are hidden on the audio node (statistics are also
+</I>&gt;<i> restricted to audio programmes).
+</I>&gt;<i>
+</I>&gt;<i> the only thing necessary for audio nodes to get along with video
+</I>&gt;<i> programmes is a svn update and a run of update.sql, which adds a few
+</I>&gt;<i> necessary fields in the database.
+</I>&gt;<i>
+</I>&gt;<i> there has been a account created for all of you on all three nodes:
+</I>&gt;<i> testuser/testuser (of course, you have both administrator and editor
+</I>&gt;<i> rights.)
+</I>&gt;<i>
+</I>&gt;<i> i have just configured the ftp server as it should be, so you can access
+</I>&gt;<i> your user directory (on node 881) via
+</I>&gt;<i>     &gt;&gt; <A HREF="ftp://testuser:testuser@sotf.fh-stpoelten.ac.at:8989">ftp://testuser:testuser@sotf.fh-stpoelten.ac.at:8989</A>
+</I>&gt;<i>
+</I>&gt;<i> you can, of course, install your own node from the svn video-branch,
+</I>&gt;<i> too. in this case, you need an up-to-date ffmpeg version. (under debian,
+</I>&gt;<i> use: &quot;deb <A HREF="ftp://ftp.nerim.net/debian-marillat/">ftp://ftp.nerim.net/debian-marillat/</A> sarge main&quot; in your
+</I>&gt;<i> sources.list)
+</I>&gt;<i>
+</I>&gt;<i> so now please test the video node and submit any found bugs, problems or
+</I>&gt;<i> suggestions - and be aware of the fact that i am 100% available to
+</I>&gt;<i> correct/implement them only until may 31... :)
+</I>&gt;<i>
+</I>&gt;<i> happy testing!
+</I>&gt;<i> greetings martin
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ps: please send your messages not only to the list, but
+</I>&gt;<i> directly to <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">ptmschmidt at fh-stpoelten.ac.at</A> as well. there has recently been
+</I>&gt;<i> severe problems with it. i already wrote a version of this mail yesterday
+</I>&gt;<i> at
+</I>&gt;<i> 6 pm, but it has never been forwarded...
+</I>&gt;<i>
+</I>&gt;<i> pps: we were not able to get our flv-files working properly in our (or
+</I>&gt;<i> any) flash video-player. the user had to wait on get.php for the whole
+</I>&gt;<i> flv to load (which might take a while... *g*) before he could leave to
+</I>&gt;<i> an other page. probably, some metadata is missing in the flv-files
+</I>&gt;<i> created with ffmpeg. any ideas concerning this problem?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000203.html">[Sotf-general] the waiting is over - happy sotf video node     testing!!!
+</A></li>
+	<LI>Next message: <A HREF="000224.html">[Sotf-general] the waiting is over - happy sotf video node     testing!!!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#222">[ date ]</a>
+              <a href="thread.html#222">[ thread ]</a>
+              <a href="subject.html#222">[ subject ]</a>
+              <a href="author.html#222">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

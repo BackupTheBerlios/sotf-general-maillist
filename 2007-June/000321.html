@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r606 - node/trunk/code/classes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2007-June/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r606%20-%20node/trunk/code/classes&In-Reply-To=%3C200706051450.l55EoDNm011087%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000320.html">
+   <LINK REL="Next"  HREF="000322.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r606 - node/trunk/code/classes</H1>
+    <B>micsik at BerliOS</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r606%20-%20node/trunk/code/classes&In-Reply-To=%3C200706051450.l55EoDNm011087%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r606 - node/trunk/code/classes">micsik at mail.berlios.de
+       </A><BR>
+    <I>Tue Jun  5 16:50:13 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000320.html">[Sotf-general] r605 - node/trunk/code/classes
+</A></li>
+        <LI>Next message: <A HREF="000322.html">[Sotf-general] r607 - node/trunk/www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#321">[ date ]</a>
+              <a href="thread.html#321">[ thread ]</a>
+              <a href="subject.html#321">[ subject ]</a>
+              <a href="author.html#321">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: micsik
+Date: 2007-06-05 16:50:13 +0200 (Tue, 05 Jun 2007)
+New Revision: 606
+
+Modified:
+   node/trunk/code/classes/sotf_Programme.class.php
+Log:
+
+
+Modified: node/trunk/code/classes/sotf_Programme.class.php
+===================================================================
+--- node/trunk/code/classes/sotf_Programme.class.php	2007-06-05 14:48:47 UTC (rev 605)
++++ node/trunk/code/classes/sotf_Programme.class.php	2007-06-05 14:50:13 UTC (rev 606)
+@@ -470,22 +470,26 @@
+ 	 return $objects;
+   }
+ 
++  function sortFilesByBitRate($a, $b) {
++    $a = $a['kbps'];
++    $b = $b['kbps'];
++    if ($a == $b)
++      return 0;
++    return ($a &lt; $b) ? -1 : 1;
++  }
++
+   function selectFileToListen() {
+-
+-	 // TODO: write this better
+-	 $files = $this-&gt;listAudioFiles();
+-	 // if lowest bitrate is free, select that
+-	 while(list(,$f) = each($files)) {
+-		if(preg_match(&quot;/^24kbps/&quot;, $f['format']) &amp;&amp; $f['stream_access']=='t')
+-		  return $f['id'];
+-	 }
+-	 reset($files);
+-	 // return first free to stream
+-	 while(list(,$f) = each($files)) {
+-		if($f['stream_access']=='t')
+-		  return $f['id'];
+-	 }
+-	 return '';
++    // TODO: write this better
++    $files = $this-&gt;listAudioFiles();
++    usort($files, array('sotf_Programme', 'sortFilesByBitRate'));
++    //debug(&quot;MFILES&quot;, $files);
++    //reset($files);
++    // return lowest bitrate free to stream
++    while(list(,$f) = each($files)) {
++      if($f['stream_access']=='t')
++        return $f['id'];
++    }
++    return '';
+   }
+ 
+   function setAudio($filename, $copy=false) {
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000320.html">[Sotf-general] r605 - node/trunk/code/classes
+</A></li>
+	<LI>Next message: <A HREF="000322.html">[Sotf-general] r607 - node/trunk/www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#321">[ date ]</a>
+              <a href="thread.html#321">[ thread ]</a>
+              <a href="subject.html#321">[ subject ]</a>
+              <a href="author.html#321">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

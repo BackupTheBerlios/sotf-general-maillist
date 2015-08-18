@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] fix for broadcast time
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2005-December/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20fix%20for%20broadcast%20time&In-Reply-To=%3CBCF4D939-926B-4B44-A4CF-FD0F8DF86375%40fhv.at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000076.html">
+   <LINK REL="Next"  HREF="000078.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] fix for broadcast time</H1>
+    <B>Wolfgang Reutz</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20fix%20for%20broadcast%20time&In-Reply-To=%3CBCF4D939-926B-4B44-A4CF-FD0F8DF86375%40fhv.at%3E"
+       TITLE="[Sotf-general] fix for broadcast time">wolfgang.reutz at fhv.at
+       </A><BR>
+    <I>Tue Dec  6 17:33:02 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000076.html">[Sotf-general] fix for broadcast time
+</A></li>
+        <LI>Next message: <A HREF="000078.html">[Sotf-general] r540 - node/trunk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>submitted to SVN repository on 05.12.2005 17:32
+
+
+On 06.12.2005, at 12:11, Micsik Andr&#225;s wrote:
+
+&gt;<i> Our users reported a bug in setting broadcast time. When you set a  
+</I>&gt;<i> broadcast time for August, then one hour is added to the time  
+</I>&gt;<i> specified. This is fixed here. Can somebody please check this code  
+</I>&gt;<i> and put it into subversion:
+</I>&gt;<i>
+</I>&gt;<i> www/editMeta.php lines 81-83:
+</I>&gt;<i>
+</I>&gt;<i> if($param == 'broadcast_date') {
+</I>&gt;<i>   $value = $value . ' ' . sotf_Utils::getParameter 
+</I>&gt;<i> ('broadcast_dateHour') .              ':' . sotf_Utils::getParameter 
+</I>&gt;<i> ('broadcast_dateMinute'); // . ' ' . $db-&gt;myTZ();
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> thanks,
+</I>&gt;<i> 	Andras
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sotf-general mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/sotf-general">http://lists.berlios.de/mailman/listinfo/sotf-general</A>
+</I>
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000076.html">[Sotf-general] fix for broadcast time
+</A></li>
+	<LI>Next message: <A HREF="000078.html">[Sotf-general] r540 - node/trunk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

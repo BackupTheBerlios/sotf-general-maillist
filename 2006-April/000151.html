@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r554 - in node/trunk: code/templates www
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r554%20-%20in%20node/trunk%3A%20code/templates%20www&In-Reply-To=%3C200604121037.k3CAbOE2011889%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000148.html">
+   <LINK REL="Next"  HREF="000156.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r554 - in node/trunk: code/templates www</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r554%20-%20in%20node/trunk%3A%20code/templates%20www&In-Reply-To=%3C200604121037.k3CAbOE2011889%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r554 - in node/trunk: code/templates www">buddhafly at berlios.de
+       </A><BR>
+    <I>Wed Apr 12 12:37:24 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000148.html">[Sotf-general] r553 - node/trunk/code/templates
+</A></li>
+        <LI>Next message: <A HREF="000156.html">[Sotf-general] r555 - node/trunk/code/classes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#151">[ date ]</a>
+              <a href="thread.html#151">[ thread ]</a>
+              <a href="subject.html#151">[ subject ]</a>
+              <a href="author.html#151">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-04-12 12:37:20 +0200 (Wed, 12 Apr 2006)
+New Revision: 554
+
+Modified:
+   node/trunk/code/templates/admin.htm
+   node/trunk/www/admin.php
+Log:
+added a confirmation request in admin.php before updating the topic tree.
+
+
+Modified: node/trunk/code/templates/admin.htm
+===================================================================
+--- node/trunk/code/templates/admin.htm	2006-04-10 17:28:43 UTC (rev 553)
++++ node/trunk/code/templates/admin.htm	2006-04-12 10:37:20 UTC (rev 554)
+@@ -1,6 +1,6 @@
+ 
+   &lt;h3&gt;{#admin#}&lt;/h3&gt;
+-{if $TTREE_UPD_MESS}{$TTREE_UPD_MESS}{/if}
++{if $TTREE_UPD_MESS}{$TTREE_UPD_MESS}&lt;br&gt;&nbsp;&lt;br&gt;{/if}
+ {if hasPerm('node', 'change') }
+ &lt;a name=&quot;network&quot;&gt;&lt;/a&gt;
+   &lt;table class=&quot;tab&quot;&gt;
+@@ -242,7 +242,7 @@
+ 							&lt;a target=&quot;log&quot; href=&quot;log.php#end&quot;&gt;{#view_log#}&lt;/a&gt;
+               &lt;br /&gt;&lt;a target=&quot;config&quot; href=&quot;viewConfig.php&quot;&gt;{#view_config#}&lt;/a&gt; | &lt;a href=&quot;phpinfo.php&quot;&gt;phpinfo()&lt;/a&gt;
+ 								&lt;br /&gt;&lt;a href=&quot;admin.php?retemplate=1&quot;&gt;{#recompile_templates#}&lt;/a&gt;
+-								{*&lt;br /&gt;&lt;a href=&quot;admin.php?updatetopictree=1&quot;&gt;Update topic tree&lt;/a&gt;*}
++								&lt;br /&gt;&lt;a href=&quot;admin.php?updatetopictree=1&quot;&gt;Update topic tree&lt;/a&gt;
+ 									&lt;br /&gt;&lt;a href=&quot;admin.php?updatetopics=1&quot;&gt;{#update_topic_counts#}&lt;/a&gt;
+ 											&lt;br /&gt;&lt;a href=&quot;admin.php?updatecvs=1&quot;&gt;{#update_from_cvs#}&lt;/a&gt;
+             &lt;/td&gt;&lt;/tr&gt;
+
+Modified: node/trunk/www/admin.php
+===================================================================
+--- node/trunk/www/admin.php	2006-04-10 17:28:43 UTC (rev 553)
++++ node/trunk/www/admin.php	2006-04-12 10:37:20 UTC (rev 554)
+@@ -213,7 +213,7 @@
+ 	$query = &quot;SELECT * FROM sotf_vars WHERE name='topic_update_done' AND value=1&quot;;
+ 	$result = $db-&gt;getRow($query);
+ 	if (count($result) == 0) {
+-		if(is_file($config['basedir'].'/code/share/update_topics.txt')){
++		if(is_file($config['basedir'].'/code/share/update_topics.txt') &amp;&amp; sotf_Utils::getParameter('confirmed')){
+ 			$db-&gt;query(&quot;BEGIN;&quot;);
+ 			
+ 			// UPDATE sotf_topic_tree_defs, sotf_topics
+@@ -256,11 +256,17 @@
+ 			$db-&gt;query(&quot;INSERT INTO sotf_vars (name, value) VALUES ('topic_update_done', '1');&quot;);
+ 			$db-&gt;query(&quot;COMMIT;&quot;);
+ 			$vocabularies-&gt;updateTopicCounts();
+-			$smarty-&gt;assign(&quot;TTREE_UPD_MESS&quot;, 'The Topic Tree has successfully been updated.');
+-		} // if is_file
++			$smarty-&gt;assign(&quot;TTREE_UPD_MESS&quot;, '&lt;span style=&quot;color:green&quot;&gt;The Topic Tree has successfully been updated.&lt;/span&gt;');
++		} // if is_file &amp;&amp; confirmed
++		elseif(is_file($config['basedir'].'/code/share/update_topics.txt')){
++			$smarty-&gt;assign(&quot;TTREE_UPD_MESS&quot;, '&lt;span style=&quot;color:red&quot;&gt;Please confirm the update to the new topic tree definitions - Version Spring 2006.&lt;br&gt;Make sure you have made a dump of your node database before!&lt;/span&gt;&lt;br&gt;&nbsp;&lt;br&gt;&lt;a href=&quot;admin.php?updatetopictree=1&amp;confirmed=1&quot;&gt;Yes, update this node\'s topic tree!&lt;/a&gt;');
++		}
++		else{
++			$smarty-&gt;assign(&quot;TTREE_UPD_MESS&quot;, '&lt;span style=&quot;color:red&quot;&gt;The file '.is_file($config['basedir']).'/code/share/update_topics.txt could not have been found.&lt;br&gt;Get the current version from SVN!&lt;/span&gt;');
++		}
+ 	} // if count($result)==0
+ 	else {
+-		$smarty-&gt;assign(&quot;TTREE_UPD_MESS&quot;, 'The Topic Tree had already been updated before.');
++		$smarty-&gt;assign(&quot;TTREE_UPD_MESS&quot;, '&lt;span style=&quot;color:red&quot;&gt;The Topic Tree had already been updated before.&lt;/span&gt;');
+ 	}
+ } // if &quot;updatetopictree&quot;
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000148.html">[Sotf-general] r553 - node/trunk/code/templates
+</A></li>
+	<LI>Next message: <A HREF="000156.html">[Sotf-general] r555 - node/trunk/code/classes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#151">[ date ]</a>
+              <a href="thread.html#151">[ thread ]</a>
+              <a href="subject.html#151">[ subject ]</a>
+              <a href="author.html#151">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

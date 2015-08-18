@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] Re: Moved to SVN
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20Re%3A%20Moved%20to%20SVN&In-Reply-To=%3C4437ACA0.50203%40dsd.sztaki.hu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000138.html">
+   <LINK REL="Next"  HREF="000137.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] Re: Moved to SVN</H1>
+    <B>Andras Micsik</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20Re%3A%20Moved%20to%20SVN&In-Reply-To=%3C4437ACA0.50203%40dsd.sztaki.hu%3E"
+       TITLE="[Sotf-general] Re: Moved to SVN">micsik at dsd.sztaki.hu
+       </A><BR>
+    <I>Sat Apr  8 14:29:20 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000138.html">[Sotf-general] Moved to SVN
+</A></li>
+        <LI>Next message: <A HREF="000137.html">[Sotf-general] r550 - node/trunk/code/share
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#139">[ date ]</a>
+              <a href="thread.html#139">[ thread ]</a>
+              <a href="subject.html#139">[ subject ]</a>
+              <a href="author.html#139">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I forgot to add something useful:
+
+Micsik Andr&#225;s wrote:
+&gt;<i> Hi all,
+</I>&gt;<i> 
+</I>&gt;<i> today I moved to SVN from CVS. It was simple:
+</I>&gt;<i>
+</I>
+first save your changes: go into the node dir and:
+cvs diff &gt;mychanges
+
+&gt;<i> svn checkout 
+</I>&gt;<i> svn+<A HREF="ssh://YOURNAME@svn.berlios.de/svnroot/repos/sotf/node/trunk">ssh://YOURNAME@svn.berlios.de/svnroot/repos/sotf/node/trunk</A> node.new
+</I>&gt;<i> 
+</I>&gt;<i> mv node node.old
+</I>&gt;<i> 
+</I>&gt;<i> mv node.uj node
+</I>&gt;<i> 
+</I>&gt;<i> mv node.old/repository/* node/repository
+</I>&gt;<i> 
+</I>&gt;<i> mv node.old/users/* node/users
+</I>&gt;<i> 
+</I>&gt;<i> cp node.old/www/config.inc.php node/www
+</I>&gt;<i> 
+</I>&gt;<i> find node -name CVS
+</I>&gt;<i> (delete found CVS directories)
+</I>&gt;<i> 
+</I>&gt;<i> ensure httpd has write access for
+</I>&gt;<i> node/www/tmp node/www/tmp/cache node/code/templates_c
+</I>
+now your node should be running OK, but it is 'out-of-the-box'
+
+you have to add your local changes by hand again, based on the file 
+mychanges
+
+&gt;<i> and that's the end
+</I>&gt;<i> 
+</I>&gt;<i> good luck,
+</I>&gt;<i>         Andras
+</I>&gt;<i> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000138.html">[Sotf-general] Moved to SVN
+</A></li>
+	<LI>Next message: <A HREF="000137.html">[Sotf-general] r550 - node/trunk/code/share
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#139">[ date ]</a>
+              <a href="thread.html#139">[ thread ]</a>
+              <a href="subject.html#139">[ subject ]</a>
+              <a href="author.html#139">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

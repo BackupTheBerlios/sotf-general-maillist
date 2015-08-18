@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] getid3.1-7-5 / sync between audio and video nodes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20getid3.1-7-5%20/%20sync%20between%20audio%20and%20video%20nodes&In-Reply-To=%3C445E26FC.8000502%40fh-stpoelten.ac.at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000186.html">
+   <LINK REL="Next"  HREF="000188.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] getid3.1-7-5 / sync between audio and video nodes</H1>
+    <B>Martin Schmidt</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20getid3.1-7-5%20/%20sync%20between%20audio%20and%20video%20nodes&In-Reply-To=%3C445E26FC.8000502%40fh-stpoelten.ac.at%3E"
+       TITLE="[Sotf-general] getid3.1-7-5 / sync between audio and video nodes">ptmschmidt at fh-stpoelten.ac.at
+       </A><BR>
+    <I>Sun May  7 18:57:32 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000186.html">[Sotf-general] r561 - node/branches/video_test/code
+</A></li>
+        <LI>Next message: <A HREF="000188.html">[Sotf-general] r562 - node/branches/video_test/code/share
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#187">[ date ]</a>
+              <a href="thread.html#187">[ thread ]</a>
+              <a href="subject.html#187">[ subject ]</a>
+              <a href="author.html#187">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hello,
+
+getid3-1.7.5 is now implemented in the video code, also in the parts of 
+editMeta.php which have recently been added from the trunk.
+
+roland, your error was probably the correct entry in the config.inc.php 
+for the new version.
+
+for those who want already try the thing, it is
+$config['getid3dir'] = $config['basedir'] . &quot;/code/getid3-1.7.5/getid3&quot;;
+and not
+$config['getid3dir'] = $config['basedir'] . &quot;/code/getid3-1.7.5&quot;;
+
+(it has now been updated in the config.inc.template anyway.)
+
+i will inform you as soon as the video extension is ready for &quot;open 
+testing&quot;, but there are still a few things which have to be checked 
+before that milestone - especially the syncing behaviour.
+
+&#224; propos: we originally had planned to sync only audio content from a 
+video to an audio node, but andr&#225;s opened us the eyes for the case 
+A&lt;-&gt;B&lt;-&gt;C where A and C are video nodes and B is an audio node. In this 
+case, C would never get the video programmes from node A, if A only 
+synced audio programmes to B.
+
+as we have not that much time left and the additional metadata disk 
+space required is acceptable, we decided to sync all the metadata but 
+modify the audio nodes in a way they do not display video programmes.
+
+how exactly, we will work out during the next two days. so, your 
+thoughts on that issue are welcome.
+
+greetings,
+martin
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000186.html">[Sotf-general] r561 - node/branches/video_test/code
+</A></li>
+	<LI>Next message: <A HREF="000188.html">[Sotf-general] r562 - node/branches/video_test/code/share
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#187">[ date ]</a>
+              <a href="thread.html#187">[ thread ]</a>
+              <a href="subject.html#187">[ subject ]</a>
+              <a href="author.html#187">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

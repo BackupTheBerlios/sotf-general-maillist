@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r559 - in node/trunk: code/templates www
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r559%20-%20in%20node/trunk%3A%20code/templates%20www&In-Reply-To=%3C200605071618.k47GIMr0007148%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000183.html">
+   <LINK REL="Next"  HREF="000185.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r559 - in node/trunk: code/templates www</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r559%20-%20in%20node/trunk%3A%20code/templates%20www&In-Reply-To=%3C200605071618.k47GIMr0007148%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r559 - in node/trunk: code/templates www">buddhafly at berlios.de
+       </A><BR>
+    <I>Sun May  7 18:18:22 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000183.html">[Sotf-general] r558 - in node/branches/video_test: code     code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos      code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share      code/templates www www/static
+</A></li>
+        <LI>Next message: <A HREF="000185.html">[Sotf-general] r560 - in node/branches/video_test: code/share www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#184">[ date ]</a>
+              <a href="thread.html#184">[ thread ]</a>
+              <a href="subject.html#184">[ subject ]</a>
+              <a href="author.html#184">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-05-07 18:18:11 +0200 (Sun, 07 May 2006)
+New Revision: 559
+
+Modified:
+   node/trunk/code/templates/editMeta.htm
+   node/trunk/www/editMeta.php
+Log:
+editMeta.php - genre is no more a required field, might be 'none'
+
+
+Modified: node/trunk/code/templates/editMeta.htm
+===================================================================
+--- node/trunk/code/templates/editMeta.htm	2006-05-04 14:34:58 UTC (rev 558)
++++ node/trunk/code/templates/editMeta.htm	2006-05-07 16:18:11 UTC (rev 559)
+@@ -159,7 +159,7 @@
+               &lt;td style=&quot;font-weight:bold; color:#FF0000&quot;&gt;*&lt;/td&gt;
+ 			{else}
+ 			  &lt;td class=&quot;meta&quot;&gt;{#genre#}:&lt;/td&gt;
+-              &lt;td&gt;*&lt;/td&gt;
++              &lt;td&gt;&nbsp;&lt;/td&gt;
+ 			{/if}
+               &lt;td&gt;&lt;select name=&quot;genre_id&quot;&gt;
+                   
+
+Modified: node/trunk/www/editMeta.php
+===================================================================
+--- node/trunk/www/editMeta.php	2006-05-04 14:34:58 UTC (rev 558)
++++ node/trunk/www/editMeta.php	2006-05-07 16:18:11 UTC (rev 559)
+@@ -121,10 +121,10 @@
+ 	}
+ 	else $field_error[$param]=false;
+ 	
+-	if($param=='genre_id' &amp;&amp; $value==0) {
++	/*if($param=='genre_id' &amp;&amp; $value==0) {
+ 	$field_error[$param]=true;
+ 	$error_count++;
+-	}
++	}*/
+ 	
+     if($type[0]=='text') {
+       $value = strip_tags($value);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000183.html">[Sotf-general] r558 - in node/branches/video_test: code     code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos      code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share      code/templates www www/static
+</A></li>
+	<LI>Next message: <A HREF="000185.html">[Sotf-general] r560 - in node/branches/video_test: code/share www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#184">[ date ]</a>
+              <a href="thread.html#184">[ thread ]</a>
+              <a href="subject.html#184">[ subject ]</a>
+              <a href="author.html#184">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

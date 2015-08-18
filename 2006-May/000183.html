@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r558 - in node/branches/video_test: code     code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos      code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share      code/templates www www/static
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r558%20-%20in%20node/branches/video_test%3A%20code%20%20%20%20%20code/classes%0A%20code/configs%20code/getid3-1.7.5%20code/getid3-1.7.5/demos%20%20%20%20%20%20code/getid3-1.7.5/getid3%0A%20code/getid3-1.7.5/helperapps%20code/share%20%20%20%20%20%20code/templates%20www%20www/static&In-Reply-To=%3C445DC84A.2020809%40fh-stpoelten.ac.at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000182.html">
+   <LINK REL="Next"  HREF="000184.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r558 - in node/branches/video_test: code     code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos      code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share      code/templates www www/static</H1>
+    <B>Martin Schmidt</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r558%20-%20in%20node/branches/video_test%3A%20code%20%20%20%20%20code/classes%0A%20code/configs%20code/getid3-1.7.5%20code/getid3-1.7.5/demos%20%20%20%20%20%20code/getid3-1.7.5/getid3%0A%20code/getid3-1.7.5/helperapps%20code/share%20%20%20%20%20%20code/templates%20www%20www/static&In-Reply-To=%3C445DC84A.2020809%40fh-stpoelten.ac.at%3E"
+       TITLE="[Sotf-general] r558 - in node/branches/video_test: code     code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos      code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share      code/templates www www/static">ptmschmidt at fh-stpoelten.ac.at
+       </A><BR>
+    <I>Sun May  7 12:13:30 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000182.html">[Sotf-general] r558 - in node/branches/video_test: code      code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos      code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share      code/templates www www/static
+</A></li>
+        <LI>Next message: <A HREF="000184.html">[Sotf-general] r559 - in node/trunk: code/templates www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#183">[ date ]</a>
+              <a href="thread.html#183">[ thread ]</a>
+              <a href="subject.html#183">[ subject ]</a>
+              <a href="author.html#183">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hello,
+
+that's why i wrote:
+
+Log:
+sotf video extension, current status
+this version has already been merged with the newest trunk revision, but
+not yet cleaned (-&gt; getid3-1.7.5)
+
+
+these problems will be fixed until tuesday...
+
+greetings,
+martin
+
+
+
+roland schrieb:
+
+&gt;<i>hello video_test branch developpers!
+</I>&gt;<i>
+</I>&gt;<i>just tried to test the new video_test branch, seems like there are problems
+</I>&gt;<i>with getID3 lib
+</I>&gt;<i>
+</I>&gt;<i>using version 1.6.2 (as suggested in config.ing.php.template) rises an error:
+</I>&gt;<i>------------------------------------------
+</I>&gt;<i>Fatal error: Cannot instantiate non-existent class: getid3 in
+</I>&gt;<i>/data/hosting/xaoknode/node/code/classes/sotf_FileList.class.php on line
+</I>&gt;<i>66
+</I>&gt;<i>------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>version 1.7.5 does not seem to be implemented yet:
+</I>&gt;<i>
+</I>&gt;<i>------------------------------------------
+</I>&gt;<i>Warning: main(/data/hosting/xaoknode/node/code/getid3-1.7.5/getid3.php):
+</I>&gt;<i>failed to open stream: No such file or directory in
+</I>&gt;<i>/data/hosting/xaoknode/node/code/classes/sotf_FileList.class.php on line 3
+</I>&gt;<i>
+</I>&gt;<i>Fatal error: main(): Failed opening required
+</I>&gt;<i>'/data/hosting/xaoknode/node/code/getid3-1.7.5/getid3.php'
+</I>&gt;<i>(include_path='.:/usr/share/php:/usr/share/pear') in
+</I>&gt;<i>/data/hosting/xaoknode/node/code/classes/sotf_FileList.class.php on line 3
+</I>&gt;<i>------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i>any ideas? has there been any effort to port to getid3 1.7.5 yet?
+</I>&gt;<i>cheers
+</I>&gt;<i>roland jankowski
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000182.html">[Sotf-general] r558 - in node/branches/video_test: code      code/classes code/configs code/getid3-1.7.5 code/getid3-1.7.5/demos      code/getid3-1.7.5/getid3 code/getid3-1.7.5/helperapps code/share      code/templates www www/static
+</A></li>
+	<LI>Next message: <A HREF="000184.html">[Sotf-general] r559 - in node/trunk: code/templates www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#183">[ date ]</a>
+              <a href="thread.html#183">[ thread ]</a>
+              <a href="subject.html#183">[ subject ]</a>
+              <a href="author.html#183">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,328 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r552 - node/trunk/www
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r552%20-%20node/trunk/www&In-Reply-To=%3C200604101313.k3ADDKtr009396%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000147.html">
+   <LINK REL="Next"  HREF="000145.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r552 - node/trunk/www</H1>
+    <B>micsik at BerliOS</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r552%20-%20node/trunk/www&In-Reply-To=%3C200604101313.k3ADDKtr009396%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r552 - node/trunk/www">micsik at berlios.de
+       </A><BR>
+    <I>Mon Apr 10 15:13:20 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000147.html">[Sotf-general] Node 666 moved to SVN
+</A></li>
+        <LI>Next message: <A HREF="000145.html">[Sotf-general] r552 - node/trunk/www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#143">[ date ]</a>
+              <a href="thread.html#143">[ thread ]</a>
+              <a href="subject.html#143">[ subject ]</a>
+              <a href="author.html#143">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: micsik
+Date: 2006-04-10 15:13:13 +0200 (Mon, 10 Apr 2006)
+New Revision: 552
+
+Modified:
+   node/trunk/www/podcast.php
+   node/trunk/www/rss.php
+Log:
+I added Janki's patches, and fixed some other bugs myself, too.
+
+
+Modified: node/trunk/www/podcast.php
+===================================================================
+--- node/trunk/www/podcast.php	2006-04-06 16:40:43 UTC (rev 551)
++++ node/trunk/www/podcast.php	2006-04-10 13:13:13 UTC (rev 552)
+@@ -4,6 +4,8 @@
+ 	* $Id$
+ 	* Authors: Andr&#225;s Micsik
+ 	*          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
++	* nicer filenames, stream link, broadcastdate and
++	* role supporte by rama + rjankowski
+ 	*/
+ 
+ define('ITEMS_IN_RSS', 10);
+@@ -18,6 +20,11 @@
+ //$queryName = sotf_Utils::getParameter('qname');
+ $query = sotf_Utils::getParameter('query');
+ 
++$items = intval(sotf_Utils::getParameter('count'));
++if(!$items or $items &lt; 1 or $items &gt; 200)
++  $items = ITEMS_IN_RSS;
++//debug(&quot;ITEMS&quot;, $items);
++
+ function writeTag(&amp;$rss, $tag, $value, $lang='', $attr='') {
+   if($lang)
+ 	 $langAttr = &quot;xml:lang=\&quot;$lang\&quot;&quot;;
+@@ -54,20 +61,55 @@
+   return $date;
+ }
+ 
++  
++
++function selectStream(&amp;$prg) {
++  global $config;
++  $files = $prg-&gt;listAudioFiles('TRUE','kbps DESC');
++  if(is_array($files)) {
++       foreach($files as $f) {
++              if($f['stream_access']=='t') {
++                $f['url'] = $config['rootUrl'] . '/listen.php?id=' . $prg-&gt;id . '&amp;fileid=' . $f['id'];
++                return $f;
++              }
++      }
++  }
++  return NULL;
++}
++
++
++
+ function selectAudio(&amp;$prg) {
+   global $config;
+   $files = $prg-&gt;listAudioFiles('TRUE','kbps DESC');
+-  foreach($files as $f) {
+-	 if($f['download_access']=='t') {
+-		//$f['url'] = $config['rootUrl'] . '/getFile.php/' . $f['filename'] . '?audio=1&amp;id=' . $prg-&gt;id . '&amp;filename=' . $f['filename'];
+-		//$f['url'] = $config['rootUrl'] . '/getFile.php?audio=1&amp;id=' . $prg-&gt;id . '&amp;filename=' . $f['filename'];
+-		$baseUrl = sotf_Node::getHomeNodeRootUrl($prg);
+-		$f['url'] = $baseUrl . '/getFile.php/fid__' . $f['id'].&quot;.mp3&quot;; // wreutz: very dirty hack for ipooder to work on os x
+-		return $f;
++  if(is_array($files)) {
++	 foreach($files as $f) {
++		if($f['download_access']=='t') {
++		  /* sun 8.2.06 added to format properly the enclosure url --rama */
++		  $station = sotf_Utils::makeValidName($prg-&gt;get('station'), 23);
++		  $series = sotf_Utils::makeValidName($prg-&gt;get('series'), 23);
++		  $title = sotf_Utils::makeValidName($prg-&gt;get('title'), 30);
++		  if($station != &quot;&quot; &amp;&amp; $series != &quot;&quot; &amp;&amp; $title != &quot;&quot;) {
++			 $fname = &quot;$station-$series-$title&quot;;
++		  } elseif($station != &quot;&quot; &amp;&amp; $title != &quot;&quot;) {
++			 $fname = &quot;$station-$title&quot;;
++		  } elseif($title != &quot;&quot;) {
++			 $fname = $title;
++		  }
++		  /* end properly format enclosure url */
++		  
++		  //$f['url'] = $config['rootUrl'] . '/getFile.php/' . $f['filename'] . '?audio=1&amp;id=' . $prg-&gt;id . '&amp;filename=' . $f['filename'];
++		  //$f['url'] = $config['rootUrl'] . '/getFile.php?audio=1&amp;id=' . $prg-&gt;id . '&amp;filename=' . $f['filename'];
++		  $baseUrl = sotf_Node::getHomeNodeRootUrl($prg);
++		  //$f['url'] = $baseUrl . '/getFile.php/fid__' . $f['id'].&quot;.mp3&quot;; // wreutz: very dirty hack for ipooder to work on os x
++		  $f['url'] = $baseUrl . '/getFile.php/' . 'fid__' . $f['id']. '__' . $fname.&quot;.mp3&quot;; //rjankowski changed order to get parsed by getFile.php
++		  // rama: included $fname as formatted name $station-$series-$title
++		  return $f;
++		}
+ 	 }
+   }
+   /*
+-  if(!$retval) {
++  if(!$retval and is_array($files)) {
+ 	 foreach($files as $f) {
+ 		if($f['stream_access']=='t') {
+ 		  $f['url'] = $config['rootUrl'] . '/listen.php?id=' . $prg-&gt;id . '&amp;fileid=' . $f['id'];
+@@ -83,9 +125,23 @@
+   global $config;
+   $rss .= &quot;\n\n&lt;item&gt;&quot;;
+   writeTag($rss, &quot;title&quot;, $prog-&gt;get('title'));
++  
++  /* 08.02.06 start rama hack to print roles */
++  $roleArr = $prog-&gt;getRoles();
++  $roleArrSize = count($roleArr);
++  for ($i=0 ; $i &lt; $roleArrSize ; $i++) {
++  	$role_name = $roleArr[$i][&quot;role_name&quot;];
++	$contact_name = $roleArr[$i][&quot;contact_data&quot;][&quot;name&quot;];
++	//$role_info = &quot;$contact_name, $role_name&quot;;
++	$role_info = array('contact_name' =&gt; $contact_name, 'role_name' =&gt; $role_name);
++  	writeTag($rss, &quot;roles&quot;, NULL, NULL, $role_info);
++  }
++  /* end rama hack to print roles */
++  
+   writeTag($rss, &quot;link&quot;, $config['rootUrl'] . &quot;/get.php?id=&quot;.$prog-&gt;id);
+   writeTag($rss, &quot;pubDate&quot;, toW3CDate($prog-&gt;get('entry_date')));
+   writeTag($rss, &quot;description&quot;, $prog-&gt;get('abstract'));
++  writeTag($rss, &quot;BroadcastDate&quot;, toW3CDate($prog-&gt;get('broadcast_date')));
+   $audioAttrs = selectAudio($prog);
+   if($audioAttrs) {
+ 	 //$filepath = $prog-&gt;getFilePath($audioAttrs);
+@@ -98,6 +154,18 @@
+ 							  );
+ 	 writeTag($rss, &quot;enclosure&quot;, NULL, NULL, $enclAttrs);
+   }
++  $streamAttrs = selectStream($prog);
++  if($streamAttrs) {
++       //$filepath = $prog-&gt;getFilePath($audioAttrs);
++       //$tmpFile = linkAudio($filepath, $audioAttrs);
++       $enclAttrs = array('type' =&gt; 'audio/mpeg',
++                                                        'length' =&gt; $streamAttrs['filesize'],
++                                                        //'url' =&gt; $config['tmpUrl'] . '/' . basename($tmpFile),
++                                                        'url' =&gt; $streamAttrs['url'],
++                                                        //'url' =&gt; $config['tmpUrl'] . '/' . 'au_011pr105_budh1204_24kbps_1chn_22050Hz.mp3',
++                                                        );
++       writeTag($rss, &quot;streamurl&quot;, NULL, NULL, $enclAttrs);
++  }
+   $rss .= &quot;\n&lt;/item&gt;&quot;;
+ }
+ 
+@@ -163,10 +231,12 @@
+ 	 }
+ 
+ 	 // add items
+-	 $newProgs = $series-&gt;listProgrammes(0, ITEMS_IN_RSS);
++	 $newProgs = $series-&gt;listProgrammes(0, $items);
+ 	 //debug(&quot;progs&quot;, $newProgs);
+-	 foreach($newProgs as $prog) {
+-		addItem($rss, $prog);
++	 if(is_array($newProgs)) {
++		foreach($newProgs as $prog) {
++		  addItem($rss, $prog);
++		}
+ 	 }
+ 	 $rss .= &quot;\n&lt;/channel&gt;&quot;;
+ 
+@@ -185,6 +255,7 @@
+   // define channel
+   $rss .= &quot;\n&lt;channel&gt;&quot;;
+   writeTag($rss, &quot;title&quot;, $station-&gt;get('name'));
++  
+   writeTag($rss, &quot;link&quot;, $config['rootUrl'] . &quot;/showStation.php/&quot; . $station-&gt;id);
+   writeTag($rss, &quot;language&quot;, $station-&gt;get2LetterLanguageCode());
+   writeTag($rss, &quot;description&quot;, $station-&gt;get('description'));
+@@ -205,10 +276,12 @@
+   }
+ 
+   // add items
+-  $newProgs = $station-&gt;listProgrammes(0, ITEMS_IN_RSS);
++  $newProgs = $station-&gt;listProgrammes(0, $items);
+   //debug(&quot;progs&quot;, $newProgs);
+-  foreach($newProgs as $prog) {
+-	 addItem($rss, $prog);
++  if(is_array($newProgs)) {
++	 foreach($newProgs as $prog) {
++		addItem($rss, $prog);
++	 }
+   }
+   
+   /*
+@@ -252,7 +325,7 @@
+   $rss .= &quot;\n&lt;/image&gt;&quot;;
+ 
+   $query = $advsearch-&gt;GetSQLCommand();
+-  $res = $db-&gt;limitQuery($query, 0, ITEMS_IN_RSS);
++  $res = $db-&gt;limitQuery($query, 0, $items);
+   $hits = array();
+   while (DB_OK === $res-&gt;fetchInto($row)) {
+ 	 //$row['icon'] = sotf_Blob::cacheIcon($row['id']);
+@@ -279,4 +352,4 @@
+ 
+ $page-&gt;logRequest();
+ 
+-?&gt;
+\ No newline at end of file
++?&gt;
+
+Modified: node/trunk/www/rss.php
+===================================================================
+--- node/trunk/www/rss.php	2006-04-06 16:40:43 UTC (rev 551)
++++ node/trunk/www/rss.php	2006-04-10 13:13:13 UTC (rev 552)
+@@ -60,6 +60,7 @@
+ // When generating RSS version 1.0, you may declare additional namespaces that enable the use of 
+ // more property tags defined by extension modules of the RSS specification.
+ $rss_writer_object-&gt;rssnamespaces[&quot;dc&quot;]=&quot;<A HREF="http://purl.org/dc/elements/1.1/">http://purl.org/dc/elements/1.1/</A>&quot;;
++$rss_writer_object-&gt;allownoitems = 1;
+ 
+ // do the job, fill in RSS
+ if($prgId) {
+@@ -230,15 +231,17 @@
+ 	 // add items
+ 	 $newProgs = $series-&gt;listProgrammes($from, $count);
+ 	 //debug(&quot;progs&quot;, $newProgs);
+-	 foreach($newProgs as $prog) {
+-		$properties=array();
+-		$properties[&quot;description&quot;]= $prog-&gt;get('abstract');
+-		$properties[&quot;link&quot;]= $config['rootUrl'] . &quot;/get.php?id=&quot;.$prog-&gt;id;
+-		$properties[&quot;title&quot;]= $prog-&gt;get('title');
+-		if($prog-&gt;get('production_date')) {
+-		  $properties[&quot;dc:date&quot;]= toW3CDate($prog-&gt;get('production_date'));
++	 if(is_array($newProgs)) {
++		foreach($newProgs as $prog) {
++		  $properties=array();
++		  $properties[&quot;description&quot;]= $prog-&gt;get('abstract');
++		  $properties[&quot;link&quot;]= $config['rootUrl'] . &quot;/get.php?id=&quot;.$prog-&gt;id;
++		  $properties[&quot;title&quot;]= $prog-&gt;get('title');
++		  if($prog-&gt;get('production_date')) {
++			 $properties[&quot;dc:date&quot;]= toW3CDate($prog-&gt;get('production_date'));
++		  }
++		  $rss_writer_object-&gt;additem($properties);
+ 		}
+-		$rss_writer_object-&gt;additem($properties);
+ 	 }
+ 
+ 	 /*
+@@ -293,17 +296,18 @@
+ 		  // add items
+ 		  $newProgs = $station-&gt;listProgrammes($from, $count);
+ 		  //debug(&quot;progs&quot;, $newProgs);
+-		  foreach($newProgs as $prog) {
+-			 $properties=array();
+-			 $properties[&quot;description&quot;]= $prog-&gt;get('abstract');
+-			 $properties[&quot;link&quot;]= $config['rootUrl'] . &quot;/get.php?id=&quot;.$prog-&gt;id;
+-			 $properties[&quot;title&quot;]= $prog-&gt;get('title');
+-			 if($prog-&gt;get('production_date')) {
+-				$properties[&quot;dc:date&quot;]= toW3CDate($prog-&gt;get('production_date'));
++		  if(is_array($newProgs)) {
++			 foreach($newProgs as $prog) {
++				$properties=array();
++				$properties[&quot;description&quot;]= $prog-&gt;get('abstract');
++				$properties[&quot;link&quot;]= $config['rootUrl'] . &quot;/get.php?id=&quot;.$prog-&gt;id;
++				$properties[&quot;title&quot;]= $prog-&gt;get('title');
++				if($prog-&gt;get('production_date')) {
++				  $properties[&quot;dc:date&quot;]= toW3CDate($prog-&gt;get('production_date'));
++				}
++				$rss_writer_object-&gt;additem($properties);
+ 			 }
+-			 $rss_writer_object-&gt;additem($properties);
+ 		  }
+-
+ 		  // define search box
+ 		  $properties=array();
+ 		  // The name of the text input form field
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000147.html">[Sotf-general] Node 666 moved to SVN
+</A></li>
+	<LI>Next message: <A HREF="000145.html">[Sotf-general] r552 - node/trunk/www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#143">[ date ]</a>
+              <a href="thread.html#143">[ thread ]</a>
+              <a href="subject.html#143">[ subject ]</a>
+              <a href="author.html#143">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

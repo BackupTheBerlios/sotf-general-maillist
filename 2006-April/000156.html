@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r555 - node/trunk/code/classes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r555%20-%20node/trunk/code/classes&In-Reply-To=%3C200604131632.k3DGWxIE031973%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000151.html">
+   <LINK REL="Next"  HREF="000157.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r555 - node/trunk/code/classes</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r555%20-%20node/trunk/code/classes&In-Reply-To=%3C200604131632.k3DGWxIE031973%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r555 - node/trunk/code/classes">buddhafly at berlios.de
+       </A><BR>
+    <I>Thu Apr 13 18:32:59 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000151.html">[Sotf-general] r554 - in node/trunk: code/templates www
+</A></li>
+        <LI>Next message: <A HREF="000157.html">[Sotf-general] Invitation to present StreamOnTheFly at XTECH 2006 in Amsterdam May 17th
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#156">[ date ]</a>
+              <a href="thread.html#156">[ thread ]</a>
+              <a href="subject.html#156">[ subject ]</a>
+              <a href="author.html#156">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-04-13 18:32:50 +0200 (Thu, 13 Apr 2006)
+New Revision: 555
+
+Modified:
+   node/trunk/code/classes/sotf_ComplexNodeObject.class.php
+Log:
+change size of icons - bug fixed
+
+
+Modified: node/trunk/code/classes/sotf_ComplexNodeObject.class.php
+===================================================================
+--- node/trunk/code/classes/sotf_ComplexNodeObject.class.php	2006-04-12 10:37:20 UTC (rev 554)
++++ node/trunk/code/classes/sotf_ComplexNodeObject.class.php	2006-04-13 16:32:50 UTC (rev 555)
+@@ -366,13 +366,8 @@
+ 		$newsize = $newwidth . &quot;x&quot; . $newheight;
+ 
+ 		debug(&quot;resizing image&quot;, $newsize);
+-
+ 		
+-		// ------- Change from wolfi_fhstp and buddhafly (Change size of person icons) -----------	
+-		$cmd = &quot;convert $imgfile -resize $newsize $newfile 2&gt;&amp;1&quot;;
+-		// when this line doesn&#180;t work, use this line:
+-		//$cmd = '&quot;' . $config['magickDir'] . &quot;/convert\&quot; $imgfile -resize $newsize $newfile 2&gt;&amp;1&quot;;	
+-		//---------------------------------------------------------------------------------------
++		$cmd = '&quot;' . $config['magickDir'] . &quot;/convert\&quot; $imgfile -resize $newsize $newfile 2&gt;&amp;1&quot;;	
+ 		
+ 		debug(&quot;resize command&quot;, $cmd);
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000151.html">[Sotf-general] r554 - in node/trunk: code/templates www
+</A></li>
+	<LI>Next message: <A HREF="000157.html">[Sotf-general] Invitation to present StreamOnTheFly at XTECH 2006 in Amsterdam May 17th
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#156">[ date ]</a>
+              <a href="thread.html#156">[ thread ]</a>
+              <a href="subject.html#156">[ subject ]</a>
+              <a href="author.html#156">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

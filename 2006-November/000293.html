@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r597 - in node/branches/payable: code/classes	code/configs code/doc code/templates www www/static
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r597%20-%20in%20node/branches/payable%3A%20code/classes%0A%09code/configs%20code/doc%20code/templates%20www%20www/static&In-Reply-To=%3C200611182128.kAILSfgU025335%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000292.html">
+   <LINK REL="Next"  HREF="000294.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r597 - in node/branches/payable: code/classes	code/configs code/doc code/templates www www/static</H1>
+    <B>micsik at BerliOS</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r597%20-%20in%20node/branches/payable%3A%20code/classes%0A%09code/configs%20code/doc%20code/templates%20www%20www/static&In-Reply-To=%3C200611182128.kAILSfgU025335%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r597 - in node/branches/payable: code/classes	code/configs code/doc code/templates www www/static">micsik at mail.berlios.de
+       </A><BR>
+    <I>Sat Nov 18 22:28:41 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000292.html">[Sotf-general] r596 - in node/branches/payable: code/doc code/share	code/templates www www/static
+</A></li>
+        <LI>Next message: <A HREF="000294.html">[Sotf-general] problem with itunes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#293">[ date ]</a>
+              <a href="thread.html#293">[ thread ]</a>
+              <a href="subject.html#293">[ subject ]</a>
+              <a href="author.html#293">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: micsik
+Date: 2006-11-18 22:28:40 +0100 (Sat, 18 Nov 2006)
+New Revision: 597
+
+Modified:
+   node/branches/payable/code/classes/sotf_Programme.class.php
+   node/branches/payable/code/configs/eng.conf
+   node/branches/payable/code/configs/fra.conf
+   node/branches/payable/code/configs/ger.conf
+   node/branches/payable/code/configs/hun.conf
+   node/branches/payable/code/doc/README.protected-content.txt
+   node/branches/payable/code/templates/getPromotedContent.htm
+   node/branches/payable/code/templates/getProtectedContent.htm
+   node/branches/payable/www/index.php
+   node/branches/payable/www/static/main.css
+Log:
+Minor fixes.
+
+
+Modified: node/branches/payable/code/classes/sotf_Programme.class.php
+===================================================================
+--- node/branches/payable/code/classes/sotf_Programme.class.php	2006-11-15 15:47:34 UTC (rev 596)
++++ node/branches/payable/code/classes/sotf_Programme.class.php	2006-11-18 21:28:40 UTC (rev 597)
+@@ -384,6 +384,20 @@
+    *   QUERIES
+    ************************************************/
+ 
++  function getPromotedProgrammes() {
++	 global $config, $db;
++	 $sql = &quot;SELECT i.* FROM sotf_programmes i, sotf_stations s WHERE i.free_content='t' AND i.promoted='t' AND i.station_id = s.id AND i.published='t' AND i.type='sound' ORDER BY i.title&quot;;
++	 $res =	$db-&gt;query($sql);
++	 if(DB::isError($res))
++		raiseError($res);
++	 $results = null;
++	 while (DB_OK === $res-&gt;fetchInto($row)) {
++		$row['icon'] = sotf_Blob::cacheIcon2($row);
++		$results[] = $row;
++	 }
++	 return $results;
++  }
++
+   /** get news for index page, mode can be: all, free, promoted, premium */
+   function getNewProgrammes($fromDay, $maxItems, $mode='all') {
+ 	 global $config, $db;
+
+Modified: node/branches/payable/code/configs/eng.conf
+===================================================================
+--- node/branches/payable/code/configs/eng.conf	2006-11-15 15:47:34 UTC (rev 596)
++++ node/branches/payable/code/configs/eng.conf	2006-11-18 21:28:40 UTC (rev 597)
+@@ -23,6 +23,10 @@
+ optional = optional
+ Metadata = Metadata
+ 
++# for payable extension
++Promoted_show = Protected show
++Premium_show = Premium show
++
+ contact_node_admin = You may contact the node administrator at:
+ 
+ # stream info
+
+Modified: node/branches/payable/code/configs/fra.conf
+===================================================================
+--- node/branches/payable/code/configs/fra.conf	2006-11-15 15:47:34 UTC (rev 596)
++++ node/branches/payable/code/configs/fra.conf	2006-11-18 21:28:40 UTC (rev 597)
+@@ -23,6 +23,10 @@
+ optional = facultatif
+ Metadata = m&#233;ta-donn&#233;es
+ 
++# for payable extension
++Promoted_show = Protected show !!
++Premium_show = Premium show !!
++
+ contact_node_admin = Vous pouvez contacter l'administrateur de noeud &#224;:
+ 
+ # stream info
+
+Modified: node/branches/payable/code/configs/ger.conf
+===================================================================
+--- node/branches/payable/code/configs/ger.conf	2006-11-15 15:47:34 UTC (rev 596)
++++ node/branches/payable/code/configs/ger.conf	2006-11-18 21:28:40 UTC (rev 597)
+@@ -23,6 +23,10 @@
+ optional = optional
+ Metadata = Metadaten
+ 
++# for payable extension
++Promoted_show = Protected show !!
++Premium_show = Premium show !!
++
+ contact_node_admin = Node administrator:
+ 
+ # stream info
+
+Modified: node/branches/payable/code/configs/hun.conf
+===================================================================
+--- node/branches/payable/code/configs/hun.conf	2006-11-15 15:47:34 UTC (rev 596)
++++ node/branches/payable/code/configs/hun.conf	2006-11-18 21:28:40 UTC (rev 597)
+@@ -23,6 +23,10 @@
+ optional = opcion&#225;lis
+ Metadata = Metaadatok
+ 
++# for payable extension
++Promoted_show = Aj&#225;nlott m&#369;sor
++Premium_show = Pr&#233;mium m&#369;sor
++
+ contact_node_admin = A csom&#243;pont rendszergazd&#225;ja ezen a c&#237;men &#233;rhet&#337; el:
+ 
+ # stream info
+@@ -68,7 +72,7 @@
+ advSearch = R&#233;szletes keres&#233;s
+ Stations = R&#225;di&#243;k
+ Topics = T&#233;m&#225;k
+-Partner = t&#225;rs / egy&#252;ttm&#252;k&#246;d&#233;s ?? !!
++Partner = Partnerek
+ 
+ #Admin tabs &amp; general
+ Network = H&#225;l&#243;zat &#233;s &#225;ltal&#225;nos
+
+Modified: node/branches/payable/code/doc/README.protected-content.txt
+===================================================================
+--- node/branches/payable/code/doc/README.protected-content.txt	2006-11-15 15:47:34 UTC (rev 596)
++++ node/branches/payable/code/doc/README.protected-content.txt	2006-11-18 21:28:40 UTC (rev 597)
+@@ -17,6 +17,10 @@
+ 
+ - you have to merge back your config file and any local changes from the previous setup
+ 
++- two new entries need to be added to the config file node/www/config.inc.php:
++  $config['payableMode'] = true;
++  $config['currency'] = 'EUR';
++
+ - then you have to run the relevant entries at the end of code/share/update.sql on your
+ database
+ 
+
+Modified: node/branches/payable/code/templates/getPromotedContent.htm
+===================================================================
+--- node/branches/payable/code/templates/getPromotedContent.htm	2006-11-15 15:47:34 UTC (rev 596)
++++ node/branches/payable/code/templates/getPromotedContent.htm	2006-11-18 21:28:40 UTC (rev 597)
+@@ -11,7 +11,7 @@
+           &lt;table&gt;&lt;tr&gt;&lt;td bgcolor=&quot;#FF0000&quot;&gt;&lt;b&gt;&lt;font color=&quot;#FFFFFF&quot;&gt;{#unpublished_warning#}&lt;/font&gt;&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+           {/if}
+           &lt;font size=&quot;-1&quot;&gt;{#prog#}:&lt;/font&gt;
+-          &lt;br&gt;{$PRG_DATA.title} &lt;b&gt;PROMOTED!&lt;/b&gt;
++          &lt;br&gt;{$PRG_DATA.title} &lt;div class=&quot;progType&quot;&gt;{#Promoted_show#}&lt;/div&gt;
+         &lt;/td&gt;
+         &lt;td class=&quot;title2&quot;&gt;
+           &lt;a href=&quot;#general&quot;&gt;{#Metadata#}&lt;/a&gt;{if $ROLES}, &lt;a href=&quot;#roles&quot;&gt;{#Roles#}&lt;/a&gt;{/if}{if $RIGHTS}, &lt;a href=&quot;#rights&quot;&gt;{#Rights#}&lt;/a&gt;{/if},
+
+Modified: node/branches/payable/code/templates/getProtectedContent.htm
+===================================================================
+--- node/branches/payable/code/templates/getProtectedContent.htm	2006-11-15 15:47:34 UTC (rev 596)
++++ node/branches/payable/code/templates/getProtectedContent.htm	2006-11-18 21:28:40 UTC (rev 597)
+@@ -11,7 +11,7 @@
+           &lt;table&gt;&lt;tr&gt;&lt;td bgcolor=&quot;#FF0000&quot;&gt;&lt;b&gt;&lt;font color=&quot;#FFFFFF&quot;&gt;{#unpublished_warning#}&lt;/font&gt;&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+           {/if}
+           &lt;font size=&quot;-1&quot;&gt;{#prog#}:&lt;/font&gt;
+-          &lt;br&gt;{$PRG_DATA.title} &lt;b&gt;PREMIUM!&lt;/b&gt;
++          &lt;br&gt;{$PRG_DATA.title} &lt;div class=&quot;progType&quot;&gt;{#Premium_show#}&lt;/div&gt;
+         &lt;/td&gt;
+         &lt;td class=&quot;title2&quot;&gt;
+           &lt;a href=&quot;#general&quot;&gt;{#Metadata#}&lt;/a&gt;{if $ROLES}, &lt;a href=&quot;#roles&quot;&gt;{#Roles#}&lt;/a&gt;{/if}{if $RIGHTS}, &lt;a href=&quot;#rights&quot;&gt;{#Rights#}&lt;/a&gt;{/if},
+
+Modified: node/branches/payable/www/index.php
+===================================================================
+--- node/branches/payable/www/index.php	2006-11-15 15:47:34 UTC (rev 596)
++++ node/branches/payable/www/index.php	2006-11-18 21:28:40 UTC (rev 597)
+@@ -101,8 +101,10 @@
+ }
+ 
+ if(nodeConfig('payableMode')) {
+-  $smarty-&gt;assign('PREMIUM', sotf_Programme::getNewProgrammes($fromDay, $maxItemsIndexPage, 'premium'));
+-  $smarty-&gt;assign('PROMOTED', sotf_Programme::getNewProgrammes($fromDay, 3, 'promoted'));
++  $fromDayPremium = date('Y-m-d', time() - (60*60*24*90));
++  $maxItemsPremium = 7;
++  $smarty-&gt;assign('PREMIUM', sotf_Programme::getNewProgrammes($fromDayPremium, $maxItemsPremium, 'premium'));
++  $smarty-&gt;assign('PROMOTED', sotf_Programme::getPromotedProgrammes());
+ }
+ 
+ // get topics with most content
+
+Modified: node/branches/payable/www/static/main.css
+===================================================================
+--- node/branches/payable/www/static/main.css	2006-11-15 15:47:34 UTC (rev 596)
++++ node/branches/payable/www/static/main.css	2006-11-18 21:28:40 UTC (rev 597)
+@@ -164,4 +164,8 @@
+ 
+ .premiumList {
+   background: #ccddcc;
++}
++
++.progType { 
++  font-size: 80%;
+ }
+\ No newline at end of file
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000292.html">[Sotf-general] r596 - in node/branches/payable: code/doc code/share	code/templates www www/static
+</A></li>
+	<LI>Next message: <A HREF="000294.html">[Sotf-general] problem with itunes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#293">[ date ]</a>
+              <a href="thread.html#293">[ thread ]</a>
+              <a href="subject.html#293">[ subject ]</a>
+              <a href="author.html#293">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

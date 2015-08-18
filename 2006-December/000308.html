@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] getting things on...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-December/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20getting%20things%20on...&In-Reply-To=%3C457BF9D1.50608%40yaya23.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000304.html">
+   <LINK REL="Next"  HREF="000305.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] getting things on...</H1>
+    <B>roland</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20getting%20things%20on...&In-Reply-To=%3C457BF9D1.50608%40yaya23.net%3E"
+       TITLE="[Sotf-general] getting things on...">janki at yaya23.net
+       </A><BR>
+    <I>Sun Dec 10 13:13:05 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000304.html">[Sotf-general] getting things on...
+</A></li>
+        <LI>Next message: <A HREF="000305.html">[Sotf-general] r600 - node/trunk/code/classes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#308">[ date ]</a>
+              <a href="thread.html#308">[ thread ]</a>
+              <a href="subject.html#308">[ subject ]</a>
+              <a href="author.html#308">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Husinsky Matthias wrote:
+&gt;<i> we would like to contribute our changes into the svn tree.
+</I>&gt;<i> unfortunately we did not recieve a lot of feedback after our last
+</I>&gt;<i> call to test our node at <A HREF="http://sotf.fh-stpoelten.ac.at/node_884/">http://sotf.fh-stpoelten.ac.at/node_884/</A>
+</I>
+hey matthias + othe video node coders,
+
+some weeks ago i did some testing of the video node code with my own
+install at <A HREF="http://video.xaok.org">http://video.xaok.org</A>
+
+well basically i did some tuning on ffmpeg parameters to render
+h.264 / avc comliant output and better quality divx output
+(if that is of interest for the list i can post my config changes)
+and updated to getid3-1.7.7
+
+after christmas until end of january i could do some more serious
+testing and bug reporting on the video part. is somebody willing
+to do some coding/bugfixing on the backend side?
+
+in short, most problems i found were related to ffmpeg and getid3,
+with actual ffmpeg from CVS things got better. an update to
+getid3 2.0 might improve the situation but probably another
+way of handling formats not supported by getid3/ffmpeg has to be
+introduced ogginfo / ffmpeg2theora would be candidates.
+
+despite of these format problems i would consider the video extension
+as quite stable. if some short term funding for hardware can be aquired
+spektral.at and medienwahn.at people are planing to do a public
+creative commons local short film archive based on the video node code
+in january.
+
+is there any test node for the payable extension yet?
+
+from my point of view best would be to merge video extension and
+payable code back to one trunk - with an on/off switch for video
+file import/handling in the config (as some nodes want audio only
+and every feature brings his bugs...)
+
+regards
+roland jankowski
+
+
+
+
+
+
+
+
+&gt;<i> anyway, we are confident that the version we developed works stable.
+</I>&gt;<i> it surely still has some issues but most of those were beyond our
+</I>&gt;<i> scope of restructuring the interface.
+</I>&gt;<i> 
+</I>&gt;<i> but before we can even think about merging our source into the tree
+</I>&gt;<i> we first should get an overview of what is already here and where to
+</I>&gt;<i> put our code.
+</I>&gt;<i> 
+</I>&gt;<i> at the moment there is one trunk and 3 branches to be found in
+</I>&gt;<i> berlios' svn: * trunk: this is probably the latest stable audio node
+</I>&gt;<i> release, like the nodes running at
+</I>&gt;<i> <A HREF="http://medienarchiv.fh-stpoelten.ac.at">http://medienarchiv.fh-stpoelten.ac.at</A> or
+</I>&gt;<i> <A HREF="http://radio.sztaki.hu/node/">http://radio.sztaki.hu/node/</A> * branch: payable - the payable etension
+</I>&gt;<i> andras developed in the recent months. i guess it is based on the
+</I>&gt;<i> trunk. * branch: video_test: the video capable version of sotf
+</I>&gt;<i> developed mainly by martin schmidt. we built our current version upon
+</I>&gt;<i> this one. * branch: sztaki_dsd: assumably one of sztaki's
+</I>&gt;<i> developements, but no further details available
+</I>&gt;<i> 
+</I>&gt;<i> is this correct?
+</I>&gt;<i> 
+</I>&gt;<i> looking at these proceedings i would like to ask the question where
+</I>&gt;<i> to go from here. we do have a trunk and two branches. we're obviously
+</I>&gt;<i> going to merge our source into the video_test branch as this was our
+</I>&gt;<i> basis. then, how do we cope with the different versions? a move from
+</I>&gt;<i> the sysadmins to our video branch would be preferrable for the
+</I>&gt;<i> following reasons: - the video node can also be used as pure audio
+</I>&gt;<i> node (by switch in the config). - the video node will then have a WAI
+</I>&gt;<i> conform interface that can be styled via pure css - audio and video
+</I>&gt;<i> nodes can coexist in a network nevertheless it is important that all
+</I>&gt;<i> the nodes on the network update to the new version since only the new
+</I>&gt;<i> nodes (even if they provide audio only) can pass the video metadata
+</I>&gt;<i> on to other nodes. as soon as two video providing nodes are on the
+</I>&gt;<i> network, this is nescessary. we did quite some tests to proove that
+</I>&gt;<i> it is working.
+</I>&gt;<i> 
+</I>&gt;<i> what do you think is best? we obviously should discuss this in detail
+</I>&gt;<i> as the video extension is a major step in the network's history. it
+</I>&gt;<i> would probably be best if we set up a new test network on different
+</I>&gt;<i> locations to proove it extensively before we do the final move. we'll
+</I>&gt;<i> start with a clean node next week an will provide the source for you
+</I>&gt;<i> to test.
+</I>&gt;<i> 
+</I>&gt;<i> finally, we'll need somebody with the access permission to the svn
+</I>&gt;<i> (and also the experience with merging) to help us since we don't have
+</I>&gt;<i> either of those.
+</I>&gt;<i> 
+</I>&gt;<i> thanks for your attention - i hope we'll get lots of feedback. all
+</I>&gt;<i> the best, matthias
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --- DI(FH) Matthias Husinsky Referat F&amp;E Fachhochschule St.P&#246;lten 
+</I>&gt;<i> _______________________________________________ Sotf-general mailing
+</I>&gt;<i> list <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A> 
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">https://lists.berlios.de/mailman/listinfo/sotf-general</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000304.html">[Sotf-general] getting things on...
+</A></li>
+	<LI>Next message: <A HREF="000305.html">[Sotf-general] r600 - node/trunk/code/classes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#308">[ date ]</a>
+              <a href="thread.html#308">[ thread ]</a>
+              <a href="subject.html#308">[ subject ]</a>
+              <a href="author.html#308">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

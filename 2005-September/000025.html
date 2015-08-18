@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] syncing sendungsarchiv.094.at to the node-network
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2005-September/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20syncing%20sendungsarchiv.094.at%20to%20the%20node-network&In-Reply-To=%3C43269387.5090507%40dsd.sztaki.hu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000023.html">
+   <LINK REL="Next"  HREF="000026.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] syncing sendungsarchiv.094.at to the node-network</H1>
+    <B>Micsik Andr&#225;s</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20syncing%20sendungsarchiv.094.at%20to%20the%20node-network&In-Reply-To=%3C43269387.5090507%40dsd.sztaki.hu%3E"
+       TITLE="[Sotf-general] syncing sendungsarchiv.094.at to the node-network">micsik at dsd.sztaki.hu
+       </A><BR>
+    <I>Tue Sep 13 10:53:27 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000023.html">[Sotf-general] syncing sendungsarchiv.094.at to the node-network
+</A></li>
+        <LI>Next message: <A HREF="000026.html">[Sotf-general] syncing sendungsarchiv.094.at to the node-network
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#25">[ date ]</a>
+              <a href="thread.html#25">[ thread ]</a>
+              <a href="subject.html#25">[ subject ]</a>
+              <a href="author.html#25">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+there is problem with this object:
+
+[12-Sep-2005 17:52:19] 62.116.13.181: :
+Array
+(
+     [id] =&gt; 094co17
+     [last_change] =&gt; 2005-06-19 23:29:28+02
+     [change_stamp] =&gt; 2
+     [arrived] =&gt; 2005-06-19 23:29:28+02
+     [node_id] =&gt; 94
+     [data] =&gt; Array
+         (
+             [id] =&gt; 094co17
+             [station_id] =&gt; 094st3
+             [name] =&gt; Martin Wassermair
+             [alias] =&gt;
+             [acronym] =&gt; Gesch&#228;ftsf&#252;hrer Public Netbase
+             [intro] =&gt;
+             [email] =&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">wassermair at t0.or.at</A>
+             [address] =&gt;
+             [phone] =&gt;
+             [cellphone] =&gt;
+             [fax] =&gt;
+             [url] =&gt; <A HREF="http://t0.or.at">http://t0.or.at</A>
+             [feedback] =&gt; f
+         )
+
+)
+
+SQL error!. ERROR:  value too long for type character varying(30) in
+  INSERT INTO sotf_contacts(id,station_id,name,alias,acr
+
+Officially, the acronym field is 30 character long, and somehow in this case 
+it is felt more (maybe because of Unicode). Anyway, the acronym is usually 
+shorter than the full name of the person :-). You may use the alias and name 
+fields, both may contain up to 100 characters, or the intro field which can 
+be very long.
+
+Andras
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000023.html">[Sotf-general] syncing sendungsarchiv.094.at to the node-network
+</A></li>
+	<LI>Next message: <A HREF="000026.html">[Sotf-general] syncing sendungsarchiv.094.at to the node-network
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#25">[ date ]</a>
+              <a href="thread.html#25">[ thread ]</a>
+              <a href="subject.html#25">[ subject ]</a>
+              <a href="author.html#25">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

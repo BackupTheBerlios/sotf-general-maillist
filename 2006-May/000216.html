@@ -1,0 +1,2055 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r573 - in node/trunk: code/share www www/help www/help/images www/static
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r573%20-%20in%20node/trunk%3A%20code/share%20www%20www/help%20www/help/images%20www/static&In-Reply-To=%3C200605191250.k4JCom68011815%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000219.html">
+   <LINK REL="Next"  HREF="000217.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r573 - in node/trunk: code/share www www/help www/help/images www/static</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r573%20-%20in%20node/trunk%3A%20code/share%20www%20www/help%20www/help/images%20www/static&In-Reply-To=%3C200605191250.k4JCom68011815%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r573 - in node/trunk: code/share www www/help www/help/images www/static">buddhafly at berlios.de
+       </A><BR>
+    <I>Fri May 19 14:50:48 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000219.html">[Sotf-general] video node testing - second call
+</A></li>
+        <LI>Next message: <A HREF="000217.html">[Sotf-general] r574 - in node/branches/video_test: code/classes code/share code/templates www www/help www/help/images www/static
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#216">[ date ]</a>
+              <a href="thread.html#216">[ thread ]</a>
+              <a href="subject.html#216">[ subject ]</a>
+              <a href="author.html#216">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-05-19 14:50:32 +0200 (Fri, 19 May 2006)
+New Revision: 573
+
+Added:
+   node/trunk/www/help/images/
+   node/trunk/www/help/images/advanced_search.jpg
+   node/trunk/www/help/images/create_new_programme.jpg
+   node/trunk/www/help/images/create_query_1.jpg
+   node/trunk/www/help/images/create_query_2.jpg
+   node/trunk/www/help/images/create_query_3.jpg
+   node/trunk/www/help/images/easy_search_result.jpg
+   node/trunk/www/help/images/interface_overview1.jpg
+   node/trunk/www/help/images/programm_content.jpg
+   node/trunk/www/help/images/programm_feedback.jpg
+   node/trunk/www/help/images/programm_overview.jpg
+   node/trunk/www/help/images/programm_playlist.jpg
+   node/trunk/www/help/images/registration.jpg
+   node/trunk/www/help/images/search_topics.jpg
+   node/trunk/www/help/images/statistic.jpg
+   node/trunk/www/static/
+   node/trunk/www/static/base.js
+   node/trunk/www/static/bg.gif
+   node/trunk/www/static/bg_main.gif
+   node/trunk/www/static/bg_main_LEFT.gif
+   node/trunk/www/static/cal.js
+   node/trunk/www/static/close.png
+   node/trunk/www/static/down.gif
+   node/trunk/www/static/down2.gif
+   node/trunk/www/static/download.gif
+   node/trunk/www/static/i-delete.gif
+   node/trunk/www/static/i-edit.gif
+   node/trunk/www/static/i-news.gif
+   node/trunk/www/static/left.gif
+   node/trunk/www/static/left2.gif
+   node/trunk/www/static/listen.gif
+   node/trunk/www/static/main.css
+   node/trunk/www/static/minus.gif
+   node/trunk/www/static/minusz.gif
+   node/trunk/www/static/next.png
+   node/trunk/www/static/noicon.png
+   node/trunk/www/static/orange.gif
+   node/trunk/www/static/playlist.js
+   node/trunk/www/static/plus.gif
+   node/trunk/www/static/plusz.gif
+   node/trunk/www/static/previous.png
+   node/trunk/www/static/reload.gif
+   node/trunk/www/static/right.gif
+   node/trunk/www/static/right2.gif
+   node/trunk/www/static/rss2html.xsl
+   node/trunk/www/static/sotf_logo.gif
+   node/trunk/www/static/sotfbg.gif
+   node/trunk/www/static/sotflogosmall.gif
+   node/trunk/www/static/stop.gif
+   node/trunk/www/static/top_r1_c1.gif
+   node/trunk/www/static/top_r2_c1.gif
+   node/trunk/www/static/top_r2_c1.jpg
+   node/trunk/www/static/top_r2_c3.gif
+   node/trunk/www/static/top_r2_c3.jpg
+   node/trunk/www/static/top_r3_c1.gif
+   node/trunk/www/static/top_r4_c1.gif
+   node/trunk/www/static/top_r4_c2.gif
+   node/trunk/www/static/transp.gif
+   node/trunk/www/static/transp.png
+   node/trunk/www/static/tree.js
+   node/trunk/www/static/up.gif
+   node/trunk/www/static/up2.gif
+Removed:
+   node/trunk/www/help/images/
+   node/trunk/www/static/
+Modified:
+   node/trunk/code/share/db.sql
+   node/trunk/code/share/update.sql
+Log:
+images renewed
+data types in db changed (video-related fields)
+
+
+Modified: node/trunk/code/share/db.sql
+===================================================================
+--- node/trunk/code/share/db.sql	2006-05-15 10:11:30 UTC (rev 572)
++++ node/trunk/code/share/db.sql	2006-05-19 12:50:32 UTC (rev 573)
+@@ -288,7 +288,7 @@
+ &quot;filesize&quot; int,
+ &quot;last_modified&quot; timestamptz,
+ &quot;play_length&quot; int,
+-&quot;kbps&quot; int2,		-- kilobit per second
++&quot;kbps&quot; int,		-- kilobit per second
+ &quot;vbr&quot; bool DEFAULT 'f'::bool,		-- variable bitrate
+ &quot;type&quot; varchar(10),		-- e.g. audio, video
+ &quot;mime_type&quot; varchar(50),
+@@ -297,10 +297,10 @@
+ &quot;download_access&quot; bool DEFAULT 'f'::bool,	-- if users may download it
+ &quot;main_content&quot; bool DEFAULT 'f'::bool,		-- if this file is a variation of the main programme audio/video or sg. else
+ &quot;codec&quot; varchar(40) DEFAULT NULL,
+-&quot;frame_rate&quot; int DEFAULT NULL,
++&quot;frame_rate&quot; float DEFAULT NULL,
+ &quot;lossless&quot; boolean DEFAULT NULL,
+-&quot;resolution_x&quot; int DEFAULT NULL,
+-&quot;resolution_y&quot; int DEFAULT NULL,
++&quot;resolution_x&quot; float DEFAULT NULL,
++&quot;resolution_y&quot; float DEFAULT NULL,
+ &quot;pixel_aspect_ratio&quot; float DEFAULT NULL,
+ CONSTRAINT &quot;sotf_media_files_u&quot; UNIQUE (&quot;prog_id&quot;, &quot;filename&quot;),
+ CONSTRAINT &quot;to_progs&quot; FOREIGN KEY(&quot;prog_id&quot;) REFERENCES sotf_programmes(&quot;id&quot;) ON DELETE CASCADE
+
+Modified: node/trunk/code/share/update.sql
+===================================================================
+--- node/trunk/code/share/update.sql	2006-05-15 10:11:30 UTC (rev 572)
++++ node/trunk/code/share/update.sql	2006-05-19 12:50:32 UTC (rev 573)
+@@ -214,7 +214,35 @@
+ ALTER TABLE sotf_media_files ADD COLUMN &quot;codec&quot; varchar(40) NULL;
+ ALTER TABLE sotf_media_files ADD COLUMN &quot;frame_rate&quot; int NULL;
+ ALTER TABLE sotf_media_files ADD COLUMN &quot;lossless&quot; boolean NULL;
+-ALTER TABLE sotf_media_files ADD COLUMN &quot;resolution_x&quot; int NULL;
+-ALTER TABLE sotf_media_files ADD COLUMN &quot;resolution_y&quot; int NULL;
++ALTER TABLE sotf_media_files ADD COLUMN &quot;resolution_x&quot; float NULL;
++ALTER TABLE sotf_media_files ADD COLUMN &quot;resolution_y&quot; float NULL;
+ ALTER TABLE sotf_media_files ADD COLUMN &quot;pixel_aspect_ratio&quot; float NULL;
+-COMMIT;
+\ No newline at end of file
++COMMIT;
++
++       BEGIN;
++       ALTER TABLE sotf_media_files ADD COLUMN frame_rate_2 float;
++       UPDATE sotf_media_files SET frame_rate_2 = CAST(frame_rate AS float);
++       ALTER TABLE sotf_media_files DROP COLUMN frame_rate;
++	   ALTER TABLE sotf_media_files RENAME COLUMN frame_rate_2 TO frame_rate;
++       COMMIT;
++	   
++	   BEGIN;
++       ALTER TABLE sotf_media_files ADD COLUMN kbps_2 int;
++       UPDATE sotf_media_files SET kbps_2 = CAST(kbps AS int);
++       ALTER TABLE sotf_media_files DROP COLUMN kbps;
++	   ALTER TABLE sotf_media_files RENAME COLUMN kbps_2 TO kbps;
++       COMMIT;
++	   
++	   BEGIN;
++       ALTER TABLE sotf_media_files ADD COLUMN resolution_x_2 float;
++       UPDATE sotf_media_files SET resolution_x_2 = CAST(resolution_x AS float);
++       ALTER TABLE sotf_media_files DROP COLUMN resolution_x;
++	   ALTER TABLE sotf_media_files RENAME COLUMN resolution_x_2 TO resolution_x;
++       COMMIT;
++	   
++	   BEGIN;
++       ALTER TABLE sotf_media_files ADD COLUMN resolution_y_2 float;
++       UPDATE sotf_media_files SET resolution_y_2 = CAST(resolution_y AS float);
++       ALTER TABLE sotf_media_files DROP COLUMN resolution_y;
++	   ALTER TABLE sotf_media_files RENAME COLUMN resolution_y_2 TO resolution_y;
++       COMMIT;
+\ No newline at end of file
+
+Added: node/trunk/www/help/images/advanced_search.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/advanced_search.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/help/images/create_new_programme.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/create_new_programme.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/help/images/create_query_1.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/create_query_1.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/help/images/create_query_2.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/create_query_2.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/help/images/create_query_3.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/create_query_3.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/help/images/easy_search_result.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/easy_search_result.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/help/images/interface_overview1.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/interface_overview1.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/help/images/programm_content.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/programm_content.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/help/images/programm_feedback.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/programm_feedback.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/help/images/programm_overview.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/programm_overview.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/help/images/programm_playlist.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/programm_playlist.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/help/images/registration.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/registration.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/help/images/search_topics.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/search_topics.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/help/images/statistic.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/help/images/statistic.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/base.js
+===================================================================
+--- node/trunk/www/static/base.js	2006-05-15 10:11:30 UTC (rev 572)
++++ node/trunk/www/static/base.js	2006-05-19 12:50:32 UTC (rev 573)
+@@ -0,0 +1,39 @@
++
++// confirmUnsaved() is declared in main.htm and main_popup.htm as it needs localization via Smarty
++
++function popup(url, name, height, width, scroll) {
++  if(!confirmUnsaved())
++    return;
++	var features = &quot;screenX=350,screenY=300,width=&quot; + width + &quot;,height=&quot; + height +
++		&quot;,menubar=no,resizable=yes,status=no,locationbar=no&quot;;
++	if (scroll) {
++		features +=&quot;,scrollbars=yes&quot;;
++	}
++	var win = window.open(url, name, features);
++	win.focus();
++}
++
++/*
++function redir2(f, url) {
++  f.action = url;
++  f.submit();
++}
++*/
++
++function redir(f, url) {
++  if(!confirmUnsaved())
++    return;
++  window.location.href = url;
++}
++
++function checkIfEmpty(input, message) {
++  if(!input.value) {
++    alert(message);
++    return false;
++  } else
++    return true;
++}
++
++function deleteConfirm(msg) {
++    return confirm(msg);
++}
+
+Added: node/trunk/www/static/bg.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/bg.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/bg_main.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/bg_main.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/bg_main_LEFT.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/bg_main_LEFT.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/cal.js
+===================================================================
+--- node/trunk/www/static/cal.js	2006-05-15 10:11:30 UTC (rev 572)
++++ node/trunk/www/static/cal.js	2006-05-19 12:50:32 UTC (rev 573)
+@@ -0,0 +1,99 @@
++var tags_before_clock = &quot;&lt;span class=date2&gt; // &quot; 
++
++var tags_after_clock  = &quot;// &lt;/span&gt;&quot;
++
++var tags_before_date = &quot;&lt;span class=date&gt;&nbsp;&nbsp;&quot;
++
++var tags_after_date = &quot;&lt;/span&gt; &quot;
++
++
++
++if(navigator.appName == &quot;Netscape&quot;) {
++
++document.write('&lt;div id=&quot;clock&quot;&gt;&lt;/div&gt;');
++
++}
++
++
++
++if (navigator.appVersion.indexOf(&quot;MSIE&quot;) != -1){
++
++document.write('&lt;span id=&quot;clock&quot;&gt;&lt;/span&gt;');
++
++}
++
++
++
++var element = null;
++
++  
++
++function upclock(){ 
++
++  var dte = new Date();
++
++  var hrs = dte.getHours();
++
++  var min = dte.getMinutes(); 
++
++  var sec = dte.getSeconds();
++
++  var year = dte.getYear();
++
++  var day = dte.getDate() ;
++
++  var month = dte.getMonth() + 1;
++
++  var col = &quot;:&quot;;
++
++  var dot = &quot;.&quot;;
++
++  var spc = &quot; &quot;;
++
++
++
++  year = year - 2000;
++
++  if(year&lt;0)year = year + 1900;
++
++  
++
++  if (min&lt;=9) min=&quot;0&quot;+min;
++
++  if (sec&lt;=9) sec=&quot;0&quot;+sec;
++
++  if (hrs&lt;=9) hrs=&quot;0&quot;+hrs;
++
++  if (day&lt;=9) day=&quot;0&quot;+day;
++
++  if (month&lt;=9) month=&quot;0&quot;+month;
++
++  if (year&lt;=9) year=&quot;0&quot;+year;
++
++ 
++
++  if(navigator.appName == &quot;Netscape&quot;){
++
++    if(document.getElementById){
++
++      element = document.getElementById(&quot;clock&quot;);
++
++    }else if(document.all){
++
++      element = document.all[&quot;clock&quot;];
++
++    }else if(document.layers){
++
++      element = document.layers[&quot;clock&quot;];
++
++    }
++
++    element.innerHTML = (tags_before_date+day+dot+month+dot+year+tags_after_date+tags_before_clock+hrs+col+min+col+sec+spc+tags_after_clock);
++
++  }else{
++
++  	clock.innerHTML = (tags_before_date+day+dot+month+dot+year+tags_after_date+tags_before_clock+hrs+col+min+col+sec+spc+tags_after_clock);
++
++  }
++
++}
+\ No newline at end of file
+
+Added: node/trunk/www/static/close.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/close.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/down.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/down.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/down2.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/down2.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/download.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/download.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/i-delete.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/i-delete.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/i-edit.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/i-edit.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/i-news.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/i-news.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/left.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/left.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/left2.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/left2.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/listen.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/listen.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/main.css
+===================================================================
+--- node/trunk/www/static/main.css	2006-05-15 10:11:30 UTC (rev 572)
++++ node/trunk/www/static/main.css	2006-05-19 12:50:32 UTC (rev 573)
+@@ -0,0 +1,129 @@
++BODY { 
++  FONT-SIZE: 13px;
++}
++
++.status {
++	background-color: #FFAAAA; FONT-WEIGHT: bold; FONT-SIZE: 13px; TEXT-TRANSFORM: uppercase; FONT-FAMILY: Tahoma, Verdana, Arial; LETTER-SPACING: 1pt; FONT-VARIANT: normal
++}
++
++.menu {
++	FONT-WEIGHT: bold; FONT-SIZE: 13px; TEXT-TRANSFORM: uppercase; FONT-FAMILY: Tahoma, Verdana, Arial; LETTER-SPACING: 1pt; FONT-VARIANT: normal
++}
++
++A.menu:link {
++	COLOR: #000000; TEXT-DECORATION: none
++}
++A.menu:active {
++	COLOR: #000000; TEXT-DECORATION: none
++}
++A.menu:visited {
++	COLOR: #000000; TEXT-DECORATION: none
++}
++A.menu:hover {
++	COLOR: #ff0000; TEXT-DECORATION: underline
++}
++.date {
++	FONT-WEIGHT: bold; FONT-SIZE: 17px; COLOR: #666666; FONT-FAMILY: Tahoma, Verdana, Arial
++}
++.date2 {
++	FONT-WEIGHT: bold; FONT-SIZE: 13px; COLOR: #666666; FONT-FAMILY: Arial, Helvetica, sans-serif
++}
++TD {
++	FONT-SIZE: 13px; FONT-FAMILY: Tahoma, Verdana, Arial
++}
++TH {
++	FONT-SIZE: 13px; FONT-FAMILY: Tahoma, Verdana, Arial
++}
++.tablebg     { background-image: url(top_r2_c1.gif);
++               background-position: right }
++TR.listhead {
++  background-color: #D3ECF5;
++}
++TR.list2 {
++  background-color: #D3ECF5;
++}
++TR.list1 {
++  background-color: #EFF4FE;
++}
++
++
++TABLE.tabarea {
++  background: #D3ECF5; width: 100%;
++}
++TD.tabarea {
++  background-color: #EFF4FE;
++}
++
++TABLE.tab {
++  background: #A8C3F7; width: 20%;
++}
++TD.tab {
++  FONT-WEIGHT: bold; background-color: #A8C3F7;
++}
++
++TABLE.title {
++  
++}
++TD.title2 {
++  background-color: #F7DCC3;
++}
++TD.titlehead {
++  FONT-WEIGHT: bold; FONT-SIZE: 16px; background: #F0B989;
++}
++
++TD.topic_title2 {
++  FONT-WEIGHT: bold; FONT-SIZE: 16px; background-color: #F7DCC3;
++}
++TD.topic_titlehead {
++  FONT-WEIGHT: bold; background: #F0B989;
++}
++
++TABLE.login {
++  background: #EFF4FE;
++}
++
++.prevnext {
++  background: #A8C3F7; text-align: center; width: 20%;
++}
++
++A.action {
++ COLOR: #000000; border: outset; border-width: thin; background-color: #DDDDDD; TEXT-DECORATION: none; padding: 2px; margin: 3px;
++}
++
++A.goto_object {
++  FONT-WEIGHT: bold; FONT-SIZE: 16px; 
++}
++
++A.playlist {
++  FONT-SIZE: 12px;
++}
++
++A.topicitem {
++  FONT-SIZE: 12px;
++  TEXT-DECORATION: none;
++}
++
++INPUT.action {
++  
++}
++
++INPUT {
++  FONT-SIZE: 13px; FONT-FAMILY: Tahoma, Verdana, Arial;
++}
++
++A {
++  COLOR: #000000; TEXT-DECORATION: underline;
++}
++
++.subheader {
++
++}
++
++.abstract {
++  font-style: italic 
++}
++
++.meta {
++ FONT-WEIGHT: bold; 
++}
++
+
+Added: node/trunk/www/static/minus.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/minus.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/minusz.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/minusz.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/next.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/next.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/noicon.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/noicon.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/orange.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/orange.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/playlist.js
+===================================================================
+--- node/trunk/www/static/playlist.js	2006-05-15 10:11:30 UTC (rev 572)
++++ node/trunk/www/static/playlist.js	2006-05-19 12:50:32 UTC (rev 573)
+@@ -0,0 +1,508 @@
++//&lt;!--
++
++
++
++function selectAllItemsIn(sel) {
++
++        var i = 0;
++
++        while (i &lt; sel.options.length) {
++
++                if (sel.options[i].value != '') {
++
++			//sel.options[i].selected = 1;
++
++			document.forms.taskform.lista.value = document.forms.taskform.lista.value + &quot;|&quot; + sel.options[i].value;
++
++                }
++
++                i++;
++
++        }
++
++	return true; // let form to submit
++
++}
++
++
++
++	var form;	
++
++	var options;
++
++	var lista;
++
++	var firstrun;
++
++	var oidSep;
++
++	
++
++function generate() {
++
++
++
++	form = document.forms.taskform;
++
++	options = form.list.options;
++
++	lista = form.list;
++
++	firstrun = false;
++
++	separator = ' - ';
++
++	oidSep = ':';
++
++
++
++		len = lista.options.length;
++
++		if (lista.options[len-1].value == 'x') {
++
++			len--;
++
++			lista.length = len;
++
++			// last spacer cell delete
++
++				firstrun = true;
++
++		}
++
++
++
++		current = new Array();
++
++
++
++		for (var i=0; i&lt;len; i++) {
++
++
++
++			levelArray = lista.options[i].value.split(oidSep);
++
++			level = 0;		//not needed here
++
++			//level = levelArray[0];
++
++
++
++			if (!current[level]) {
++
++				current[level] = '1';
++
++			}
++
++			else {
++
++				current[level]++;
++
++				level++;
++
++				current[level] = '0';
++
++			}
++
++
++
++			j = 0;
++
++
++
++			if (!firstrun) {			
++
++				pufferArray = options[i].text.split(separator);
++
++				puffer = pufferArray[1];
++
++			} else {
++
++				puffer = options[i].text;
++
++			}
++
++
++
++			options[i].text = '';
++
++			while ((current[j]) &amp;&amp; (current[j] != '0')) {
++
++				options[i].text = options[i].text + current[j] + '.';
++
++				j++;
++
++			}
++
++			options[i].text = options[i].text + separator + puffer; // + separator + options[i].value;
++
++		}
++
++
++
++firstrun=false;
++
++}
++
++
++
++
++
++function moveTop() {
++
++
++
++	form = document.forms.taskform;
++
++	options = form.list.options;
++
++	lista = form.list;
++
++	firstrun = false;
++
++	separator = ' - ';
++
++	oidSep = ':';
++
++
++
++	selected = 0;
++
++	endSelected = 0;
++
++	selectedLen = 0;
++
++	selectPufferVal = new Array();
++
++	selectPufferText = new Array();
++
++	selectPufferOid = new Array();
++
++
++
++	for (var i=0; i&lt;lista.length; i++) {
++
++		if (options[i].selected) {
++
++			selected = i;
++
++			options[i].selected = false;
++
++			i = lista.length;
++
++		}
++
++	}
++
++
++
++
++
++
++
++	for (var i=0; i&lt;options.length; i++) {
++
++		selectPufferText[i] = options[i].text;
++
++		selectPufferVal[i] = options[i].value;
++
++	}
++
++
++
++	for (var i=1; i&lt;selected+1; i++) {
++
++		options[i].text = selectPufferText[i-1];
++
++		options[i].value = selectPufferVal[i-1];
++
++	}
++
++
++
++	lista.options[0].text = selectPufferText[selected];
++
++	lista.options[0].value = selectPufferVal[selected];
++
++	lista.options[0].selected = true;
++
++
++
++
++
++}
++
++
++
++
++
++function moveUp() {
++
++
++
++	form = document.forms.taskform;
++
++	options = form.list.options;
++
++	lista = form.list;
++
++	firstrun = false;
++
++	separator = ' - ';
++
++	oidSep = ':';
++
++
++
++	selected = 0;
++
++	endSelected = 0;
++
++	selectedLen = 0;
++
++	selectPufferVal = new Array();
++
++	selectPufferText = new Array();
++
++	selectPufferOid = new Array();
++
++
++
++	for (var i=0; i&lt;lista.length; i++) {
++
++		if (options[i].selected) {
++
++			selected = i;
++
++			options[i].selected = false;
++
++			i = lista.length;
++
++		}
++
++	}
++
++
++
++	if (selected &gt; 0) {
++
++		selectPufferText[selected-1] = options[selected-1].text;
++
++		options[selected-1].text = options[selected].text;
++
++		options[selected].text = selectPufferText[selected-1];	
++
++
++
++		selectPufferVal[selected-1] = options[selected-1].value;
++
++		options[selected-1].value = options[selected].value;
++
++		options[selected].value = selectPufferVal[selected-1];	
++
++
++
++		options[selected-1].selected = true;
++
++		options[selected].selected = false;
++
++	}
++
++
++
++
++
++
++
++}
++
++
++
++
++
++function moveDown() {
++
++
++
++	form = document.forms.taskform;
++
++	options = form.list.options;
++
++	lista = form.list;
++
++	firstrun = false;
++
++	separator = ' - ';
++
++	oidSep = ':';
++
++
++
++	selected = 0;
++
++	endSelected = 0;
++
++	selectedLen = 0;
++
++	selectPufferVal = new Array();
++
++	selectPufferText = new Array();
++
++	selectPufferOid = new Array();
++
++
++
++	hasSelected = false;
++
++
++
++	for (var i=0; i&lt;lista.length; i++) {
++
++		if (options[i].selected) {
++
++			selected = i;
++
++			options[i].selected = false;
++
++			i = lista.length;
++
++			hasSelected = true;
++
++		}
++
++	}
++
++
++
++	if ((selected &lt; lista.length-1) &amp;&amp; hasSelected) {
++
++		selectPufferText[selected+1] = options[selected+1].text;
++
++		options[selected+1].text = options[selected].text;
++
++		options[selected].text = selectPufferText[selected+1];	
++
++
++
++		selectPufferVal[selected+1] = options[selected+1].value;
++
++		options[selected+1].value = options[selected].value;
++
++		options[selected].value = selectPufferVal[selected+1];	
++
++
++
++		options[selected+1].selected = true;
++
++		options[selected].selected = false;
++
++
++
++	}
++
++
++
++
++
++
++
++}
++
++
++
++
++
++
++
++function moveBottom() {
++
++
++
++	form = document.forms.taskform;
++
++	options = form.list.options;
++
++	lista = form.list;
++
++	firstrun = false;
++
++	separator = ' - ';
++
++	oidSep = ':';
++
++
++
++	selected = 0;
++
++	endSelected = 0;
++
++	selectedLen = 0;
++
++	selectPufferVal = new Array();
++
++	selectPufferText = new Array();
++
++	selectPufferOid = new Array();
++
++	end = lista.length - 1;
++
++
++
++
++
++	for (var i=0; i&lt;lista.length; i++) {
++
++		if (options[i].selected) {
++
++			selected = i;
++
++			options[i].selected = false;
++
++			i = lista.length;
++
++		}
++
++	}
++
++
++
++
++
++	for (var i=0; i&lt;options.length; i++) {
++
++		selectPufferText[i] = options[i].text;
++
++		selectPufferVal[i] = options[i].value;
++
++	}
++
++
++
++
++
++	for (var i=selected; i&lt;end; i++) {
++
++		options[i].text = selectPufferText[i+1];
++
++		options[i].value = selectPufferVal[i+1];
++
++	}
++
++
++
++	lista.options[end].text = selectPufferText[selected];
++
++	lista.options[end].value = selectPufferVal[selected];
++
++	lista.options[end].selected = true;
++
++
++
++	
++
++}
++
++
++
++//--&gt;
++
+
+Added: node/trunk/www/static/plus.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/plus.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/plusz.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/plusz.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/previous.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/previous.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/reload.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/reload.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/right.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/right.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/right2.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/right2.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/rss2html.xsl
+===================================================================
+--- node/trunk/www/static/rss2html.xsl	2006-05-15 10:11:30 UTC (rev 572)
++++ node/trunk/www/static/rss2html.xsl	2006-05-19 12:50:32 UTC (rev 573)
+@@ -0,0 +1,228 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++
++&lt;!--
++
++  @(#) $Id: rss2html.xsl,v 1.4 2005/06/24 14:33:06 wreutz Exp $
++
++  --&gt;
++
++&lt;xsl:stylesheet version=&quot;1.0&quot; xmlns:xsl=&quot;<A HREF="http://www.w3.org/1999/XSL/Transform">http://www.w3.org/1999/XSL/Transform</A>&quot; xmlns:rdf=&quot;<A HREF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">http://www.w3.org/1999/02/22-rdf-syntax-ns#</A>&quot; xmlns:dc=&quot;<A HREF="http://purl.org/dc/elements/1.1/">http://purl.org/dc/elements/1.1/</A>&quot; xmlns:rss=&quot;<A HREF="http://purl.org/rss/1.0/">http://purl.org/rss/1.0/</A>&quot; xmlns=&quot;<A HREF="http://www.w3.org/1999/xhtml">http://www.w3.org/1999/xhtml</A>&quot;&gt;
++
++
++
++&lt;xsl:output method=&quot;html&quot; encoding=&quot;utf-8&quot; /&gt;
++
++
++
++&lt;xsl:template match=&quot;/&quot;&gt;
++
++&lt;html&gt;
++
++&lt;head&gt;
++
++&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=iso-8859-1&quot; /&gt;
++
++&lt;style type=&quot;text/css&quot;&gt;
++
++div.channel-title { font-family: sans-serif, arial, helvetica }
++
++&lt;/style&gt;
++
++&lt;style type=&quot;text/css&quot;&gt;
++
++div.image { font-family: sans-serif, arial, helvetica }
++
++&lt;/style&gt;
++
++&lt;style type=&quot;text/css&quot;&gt;
++
++div.image-description { font-family: sans-serif, arial, helvetica }
++
++&lt;/style&gt;
++
++&lt;style type=&quot;text/css&quot;&gt;
++
++div.item-title { font-family: sans-serif, arial, helvetica }
++
++&lt;/style&gt;
++
++&lt;style type=&quot;text/css&quot;&gt;
++
++div.item-description { font-family: sans-serif, arial, helvetica }
++
++&lt;/style&gt;
++
++&lt;style type=&quot;text/css&quot;&gt;
++
++div.textinput-title { font-family: sans-serif, arial, helvetica }
++
++&lt;/style&gt;
++
++&lt;style type=&quot;text/css&quot;&gt;
++
++div.textinput-form { font-family: sans-serif, arial, helvetica }
++
++&lt;/style&gt;
++
++&lt;title&gt;
++
++&lt;xsl:for-each select=&quot;rdf:RDF/rss:channel&quot;&gt;
++
++&lt;xsl:value-of select=&quot;rss:description&quot;/&gt;
++
++&lt;/xsl:for-each&gt;
++
++&lt;/title&gt;
++
++&lt;/head&gt;
++
++&lt;body&gt;
++
++
++
++&lt;xsl:for-each select=&quot;rdf:RDF/rss:image&quot;&gt;
++
++&lt;center&gt;&lt;div class=&quot;image&quot;&gt;
++
++&lt;xsl:element name=&quot;a&quot;&gt;
++
++	&lt;xsl:attribute name=&quot;href&quot;&gt;&lt;xsl:value-of select=&quot;rss:link&quot;/&gt;&lt;/xsl:attribute&gt;
++
++	&lt;xsl:element name=&quot;img&quot;&gt;
++
++		&lt;xsl:attribute name=&quot;src&quot;&gt;&lt;xsl:value-of select=&quot;rss:url&quot;/&gt;&lt;/xsl:attribute&gt;
++
++		&lt;xsl:attribute name=&quot;alt&quot;&gt;&lt;xsl:value-of select=&quot;rss:title&quot;/&gt;&lt;/xsl:attribute&gt;
++
++		&lt;xsl:attribute name=&quot;border&quot;&gt;0&lt;/xsl:attribute&gt;
++
++	&lt;/xsl:element&gt;
++
++&lt;/xsl:element&gt;
++
++&lt;/div&gt;&lt;/center&gt;
++
++&lt;center&gt;&lt;div class=&quot;image-description&quot;&gt;
++
++&lt;xsl:value-of select=&quot;rss:description&quot;/&gt;
++
++&lt;/div&gt;&lt;/center&gt;
++
++&lt;/xsl:for-each&gt;
++
++
++
++&lt;xsl:for-each select=&quot;rdf:RDF/rss:channel&quot;&gt;
++
++&lt;center&gt;&lt;div class=&quot;channel-title&quot;&gt;
++
++&lt;xsl:element name=&quot;a&quot;&gt;
++
++	&lt;xsl:attribute name=&quot;href&quot;&gt;&lt;xsl:value-of select=&quot;rss:link&quot;/&gt;&lt;/xsl:attribute&gt;
++
++	&lt;xsl:value-of select=&quot;rss:title&quot;/&gt;
++
++	&lt;xsl:text&gt; (&lt;/xsl:text&gt;
++
++	&lt;xsl:value-of select=&quot;dc:date&quot;/&gt;
++
++	&lt;xsl:text&gt;)&lt;/xsl:text&gt;
++
++&lt;/xsl:element&gt;
++
++&lt;/div&gt;&lt;/center&gt;
++
++&lt;/xsl:for-each&gt;
++
++
++
++&lt;ul&gt;
++
++&lt;hr /&gt;
++
++&lt;xsl:for-each select=&quot;rdf:RDF/rss:item&quot;&gt;
++
++&lt;div class=&quot;item-title&quot;&gt;&lt;li&gt;
++
++&lt;xsl:element name=&quot;a&quot;&gt;
++
++	&lt;xsl:attribute name=&quot;href&quot;&gt;&lt;xsl:value-of select=&quot;rss:link&quot;/&gt;&lt;/xsl:attribute&gt;
++
++	&lt;xsl:value-of select=&quot;rss:title&quot;/&gt;
++
++&lt;/xsl:element&gt;
++
++&lt;xsl:text&gt; (&lt;/xsl:text&gt;
++
++&lt;xsl:value-of select=&quot;dc:date&quot;/&gt;
++
++&lt;xsl:text&gt;)&lt;/xsl:text&gt;
++
++&lt;/li&gt;&lt;/div&gt;
++
++&lt;div class=&quot;item-description&quot;&gt;
++
++  &lt;!--   &lt;xsl:copy&gt; --&gt;
++
++   &lt;xsl:value-of select=&quot;rss:description&quot;/&gt;
++
++   &lt;!-- &lt;/xsl:copy&gt; --&gt;
++
++&lt;/div&gt;
++
++&lt;hr /&gt;
++
++&lt;/xsl:for-each&gt;
++
++&lt;/ul&gt;
++
++
++
++&lt;xsl:for-each select=&quot;rdf:RDF/rss:textinput&quot;&gt;
++
++&lt;center&gt;&lt;b&gt;&lt;div class=&quot;textinput-title&quot;&gt;&lt;xsl:value-of select=&quot;rss:description&quot;/&gt;&lt;/div&gt;&lt;/b&gt;&lt;/center&gt;
++
++&lt;xsl:element name=&quot;form&quot;&gt;
++
++	&lt;xsl:attribute name=&quot;action&quot;&gt;&lt;xsl:value-of select=&quot;rss:link&quot;/&gt;&lt;/xsl:attribute&gt;
++
++	&lt;xsl:attribute name=&quot;method&quot;&gt;POST&lt;/xsl:attribute&gt;
++
++	&lt;center&gt;&lt;div class=&quot;textinput-form&quot;&gt;
++
++	&lt;xsl:element name=&quot;input&quot;&gt;
++
++		&lt;xsl:attribute name=&quot;name&quot;&gt;&lt;xsl:value-of select=&quot;rss:name&quot;/&gt;&lt;/xsl:attribute&gt;
++
++		&lt;xsl:attribute name=&quot;type&quot;&gt;text&lt;/xsl:attribute&gt;
++
++	&lt;/xsl:element&gt;
++
++	&lt;xsl:text&gt; &lt;/xsl:text&gt;
++
++	&lt;xsl:element name=&quot;input&quot;&gt;
++
++		&lt;xsl:attribute name=&quot;value&quot;&gt;&lt;xsl:value-of select=&quot;rss:title&quot;/&gt;&lt;/xsl:attribute&gt;
++
++		&lt;xsl:attribute name=&quot;type&quot;&gt;submit&lt;/xsl:attribute&gt;
++
++	&lt;/xsl:element&gt;
++
++&lt;/div&gt;&lt;/center&gt;
++
++&lt;/xsl:element&gt;
++
++&lt;/xsl:for-each&gt;
++
++
++
++&lt;/body&gt;
++
++&lt;/html&gt;
++
++&lt;/xsl:template&gt;
++
++
++
++&lt;/xsl:stylesheet&gt;
++
+
+Added: node/trunk/www/static/sotf_logo.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/sotf_logo.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/sotfbg.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/sotfbg.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/sotflogosmall.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/sotflogosmall.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/stop.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/stop.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/top_r1_c1.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/top_r1_c1.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/top_r2_c1.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/top_r2_c1.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/top_r2_c1.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/top_r2_c1.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/top_r2_c3.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/top_r2_c3.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/top_r2_c3.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/top_r2_c3.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/top_r3_c1.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/top_r3_c1.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/top_r4_c1.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/top_r4_c1.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/top_r4_c2.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/top_r4_c2.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/transp.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/transp.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/transp.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/transp.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/tree.js
+===================================================================
+--- node/trunk/www/static/tree.js	2006-05-15 10:11:30 UTC (rev 572)
++++ node/trunk/www/static/tree.js	2006-05-19 12:50:32 UTC (rev 573)
+@@ -0,0 +1,262 @@
++/* $Id: tree.js,v 1.4 2003/02/04 15:00:34 andras Exp $ */
++
++
++// These scripts were originally found on cooltype.com.
++// Modified 01/01/1999 by Tobias Ratschiller for linuxapps.com
++
++// Modified 7th June 2000 by Brian Birtles for Mozilla 5.0
++// compatibility for phpMyAdmin
++
++// Rewritten and put in a libray 2nd May 2001 by Lo&#239;c Chapeaux
++
++// Test passed with:
++// - Mozilla 0.8.1, 0.9.0, 0.9.1, 0.9.2 for Windows (js enabled
++//    &amp; disabled)
++// - IE5, 5.01, 5.5 for Windows
++// - Netscape 4.75 for Windows
++
++// Test failed (crappy DOM implementations) with:
++// - Opera 5.02 for windows: 'getElementsByTagName' is unsupported
++// - Opera 5.10 to 5.12 for windows, Opera 5+ for Linux: 'style.display' can't
++//   be changed
++// - Konqueror 2+: 'style.display' can't be changed
++
++
++var isExpanded   = false;
++
++var imgOpened    = new Image(9,9);
++imgOpened.src    = 'static/minus.gif';
++var imgClosed    = new Image(9,9);
++imgClosed.src    = 'static/plus.gif';
++
++
++/**
++ * Do reloads the frame if the window has been resized under Netscape4+
++ *
++ * @access  private
++ */
++function reDo() {
++  if (innerWidth != origWidth || innerHeight != origHeight)
++    location.reload(true);
++} // end of the 'reDo()' function
++
++/**
++ * Positioned element resize bug under NS4+
++ */
++if (isNS4) {
++  var origWidth  = innerWidth;
++  var origHeight = innerHeight;
++  onresize       = reDo;
++}
++
++
++/**
++ * Gets the id of the first collapsible room
++ *
++ * @param  string  the name of the first collapsible room
++ *
++ * @return  integer  the index number corresponding to this room
++ *
++ * @access  public
++ */
++function nsGetIndex(el) {
++  var ind       = null;
++  var theLayers = document.layers;
++  var layersCnt = theLayers.length;
++  for (var i = 0; i &lt; layersCnt; i++) {
++    if (theLayers[i].id == el) {
++      ind = i;
++      break;
++    }
++  }
++  return ind;
++} // end of the 'nsGetIndex()' function
++
++
++/**
++ * Positions layers under NS4+
++ *
++ * @access  public
++ */
++function nsArrangeList() {
++  if (firstInd != null) {
++    var theLayers = document.layers;
++    var layersCnt = theLayers.length;
++    var nextY     = theLayers[firstInd].pageY + theLayers[firstInd].document.height;
++    for (var i = firstInd + 1; i &lt; layersCnt; i++) {
++      if (theLayers[i].visibility != 'hide') {
++        theLayers[i].pageY = nextY;
++        nextY              += theLayers[i].document.height;
++      }
++    }
++  }
++} // end of the 'nsArrangeList()' function
++
++
++/**
++ * Expand databases at startup
++ *
++ * @access  public
++ */
++function nsShowAll() {
++  var theLayers = document.layers;
++  var layersCnt = theLayers.length;
++  for (i = firstInd; i &lt; layersCnt; i++) {
++    theLayers[i].visibility = 'show';
++  }
++} // end of the 'nsShowAll()' function
++
++
++/**
++ * Collapses databases at startup
++ *
++ * @access  public
++ */
++function initIt()
++{
++  if (!capable || !isServer)
++    return;
++
++  if (isDOM) {
++    var tempColl    = document.getElementsByTagName('DIV');
++    var tempCollCnt = tempColl.length;
++    for (var i = 0; i &lt; tempCollCnt; i++) {
++      if (tempColl[i].id == expandedDb)
++        tempColl[i].style.display = 'block';
++      else if (tempColl[i].className == 'child')
++        tempColl[i].style.display = 'none';
++    }
++  } // end of the DOM case
++  else if (isIE4) {
++    tempColl        = document.all.tags('DIV');
++    var tempCollCnt = tempColl.length;
++    for (var i = 0; i &lt; tempCollCnt; i++) {
++      if (tempColl(i).id == expandedDb)
++        tempColl(i).style.display = 'block';
++      else if (tempColl(i).className == 'child')
++        tempColl(i).style.display = 'none';
++    }
++  } // end of the IE4 case
++  else if (isNS4) {
++    var theLayers  = document.layers;
++    var layersCnt  = theLayers.length;
++    for (var i = 0; i &lt; layersCnt; i++) {
++      if (theLayers[i].id == expandedDb)
++        theLayers[i].visibility   = 'show';
++      else if (theLayers[i].id.indexOf('Child') != -1)
++        theLayers[i].visibility   = 'hide';
++      else
++        theLayers[i].visibility   = 'show';
++    }
++    nsArrangeList();
++  } // end of the NS4 case
++} // end of the 'initIt()' function
++
++
++/**
++ * Collapses/expands a database when the user require this to be done
++ *
++ * @param  string  the  name of the room to act on
++ * @param  boolean whether to expand or to collapse the database content
++ *
++ * @access  public
++ */
++function expandBase(el, unexpand)
++{
++  if (!capable)
++    return;
++
++  if (isDOM) {
++    var whichEl = document.getElementById(el + 'Child');
++    var whichIm = document.getElementById(el + 'Img');
++    if (whichEl.style.display == 'none' &amp;&amp; whichIm) {
++      whichEl.style.display  = 'block';
++      whichIm.src            = imgOpened.src;
++    }
++    else if (unexpand) {
++      whichEl.style.display  = 'none';
++      whichIm.src            = imgClosed.src;
++    }
++  } // end of the DOM case
++  else if (isIE4) {
++    var whichEl = document.all(el + 'Child');
++    var whichIm = document.images.item(el + 'Img');
++    if (whichEl.style.display == 'none') {
++      whichEl.style.display  = 'block';
++      whichIm.src            = imgOpened.src;
++    }
++    else if (unexpand) {
++      whichEl.style.display  = 'none';
++      whichIm.src            = imgClosed.src;
++    }
++  } // end of the IE4 case
++  else if (isNS4) {
++    var whichEl = document.layers[el + 'Child'];
++    var whichIm = document.layers[el + 'Parent'].document.images['imEx'];
++    if (whichEl.visibility == 'hide') {
++      whichEl.visibility  = 'show';
++      whichIm.src         = imgOpened.src;
++    }
++    else if (unexpand) {
++      whichEl.visibility  = 'hide';
++      whichIm.src         = imgClosed.src;
++    }
++    nsArrangeList();
++  } // end of the NS4 case
++} // end of the 'expandBase()' function
++
++
++/**
++ * Add styles for positioned layers
++ */
++if (capable) {
++  with (document) {
++    // Brian Birtles : This is not the ideal method of doing this
++    // but under the 7th June '00 Mozilla build (and many before
++    // it) Mozilla did not treat text between &lt;style&gt; tags as
++    // style information unless it was written with the one call
++    // to write().
++    if (isDOM) {
++      var lstyle = '&lt;style type=&quot;text/css&quot;&gt;'
++                 + 'div {color: #000000;}'
++                 + '.heada {font-family: ' + fontFamily + '; font-size: 10pt}'
++                 + '.parent {font-family: ' + fontFamily + '; color: #000000; text-decoration:none; display: block}'
++                 + '.child {font-family: ' + fontFamily + '; font-size: 8pt; color: #333399; text-decoration:none; display: none}'
++                 + '.item, .item:active, .item:hover, .tblItem, .tblItem:active {color: #333399; text-decoration: none; font-size: 8pt;}'
++                 + '.tblItem:hover {color: #FF0000; text-decoration: underline}'
++                 + '&lt;\/style&gt;';
++      write(lstyle);
++    }
++    else {
++      write('&lt;style type=&quot;text/css&quot;&gt;');
++      write('div {color: #000000; }');
++      write('.heada {font-family: ' + fontFamily + '; font-size: 10pt}');
++      if (isIE4) {
++        write('.parent {font-family: ' + fontFamily + '; color: #000000; text-decoration: none; display: block}');
++        write('.child {font-family: ' + fontFamily + '; font-size: 8pt; color: #333399; text-decoration: none; display: none}');
++        write('.item, .item:active, .item:hover, .tblItem, .tblItem:active {color: #333399; text-decoration: none; font-size: 8pt}');
++        write('.tblItem:hover {color: #FF0000; text-decoration: underline}');
++      }
++      else {
++        write('.parent {font-family: ' + fontFamily + '; color: #000000; text-decoration: none; position: absolute; visibility: hidden}');
++        write('.child {font-family: ' + fontFamily + '; font-size: 8pt; color: #333399; position: absolute; visibility: hidden}');
++        write('.item, .tblItem {color: #333399; text-decoration: none}');
++      }
++      write('&lt;\/style&gt;');
++    }
++  }
++}
++else {
++  with (document) {
++    write('&lt;style type=&quot;text/css&quot;&gt;');
++    write('div {color: #000000; }');
++    write('.heada {font-family: ' + fontFamily + '; font-size: 10pt}');
++    write('.parent {font-family: ' + fontFamily + '; color: #000000; text-decoration: none}');
++    write('.child {font-family: ' + fontFamily + '; font-size: 8pt; color: #333399; text-decoration: none}');
++    write('.item, .item:active, .item:hover, .tblItem, .tblItem:active {color: #333399; text-decoration: none}');
++    write('.tblItem:hover {color: #FF0000; text-decoration: underline}');
++    write('&lt;\/style&gt;');
++  }
++} // end of adding styles
++
++
+
+Added: node/trunk/www/static/up.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/up.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/trunk/www/static/up2.gif
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/trunk/www/static/up2.gif
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000219.html">[Sotf-general] video node testing - second call
+</A></li>
+	<LI>Next message: <A HREF="000217.html">[Sotf-general] r574 - in node/branches/video_test: code/classes code/share code/templates www www/help www/help/images www/static
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#216">[ date ]</a>
+              <a href="thread.html#216">[ thread ]</a>
+              <a href="subject.html#216">[ subject ]</a>
+              <a href="author.html#216">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

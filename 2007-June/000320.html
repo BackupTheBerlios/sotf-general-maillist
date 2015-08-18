@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r605 - node/trunk/code/classes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2007-June/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r605%20-%20node/trunk/code/classes&In-Reply-To=%3C200706051448.l55EmmWF010909%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000321.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r605 - node/trunk/code/classes</H1>
+    <B>micsik at BerliOS</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r605%20-%20node/trunk/code/classes&In-Reply-To=%3C200706051448.l55EmmWF010909%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r605 - node/trunk/code/classes">micsik at mail.berlios.de
+       </A><BR>
+    <I>Tue Jun  5 16:48:48 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000321.html">[Sotf-general] r606 - node/trunk/code/classes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#320">[ date ]</a>
+              <a href="thread.html#320">[ thread ]</a>
+              <a href="subject.html#320">[ subject ]</a>
+              <a href="author.html#320">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: micsik
+Date: 2007-06-05 16:48:47 +0200 (Tue, 05 Jun 2007)
+New Revision: 605
+
+Modified:
+   node/trunk/code/classes/sotf_User.class.php
+Log:
+minor fix for FTP access
+
+
+Modified: node/trunk/code/classes/sotf_User.class.php
+===================================================================
+--- node/trunk/code/classes/sotf_User.class.php	2007-05-23 13:49:31 UTC (rev 604)
++++ node/trunk/code/classes/sotf_User.class.php	2007-06-05 14:48:47 UTC (rev 605)
+@@ -202,7 +202,8 @@
+ 	  global $config;
+ 	  if(substr($config['userFTP'], -1) != '/')
+ 		 $config['userFTP'] = $config['userFTP'] . '/';
+-	  $userFtpUrl = str_replace('<A HREF="ftp://">ftp://</A>', &quot;<A HREF="ftp://">ftp://</A>&quot;.$this-&gt;name.&quot;@&quot; , $config['userFTP'] . $this-&gt;name);
++	  //$userFtpUrl = str_replace('<A HREF="ftp://">ftp://</A>', &quot;<A HREF="ftp://">ftp://</A>&quot;.$this-&gt;name.&quot;@&quot; , $config['userFTP'] . $this-&gt;name);
++	  $userFtpUrl = str_replace('<A HREF="ftp://">ftp://</A>', &quot;<A HREF="ftp://">ftp://</A>&quot;.$this-&gt;name.&quot;@&quot; , $config['userFTP']);
+ 	  return $userFtpUrl;
+ 	}
+ 	
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000321.html">[Sotf-general] r606 - node/trunk/code/classes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#320">[ date ]</a>
+              <a href="thread.html#320">[ thread ]</a>
+              <a href="subject.html#320">[ subject ]</a>
+              <a href="author.html#320">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

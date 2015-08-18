@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r550 - node/trunk/code/share
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r550%20-%20node/trunk/code/share&In-Reply-To=%3C200604061418.k36EIhx6009412%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000139.html">
+   <LINK REL="Next"  HREF="000140.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r550 - node/trunk/code/share</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r550%20-%20node/trunk/code/share&In-Reply-To=%3C200604061418.k36EIhx6009412%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r550 - node/trunk/code/share">buddhafly at berlios.de
+       </A><BR>
+    <I>Thu Apr  6 16:18:43 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000139.html">[Sotf-general] Re: Moved to SVN
+</A></li>
+        <LI>Next message: <A HREF="000140.html">[Sotf-general] r551 - in node/trunk: code/configs code/share www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#137">[ date ]</a>
+              <a href="thread.html#137">[ thread ]</a>
+              <a href="subject.html#137">[ subject ]</a>
+              <a href="author.html#137">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-04-06 16:18:34 +0200 (Thu, 06 Apr 2006)
+New Revision: 550
+
+Modified:
+   node/trunk/code/share/db.sql
+Log:
+prevents nodes installed already with the new vocabularies from getting messed up by clicking &quot;update topic tree&quot;.
+
+
+Modified: node/trunk/code/share/db.sql
+===================================================================
+--- node/trunk/code/share/db.sql	2006-04-04 10:40:09 UTC (rev 549)
++++ node/trunk/code/share/db.sql	2006-04-06 14:18:34 UTC (rev 550)
+@@ -656,3 +656,6 @@
+ -- update sotf_programmes set language='deu' where language='de' 
+ -- update sotf_programmes set language='eng' where language='en' 
+ -- update sotf_programmes set language='hun' where language='hu' 
++
++-- ADDED BY Martin Schmidt to provide the new vocabularies (apr 06) to be destroyed
++INSERT INTO sotf_vars (name, value) VALUES ('topic_update_done', '1');
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000139.html">[Sotf-general] Re: Moved to SVN
+</A></li>
+	<LI>Next message: <A HREF="000140.html">[Sotf-general] r551 - in node/trunk: code/configs code/share www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#137">[ date ]</a>
+              <a href="thread.html#137">[ thread ]</a>
+              <a href="subject.html#137">[ subject ]</a>
+              <a href="author.html#137">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

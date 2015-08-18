@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] the waiting is over - happy sotf video node          testing!!!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20the%20waiting%20is%20over%20-%20happy%20sotf%20video%20node%20%20%20%20%20%0A%20%20%20%20%20testing%21%21%21&In-Reply-To=%3C35301.195.177.250.8.1148470318.squirrel%40195.177.250.8%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000226.html">
+   <LINK REL="Next"  HREF="000199.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] the waiting is over - happy sotf video node          testing!!!</H1>
+    <B>roland</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20the%20waiting%20is%20over%20-%20happy%20sotf%20video%20node%20%20%20%20%20%0A%20%20%20%20%20testing%21%21%21&In-Reply-To=%3C35301.195.177.250.8.1148470318.squirrel%40195.177.250.8%3E"
+       TITLE="[Sotf-general] the waiting is over - happy sotf video node          testing!!!">janki at yaya23.net
+       </A><BR>
+    <I>Wed May 24 13:31:58 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000226.html">[Sotf-general] the waiting is over - happy sotf video node               testing!!!
+</A></li>
+        <LI>Next message: <A HREF="000199.html">[Sotf-general] getid3-1.7.5 implemented
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#227">[ date ]</a>
+              <a href="thread.html#227">[ thread ]</a>
+              <a href="subject.html#227">[ subject ]</a>
+              <a href="author.html#227">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Martin Schmidt said:
+&gt;&gt;<i>1b.)
+</I>&gt;&gt;<i>view 'ftp_auth' had to be redefined to prefix BASEDIR in 'homedir' field
+</I>&gt;&gt;<i>(maybe an sideeffect from 1a?)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i> I noticed that, too. But - according to the BerliOS WebSVN - this change
+</I>&gt;<i> dates back to revision 349 on 2003-12-18! :)
+</I>
+does it make sense to submit a bug report on berlios? looks like the
+'bugs' page is not very up-to-date
+
+if somebody gives me SVN submit permissions i can fix it on my own.
+
+
+&gt;<i> If the script times out, raise the max_execution_time in php.ini. The
+</I>&gt;<i> first time you call get.php for a certain programme, it's running a bit
+</I>&gt;<i> longer as the converted files have to be processed. Here, the video
+</I>&gt;<i> files (which of course might be very big, much more than 128mb... *g*)
+</I>&gt;<i> have to be moved from the tmpdir into the repository and their file
+</I>&gt;<i> information has to be stored in the db. That's the thing which consumes
+</I>&gt;<i> the ressources!
+</I>&gt;<i>
+</I>&gt;<i> You can shorten this process if you wait in editFiles.php for the
+</I>&gt;<i> transcoding process to finish or visit the page again after you think
+</I>&gt;<i> it's done. Then, the file movements are done there, which should go
+</I>&gt;<i> faster.
+</I>
+ressources also get to their limit when viewing the same entry several
+times with _all_ default files converted and stills rendered. i guess it
+has
+something to do with either the flash player or some kind of getid3
+parsing whenever an entry is viewed with get.php or editFiles.php
+
+
+
+&gt;<i>
+</I>&gt;&gt;<i>2b)
+</I>&gt;&gt;<i>transcode functions
+</I>&gt;&gt;<i>as i can see from the process list several ffmpegs are fired up when
+</I>&gt;&gt;<i>pressing &quot;convert all required...&quot;
+</I>
+&gt;&gt;<i>
+</I>&gt;<i> For this reason, the ffmpegs are (preliminarily) run with &quot;nice -n 15&quot;.
+</I>&gt;<i> That reduces the amount of memory and cpu they might consume. As the
+</I>&gt;<i> nice factor could apparently be even higher in some cases (reducing the
+</I>&gt;<i> ressources again), I will add it as a config parameter.
+</I>
+nice values define the priority in the kernel scheduler, higher values
+neither reduce mem nor cpu footprint, they just lower the probability of
+getting a timeslice of CPU time when there are other processes with higher
+priority in the queue.
+
+i would recommend setting &quot;nice -n 19&quot; as we want to keep as many cpu
+ressources as possible for interactive components as apache, we don't
+care if ffmpeg takes 2secs longer to transcode
+
+
+&gt;&gt;<i>2c)
+</I>&gt;&gt;<i>support of open formats - OGG/THEORA video
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>this i more a feature request than a bug. in the present state ogg/theora
+</I>&gt;&gt;<i>video format is not supported at all, neither as input format nor as an
+</I>&gt;&gt;<i>convert target.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>for the node to be attractive to creative commons producers and/or the
+</I>&gt;&gt;<i>indymedia univers it would be crucial to support this free format.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>martin, is there any easy way to get theora support in there? relavant
+</I>&gt;&gt;<i>command line tools are ffmpeg2theora (<A HREF="http://v2v.cc/~j/ffmpeg2theora/">http://v2v.cc/~j/ffmpeg2theora/</A>)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>ffmpeg supports decoding anyway (from the ffmpeg site: &quot;Put another way,
+</I>&gt;&gt;<i>FFmpeg supports Theora video decoding&quot;)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>if you are not interested to integrate it, could you give me some hints
+</I>&gt;&gt;<i>where to start, eg. wich classes have to be modified?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i> That's easy, no classes have to be modified for that at all! All
+</I>&gt;<i> possible ffmpeg parameters (and important error messages) can be found
+</I>&gt;<i> in config.inc.php for every node administrator to adapt for his needs.
+</I>&gt;<i> You can change, add or remove file types as you like. (&gt;&gt;
+</I>&gt;<i> <A HREF="http://ffmpeg.sourceforge.net/ffmpeg-doc.html">http://ffmpeg.sourceforge.net/ffmpeg-doc.html</A>) If you have a problem
+</I>&gt;<i> with your server ressources, you possibly should reduce the bandwidth of
+</I>&gt;<i> the video files there, too.
+</I>
+just tried to integrate it but there are several issues:
+(regarding h.264 support it will be similar, as the x264
+transcoder is not integrated in ffmpeg)
+
+* ffmpeg alone cannot handle the conversion
+* to read-or-write ogg/theora ffmpeg2theora is needed
+* config.inc.php and sotf_VideoCheck.class.php can't handle
+  encoding with something else then ffmpeg alone yet
+
+so how could we extend the encoding to support serveral
+encoders?
+
+one easy hack could be to replace $ffmpeg_params with $transcode_script
+and do a shell script for every format that takes an input and output file
+as arguments  (script does ffmpeg/ffmpeg2theora/x264/whatever magic, with
+pipes)
+
+
+cheers,
+roland jankowski
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&gt;<i>
+</I>&gt;&gt;<i>i'll keep you informed on new findings,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i> Thank you.
+</I>&gt;<i>
+</I>&gt;<i> By the way: what about the new topic tree, haven't you tested the script
+</I>&gt;<i> on the orange database? It doesn't figure in your bug report, at least.
+</I>&gt;<i>
+</I>&gt;&gt;<i>cheers,
+</I>&gt;&gt;<i>roland jankowski
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i> Greetings,
+</I>&gt;<i> Martin
+</I>&gt;<i>
+</I>&gt;&gt;<i>btw, alternatives for the embedded flash player could
+</I>&gt;&gt;<i><A HREF="http://www.flumotion.net/cortado/">http://www.flumotion.net/cortado/</A> (the world social forum was using this
+</I>&gt;&gt;<i>for video broadcasting last year)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sotf-general mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/sotf-general">http://lists.berlios.de/mailman/listinfo/sotf-general</A>
+</I>&gt;<i>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000226.html">[Sotf-general] the waiting is over - happy sotf video node               testing!!!
+</A></li>
+	<LI>Next message: <A HREF="000199.html">[Sotf-general] getid3-1.7.5 implemented
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#227">[ date ]</a>
+              <a href="thread.html#227">[ thread ]</a>
+              <a href="subject.html#227">[ subject ]</a>
+              <a href="author.html#227">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] fix for broadcast time
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2005-December/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20fix%20for%20broadcast%20time&In-Reply-To=%3C439571F7.1000803%40dsd.sztaki.hu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000073.html">
+   <LINK REL="Next"  HREF="000075.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] fix for broadcast time</H1>
+    <B>Micsik Andr&#225;s</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20fix%20for%20broadcast%20time&In-Reply-To=%3C439571F7.1000803%40dsd.sztaki.hu%3E"
+       TITLE="[Sotf-general] fix for broadcast time">micsik at dsd.sztaki.hu
+       </A><BR>
+    <I>Tue Dec  6 12:11:51 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000073.html">[Sotf-general] AXMEDIS conference report
+</A></li>
+        <LI>Next message: <A HREF="000075.html">[Sotf-general] fix for broadcast time
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#74">[ date ]</a>
+              <a href="thread.html#74">[ thread ]</a>
+              <a href="subject.html#74">[ subject ]</a>
+              <a href="author.html#74">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Our users reported a bug in setting broadcast time. When you set a broadcast 
+time for August, then one hour is added to the time specified. This is fixed 
+here. Can somebody please check this code and put it into subversion:
+
+www/editMeta.php lines 81-83:
+
+if($param == 'broadcast_date') {
+   $value = $value . ' ' . sotf_Utils::getParameter('broadcast_dateHour') . 
+              ':' . sotf_Utils::getParameter('broadcast_dateMinute'); // . ' 
+' . $db-&gt;myTZ();
+}
+
+thanks,
+	Andras
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000073.html">[Sotf-general] AXMEDIS conference report
+</A></li>
+	<LI>Next message: <A HREF="000075.html">[Sotf-general] fix for broadcast time
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#74">[ date ]</a>
+              <a href="thread.html#74">[ thread ]</a>
+              <a href="subject.html#74">[ subject ]</a>
+              <a href="author.html#74">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

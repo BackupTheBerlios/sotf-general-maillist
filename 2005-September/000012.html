@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] release note: check for legal characters / resize and convert person icons
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2005-September/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20release%20note%3A%20check%20for%20legal%20characters%20/%20resize%20and%20convert%20person%0A%20icons&In-Reply-To=%3C432055FC.8050109%40fh-stpoelten.ac.at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000011.html">
+   <LINK REL="Next"  HREF="000013.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] release note: check for legal characters / resize and convert person icons</H1>
+    <B>Martin Schmidt</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20release%20note%3A%20check%20for%20legal%20characters%20/%20resize%20and%20convert%20person%0A%20icons&In-Reply-To=%3C432055FC.8050109%40fh-stpoelten.ac.at%3E"
+       TITLE="[Sotf-general] release note: check for legal characters / resize and convert person icons">tm021103 at fh-stpoelten.ac.at
+       </A><BR>
+    <I>Thu Sep  8 17:17:16 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000011.html">[Sotf-general] Move from CVS -&gt; SVN
+</A></li>
+        <LI>Next message: <A HREF="000013.html">[Sotf-general] new tarball
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#12">[ date ]</a>
+              <a href="thread.html#12">[ thread ]</a>
+              <a href="subject.html#12">[ subject ]</a>
+              <a href="author.html#12">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi @ all,
+
+my colleage wolfgang csacsinovits and me have worked out two features 
+for the streamonthefly node over the past two weeks. the changes have 
+already been approved by juergen schmidt and are available via cvs:
+
+
+1. check for legal characters in filenames after upload
+[affected files: functions.inc.php, sotf_FileList.class.php, 
+manageFiles.php]
+
+the node could not handle filenames containing special chars correctly, 
+so we wrote a function to replace these with appropriate characters, e.g.:
+
+&#228; -&gt; ae | &#223; -&gt; ss | &#231; -&gt; c | &#233; -&gt; e | ! / @ / # / + / . / ... -&gt; _
+
+it is surprisingly named convert_special_chars() *g* and can be found in 
+./www/functions.inc.php.
+
+the function call has been integrated in 
+./code/classes/sotf_FileList.class.php and ./www/manageFiles.php, each 
+one surrounded by a bit of code to keep the function from touching the 
+file extension's point.
+
+in manageFiles.php, it has been necessary to utf8_decode() the filename, 
+which unfortunately won't work unless the php[x]-recode module is 
+installed on the server!
+
+
+2. resize and convert person icons to png
+[affected files: sotf_ComplexNodeObject.class.php, editContact.php]
+
+in alberschwende, we decided to resize the person icons to 50x50 (of 
+course considering the correct ratio) and convert them to png.
+
+to differ between person- and station-icons (as it is known, those 
+dimensions are configured in the config.inc.php), we added the parameter 
+$ispersonicon to the function setIcon() in 
+./class/sotf_ComplexNodeObject.class.php which is default set to 'false'.
+
+if set 'true', the function will resize the icon 50 x [y] or  [x] x 50, 
+respectively - else it will use the values of the config.inc.php.
+
+the function is now used twice with the new parameter in 
+./www/editContact.php.
+
+
+greetings
+martin
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sotf-general/attachments/20050908/7aaf8cf5/attachment.html">https://lists.berlios.de/pipermail/sotf-general/attachments/20050908/7aaf8cf5/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000011.html">[Sotf-general] Move from CVS -&gt; SVN
+</A></li>
+	<LI>Next message: <A HREF="000013.html">[Sotf-general] new tarball
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#12">[ date ]</a>
+              <a href="thread.html#12">[ thread ]</a>
+              <a href="subject.html#12">[ subject ]</a>
+              <a href="author.html#12">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

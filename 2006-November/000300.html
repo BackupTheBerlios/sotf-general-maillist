@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] problem with itunes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20problem%20with%20itunes&In-Reply-To=%3C4562F96C.9070607%40o94.at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000299.html">
+   <LINK REL="Next"  HREF="000295.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] problem with itunes</H1>
+    <B>herbert gnauer</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20problem%20with%20itunes&In-Reply-To=%3C4562F96C.9070607%40o94.at%3E"
+       TITLE="[Sotf-general] problem with itunes">hg at o94.at
+       </A><BR>
+    <I>Tue Nov 21 14:04:44 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000299.html">[Sotf-general] problem with itunes
+</A></li>
+        <LI>Next message: <A HREF="000295.html">[Sotf-general] r598 - in node/branches/payable: code/configs	code/templates www/static
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#300">[ date ]</a>
+              <a href="thread.html#300">[ thread ]</a>
+              <a href="subject.html#300">[ subject ]</a>
+              <a href="author.html#300">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thomas Hassan schrieb:
+&gt;&gt;<i> i discussed this problem some years ago ;-)
+</I>&gt;&gt;<i> that time everyone on the list said that itunes is just a player for
+</I>&gt;&gt;<i> mac and noone uses it and it's my problem ;-)
+</I>
+times have changed, due to ipod's success lots of people start to use 
+this lousy piece of sw nowadays, oh tempora, oh mores...! ;(
+
+&gt;<i> I distinctly remember that it was originally planned to merge the
+</I>&gt;<i> mp3files into one, specifically to avoid these problems. I think it
+</I>&gt;<i> was not done for time reasons then. it should not be a problem
+</I>&gt;<i> nowadays. Merging 2 mp3 files is a wellknown and non-expensive
+</I>&gt;<i> operation.
+</I>
+hm, for several resons i wouldn't favor this solutions. in my opinion 
+this means a deep going change of content. i fear most contributors will 
+have a similar point of view. at last an inbuilt jingle of a station is 
+not very feasible for exchange of broadcasts with other radios (one of 
+our main targets).
+
+as recently as if you add EXTM3U and EXTINF it works correctly even with 
+crappy itunes. the tags don't need to contain reasonable data, it also 
+works properly with a file like this:
+
+---snip---
+#EXTM3U
+#EXTINF:1,jingle
+<A HREF="http://sendungsarchiv.o94.at/tmp/au_094st3_jingle_48kbps_1chn_22050Hz.mp3">http://sendungsarchiv.o94.at/tmp/au_094st3_jingle_48kbps_1chn_22050Hz.mp3</A>
+#EXTINF:1,broadcast
+<A HREF="http://sendungsarchiv.o94.at/tmp/au_094pr1033_parkgeschichten_128kbps_1chn_44100Hz.mp3">http://sendungsarchiv.o94.at/tmp/au_094pr1033_parkgeschichten_128kbps_1chn_44100Hz.mp3</A>
+---snap---
+
+in this example digit 1 represents a faked playlength (in seconds). for 
+a short while this wrong values are shown by itunes, but it becomes 
+recently corrected when the file starts to play. it's working properly, 
+but in fact its not really unsoiled - and the value of playlength is 
+already known at this time, should be no effort to merge.
+
+best
+herbert
+
+
+
+-- 
+
+
+HERBERT GNAUER
+IT Maschinist
+
+ORANGE 94.0
+Verein Freies Radio Wien
+A-1200 Wien Klosterneuburger Strasse 1
+
+TEL +43 - 1 319 09 99 - 12
+FAX +43 - 1 319 09 99 - 14
+E-MAIL <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">hg at o94.at</A>
+WEB o94.at
+UKW 94.0
+UPC 92.7 Telekabel
+WAP wap.o94.at
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000299.html">[Sotf-general] problem with itunes
+</A></li>
+	<LI>Next message: <A HREF="000295.html">[Sotf-general] r598 - in node/branches/payable: code/configs	code/templates www/static
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#300">[ date ]</a>
+              <a href="thread.html#300">[ thread ]</a>
+              <a href="subject.html#300">[ subject ]</a>
+              <a href="author.html#300">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

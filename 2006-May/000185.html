@@ -1,0 +1,379 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r560 - in node/branches/video_test: code/share www
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r560%20-%20in%20node/branches/video_test%3A%20code/share%20www&In-Reply-To=%3C200605071623.k47GNcQp007497%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000184.html">
+   <LINK REL="Next"  HREF="000186.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r560 - in node/branches/video_test: code/share www</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r560%20-%20in%20node/branches/video_test%3A%20code/share%20www&In-Reply-To=%3C200605071623.k47GNcQp007497%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r560 - in node/branches/video_test: code/share www">buddhafly at berlios.de
+       </A><BR>
+    <I>Sun May  7 18:23:38 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000184.html">[Sotf-general] r559 - in node/trunk: code/templates www
+</A></li>
+        <LI>Next message: <A HREF="000186.html">[Sotf-general] r561 - node/branches/video_test/code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#185">[ date ]</a>
+              <a href="thread.html#185">[ thread ]</a>
+              <a href="subject.html#185">[ subject ]</a>
+              <a href="author.html#185">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-05-07 18:23:34 +0200 (Sun, 07 May 2006)
+New Revision: 560
+
+Modified:
+   node/branches/video_test/code/share/db.sql
+   node/branches/video_test/www/admin.php
+   node/branches/video_test/www/config.inc.php.template
+   node/branches/video_test/www/editMeta.php
+Log:
+added support of getid3-1.7.5 in editMeta.php
+fixed syntax error in db.sql
+updated config.inc.php.template
+
+
+Modified: node/branches/video_test/code/share/db.sql
+===================================================================
+--- node/branches/video_test/code/share/db.sql	2006-05-07 16:18:11 UTC (rev 559)
++++ node/branches/video_test/code/share/db.sql	2006-05-07 16:23:34 UTC (rev 560)
+@@ -103,8 +103,8 @@
+ &quot;url&quot; varchar(255) NOT NULL,
+ &quot;neighbours&quot; varchar(255), -- 
+ &quot;last_sync_in&quot; timestamptz,							-- time of last sync 
+-&quot;last_sync_out&quot; timestamptz							-- time of last sync 
+-&quot;video_capable&quot; bool DEFAULT 'f'::bool --ADDED BY Martin Schmidt
++&quot;last_sync_out&quot; timestamptz, 							-- time of last sync 
++&quot;video_capable&quot; bool DEFAULT 'f'  --ADDED BY Martin Schmidt
+ );
+ 
+ CREATE TABLE &quot;sotf_neighbours&quot; (
+
+Modified: node/branches/video_test/www/admin.php
+===================================================================
+--- node/branches/video_test/www/admin.php	2006-05-07 16:18:11 UTC (rev 559)
++++ node/branches/video_test/www/admin.php	2006-05-07 16:23:34 UTC (rev 560)
+@@ -3,7 +3,7 @@
+ /*  
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andrs Micsik, Mt Pataki, Tams Dri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+  * Update Topic Tree by Martin Schmidt, FH St. Poelten
+  */
+
+Modified: node/branches/video_test/www/config.inc.php.template
+===================================================================
+--- node/branches/video_test/www/config.inc.php.template	2006-05-07 16:18:11 UTC (rev 559)
++++ node/branches/video_test/www/config.inc.php.template	2006-05-07 16:23:34 UTC (rev 560)
+@@ -97,7 +97,7 @@
+ $config['smartydir'] = $config['basedir'] . &quot;/code/Smarty-2.6.9/libs&quot;;
+ 
+ // where getid3 files are located
+-$config['getid3dir'] = $config['basedir'] . &quot;/code/getid3-1.6.2&quot;;
++$config['getid3dir'] = $config['basedir'] . &quot;/code/getid3-1.7.5/getid3&quot;;
+ 
+ // where ImageMagick is installed
+ $config['magickDir'] = &quot;C:/Program Files/ImageMagick&quot;;
+@@ -300,7 +300,76 @@
+ // index of the preferred streaming format from the list above
+ $config['preferredStreamingFormat'] = 1;
+ 
++
++
+ //////////////////////////////////////////////////////////////////////////
++// VIDEO OPTIONS ---------------------------------------------------------
++//////////////////////////////////////////////////////////////////////////
++
++/**
++* Perl regexp for parse ffmpeg output during transcode.
++*
++* @package	StreamOnTheFly
++* @variable	string	$config['lameencRegexp']
++*/
++$config['ffmpegRegexp'] = &quot;/frame=(.*?) q=/&quot;;
++$config['ffmpegErrorRegexp']= &quot;/0x404336f0\](.*?)$/&quot;;
++
++
++$config['ffmpeg'] = $config['helperdir'].&quot;/ffmpeg&quot;;
++
++/**
++* Required video formats.
++*
++* Array of associative arrays contains information about the video format.
++* @package	StreamOnTheFly
++* @variable	array	$config['videoFormats']
++*/
++
++$config['videoFormats'] = array(
++					array(
++						'format' =&gt; 'flv',
++						'size' =&gt; '176x144',
++						'framerate' =&gt; '15',
++						'video_bitrate' =&gt; '336',
++						'audio_bitrate' =&gt; '64',
++						'audio_channels' =&gt; '2',
++						'audio_samplerate' =&gt; '22050',
++						'ffmpeg_params'=&gt;'-f flv -vcodec flv -s qcif -r 15 -b 336 -bt 16 -ac 2 -ar 22050 -ab 64'),
++					
++					array(
++						'format' =&gt; 'wmv',
++						'size' =&gt; '320x240',
++						'framerate' =&gt; '25',
++						'video_bitrate' =&gt; '672',
++						'audio_bitrate' =&gt; '96',
++						'audio_channels' =&gt; '2',
++						'audio_samplerate' =&gt; '22050',
++						'ffmpeg_params'=&gt;'-vcodec wmv2 -s 320x240 -r 25 -b 672 -acodec mp3 -ac 2 -ar 22050 -ab 96'),
++					array(
++						'format' =&gt; 'mp4',
++						'size' =&gt; '320x240',
++						'framerate' =&gt; '25',
++						'video_bitrate' =&gt; '672',
++						'audio_bitrate' =&gt; '96',
++						'audio_channels' =&gt; '2',
++						'audio_samplerate' =&gt; '22050',
++						'ffmpeg_params'=&gt; '-b 672 -maxrate 900 -vcodec xvid -qmin 3 -qmax 5 -bufsize 4096 -g 300 -s 320x240 -acodec aac -ab 96 -ac 2 -ar 22050'),
++						
++					array(
++						'format' =&gt; '3gp',
++						'size' =&gt; '176x144',
++						'framerate' =&gt; '14.985',
++						'video_bitrate' =&gt; '336',
++						'audio_bitrate' =&gt; '64',
++						'audio_channels' =&gt; '2',
++						'audio_samplerate' =&gt; '22050',
++						'ffmpeg_params'=&gt;'-f 3gp -vcodec mpeg4 -s 176x144 -r 14.985 -b 336 -acodec aac -ac 2 -ar 22050 -ab 64')
++					);
++
++
++
++//////////////////////////////////////////////////////////////////////////
+ // MISC OPTIONS ------------------------------------------------------
+ //////////////////////////////////////////////////////////////////////////
+ 
+
+Modified: node/branches/video_test/www/editMeta.php
+===================================================================
+--- node/branches/video_test/www/editMeta.php	2006-05-07 16:18:11 UTC (rev 559)
++++ node/branches/video_test/www/editMeta.php	2006-05-07 16:23:34 UTC (rev 560)
+@@ -3,7 +3,7 @@
+ /*  
+  * $Id$
+  * Created for the StreamOnTheFly project (IST-2001-32226)
+- * Authors: Andrs Micsik, Mt Pataki, Tams Dri 
++ * Authors: Andr&#225;s Micsik, M&#225;t&#233; Pataki, Tam&#225;s D&#233;ri 
+  *          at MTA SZTAKI DSD, <A HREF="http://dsd.sztaki.hu">http://dsd.sztaki.hu</A>
+      @internal change &quot;read ID3 Tags from MP3 File and write ID3 Tags from Metadata fields&quot;
+  *           by wolfgang csacsinovits and martin schmidt (fh st. poelten)
+@@ -13,6 +13,8 @@
+ 
+ require(&quot;init.inc.php&quot;);
+ 
++$getID3 = new getID3; //ADDED BY Martin Schmidt
++
+ $prgId = sotf_Utils::getParameter('id');
+ $new = sotf_Utils::getParameter('new');
+ 
+@@ -38,16 +40,21 @@
+ 
+ 	   // ---- changed by wolfgang csacsinovits and martin schmidt GET ID3 TAGS and write into Metadata - Fields
+   	 
+-  	 
++  	 	
++		
+   	    $audioFiles = $prg-&gt;listAudioFiles('true');
+   	    
+   	    $file =  $prg-&gt;getAudioDir() . '/' . $audioFiles[0] ['filename'];
+   	 
+ 	 	if($new){
+-	 
+-			$ThisFileInfo = GetAllFileInfo($file, 'mp3', false, false, false) ;
++		
++			$getID3 = new getID3();
++			$ThisFileInfo = $getID3-&gt;analyze($file);
++			getid3_lib::CopyTagsToComments($ThisFileInfo);
+ 			
++			//$ThisFileInfo = GetAllFileInfo($file, 'mp3', false, false, false) ;
+ 			
++			
+ 			if (($ThisFileInfo['comments']['title']) != '' ) {
+ 				$title = implode(', ', $ThisFileInfo['comments']['title']);
+ 				}
+@@ -116,10 +123,10 @@
+ 		    $field_error[$param]=true;
+ 		  	$error_count++;
+ 	}	    else $field_error[$param]=false;	    	    
+-	if($param=='genre_id' &amp;&amp; $value==0) {	    
++	/*if($param=='genre_id' &amp;&amp; $value==0) {	    
+ 		$field_error[$param]=true;	    
+ 		$error_count++;	    
+-	}	    
++	}	 */   
+ 		if($type[0]=='text') {
+       $value = strip_tags($value);
+     } elseif($type[0]=='number') {
+@@ -153,68 +160,58 @@
+ 		  // check if file is mp3 - file	        
+ 		  $filename = $file;	        
+ 		  $extension = substr($filename, strrpos($filename, '.') +1);	        	        
+-		  $productiondate = (SafeStripSlashes(sotf_Utils::getParameter('production_date')));	        	        
+-		  if($extension==&quot;mp3&quot;) {	        	        	        
+-		  // TITLE	        
+-		  $data['id3v2']['TIT2']['encodingid'] = 0;	        
+-		  $data['id3v2']['TIT2']['data']       = SafeStripSlashes(sotf_Utils::getParameter('title'));	        
+-		  $data['ape']['title'][] = SafeStripSlashes(sotf_Utils::getParameter('title'));	        	        
+-		  $data['id3v1']['TIT2']['encodingid'] = 0;	        $data['id3v1']['TIT2']['data']       = SafeStripSlashes(sotf_Utils::getParameter('title'));	        $data['ape']['title'][] = SafeStripSlashes(sotf_Utils::getParameter('title'));	        $title =  $data['ape']['title'][0];	 	        	        
+-		  // STATION	 
+-		  
+-		  //php4 compatibility hack
+-		  $prg-&gt;station = $prg-&gt;getObject($prg-&gt;get('station_id'));	        
+-		  if(is_object($prg-&gt;station)) {	            
+-			  $prg-&gt;stationName = $prg-&gt;station-&gt;get('name');	            
+-			  $station_name = $prg-&gt;stationName;	        
+-		  }	        
+-		  else $station_name = &quot;&quot;;	        
+-		         
+-				 
+-		  $data['id3v2']['TPE1']['encodingid'] = 0;	        
+-		  $data['id3v2']['TPE1']['data']       = SafeStripSlashes($station_name);	        
+-		  $data['ape']['artist'][] = SafeStripSlashes($station_name);	        	        
+-		  $data['id3v1']['TPE1']['encodingid'] = 0;	        
+-		  $data['id3v1']['TPE1']['data']       = SafeStripSlashes($station_name);	        
+-		  $data['ape']['artist'][] = SafeStripSlashes($station_name);	        
+-		  $artist = $data['ape']['artist'][0];	 	        	        
+-		  // YEAR	        
+-		  $data['id3v2']['TYER']['encodingid'] = 0;	        
+-		  $data['id3v2']['TYER']['data']       = SafeStripSlashes(sotf_Utils::getParameter('production_date' . 'Year'));        
+-		  $data['ape']['year'][] = SafeStripSlashes(sotf_Utils::getParameter('production_date' . 'Year'));        	        
+-		  $data['id3v1']['TYER']['encodingid'] = 0;	        
+-		  $data['id3v1']['TYER']['data']       = SafeStripSlashes(sotf_Utils::getParameter('production_date' . 'Year'));
+-		  $data['ape']['year'][] = SafeStripSlashes(sotf_Utils::getParameter('production_date' . 'Year'));
+-		  $year = $data['ape']['year'][0];	 	        	        
+-		  // GENRE	        
+-		  $data['id3v2']['TCON']['encodingid'] = 0;	        
+-		  $data['id3v2']['TCON']['data']       = SafeStripSlashes($vocabularies-&gt;getGenreName($prg-&gt;get('genre_id')));	        
+-		  $data['ape']['genre'][] = SafeStripSlashes($vocabularies-&gt;getGenreName($prg-&gt;get('genre_id')));	        	        
+-		  $data['id3v2']['TRCK']['encodingid'] = 0;	        
+-		  $data['id3v2']['TRCK']['data']       = SafeStripSlashes(sotf_Utils::getParameter('title'));	        
+-		  $data['ape']['track'][] = SafeStripSlashes(sotf_Utils::getParameter('title'));	        	        
+-		  $data['id3v1']['TCON']['encodingid'] = 0;	        
+-		  $data['id3v1']['TCON']['data']       = SafeStripSlashes($vocabularies-&gt;getGenreName($prg-&gt;get('genre_id')));	        
+-		  $data['ape']['genre'][] = SafeStripSlashes($vocabularies-&gt;getGenreName($prg-&gt;get('genre_id')));	        
+-		  $genre = $data['ape']['genre'][0];	        	        
+-		  $data['id3v1']['TRCK']['encodingid'] = 0;	        
+-		  $data['id3v1']['TRCK']['data']       = SafeStripSlashes(sotf_Utils::getParameter('title'));	        
+-		  $data['ape']['track'][] = SafeStripSlashes(sotf_Utils::getParameter('title'));	        	        
+-		  // COMMENT	        
+-		  $data['id3v1']['COMM'][0]['encodingid']  = 0;	        
+-		  $data['id3v1']['COMM'][0]['language']    = 'eng';	        
+-		  $data['id3v1']['COMM'][0]['description'] = '';	        
+-		  $data['id3v1']['COMM'][0]['data']        = SafeStripSlashes(sotf_Utils::getParameter('keywords'));	        
+-		  $data['ape']['comments'][] = SafeStripSlashes(sotf_Utils::getParameter('keywords'));	        
+-		  $comment = $data['ape']['comments'][0];	        	        	        
+-		  $data['id3v2']['TALB']['encodingid'] = 0;	        
+-		  $data['id3v2']['TALB']['data']       = '*ID3Tags modified by SOTF*';	        
+-		  $data['ape']['album'][] = '*ID3Tags modified by SOTF*';	                	 	    
+-		  WriteID3v1($file, $title, $artist, '*ID3Tags modified by SOTF*' , $year, $comment, $genre, $title, false );	    
+-		  WriteID3v2($file, $data, 3, 0, true, 0, true);	 	        
+-		  if (!empty($_POST['VersionToEditAPE'])) {	            
+-			  echo 'APE changes'.(WriteAPEtag($EditorFilename, $data['ape'], false) ? '' : ' NOT').' written successfully&lt;HR&gt;';	            
+-		  }	                	                    
++		  $productiondate = (getid3_lib::SafeStripSlashes(sotf_Utils::getParameter('production_date')));	        	        
++		  if($extension==&quot;mp3&quot;) {	   
++
++			$TaggingFormat = 'UTF-8';
++			
++			require($config['getid3dir'].'/write.php');
++			$tagwriter = new getid3_writetags;
++			$tagwriter-&gt;filename       = $file;
++			$tagwriter-&gt;tagformats     = array('id3v1', 'id3v2.3', 'ape');
++			$tagwriter-&gt;overwrite_tags = true;
++			$tagwriter-&gt;tag_encoding   = $TaggingFormat;
++
++			  // TITLE	 
++			  $data['title'][]= getid3_lib::SafeStripSlashes(sotf_Utils::getParameter('title'));	
++			 
++			  // STATION	 
++			  
++			  //php4 compatibility hack
++			  $prg-&gt;station = $prg-&gt;getObject($prg-&gt;get('station_id'));	        
++			  if(is_object($prg-&gt;station)) {	            
++				  $prg-&gt;stationName = $prg-&gt;station-&gt;get('name');	            
++				  $station_name = $prg-&gt;stationName;	        
++			  }	        
++			  else $station_name = &quot;&quot;;	        
++					
++			  $data['artist'][]= getid3_lib::SafeStripSlashes($station_name);	
++			  
++			  //SERIES
++			  $prg-&gt;series = $prg-&gt;getObject($prg-&gt;get('series_id'));	        
++			  if(is_object($prg-&gt;series)) {	            
++				  $prg-&gt;seriesName = $prg-&gt;series-&gt;get('name');	            
++				  $series_name = $prg-&gt;seriesName;	        
++			  }	        
++			  else $series_name = &quot;&quot;;	
++			  
++			  $data['album'][]= getid3_lib::SafeStripSlashes($series_name);
++			  
++			  
++			  // YEAR	     
++			     
++			  $data['year'][]= getid3_lib::SafeStripSlashes(sotf_Utils::getParameter('production_date' . 'Year'));
++		   	        	        
++			  // GENRE
++			  $data['genre'][] = getid3_lib::SafeStripSlashes($vocabularies-&gt;getGenreName($prg-&gt;get('genre_id')));
++			  	        
++	  
++			  // COMMENT	
++			  $data['comment'][] = ' *ID3Tags modified by StreamOnTheFly*';
++			  
++			  $tagwriter-&gt;tag_data = $data;
++			  $tagwriter-&gt;WriteTags();
++			                 	                    
+ 	  }	//for count($audioFiles)        
+  }	//foreach params        	   	
+ 	  //-----------------------------------------------------------------------------------------------------	 	                	  
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000184.html">[Sotf-general] r559 - in node/trunk: code/templates www
+</A></li>
+	<LI>Next message: <A HREF="000186.html">[Sotf-general] r561 - node/branches/video_test/code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#185">[ date ]</a>
+              <a href="thread.html#185">[ thread ]</a>
+              <a href="subject.html#185">[ subject ]</a>
+              <a href="author.html#185">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

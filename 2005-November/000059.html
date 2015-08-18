@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] sync probs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2005-November/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20sync%20probs&In-Reply-To=%3C43842F03.2030704%40no-na.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000058.html">
+   <LINK REL="Next"  HREF="000060.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] sync probs</H1>
+    <B>herbert gnauer</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20sync%20probs&In-Reply-To=%3C43842F03.2030704%40no-na.net%3E"
+       TITLE="[Sotf-general] sync probs">hg at no-na.net
+       </A><BR>
+    <I>Wed Nov 23 09:57:39 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000058.html">[Sotf-general] sync probs
+</A></li>
+        <LI>Next message: <A HREF="000060.html">[Sotf-general] sync probs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#59">[ date ]</a>
+              <a href="thread.html#59">[ thread ]</a>
+              <a href="subject.html#59">[ subject ]</a>
+              <a href="author.html#59">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi wolfgang,
+
+regrettably not, <A HREF="http://sotf.fhv.at/node/get.php?id=094pr206">http://sotf.fhv.at/node/get.php?id=094pr206</A> shows the 
+logo now (as well as meanwhile radio.sztaki does) but no audio-data. i 
+fear it's a problem of our node sendungsarchiv.o94, sync between the 
+other nodes seems to work well.
+
+lgbrt
+
+Wolfgang Reutz schrieb:
+&gt;<i> Hi all,
+</I>&gt;<i> 
+</I>&gt;<i> the dornbirn node had a problem with apache this afternoon, all  
+</I>&gt;<i> problems have been solved and the two nodes are running again :-)
+</I>&gt;<i> 
+</I>&gt;<i> just ran a cron.php and i get this status in the admin.php page:
+</I>&gt;<i> 
+</I>&gt;<i> Node            Objects waiting on my node    Forwards waiting on my node
+</I>&gt;<i> 
+</I>&gt;<i> 666 (AT2)        1                            0
+</I>&gt;<i> 668 (AT6)        3130                        3725
+</I>&gt;<i> 11 (HU1)        1                            0
+</I>&gt;<i> 94 (o94)            1                            0
+</I>&gt;<i> 
+</I>&gt;<i> seems ok for me ;-)
+</I>&gt;<i> 
+</I>&gt;<i> Wolfgang
+</I>&gt;<i> 
+</I>&gt;<i> On 22.11.2005, at 23:02, Herbert Gnauer wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> hi erveryone,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> sorry to say, but 3 nodes are out of sync (radio.sztaki.hu,  
+</I>&gt;&gt;<i> medienarchiv.fh-stpoelten.ac.at and sendungsarchiv.o94.at), <A HREF="http://">http://</A> 
+</I>&gt;&gt;<i> sotf.fhv.at/node/ returns an empty page at moment.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> stpoelten and sztaki seem to have synchronized only metadata for a  
+</I>&gt;&gt;<i> while. logos of broadcasts are missing as well as audio-data.  
+</I>&gt;&gt;<i> examples are <A HREF="http://medienarchiv.fh-stpoelten.ac.at/showSeries.php/">http://medienarchiv.fh-stpoelten.ac.at/showSeries.php/</A> 
+</I>&gt;&gt;<i> 094se3 and <A HREF="http://radio.sztaki.hu/node/showSeries.php/094se3">http://radio.sztaki.hu/node/showSeries.php/094se3</A> in  
+</I>&gt;&gt;<i> comparison to origin <A HREF="http://sendungsarchiv.o94.at/showSeries.php/">http://sendungsarchiv.o94.at/showSeries.php/</A> 094se3
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> older boradcasts statisics are out of sync or updated very very  
+</I>&gt;&gt;<i> rarely. for example <A HREF="http://sendungsarchiv.o94.at/get.php/094pr95">http://sendungsarchiv.o94.at/get.php/094pr95</A> is  
+</I>&gt;&gt;<i> up to date (last updated at: 2005-11-22 22:45:04+01), statistics of  
+</I>&gt;&gt;<i> same broadcast at radio sztaki and stpoelten are more than one  month 
+</I>&gt;&gt;<i> old <A HREF="http://radio.sztaki.hu/node/get.php/094pr95">http://radio.sztaki.hu/node/get.php/094pr95</A> (both last  updated 
+</I>&gt;&gt;<i> at: 2005-10-16 15:45:03+02)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> i've found some errors in our /var/www/node/logs/log:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ---snip---
+</I>&gt;&gt;<i> [22-Nov-2005 21:45:03] 62.116.13.181: XML-RPC: call to <A HREF="http://">http://</A> 
+</I>&gt;&gt;<i> medienarchiv.fh-stpoelten.ac.at/xmlrpcServer.php/sync/1
+</I>&gt;&gt;<i> [22-Nov-2005 21:45:05] 62.116.13.181: ERROR: Error response: 2   
+</I>&gt;&gt;<i> Invalid return payload: enabling debugging to examine incoming  payload.
+</I>&gt;&gt;<i> ---snap---
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ---snip---
+</I>&gt;&gt;<i> [22-Nov-2005 21:45:05] 62.116.13.181: XML-RPC: call to <A HREF="http://">http://</A> 
+</I>&gt;&gt;<i> sotf.fhv.at/node/xmlrpcServer.php/sync/1
+</I>&gt;&gt;<i> [22-Nov-2005 21:45:05] No response received from server.
+</I>&gt;&gt;<i> [22-Nov-2005 21:45:05] 62.116.13.181: ERROR: Error response: 6  No  
+</I>&gt;&gt;<i> data received from server..
+</I>&gt;&gt;<i> ---snap---
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ---snip---
+</I>&gt;&gt;<i> [22-Nov-2005 21:45:06] 62.116.13.181: XML-RPC: call to <A HREF="http://">http://</A> 
+</I>&gt;&gt;<i> sotf.fhv.at/node_achwelle/xmlrpcServer.php/forward/1
+</I>&gt;&gt;<i> [22-Nov-2005 21:45:06] XML error: no element found at line 2
+</I>&gt;&gt;<i> [22-Nov-2005 21:45:06] 62.116.13.181: ERROR: Error response: 2   
+</I>&gt;&gt;<i> Invalid return payload: enabling debugging to examine incoming  payload.
+</I>&gt;&gt;<i> ---snap---
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> does anyone know what's going wrong and how to fix it?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> best
+</I>&gt;&gt;<i> herbert
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+
+-- 
+________________________________________________
+debugging is finished when the last user is dead
+<A HREF="http://no-na.net">http://no-na.net</A>               wer will kann mal
+
+public pgp key              <A HREF="http://no-na.net/pgp">http://no-na.net/pgp</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000058.html">[Sotf-general] sync probs
+</A></li>
+	<LI>Next message: <A HREF="000060.html">[Sotf-general] sync probs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#59">[ date ]</a>
+              <a href="thread.html#59">[ thread ]</a>
+              <a href="subject.html#59">[ subject ]</a>
+              <a href="author.html#59">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

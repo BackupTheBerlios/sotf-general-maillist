@@ -1,0 +1,1140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r575 - in node/branches/video_test: code/classes code/configs code/templates www www/static
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r575%20-%20in%20node/branches/video_test%3A%20code/classes%20code/configs%20code/templates%20www%20www/static&In-Reply-To=%3C200605230557.k4N5v6L9026752%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000217.html">
+   <LINK REL="Next"  HREF="000221.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r575 - in node/branches/video_test: code/classes code/configs code/templates www www/static</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r575%20-%20in%20node/branches/video_test%3A%20code/classes%20code/configs%20code/templates%20www%20www/static&In-Reply-To=%3C200605230557.k4N5v6L9026752%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r575 - in node/branches/video_test: code/classes code/configs code/templates www www/static">buddhafly at berlios.de
+       </A><BR>
+    <I>Tue May 23 07:57:06 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000217.html">[Sotf-general] r574 - in node/branches/video_test: code/classes code/share code/templates www www/help www/help/images www/static
+</A></li>
+        <LI>Next message: <A HREF="000221.html">[Sotf-general] node 094 updated to SVN trunk, using getid3-1.7.5
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#220">[ date ]</a>
+              <a href="thread.html#220">[ thread ]</a>
+              <a href="subject.html#220">[ subject ]</a>
+              <a href="author.html#220">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-05-23 07:56:34 +0200 (Tue, 23 May 2006)
+New Revision: 575
+
+Added:
+   node/branches/video_test/www/static/3gp.jpg
+   node/branches/video_test/www/static/mp4.jpg
+   node/branches/video_test/www/static/video.jpg
+   node/branches/video_test/www/static/wmv.jpg
+   node/branches/video_test/www/videoplayer.swf
+Removed:
+   node/branches/video_test/www/videoplayer.swf
+Modified:
+   node/branches/video_test/code/classes/sotf_File.class.php
+   node/branches/video_test/code/classes/sotf_VideoCheck.class.php
+   node/branches/video_test/code/classes/sotf_VideoFile.class.php
+   node/branches/video_test/code/configs/eng.conf
+   node/branches/video_test/code/configs/fra.conf
+   node/branches/video_test/code/configs/ger.conf
+   node/branches/video_test/code/configs/hun.conf
+   node/branches/video_test/code/templates/advsearch.htm
+   node/branches/video_test/code/templates/editFiles.htm
+   node/branches/video_test/code/templates/editMeta.htm
+   node/branches/video_test/code/templates/get.htm
+   node/branches/video_test/www/advsearch.php
+   node/branches/video_test/www/config.inc.php.template
+   node/branches/video_test/www/editFiles.php
+   node/branches/video_test/www/functions.inc.php
+   node/branches/video_test/www/getFile.php
+Log:
+solved flv-loading/download problem with local files
+(now, get.php does not freeze anymore)
+added icons for the different video file types
+added mimetypes in config.inc.php and sotf_File.class.php
+stored all ffmpeg-relevant variables in config.inc.php
+implemented check for empty input fields in advsearch.php
+solved some transcoding issues
+translated smarty configs (only hun is missing)
+
+
+Modified: node/branches/video_test/code/classes/sotf_File.class.php
+===================================================================
+--- node/branches/video_test/code/classes/sotf_File.class.php	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/code/classes/sotf_File.class.php	2006-05-23 05:56:34 UTC (rev 575)
+@@ -87,6 +87,14 @@
+ 			'pdf'	=&gt; 'application/pdf',
+ 			'png'	=&gt; 'image/png',
+ 			'ps'	=&gt; 'application/postscript',
++			'flv'   =&gt; 'video/x-flv',
++			'avi'   =&gt; 'x-msvideo',
++			'mov'   =&gt; 'quicktime',
++			'mpg'   =&gt; 'mpeg',
++			'mpeg'  =&gt; 'mpeg',
++			'mp4'   =&gt; 'video/mp4',
++			'3gp'   =&gt; 'video/3gpp',
++			'wmv'   =&gt; 'video/x-ms-wmv',
+ 			'txt'	=&gt; 'text/plain',
+ 			'xls'	=&gt; 'application/vnd.ms-excel');
+ 		if ($config['mimetypes'][$type])
+
+Modified: node/branches/video_test/code/classes/sotf_VideoCheck.class.php
+===================================================================
+--- node/branches/video_test/code/classes/sotf_VideoCheck.class.php	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/code/classes/sotf_VideoCheck.class.php	2006-05-23 05:56:34 UTC (rev 575)
+@@ -81,32 +81,7 @@
+ 					continue;							// This is not the one we need, get another one
+ 				}
+ 
+-				
+-				/*if($this-&gt;list-&gt;list[$j]-&gt;format!=&quot;flv&quot;){
+-					if (abs($this-&gt;list-&gt;list[$j]-&gt;average_bitrate - ($config['videoFormats'][$i]['video_bitrate']+$config['videoFormats'][$i]['audio_bitrate'])) &gt; $config['bitrateToleranceVideo']){
+-						if($display_arr) print &quot;$i$j wrong bitrate: &quot;.$this-&gt;list-&gt;list[$j]-&gt;average_bitrate.&quot;, should be &quot;.($config['videoFormats'][$i]['video_bitrate']+$config['videoFormats'][$i]['audio_bitrate']).&quot;&lt;br&gt;&quot;.print_r_html($this-&gt;list-&gt;list[$j]).&quot;&lt;br&gt;&nbsp;&lt;br&gt;&quot;;
+-						continue;							// This is not the one we need, get another one
+-					}
+-	
+-					else
+-	
+-					{
+-						$this-&gt;list-&gt;list[$j]-&gt;bitrate = $config['videoFormats'][$i]['video_bitrate']+$config['videoFormats'][$i]['audio_bitrate'];
+-						$this-&gt;list-&gt;list[$j]-&gt;average_bitrate = $config['videoFormats'][$i]['video_bitrate']+$config['videoFormats'][$i]['audio_bitrate'];
+-					}
+-	
+-					if ($config['videoFormats'][$i]['audio_channels'] != $this-&gt;list-&gt;list[$j]-&gt;channels){
+-						if($display_arr) print &quot;$i$j wrong channels: &quot;.$this-&gt;list-&gt;list[$j]-&gt;channels.&quot;, should be &quot;.$config['videoFormats'][$i]['audio_channels'].&quot;&lt;br&gt;&quot;.print_r_html($this-&gt;list-&gt;list[$j]).&quot;&lt;br&gt;&nbsp;&lt;br&gt;&quot;;
+-						continue;							// This is not the one we need, get another one
+-					}
+-				}*/
+-
+-				if ($config['videoFormats'][$i]['audio_samplerate'] != $this-&gt;list-&gt;list[$j]-&gt;samplerate){
+-					if($display_arr) print &quot;$i$j wrong samplerate: &quot;.$this-&gt;list-&gt;list[$j]-&gt;samplerate.&quot;, should be &quot;.$config['videoFormats'][$i]['audio_samplerate'].&quot;&lt;br&gt;&quot;.print_r_html($this-&gt;list-&gt;list[$j]).&quot;&lt;br&gt;&nbsp;&lt;br&gt;&quot;;
+-					continue;							// This is not the one we need, get another one
+-				}
+-
+-				$found = $j;							// All conditions matched, that's what we need, store its position
++				$found = $j;							// That's what we need, store its position
+ 				break;									// don't need to search for another, leave the loop
+ 
+ 			}
+@@ -127,7 +102,7 @@
+ 	*
+ 	* @param	object	$audiofile	sotf_AudioFile object to be checked
+ 	* @return	mixed	If the audio file satisfies any requestment returns an integer which is an index of the $config['videoFormats'] global variable. If the file satisfy any requestment returns boolean false
+-	* @use	$config['videoFormats'], $config['bitrateTolerance']
++	* @use	$config['videoFormats']
+ 	*/
+ 
+ 	function getRequestIndex($videofile)
+@@ -189,6 +164,8 @@
+ 	
+ function fileOK($file) {
+ 
++	global $config;
++
+ 	$getID3 = new getID3();
+ 	$fileinfo = $getID3-&gt;analyze($file);
+ 	getid3_lib::CopyTagsToComments($fileinfo);
+@@ -201,7 +178,7 @@
+ 		   $buffer .= fgets($handle, 4096);
+ 		}
+ 		fclose ($handle);
+-		$finished = stristr($buffer,'muxing overhead');
++		$finished = stristr($buffer,$config['ffmpegFinishMessage']) &amp;&amp; !stristr($buffer, $config['ffmpegEmptyVideo']);
+ 
+ 	}
+ 	else $finished = false;
+@@ -230,6 +207,8 @@
+ 	
+ 	function getPercentageOrError($tempfile, $totalframes){
+ 	
++		global $config;
++	
+ 		if(is_file($tempfile.&quot;.txt&quot;)){
+ 			$handle = fopen ($tempfile.&quot;.txt&quot;, &quot;r&quot;);
+ 			$buffer=&quot;&quot;;
+@@ -240,12 +219,29 @@
+ 			
+ 			$returnarray=array();			
+ 	
+-			preg_match_all(&quot;/frame=(.{1,9})q=/&quot;, $buffer, $results);
++			preg_match_all($config['ffmpegRegexp'], $buffer, $results);
+ 			$curframe=$results[1][count($results[1])-1];
+ 			$timediff= time()-filemtime($tempfile);
++			
++			$errors_before=false;
++			$errors_during=false;
++			
++			for($i=0;$i&lt;count($config['ffmpegErrorsBeforeConversion']);$i++){
++				if(preg_match_all($config['ffmpegErrorsBeforeConversion'][$i], $buffer, $errors_1)) {
++					$errors_before=true;
++				}
++			}
++			
++			for($j=0;$j&lt;count($config['ffmpegErrorsDuringConversion']);$j++){
++				if(preg_match_all($config['ffmpegErrorsDuringConversion'][$j], $buffer, $errors_2)) {
++					$errors_during=true;
++				}
++			}
+ 
+-			if (empty($results[1]) &amp;&amp; is_file($tempfile) &amp;&amp; (preg_match_all(&quot;/\n\[.*@ 0x.*\n/&quot;, $buffer, $errors) || preg_match_all(&quot;/\nUnsupported codec/&quot;, $buffer, $errors)) &amp;&amp; $timediff&gt;3){
+-				$returnarray['errors']=$errors[0];
++			if (is_file($tempfile) &amp;&amp; ((empty($results[1]) &amp;&amp; $errors_before) || $errors_during) &amp;&amp; $timediff&gt;3)
++			{
++				$errors=array_merge($errors_1, $errors_2);
++				$returnarray['errors']=$errors;
+ 				logError('conversion failed: '.$tempfile);
+ 				logError('ffmpeg output: '. $buffer); 
+ 			}
+@@ -271,10 +267,9 @@
+ 		global $config, $page;
+ 
+         if($this-&gt;console) {
+-          //echo &quot;&lt;p&gt;&quot;; // . $page-&gt;getlocalized('transcoding_video') . &quot;&lt;br /&gt;\n&quot;;
+           flush();
+           
+-          $output = $this-&gt;progressBar($cmd,$config['ffmpegRegexp'], $totalframes, true, $config['ffmpegErrorRegexp']);
++          $output = $this-&gt;progressBar($cmd,$config['ffmpegRegexp'], $totalframes, true);
+           echo &quot;&lt;br/&gt;\n&quot;;
+           flush();
+ 		  return $output;
+@@ -321,7 +316,7 @@
+ 		$this-&gt;getTotalFrames($source, $index);
+ 
+ 		
+-		$cmd=&quot;nohup nice -n 15 &quot;.$config['ffmpeg'].' -i '.$source.' '.$config['videoFormats'][$index]['ffmpeg_params']./*' -minrate '. ($config['videoFormats'][$index]['video_bitrate']) .' -maxrate '. ($config['videoFormats'][$index]['video_bitrate']+$config['bitrateToleranceVideo']) .' -bufsize 4096 '.*/' '.$target.&quot; 1&gt;&quot;.$target.&quot;.txt 2&gt;&amp;1 &amp;&quot;;
++		$cmd=&quot;nohup nice -n 15 &quot;.$config['ffmpeg'].' -i '.$source.' '.$config['videoFormats'][$index]['ffmpeg_params'].' '.$target.&quot; 1&gt;&quot;.$target.&quot;.txt 2&gt;&amp;1 &amp;&quot;;
+ 		
+ 		
+       if($this-&gt;console){
+@@ -330,20 +325,7 @@
+ 	  }
+            $this-&gt;transcodeWithFfmpeg($cmd, $totalframes);
+ 		  
+-       /*
+-	   $videoFileOK = $this-&gt;fileOK($target);
+-	   	if(!$videoFileOK) {
+-			logError('conversion failed: '.$target);
+-			if($output)logError('ffmpeg output: '. $output['data']); 
+-			if($this-&gt;console){
+-				echo &quot;&lt;span style='color:#c00'&gt;[ffmpeg error] Transcoding failed. The error has been logged.&lt;/span&gt;&quot;;
+-				echo &quot;&lt;br&gt;&nbsp;&quot;;
+-			}
+-		}
+-		else unlink($target.&quot;.txt&quot;);
+-		*/
+ 		
+-		
+       debug('conversion finished', $target);
+ 
+       return $target;
+
+Modified: node/branches/video_test/code/classes/sotf_VideoFile.class.php
+===================================================================
+--- node/branches/video_test/code/classes/sotf_VideoFile.class.php	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/code/classes/sotf_VideoFile.class.php	2006-05-23 05:56:34 UTC (rev 575)
+@@ -5,7 +5,7 @@
+ 
+ /**
+ * This is a class for handling audio files.
+-* MODIFIED FOR HANDLING VIDEO FILES BY BUDDHAFLY
++* MODIFIED FOR HANDLING VIDEO FILES BY Martin Schmidt
+ * @author	Tamas Kezdi SZTAKI DSD &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">tbyte at sztaki.hu</A>&gt;
+ * @package	StreamOnTheFly
+ * @version	0.1
+@@ -96,7 +96,7 @@
+ 		$getID3 = new getID3();
+ 		$fileinfo = $getID3-&gt;analyze($path);
+ 		getid3_lib::CopyTagsToComments($fileinfo);
+-		//print_r($fileinfo);
++		//print_r_html($fileinfo);
+ 		//$fileinfo = GetAllFileInfo($this-&gt;path);
+ 		 
+    		 $this-&gt;allInfo = $fileinfo; //was $fileInfo
+@@ -154,8 +154,10 @@
+ 			
+ 			if(isset($fileinfo['audio'])){
+ 			 $audioinfo = $fileinfo['audio'];
+-			 $this-&gt;samplerate = $audioinfo[&quot;sample_rate&quot;];
+-			$this-&gt;channels = $audioinfo[&quot;channels&quot;];
++			 if($audioinfo[&quot;sample_rate&quot;])$this-&gt;samplerate = $audioinfo[&quot;sample_rate&quot;];
++			 else $this-&gt;samplerate = 0;
++			 if($audioinfo[&quot;channels&quot;]) $this-&gt;channels = $audioinfo[&quot;channels&quot;];
++			 else $this-&gt;channels = 0;
+ 			}
+ 			else {
+ 			$this-&gt;samplerate = 0;
+@@ -179,12 +181,13 @@
+ 		for($i=1;$i&lt;=5;$i++){
+ 			$position = round((($i+($i-1))/10)*$length);
+ 			$target = $temppath.&quot;/still_&quot;.$id.&quot;_&quot;.$i.&quot;.gif&quot;;
+-			$cmd = &quot;nohup nice -n 15 &quot;.$config['ffmpeg'].&quot; -i $file -f image2 -img gif -ss $position -t 1 -r 1 -s sqcif -y $target 1&gt;$target.txt 2&gt;&amp;1 &amp;&quot;;
++			$cmd = &quot;nohup nice -n 15 &quot;.$config['ffmpeg'].&quot; -i $file &quot;.$config['ffmpeg_params_stills'].&quot;  -ss $position -y $target 1&gt;$target.txt 2&gt;&amp;1 &amp;&quot;;
+ 			exec($cmd);
+ 		}
+ 		
+ 	}
+ 
++
+ 	
+ 	function searchForStill($prg){
+ 		
+@@ -309,18 +312,5 @@
+ 
+   }
+   
+- /* function transcode(){
+-  
+-  $path = $this-&gt;path;
+-  
+-  	exec(&quot;ffmpeg -i $path -r 16 -i 100 -s qcif -ar 22050 -ab 48 -ac 1 $flvpath/mov.flv&quot;, $output_array);
+-	print_r($output_array);
+-	exec(&quot;ffmpeg -i $path -r 16 -i 100 -s qcif -ar 22050 -ab 48 -ac 1 $flvpath/mov.flv&quot;, $output_array);
+-	print_r($output_array);
+-  	exec(&quot;ffmpeg -i $path -r 16 -i 100 -s qcif -ar 22050 -ab 48 -ac 1 $flvpath/mov.flv&quot;, $output_array);
+-	print_r($output_array);
+-	
+-  }*/
+ 
+-
+ } // end class sotf_AudioFile
+\ No newline at end of file
+
+Modified: node/branches/video_test/code/configs/eng.conf
+===================================================================
+--- node/branches/video_test/code/configs/eng.conf	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/code/configs/eng.conf	2006-05-23 05:56:34 UTC (rev 575)
+@@ -654,6 +654,8 @@
+ #ADDED BY Martin Schmidt
+ manage_queries=Manage your queries
+ combine=Combine one or more criterias to perform an advanced search on programmes
++field_empty = The red marked field is empty!
++fields_empty = The red marked fields are empty!
+ 
+ load=Load query
+ default=Make my default
+@@ -787,6 +789,10 @@
+ viewpopup = View
+ programme_audio = Programme audio
+ 
++#added by Martin Schmidt
++programme_video = Programme video
++
++
+ Links = Links
+ put_into_playlist = Put into my playlist
+ upload_to_portal = Upload to my portal
+@@ -915,6 +921,12 @@
+ convert = Convert from others
+ convert_all = Convert all required formats
+ 
++#added by Martin Schmidt
++create_stills = Create preview stills
++generating_stills = Preview stills are being generated...
++conversion_not_possible = Conversion not possible!
++converting = Converting
++
+ main_audio_count_mismatch = Data integrity problem with programme audio files!
+ missing_from_sql = Description of file '%1' is missing from SQL database.
+ 
+
+Modified: node/branches/video_test/code/configs/fra.conf
+===================================================================
+--- node/branches/video_test/code/configs/fra.conf	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/code/configs/fra.conf	2006-05-23 05:56:34 UTC (rev 575)
+@@ -651,6 +651,8 @@
+ #ADDED BY Martin Schmidt
+ manage_queries=Manage your queries
+ combine=Choisissez un ou plusieurs champs pour faire votre question
++field_empty = Le champ marqu&#233; en rouge est vide!
++fields_empty = Les champs marqu&#233;s en rouge sont vide!
+ 
+ load= Chargez question
+ default= Faites mon d&#233;faut
+@@ -783,6 +785,9 @@
+ viewpopup = ???
+ programme_audio = programme audio
+ 
++#added by Martin Schmidt
++programme_video = programme video
++
+ Links = liens
+ put_into_playlist = Mettez dans mon programme
+ upload_to_portal = T&#233;l&#233;chargez &#224; mon portail
+@@ -908,6 +913,12 @@
+ convert = convertissez d'autres
+ convert_all = convertissez tous les formats requis
+ 
++#added by Martin Schmidt
++create_stills = G&#233;n&#233;rer images fixes
++generating_stills = Des images fixes sont g&#233;n&#233;r&#233;s...
++conversion_not_possible = Conversion n'est pas possible!
++converting = Convertissant
++
+ main_audio_count_mismatch = Probl&#232;me d'int&#233;grit&#233; des donn&#233;es avec des dossiers d'acoustique de programme!
+ missing_from_sql = La description du dossier '%1 'est absente de la base de donn&#233;es de SQL.
+ 
+
+Modified: node/branches/video_test/code/configs/ger.conf
+===================================================================
+--- node/branches/video_test/code/configs/ger.conf	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/code/configs/ger.conf	2006-05-23 05:56:34 UTC (rev 575)
+@@ -190,7 +190,7 @@
+ topics_title = Themen
+ 
+ [index]
+-intro = Willkommen bei &lt;a href=&quot;/sotf/index.htm&quot;&gt;StreamOnTheFly!&lt;/a&gt;
++intro = Willkommen bei StreamOnTheFly!
+ Login_tab = Anmelden
+ logged_in_as = Angemeldet als:
+ Go = Go
+@@ -658,6 +658,8 @@
+ #ADDED BY Martin Schmidt
+ manage_queries=Suche/n verwalten
+ combine=W&#228;hlen Sie ein oder mehrere Feld(er), um eine erweiterte Suche durchzuf&#252;hren
++field_empty = Das rot markierte Feld ist nicht ausgef&#252;llt!
++fields_empty = Die rot markierten Felder sind nicht ausgef&#252;llt!
+ 
+ load = Suche laden
+ default = Zu Standard machen
+@@ -790,6 +792,9 @@
+ viewpopup = Ansicht
+ programme_audio = Audio
+ 
++#added by Martin Schmidt
++programme_video = Video
++
+ Links = Links
+ put_into_playlist = Zu meinem Programm hinzuf&#252;gen
+ upload_to_portal = Auf mein Portal raufladen
+@@ -918,6 +923,12 @@
+ convert = Von anderen konvertieren
+ convert_all = Alle ben&#246;tigten Formate konvertieren
+ 
++#added by Martin Schmidt
++create_stills = Preview-Bilder erzeugen
++generating_stills = Die Preview-Bilder werden erzeugt...
++conversion_not_possible = Konvertierung nicht m&#246;glich!
++converting = Konvertiere
++
+ main_audio_count_mismatch = Die Audiodatei ist m&#246;glicherweise defekt!
+ missing_from_sql = Die Beschreibung der Datei %1 fehlt in der SQL-Datenbank.
+ 
+
+Modified: node/branches/video_test/code/configs/hun.conf
+===================================================================
+--- node/branches/video_test/code/configs/hun.conf	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/code/configs/hun.conf	2006-05-23 05:56:34 UTC (rev 575)
+@@ -650,6 +650,8 @@
+ #ADDED BY Martin Schmidt
+ manage_queries= Keres&#337;k&#233;rd&#233;sek kezel&#233;se
+ combine=Combine one or more criterias to perform an advanced search on programmes
++field_empty = The red marked field is empty!
++fields_empty = The red marked fields are empty!
+ 
+ load = Bet&#246;lt&#233;s
+ default = Legyen alap&#233;rtelmezett
+@@ -782,6 +784,9 @@
+ viewpopup = Nezegeto
+ programme_audio = M&#369;sor hanganyaga
+ 
++#added by Martin Schmidt
++programme_video = Programme video
++
+ Links = Ugr&#243;pontok
+ put_into_playlist = Tedd a kedvenceimhez!
+ upload_to_portal = Tedd fel a port&#225;lomra!
+@@ -914,6 +919,12 @@
+ convert = Gener&#225;ld a t&#246;bbib&#337;l
+ convert_all = Gener&#225;ld az &#246;sszes k&#246;telez&#337; form&#225;tumot
+ 
++#added by Martin Schmidt
++create_stills = Create preview stills
++generating_stills = Preview stills are being generated...
++conversion_not_possible = Conversion not possible!
++converting = Converting
++
+ main_audio_count_mismatch = Integrit&#225;si probl&#233;ma: elt&#233;r&#233;s a hangf&#225;jlok &#233;s az adatb&#225;zis k&#246;z&#246;tt!
+ missing_from_sql = A '%1' f&#225;jl adatai hi&#225;nyoznak az adatb&#225;zisb&#243;l.
+ 
+
+Modified: node/branches/video_test/code/templates/advsearch.htm
+===================================================================
+--- node/branches/video_test/code/templates/advsearch.htm	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/code/templates/advsearch.htm	2006-05-23 05:56:34 UTC (rev 575)
+@@ -17,8 +17,15 @@
+ 	&lt;TD colspan='4' ALIGN=center&gt;&lt;B&gt;{#combine#}&lt;/B&gt;&lt;/TD&gt;&lt;TD BGCOLOR=&quot;{#searchBgColor1#}&quot;&gt;&nbsp;&nbsp;&lt;/TD&gt;
+ 	&lt;/TR&gt;
+ 	
++	{if !empty($ERROR_FIELDS)}
+ 	&lt;TR&gt;
+ 	&lt;TD BGCOLOR=&quot;{#searchBgColor1#}&quot;&gt;&nbsp;&nbsp;&lt;/TD&gt;
++	&lt;TD colspan='4' ALIGN=center&gt;&nbsp;&lt;br&gt;&lt;B style=&quot;color:red&quot;&gt;{if $ERROR_COUNT == 1} {#field_empty#} {else} {#fields_empty#} {/if}&lt;/B&gt;&lt;/TD&gt;&lt;TD BGCOLOR=&quot;{#searchBgColor1#}&quot;&gt;&nbsp;&nbsp;&lt;/TD&gt;
++	&lt;/TR&gt;
++	{/if}
++	
++	&lt;TR&gt;
++	&lt;TD BGCOLOR=&quot;{#searchBgColor1#}&quot;&gt;&nbsp;&nbsp;&lt;/TD&gt;
+ 	&lt;TD colspan='4' ALIGN=center&gt;&nbsp;&nbsp;&lt;/TD&gt;&lt;TD BGCOLOR=&quot;{#searchBgColor1#}&quot;&gt;&nbsp;&nbsp;&lt;/TD&gt;
+ 	&lt;/TR&gt;
+ 	
+@@ -32,10 +39,10 @@
+ 		
+ 		&lt;TD&gt;&nbsp;&nbsp;&lt;INPUT type=&quot;checkbox&quot; name=&quot;SQLchosen[]&quot; value=&quot;{$SQLquery[i][1]}&quot; {if $SQLquery[i][0] == &quot;AND&quot;} checked {/if}/&gt;&lt;/TD&gt; {*ADDED BY Martin Schmidt*}
+ 		 
+-		&lt;TD&gt;&lt;B&gt;{$SQLqueryfields[i]}&lt;/B&gt;&lt;/TD&gt;
++		&lt;TD&gt;&lt;B{if $ERROR_FIELDS[i]=='error'} style=&quot;color:red&quot;{/if}&gt;{$SQLqueryfields[i]}&lt;/B&gt;&lt;/TD&gt;
+ 		{if $SQLquery[i][4] == &quot;string&quot;}
+ 			&lt;TD&gt;&lt;SELECT name=&quot;SQLeq[]&quot;&gt;{html_options options=$EQstring selected=$SQLquery[i][2]}&lt;/SELECT&gt;&lt;/TD&gt;
+-			&lt;TD&gt;&lt;INPUT type=&quot;text&quot; name=&quot;SQLstring[]&quot; value=&quot;{$SQLquery[i][3]}&quot; size=&quot;30&quot;&gt;&lt;/TD&gt;
++			&lt;TD&gt;&lt;INPUT type=&quot;text&quot; name=&quot;SQLstring[]&quot; value=&quot;{$SQLquery[i][3]}&quot; size=&quot;30&quot; &gt;&lt;/TD&gt;
+ 		{elseif $SQLquery[i][4] == &quot;date&quot;}
+ 			&lt;TD&gt;&lt;SELECT name=&quot;SQLeq[]&quot; width=13&gt;{html_options options=$EQdate selected=$SQLquery[i][2]}&lt;/SELECT&gt;&lt;/TD&gt;
+ 			&lt;TD&gt;{html_select_date prefix=&quot;SQLstring[]&quot; time=$SQLquery[i][3] start_year=&quot;2000&quot; end_year=&quot;+0&quot; display_days=true month_format=&quot;%m&quot; field_order=&quot;YMD&quot; }&lt;/TD&gt;
+
+Modified: node/branches/video_test/code/templates/editFiles.htm
+===================================================================
+--- node/branches/video_test/code/templates/editFiles.htm	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/code/templates/editFiles.htm	2006-05-23 05:56:34 UTC (rev 575)
+@@ -38,7 +38,7 @@
+     &lt;/div&gt;
+ {/if}
+ &lt;/form&gt;
+-
++{if $CREATESTILLS}&lt;div style='color:green;font-weight:bold'&gt;{#generating_stills#}&lt;br&gt;&nbsp;&lt;/div&gt;{/if}
+ &lt;form&gt;
+ &lt;table class=&quot;tab&quot;&gt;
+   &lt;tr&gt; 
+@@ -72,9 +72,9 @@
+               {if !empty($item.filename) }
+               &lt;a target=&quot;link&quot; href=&quot;getFile.php/{$item.filename}?audio=1&amp;id={$PRG_ID}&amp;filename={$item.filename}&quot;&gt;{$item.filename}&lt;/a&gt;
+ 			  {elseif !empty($item.errors) }
+-			  	&lt;font color=&quot;red&quot;&gt;converting error&lt;/font&gt;
++			  	&lt;font color=&quot;red&quot;&gt;{#conversion_not_possible#}&lt;/font&gt;
+ 			  {elseif $item.converting}
+-			  &lt;font color=&quot;green&quot;&gt;converting {$item.percentage}&lt;/font&gt;
++			  &lt;font color=&quot;green&quot;&gt;{#converting#} {$item.percentage}&lt;/font&gt;
+               { else }
+               &lt;font color=&quot;red&quot;&gt;{#missing#}&lt;/font&gt;
+               {/if}
+@@ -101,7 +101,7 @@
+             &lt;/td&gt;
+ 			{/if}
+             &lt;td&gt;
+-                {if !empty($item.filename) }
++                {if !empty($item.filename) &amp;&amp; $item.flv != true}
+               &lt;input type=&quot;checkbox&quot; onclick=&quot;javascript:setvalue('audiofilesd', '{$item.id}', this.checked);return true;&quot;{ if $item.download_access eq 't' } CHECKED=&quot;1&quot; {/if} /&gt;
+                 {/if}
+             &lt;/td&gt;
+@@ -132,8 +132,8 @@
+ 				{/if}
+ 				
+ 			  {/if}
+-			  {if $PRG_DATA.type=='video' AND !$STILL_FOUND}
+-                   &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b3&quot; value=&quot;Create Stills&quot; onClick=&quot;javascript:document.location.href='editFiles.php?id={$PRG_ID}&amp;createstills=1'&quot; /&gt;
++			  {if $PRG_DATA.type=='video' AND !$CREATESTILLS AND !$STILL_FOUND}
++                   &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b3&quot; id=&quot;b3&quot; value=&quot;{#create_stills#}&quot; onClick=&quot;javascript:document.getElementById('b3').style.visibility='hidden';document.location.href='editFiles.php?id={$PRG_ID}&amp;createstills=1'&quot; /&gt;
+ 			{/if}
+               &lt;/td&gt;
+           &lt;/tr&gt;  
+
+Modified: node/branches/video_test/code/templates/editMeta.htm
+===================================================================
+--- node/branches/video_test/code/templates/editMeta.htm	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/code/templates/editMeta.htm	2006-05-23 05:56:34 UTC (rev 575)
+@@ -159,7 +159,7 @@
+               &lt;td style=&quot;font-weight:bold; color:#FF0000&quot;&gt;*&lt;/td&gt;
+ 			{else}
+ 			  &lt;td class=&quot;meta&quot;&gt;{#genre#}:&lt;/td&gt;
+-              &lt;td&gt;*&lt;/td&gt;
++              &lt;td&gt;&nbsp;&lt;/td&gt;
+ 			{/if}
+               &lt;td&gt;&lt;select name=&quot;genre_id&quot;&gt;
+                   
+
+Modified: node/branches/video_test/code/templates/get.htm
+===================================================================
+--- node/branches/video_test/code/templates/get.htm	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/code/templates/get.htm	2006-05-23 05:56:34 UTC (rev 575)
+@@ -74,9 +74,7 @@
+ 
+     &lt;/tr&gt;
+   &lt;/table&gt;
+-  
+-  &lt;a href=&quot;404&quot;&gt;ERROR NOT FOUND&lt;/a&gt;&lt;br&gt;
+-  &lt;a href=&quot;b_sorenson.mov&quot;&gt;SORENSON MOV&lt;/a&gt;
++
+   {*ADDED BY Martin Schmidt*}
+   
+   {if $VIDEO_PRG}
+@@ -87,12 +85,11 @@
+   &lt;/table&gt;
+ 
+   &lt;table class=&quot;tabarea&quot; width=&quot;100%&quot; &gt;
+-    {*&lt;tr&gt; 
+-	 
+-	{if $FLV_FOUND} 
+-      &lt;td class=&quot;tabarea&quot;&gt; 
+-	 
+-  &lt;OBJECT class=&quot;videoplayer&quot; classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000'
++   
++   &lt;tr&gt;&lt;td  class=&quot;tabarea&quot;&gt;{if $FLV_FOUND}
++   
++
++   &lt;OBJECT class=&quot;videoplayer&quot; classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000'
+         codebase='<A HREF="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0">http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0</A>'
+         width='216' height='186' style=&quot;padding:0; margin:0&quot;&gt;
+         &lt;param name='movie' value=&quot;{$ROOT_URL}/videoplayer.swf?flvpath={$FLV_PATH}&quot;&gt;
+@@ -102,38 +99,18 @@
+         &lt;EMBED class=&quot;videoplayer&quot; style=&quot;padding:0; margin:0&quot; src=&quot;{$ROOT_URL}/videoplayer.swf?flvpath={$FLV_PATH}&quot; quality='high' width='216' height='186' bgcolor=&quot;#EFF4FE&quot; loop=&quot;false&quot; type='application/x-shockwave-flash'
+         pluginspage='<A HREF="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash">http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash</A>'&gt;
+         &lt;/EMBED&gt;
+-		  &lt;/OBJECT&gt; 
+-		
+-	&lt;object type=&quot;application/x-shockwave-flash&quot; width=&quot;176&quot; height=&quot;144&quot; 
+-    wmode=&quot;transparent&quot; data=&quot;flvplayer.swf?file={$FLV_PATH}&quot;&gt;
+-  &lt;param name=&quot;movie&quot; value=&quot;flvplayer.swf?file={$FLV_PATH}&quot; /&gt;
+-  &lt;param name=&quot;wmode&quot; value=&quot;transparent&quot; /&gt;
+-  &lt;/object&gt;
+-  &lt;/td&gt;
+-  
+-{elseif !$FLV_FOUND and $VIDEO_PRG}
+-&lt;td class=&quot;tabarea&quot;&gt; 
+-  		Flash-Preview for this programme is not available.
+-		&lt;/td&gt;
+-  {/if}javascript:*}
+-  
++	&lt;/OBJECT&gt; 
++
++
++  {else} &lt;div style='padding:10px'&gt;Flash Preview is not available for this programme.&lt;/div&gt;{/if}
++  &lt;/td&gt;&lt;/tr&gt;  
++   
+   {if $STILLS}&lt;tr&gt;&lt;td  class=&quot;tabarea&quot;&gt;{foreach item=item from=$STILLS}
+   &lt;img style=&quot;padding:10px&quot; src='getFile.php/{$item.filename}?id={$PRG_DATA.id}&amp;filename={$item.filename}'&gt;
+   {/foreach}    &lt;/td&gt;&lt;/tr&gt;
+   {/if}
+   
+-   &lt;/tr&gt;&lt;td  class=&quot;tabarea&quot;&gt;{if $FLV_FOUND}
+-   &lt;script type=&quot;text/javascript&quot;&gt;
+-	&lt;!--
+-	document.write(&quot;&lt;div style='padding:10px'&gt;&gt;&gt; &lt;a href='#' onClick=popup('videoplayer.swf?flvpath={$FLV_PATH}','CreateNeighbour',170,191,false)&gt;Flash Preview&lt;/a&gt;&lt;/div&gt;&quot;);
+-	//--&gt;
+-	&lt;/script&gt;
+-	&lt;noscript&gt;
+-	  &lt;div style='padding:10px'&gt;&gt;&gt; &lt;a target='_blank' href='videoplayer.swf?flvpath={$FLV_PATH}'&gt;Flash Preview&lt;/a&gt;&lt;/div&gt; 
+-	&lt;/noscript&gt;
+-
+-  {else} &lt;div style='padding:10px'&gt;Flash Preview is not available for this programme.&lt;/div&gt;{/if}
+-  &lt;/td&gt;&lt;/tr&gt;
++   
+   
+ &lt;/table&gt;
+ &lt;p&gt;&lt;/p&gt;
+@@ -310,13 +287,26 @@
+     &lt;table&gt;
+        {cycle name=&quot;audio&quot; values=&quot;list1,list2&quot; print=false advance=false}
+        {foreach item=item from=$AUDIO_FILES}
+-          {if $item.download_access eq 't' or $item.stream_access eq 't' }
++          {if ($item.download_access eq 't' or $item.stream_access eq 't') and $item.format!='flv'}
+           &lt;tr class=&quot;{cycle name=audio}&quot;&gt;
+             &lt;td width=&quot;5%&quot;&gt;&lt;/td&gt;
++			{if $item.format=='wmv'}
++			&lt;td width=&quot;5%&quot;&gt;
++				&lt;a href=&quot;{$ROOT_URL}/getFile.php/{$item.filename}?{if $item.main_content eq 't' }audio=1&amp;{/if}id={$ID}&amp;filename={$item.filename}&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/wmv.jpg&quot; border=&quot;0&quot; alt=&quot;Windows Media File&quot; style=&quot;background-color:#fff;width:20px;height:20px;padding:2px;border-style:solid;border-width:1px;border-color:#666666&quot;&gt;&lt;/a&gt;
++			&lt;/td&gt;
++			{elseif $item.format=='mov' OR $item.format=='mp4'}
++			&lt;td width=&quot;5%&quot;&gt;
++				&lt;a href=&quot;{$ROOT_URL}/getFile.php/{$item.filename}?{if $item.main_content eq 't' }audio=1&amp;{/if}id={$ID}&amp;filename={$item.filename}&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/mp4.jpg&quot; border=&quot;0&quot; alt=&quot;Quicktime File&quot; style=&quot;background-color:#fff;width:20px;height:20px;padding:2px;border-style:solid;border-width:1px;border-color:#666666&quot;&gt;&lt;/a&gt;
++			&lt;/td&gt;
++			{elseif $item.format=='3gp'}
++			&lt;td width=&quot;5%&quot;&gt;
++				&lt;a href=&quot;{$ROOT_URL}/getFile.php/{$item.filename}?{if $item.main_content eq 't' }audio=1&amp;{/if}id={$ID}&amp;filename={$item.filename}&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/3gp.jpg&quot; border=&quot;0&quot; alt=&quot;3GP File&quot; style=&quot;background-color:#fff;width:20px;height:20px;padding:2px;border-style:solid;border-width:1px;border-color:#666666&quot;&gt;&lt;/a&gt;
++			{else if $VIDEO_PRG}&lt;td width=&quot;5%&quot;&gt;&lt;a href=&quot;{$ROOT_URL}/getFile.php/{$item.filename}?{if $item.main_content eq 't' }audio=1&amp;{/if}id={$ID}&amp;filename={$item.filename}&quot;&gt;&lt;img src=&quot;{$IMAGE_URL}/video.jpg&quot; border=&quot;0&quot; alt=&quot;Video File&quot; style=&quot;background-color:#fff;width:20px;height:20px;padding:2px;border-style:solid;border-width:1px;border-color:#666666&quot;&gt;&lt;/td&gt;{/if}
++			
+             &lt;td&gt;
+               {if $item.main_content eq 't' }
+ 			  	{if $VIDEO_PRG}
+-				 Programme video
++				 {#programme_video#}
+ 				 {else}
+                  {#programme_audio#}
+ 				{/if}
+
+Modified: node/branches/video_test/www/advsearch.php
+===================================================================
+--- node/branches/video_test/www/advsearch.php	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/www/advsearch.php	2006-05-23 05:56:34 UTC (rev 575)
+@@ -113,6 +113,7 @@
+ 	}
+ 
+ 
++
+ $max = count($SQLeq);
+ $k = 0;
+ for ($i=0; $i &lt; $max; $i++)			//go through all the values on the form
+@@ -127,12 +128,16 @@
+ 	{
+ 		$SQLquery[$i][3] = abs($SQLstring[$k]);
+ 	}
+-	else	$SQLquery[$i][3] = $SQLstring[$k];
++	else{
++		$SQLquery[$i][3] = $SQLstring[$k];
++	}
+ 	$k++;
+ }
+ 
+ 	
+ // ADDED BY Martin Schmidt
++$error_fields=array();
++$error_count=0;
+ 
+ if (!$fromSearchResults){
+ 	for($j=0;$j&lt;count($SQLquery);$j++){
+@@ -140,6 +145,10 @@
+ 		for($l=0;$l&lt;count($SQLchosen);$l++){
+ 			if($SQLchosen) {
+ 				if($SQLquery[$j][1] == $SQLchosen[$l]){
++					 if($SQLquery[$j][4]==&quot;string&quot; &amp;&amp; $SQLquery[$j][3]==&quot;&quot;){
++					 	$error_fields[$j]='error';
++						$error_count++;
++					 }
+ 					 $SQLquery[$j][0]=&quot;AND&quot;;
+ 					 $was_chosen=true;
+ 				}
+@@ -149,6 +158,8 @@
+ 	}
+ }
+ 
++
++
+ /////////////////////////////////
+ 
+ $advsearch-&gt;sotf_AdvSearch($SQLquery);			//set the inner variables of the class as well
+@@ -169,7 +180,7 @@
+ 	}
+ 	///////////////////////////////////////////////
+ 	
+-	if($minOneField){
++	if($minOneField &amp;&amp; empty($error_fields)){
+ 		//$_SESSION[&quot;SQLquery&quot;] = $SQLquery;
+ 		//$_SESSION[&quot;SQLquerySerial&quot;] = $advsearch-&gt;Serialize();
+ 		$SQLquerySerial = $advsearch-&gt;Serialize();
+@@ -307,6 +318,9 @@
+ $paramcache-&gt;setProcessed();						//paramcache, against reload
+ //$paramcache-&gt;addResult(&quot;SQLquerySerial&quot;, $advsearch-Serialize());	//save serialized query
+ 
++$smarty-&gt;assign(&quot;ERROR_FIELDS&quot;, $error_fields);
++$smarty-&gt;assign(&quot;ERROR_COUNT&quot;, $error_count);
++
+ $page-&gt;send();
+ 
+ ?&gt;
+
+Modified: node/branches/video_test/www/config.inc.php.template
+===================================================================
+--- node/branches/video_test/www/config.inc.php.template	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/www/config.inc.php.template	2006-05-23 05:56:34 UTC (rev 575)
+@@ -307,19 +307,16 @@
+ //////////////////////////////////////////////////////////////////////////
+ 
+ /**
+-* Perl regexp for parse ffmpeg output during transcode.
++* Path to FFmpeg directory
+ *
+ * @package	StreamOnTheFly
+-* @variable	string	$config['lameencRegexp']
++* @variable	array	$config['ffmpeg']
+ */
+-$config['ffmpegRegexp'] = &quot;/frame=(.*?) q=/&quot;;
+-$config['ffmpegErrorRegexp']= &quot;/0x404336f0\](.*?)$/&quot;;
++$config['ffmpeg'] = $config['helperdir'].&quot;/ffmpeg&quot;;
+ 
+ 
+-$config['ffmpeg'] = $config['helperdir'].&quot;/ffmpeg&quot;;
+-
+ /**
+-* Required video formats.
++* Required video formats. (FLV format is necessary for preview on get.php!)
+ *
+ * Array of associative arrays contains information about the video format.
+ * @package	StreamOnTheFly
+@@ -368,7 +365,18 @@
+ 					);
+ 
+ 
++/**
++* FFmpeg parameters used for preview still creation
++*
++* @package	StreamOnTheFly
++* @variable	array	$config['videoFormats']
++*/
+ 
++$config['ffmpeg_params_stills'] = '-f image2 -img gif -t 1 -r 1 -s sqcif';
++
++
++				
++
+ //////////////////////////////////////////////////////////////////////////
+ // MISC OPTIONS ------------------------------------------------------
+ //////////////////////////////////////////////////////////////////////////
+@@ -379,17 +387,82 @@
+ 
+ // MIME types to determine type of uploaded documents
+ $config['mimetypes'] = array(
+-				'doc'=&gt;'application/msword',
+-				'gif'=&gt;'image/gif',
+-				'htm'=&gt;'text/html',
+-				'html'=&gt;'text/html',
+-				'jpg'=&gt;'image/jpeg',
+-				'mp3'=&gt;'audio/mp3',
+-				'm3u'=&gt;'audio/x-mpeg',
+-				'pdf'=&gt;'application/pdf',
+-				'ps'=&gt;'application/postscript',
+-				'txt'=&gt;'text/plain',
+-				'xls'=&gt;'application/vnd.ms-excel'
+-				);
++			'doc'	=&gt; 'application/msword',
++			'gif'	=&gt; 'image/gif',
++			'htm'	=&gt; 'text/html',
++			'html'	=&gt; 'text/html',
++			'jpg'	=&gt; 'image/jpeg',
++			'mp3'	=&gt; 'audio/mp3',
++			'm3u'	=&gt; 'audio/x-mpeg',
++			'ogg'	=&gt; 'application/x-ogg',
++			'pdf'	=&gt; 'application/pdf',
++			'png'	=&gt; 'image/png',
++			'ps'	=&gt; 'application/postscript',
++			'flv'   =&gt; 'video/x-flv',
++			'avi'   =&gt; 'x-msvideo',
++			'mov'   =&gt; 'quicktime',
++			'mpg'   =&gt; 'mpeg',
++			'mpeg'  =&gt; 'mpeg',
++			'mp4'   =&gt; 'video/mp4',
++			'3gp'   =&gt; 'video/3gpp',
++			'wmv'   =&gt; 'video/x-ms-wmv',
++			'txt'	=&gt; 'text/plain',
++			'xls'	=&gt; 'application/vnd.ms-excel');
++		
++		
++			
++//////////////////////////////////////////////////////////////////////////
++// ADVANCED VIDEO OPTIONS ------------------------------------------------
++//////////////////////////////////////////////////////////////////////////			
+ 
++
++/**
++* Perl regexp for parsing ffmpeg output during transcode.
++*
++* @package	StreamOnTheFly
++* @variable	string	$config['ffmpegRegexp']
++*/
++$config['ffmpegRegexp'] = &quot;/frame=(.*?) q=/&quot;;
++
++
++/**
++* Perl regexp for parsing ffmpeg errors occuring BEFORE CONVERSION EVEN STARTS.
++*
++* @package	StreamOnTheFly
++* @variable	string	$config['ffmpegErrorsBeforeConversion']
++*/
++$config['ffmpegErrorsBeforeConversion']=array(
++											&quot;/\n\[.*@ 0x.*\n/&quot;, 
++											&quot;/Unsupported codec/&quot;
++										);
++
++/**
++* Perl regexp for parsing ffmpeg errors occuring DURING THE CONVERSION (frame progress already displayed).
++*
++* @package	StreamOnTheFly
++* @variable	string	$config['ffmpegErrorsDuringConversion']
++*/
++$config['ffmpegErrorsDuringConversion']=array(
++											&quot;/Color spaces other than 420p/&quot;
++										);
++										
++/**
++* String in ffmpeg output when CONVERSION IS FINISHED.
++*
++* @package	StreamOnTheFly
++* @variable	string	$config['ffmpegFinishMessage']
++*/
++$config['ffmpegFinishMessage']=&quot;muxing overhead&quot;;
++
++										
++										
++/**
++* String in ffmpeg output when CONVERSION IS FINISHED, BUT NO USABLE VIDEO HAS BEEN PRODUCED.
++*
++* @package	StreamOnTheFly
++* @variable	string	$config['ffmpegEmptyVideo']
++*/
++$config['ffmpegEmptyVideo']=&quot;video:0kB&quot;;
++
++
+ ?&gt;
+
+Modified: node/branches/video_test/www/editFiles.php
+===================================================================
+--- node/branches/video_test/www/editFiles.php	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/www/editFiles.php	2006-05-23 05:56:34 UTC (rev 575)
+@@ -171,7 +171,8 @@
+ 	for ($i=0;$i&lt;count($config[$checker-&gt;prefix.'Formats']);$i++) // is either &quot;audioFormats&quot; or &quot;videoFormats&quot;
+ 	{
+ 	  $PRG_AUDIO[$i] = array(&quot;format&quot; =&gt; $checker-&gt;getFormatFileName($i),
+-							 &quot;index&quot; =&gt; $i);
++							 &quot;index&quot; =&gt; $i,
++							 &quot;flv&quot; =&gt; preg_match(&quot;/flv/&quot;, $checker-&gt;getFormatFileName($i)));
+ 	  if ($checker-&gt;reqs[$i][0]) {
+ 		$fname = $prgAudiolist-&gt;list[$checker-&gt;reqs[$i][1]]-&gt;name;
+ 		$PRG_AUDIO[$i] = array_merge($PRG_AUDIO[$i], $mainAudio[$fname]);
+@@ -192,7 +193,10 @@
+ 						$totalframes=$checker-&gt;getTotalFrames($source, $i);
+ 						$perc_error = $checker-&gt;getPercentageOrError($temppath.$filename, $totalframes);
+ 						$PRG_AUDIO[$i]['errors']=$perc_error['errors'];
+-						if($perc_error['percentage'])$PRG_AUDIO[$i]['percentage']=&quot;~ &quot;.$perc_error['percentage'].&quot;%&quot;;
++						if($perc_error['percentage']){
++							if($perc_error['percentage']&gt;100)$perc_error['percentage']=100;
++							$PRG_AUDIO[$i]['percentage']=&quot;~ &quot;.$perc_error['percentage'].&quot;%&quot;;
++						}
+ 						if(!empty($perc_error['errors'])) $PRG_AUDIO[$i]['converting'] = false;
+ 				   }
+ 			   }
+@@ -222,7 +226,7 @@
+ 
+ 
+ 
+-// start converting required formats
++// start converting required video formats
+ if($videoconv &amp;&amp; $missing){
+ 
+ 	$obj = $repository-&gt;getObject($id);
+
+Modified: node/branches/video_test/www/functions.inc.php
+===================================================================
+--- node/branches/video_test/www/functions.inc.php	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/www/functions.inc.php	2006-05-23 05:56:34 UTC (rev 575)
+@@ -360,4 +360,48 @@
+         pclose($fp);
+         return $isOneColor;
+   }
++  
++  
++  //function to have a nice formatted print_r for multi-dimensional arrays (great for getid3-arrays!)
++  //ADDED BY Martin Schmidt (not written by my own, copied from php.net...)
++  
++  function print_r_html($arr, $style = &quot;display: none; margin-left: 10px;&quot;){ 
++  static $i = 0; $i++;
++  echo &quot;\n&lt;div id=\&quot;array_tree_$i\&quot; class=\&quot;array_tree\&quot;&gt;\n&quot;;
++  foreach($arr as $key =&gt; $val)
++  { switch (gettype($val))
++   { case &quot;array&quot;:
++       echo &quot;&lt;a onclick=\&quot;document.getElementById('&quot;;
++       echo &quot;array_tree_element_$i').style.display = &quot;;
++       echo &quot;document.getElementById('array_tree_element_$i'&quot;;
++       echo &quot;).style.display == 'block' ?&quot;;
++       echo &quot;'none' : 'block';\&quot;\n&quot;;
++       echo &quot;name=\&quot;array_tree_link_$i\&quot; href=\&quot;#array_tree_link_$i\&quot;&gt;&quot;.htmlspecialchars($key).&quot;&lt;/a&gt;&lt;br /&gt;\n&quot;;
++       echo &quot;&lt;div class=\&quot;array_tree_element_\&quot; id=\&quot;array_tree_element_$i\&quot; style=\&quot;$style\&quot;&gt;&quot;;
++       echo print_r_html($val);
++       echo &quot;&lt;/div&gt;&quot;;
++     break;
++     case &quot;integer&quot;:
++       echo &quot;&lt;b&gt;&quot;.htmlspecialchars($key).&quot;&lt;/b&gt; =&gt; &lt;i&gt;&quot;.htmlspecialchars($val).&quot;&lt;/i&gt;&lt;br /&gt;&quot;;
++     break;
++     case &quot;double&quot;:
++       echo &quot;&lt;b&gt;&quot;.htmlspecialchars($key).&quot;&lt;/b&gt; =&gt; &lt;i&gt;&quot;.htmlspecialchars($val).&quot;&lt;/i&gt;&lt;br /&gt;&quot;;
++     break;
++     case &quot;boolean&quot;:
++       echo &quot;&lt;b&gt;&quot;.htmlspecialchars($key).&quot;&lt;/b&gt; =&gt; &quot;;
++       if ($val)
++       { echo &quot;true&quot;; }
++       else
++       { echo &quot;false&quot;; }
++       echo  &quot;&lt;br /&gt;\n&quot;;
++     break;
++     case &quot;string&quot;:
++       echo &quot;&lt;b&gt;&quot;.htmlspecialchars($key).&quot;&lt;/b&gt; =&gt; &lt;code&gt;&quot;.htmlspecialchars($val).&quot;&lt;/code&gt;&lt;br /&gt;&quot;;
++     break;
++     default:
++       echo &quot;&lt;b&gt;&quot;.htmlspecialchars($key).&quot;&lt;/b&gt; =&gt; &quot;.gettype($val).&quot;&lt;br /&gt;&quot;;
++     break; }
++   echo &quot;\n&quot;; }
++  echo &quot;&lt;/div&gt;\n&quot;; }
++
+ ?&gt;
+\ No newline at end of file
+
+Modified: node/branches/video_test/www/getFile.php
+===================================================================
+--- node/branches/video_test/www/getFile.php	2006-05-19 12:59:13 UTC (rev 574)
++++ node/branches/video_test/www/getFile.php	2006-05-23 05:56:34 UTC (rev 575)
+@@ -53,6 +53,8 @@
+ 
+ // TODO check if user have rights to access: 1. prg is published, 2. file has public_access or donwload_access
+ 
++$pure_filename=$filename;
++
+ if($mainAudio)
+      $filename =  sotf_Utils::getFileInDir($prg-&gt;getAudioDir(), $filename);
+ else
+@@ -64,31 +66,44 @@
+ debug('filename', $filename);
+ 
+ $file = &amp; new sotf_File($filename);
+-if ($file-&gt;type != &quot;none&quot;)
+-{
+-	header(&quot;Content-type: &quot; . $file-&gt;mimetype . &quot;\n&quot;);
+-	header(&quot;Content-length: &quot; . filesize($filename) . &quot;\n&quot;);   
+-	//if($mainAudio) {  //this is somehow needed for iPodder
+-	//  header(&quot;Accept-Ranges: bytes&quot;);
+-	//  header('ETag: &quot;' . md5(file_get_contents($filename)) . '&quot;');
+-	//} else {
+-	  header(&quot;Content-transfer-encoding: binary\n&quot;); 
+-	  //}
+-	// send file
++
++if (preg_match(&quot;/image/&quot;, $file-&gt;mimetype))
++	{
++		header(&quot;Content-type: &quot; . $file-&gt;mimetype . &quot;\n&quot;);
++		header(&quot;Content-length: &quot; . filesize($filename) . &quot;\n&quot;);   
++		//if($mainAudio) {  //this is somehow needed for iPodder
++		//  header(&quot;Accept-Ranges: bytes&quot;);
++		//  header('ETag: &quot;' . md5(file_get_contents($filename)) . '&quot;');
++		//} else {
++		  header(&quot;Content-transfer-encoding: binary\n&quot;); 
++		  //}
++		// send file
++		
++		// wreutz: added this to get rid of fid_123mf12 filename and save as the real filename of the file
++		header( &quot;Content-Disposition: filename=&quot;.basename($filename).&quot;;\n&quot; );
++		// wreutz: end
+ 	
+-	// wreutz: added this to get rid of fid_123mf12 filename and save as the real filename of the file
+-    header( &quot;Content-Disposition: filename=&quot;.basename($filename).&quot;;\n&quot; );
+-    // wreutz: end
++		readfile($filename);
++		if($file-&gt;mimetype!='video/x-flv') $prg-&gt;addStat($file-&gt;id, &quot;downloads&quot;);
+ 
+-	readfile($filename);
++	}
++
++
++else if ($file-&gt;type != &quot;none&quot;){
++	if(!is_file($config['wwwdir'].'/tmp/'.$pure_filename)){
++		copy($filename, $config['wwwdir'].'/tmp/'.$pure_filename);
++	}
++	// add this download to statistics
++	if($file-&gt;mimetype!='video/x-flv') $prg-&gt;addStat($file-&gt;id, &quot;downloads&quot;);
++
++	$page-&gt;redirect('<A HREF="http://">http://</A>' . $_SERVER['HTTP_HOST'] . $config['localPrefix'] . '/tmp/'.$pure_filename);
+ }
+-else
+-  raiseError(&quot;download_problem&quot;, $filename);
+ 
+-// add this download to statistics
+-$prg-&gt;addStat($file-&gt;id, &quot;downloads&quot;);
++else  raiseError(&quot;download_problem&quot;, $filename);
+ 
+ 
++
++
+ $page-&gt;logRequest();
+ 
+ ?&gt;
+\ No newline at end of file
+
+Added: node/branches/video_test/www/static/3gp.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/branches/video_test/www/static/3gp.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/branches/video_test/www/static/mp4.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/branches/video_test/www/static/mp4.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/branches/video_test/www/static/video.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/branches/video_test/www/static/video.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: node/branches/video_test/www/static/wmv.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/branches/video_test/www/static/wmv.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Deleted: node/branches/video_test/www/videoplayer.swf
+===================================================================
+(Binary files differ)
+
+Added: node/branches/video_test/www/videoplayer.swf
+===================================================================
+(Binary files differ)
+
+
+Property changes on: node/branches/video_test/www/videoplayer.swf
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000217.html">[Sotf-general] r574 - in node/branches/video_test: code/classes code/share code/templates www www/help www/help/images www/static
+</A></li>
+	<LI>Next message: <A HREF="000221.html">[Sotf-general] node 094 updated to SVN trunk, using getid3-1.7.5
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#220">[ date ]</a>
+              <a href="thread.html#220">[ thread ]</a>
+              <a href="subject.html#220">[ subject ]</a>
+              <a href="author.html#220">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

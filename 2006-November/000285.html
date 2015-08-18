@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r591 - node/branches/payable/code/share
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r591%20-%20node/branches/payable/code/share&In-Reply-To=%3C200611052217.kA5MHP53024914%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000284.html">
+   <LINK REL="Next"  HREF="000286.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r591 - node/branches/payable/code/share</H1>
+    <B>micsik at BerliOS</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r591%20-%20node/branches/payable/code/share&In-Reply-To=%3C200611052217.kA5MHP53024914%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r591 - node/branches/payable/code/share">micsik at mail.berlios.de
+       </A><BR>
+    <I>Sun Nov  5 23:17:25 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000284.html">[Sotf-general] r590 - in node/branches/payable: code/classes	code/configs code/doc code/share code/templates www www/static
+</A></li>
+        <LI>Next message: <A HREF="000286.html">[Sotf-general] r592 - node/trunk/www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#285">[ date ]</a>
+              <a href="thread.html#285">[ thread ]</a>
+              <a href="subject.html#285">[ subject ]</a>
+              <a href="author.html#285">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: micsik
+Date: 2006-11-05 23:17:24 +0100 (Sun, 05 Nov 2006)
+New Revision: 591
+
+Modified:
+   node/branches/payable/code/share/db.sql
+Log:
+
+
+Modified: node/branches/payable/code/share/db.sql
+===================================================================
+--- node/branches/payable/code/share/db.sql	2006-11-05 22:12:26 UTC (rev 590)
++++ node/branches/payable/code/share/db.sql	2006-11-05 22:17:24 UTC (rev 591)
+@@ -223,6 +223,7 @@
+ &quot;temporal_coverage&quot; date,										-- dc.coverage.temporal
+ &quot;published&quot; bool DEFAULT 'f'::bool,                             -- unpublished items are not searchable nor browsable
+ &quot;free_content&quot; bool DEFAULT 't'::bool,				-- listen permissions can be defined for non free content 
++&quot;promoted&quot; bool DEFAULT 'f'::bool,				-- programs promoted on index page
+ CONSTRAINT &quot;to_stations&quot; FOREIGN KEY(&quot;station_id&quot;) REFERENCES sotf_stations(&quot;id&quot;) ON DELETE CASCADE,
+ CONSTRAINT &quot;to_series&quot; FOREIGN KEY(&quot;series_id&quot;) REFERENCES sotf_series(&quot;id&quot;) ON DELETE CASCADE --??
+ );
+@@ -673,6 +674,7 @@
+ -- user groups for access permissions
+ &quot;id&quot; serial PRIMARY KEY,	-- just an id
+ &quot;name&quot; varchar(254) NOT NULL,	-- name of group
++&quot;price&quot; float DEFAULT 0,	-- price of membership
+ &quot;comments&quot; text			-- comments
+ );
+ CREATE UNIQUE INDEX sotf_group_name ON sotf_groups (&quot;name&quot;);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000284.html">[Sotf-general] r590 - in node/branches/payable: code/classes	code/configs code/doc code/share code/templates www www/static
+</A></li>
+	<LI>Next message: <A HREF="000286.html">[Sotf-general] r592 - node/trunk/www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#285">[ date ]</a>
+              <a href="thread.html#285">[ thread ]</a>
+              <a href="subject.html#285">[ subject ]</a>
+              <a href="author.html#285">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] getting things on...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-December/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20getting%20things%20on...&In-Reply-To=%3C01D46945-D72E-4D81-B4FF-EA126AABF83B%40sztaki.hu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000302.html">
+   <LINK REL="Next"  HREF="000304.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] getting things on...</H1>
+    <B>Laszlo Kovacs</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20getting%20things%20on...&In-Reply-To=%3C01D46945-D72E-4D81-B4FF-EA126AABF83B%40sztaki.hu%3E"
+       TITLE="[Sotf-general] getting things on...">laszlo.kovacs at sztaki.hu
+       </A><BR>
+    <I>Thu Dec  7 18:48:56 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000302.html">[Sotf-general] getting things on...
+</A></li>
+        <LI>Next message: <A HREF="000304.html">[Sotf-general] getting things on...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#303">[ date ]</a>
+              <a href="thread.html#303">[ thread ]</a>
+              <a href="subject.html#303">[ subject ]</a>
+              <a href="author.html#303">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear Matthias,
+
+Sorry not to able to test your new interface in details before. I've  
+just looked at it now immediately revealed some trivial user  
+interface problems (using Safari, Firefox, and Camino browsers on a  
+MAC).
+
+If you increase  (or decrease) the fontsize of the UI, than the whole  
+UI is completely disorganized, main menu disappears, flags for  
+language change move to different strange places, thus we can't use  
+the system at all. This is a real general problem.
+
+Also the limited width page design makes a strange effect on  
+usability (prevents it, as you will see it below).
+
+Seems that the new UI has much less quality from pure usability point  
+of view. A system like this should concentrate on the usability at  
+first.
+
+The new advanced search panel does not describe how it works, whether  
+it is conjunctive of disjunctive.
+
+Station list does not provide the logo of the stations thus this list  
+is much less usable.
+
+Topic tree handling is less usable as well as you put the hitlist  
+after the subtree that can be very long thus scrolling is almost  
+always necessary to reach the real content. Again a serious problem  
+that the limited width page design causes.
+
+Sorry but the whole is much less usable from general UI functionality  
+point of view. I suggest to consult a senior expert who has an  
+extensive practice in general UI design.
+
+The individual colors are great, using them together is really awful  
+from pure esthetics point of view, BTW.
+
+
+On Dec 7, 2006, at 5:33 PM, Husinsky Matthias wrote:
+
+&gt;<i> hi everybody
+</I>&gt;<i>
+</I>&gt;<i> we in st.p&#246;lten did quite some work in the last few month to bring  
+</I>&gt;<i> the sotf node interface to another level. now comes the point where  
+</I>&gt;<i> we would like to contribute our changes into the svn tree.  
+</I>&gt;<i> unfortunately we did not recieve a lot of feedback after our last  
+</I>&gt;<i> call to test our node at <A HREF="http://sotf.fh-stpoelten.ac.at/node_884/">http://sotf.fh-stpoelten.ac.at/node_884/</A>
+</I>&gt;<i>
+</I>&gt;<i> anyway, we are confident that the version we developed works  
+</I>&gt;<i> stable. it surely still has some issues but most of those were  
+</I>&gt;<i> beyond our scope of restructuring the interface.
+</I>&gt;<i>
+</I>&gt;<i> but before we can even think about merging our source into the tree  
+</I>&gt;<i> we first should get an overview of what is already here and where  
+</I>&gt;<i> to put our code.
+</I>&gt;<i>
+</I>&gt;<i> at the moment there is one trunk and 3 branches to be found in  
+</I>&gt;<i> berlios' svn:
+</I>&gt;<i> * trunk: this is probably the latest stable audio node release,  
+</I>&gt;<i> like the nodes running at <A HREF="http://medienarchiv.fh-stpoelten.ac.at">http://medienarchiv.fh-stpoelten.ac.at</A> or  
+</I>&gt;<i> <A HREF="http://radio.sztaki.hu/node/">http://radio.sztaki.hu/node/</A>
+</I>&gt;<i> * branch: payable - the payable etension andras developed in the  
+</I>&gt;<i> recent months. i guess it is based on the trunk.
+</I>&gt;<i> * branch: video_test: the video capable version of sotf developed  
+</I>&gt;<i> mainly by martin schmidt. we built our current version upon this one.
+</I>&gt;<i> * branch: sztaki_dsd: assumably one of sztaki's developements, but  
+</I>&gt;<i> no further details available
+</I>&gt;<i>
+</I>&gt;<i> is this correct?
+</I>&gt;<i>
+</I>&gt;<i> looking at these proceedings i would like to ask the question where  
+</I>&gt;<i> to go from here. we do have a trunk and two branches. we're  
+</I>&gt;<i> obviously going to merge our source into the video_test branch as  
+</I>&gt;<i> this was our basis. then, how do we cope with the different versions?
+</I>&gt;<i> a move from the sysadmins to our video branch would be preferrable  
+</I>&gt;<i> for the following reasons:
+</I>&gt;<i> - the video node can also be used as pure audio node (by switch in  
+</I>&gt;<i> the config).
+</I>&gt;<i> - the video node will then have a WAI conform interface that can be  
+</I>&gt;<i> styled via pure css
+</I>&gt;<i> - audio and video nodes can coexist in a network
+</I>&gt;<i> nevertheless it is important that all the nodes on the network  
+</I>&gt;<i> update to the new version since only the new nodes (even if they  
+</I>&gt;<i> provide audio only) can pass the video metadata on to other nodes.  
+</I>&gt;<i> as soon as two video providing nodes are on the network, this is  
+</I>&gt;<i> nescessary. we did quite some tests to proove that it is working.
+</I>&gt;<i>
+</I>&gt;<i> what do you think is best? we obviously should discuss this in  
+</I>&gt;<i> detail as the video extension is a major step in the network's  
+</I>&gt;<i> history. it would probably be best if we set up a new test network  
+</I>&gt;<i> on different locations to proove it extensively before we do the  
+</I>&gt;<i> final move. we'll start with a clean node next week an will provide  
+</I>&gt;<i> the source for you to test.
+</I>&gt;<i>
+</I>&gt;<i> finally, we'll need somebody with the access permission to the svn  
+</I>&gt;<i> (and also the experience with merging) to help us since we don't  
+</I>&gt;<i> have either of those.
+</I>&gt;<i>
+</I>&gt;<i> thanks for your attention - i hope we'll get lots of feedback.
+</I>&gt;<i> all the best,
+</I>&gt;<i> matthias
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ---
+</I>&gt;<i> DI(FH) Matthias Husinsky
+</I>&gt;<i> Referat F&amp;E
+</I>&gt;<i> Fachhochschule St.P&#246;lten
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sotf-general mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">https://lists.berlios.de/mailman/listinfo/sotf-general</A>
+</I>
+--Laszlo
+________________________________________________________________________ 
+_
+Laszlo KOVACS                   Head of Department of Distributed  
+Systems
+Computer and Automation Research Institute, Hungarian Academy of  
+Sciences
+
+Address:   MTA SZTAKI, DSD H-1111 Budapest XI. Lagymanyosi u. 11.  
+HUNGARY
+Phone:     +36 (1) 279-6212
+Fax:       +36 (1) 279-6200
+E-mail:    <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">laszlo.kovacs at sztaki.hu</A>
+URL:       <A HREF="http://dsd.sztaki.hu/kovacs">http://dsd.sztaki.hu/kovacs</A>
+________________________________________________________________________ 
+_
+&quot;The trouble with our times is that the future is not what it used to  
+be&quot;
+                                                             (Paul  
+Valery)
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000302.html">[Sotf-general] getting things on...
+</A></li>
+	<LI>Next message: <A HREF="000304.html">[Sotf-general] getting things on...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#303">[ date ]</a>
+              <a href="thread.html#303">[ thread ]</a>
+              <a href="subject.html#303">[ subject ]</a>
+              <a href="author.html#303">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] getting things on...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-December/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20getting%20things%20on...&In-Reply-To=%3C%22H000dbab0252fc9d.1165509228.scalix.fh-stpoelten.ac.at%2A%22%40MHS%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000303.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] getting things on...</H1>
+    <B>Husinsky Matthias</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20getting%20things%20on...&In-Reply-To=%3C%22H000dbab0252fc9d.1165509228.scalix.fh-stpoelten.ac.at%2A%22%40MHS%3E"
+       TITLE="[Sotf-general] getting things on...">Matthias.Husinsky at fh-stpoelten.ac.at
+       </A><BR>
+    <I>Thu Dec  7 17:33:49 CET 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000303.html">[Sotf-general] getting things on...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#302">[ date ]</a>
+              <a href="thread.html#302">[ thread ]</a>
+              <a href="subject.html#302">[ subject ]</a>
+              <a href="author.html#302">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi everybody
+
+we in st.p&#246;lten did quite some work in the last few month to bring the sotf node interface to another level. now comes the point where we would like to contribute our changes into the svn tree. unfortunately we did not recieve a lot of feedback after our last call to test our node at <A HREF="http://sotf.fh-stpoelten.ac.at/node_884/">http://sotf.fh-stpoelten.ac.at/node_884/</A>
+
+anyway, we are confident that the version we developed works stable. it surely still has some issues but most of those were beyond our scope of restructuring the interface. 
+
+but before we can even think about merging our source into the tree we first should get an overview of what is already here and where to put our code.
+
+at the moment there is one trunk and 3 branches to be found in berlios' svn:
+* trunk: this is probably the latest stable audio node release, like the nodes running at <A HREF="http://medienarchiv.fh-stpoelten.ac.at">http://medienarchiv.fh-stpoelten.ac.at</A> or <A HREF="http://radio.sztaki.hu/node/">http://radio.sztaki.hu/node/</A>
+* branch: payable - the payable etension andras developed in the recent months. i guess it is based on the trunk.
+* branch: video_test: the video capable version of sotf developed mainly by martin schmidt. we built our current version upon this one.
+* branch: sztaki_dsd: assumably one of sztaki's developements, but no further details available
+
+is this correct?
+
+looking at these proceedings i would like to ask the question where to go from here. we do have a trunk and two branches. we're obviously going to merge our source into the video_test branch as this was our basis. then, how do we cope with the different versions? 
+a move from the sysadmins to our video branch would be preferrable for the following reasons:
+- the video node can also be used as pure audio node (by switch in the config). 
+- the video node will then have a WAI conform interface that can be styled via pure css
+- audio and video nodes can coexist in a network
+nevertheless it is important that all the nodes on the network update to the new version since only the new nodes (even if they provide audio only) can pass the video metadata on to other nodes. as soon as two video providing nodes are on the network, this is nescessary. we did quite some tests to proove that it is working. 
+
+what do you think is best? we obviously should discuss this in detail as the video extension is a major step in the network's history. it would probably be best if we set up a new test network on different locations to proove it extensively before we do the final move. we'll start with a clean node next week an will provide the source for you to test.
+
+finally, we'll need somebody with the access permission to the svn (and also the experience with merging) to help us since we don't have either of those.
+
+thanks for your attention - i hope we'll get lots of feedback.
+all the best,
+matthias
+
+
+---
+DI(FH) Matthias Husinsky
+Referat F&amp;E
+Fachhochschule St.P&#246;lten
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000303.html">[Sotf-general] getting things on...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#302">[ date ]</a>
+              <a href="thread.html#302">[ thread ]</a>
+              <a href="subject.html#302">[ subject ]</a>
+              <a href="author.html#302">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

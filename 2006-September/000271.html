@@ -1,0 +1,775 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r584 - in node/branches/payable: code/classes	code/configs code/share code/templates www www/static
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r584%20-%20in%20node/branches/payable%3A%20code/classes%0A%09code/configs%20code/share%20code/templates%20www%20www/static&In-Reply-To=%3C200609301616.k8UGGaWE004872%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000269.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r584 - in node/branches/payable: code/classes	code/configs code/share code/templates www www/static</H1>
+    <B>micsik at BerliOS</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r584%20-%20in%20node/branches/payable%3A%20code/classes%0A%09code/configs%20code/share%20code/templates%20www%20www/static&In-Reply-To=%3C200609301616.k8UGGaWE004872%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r584 - in node/branches/payable: code/classes	code/configs code/share code/templates www www/static">micsik at mail.berlios.de
+       </A><BR>
+    <I>Sat Sep 30 18:16:36 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000269.html">[Sotf-general] r583 - node/branches
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#271">[ date ]</a>
+              <a href="thread.html#271">[ thread ]</a>
+              <a href="subject.html#271">[ subject ]</a>
+              <a href="author.html#271">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: micsik
+Date: 2006-09-30 18:16:35 +0200 (Sat, 30 Sep 2006)
+New Revision: 584
+
+Added:
+   node/branches/payable/code/classes/sotf_Group.class.php
+   node/branches/payable/code/templates/adminGroups.htm
+   node/branches/payable/code/templates/adminUsers.htm
+   node/branches/payable/code/templates/editGroup.htm
+   node/branches/payable/www/adminGroups.php
+   node/branches/payable/www/adminUsers.php
+   node/branches/payable/www/editGroup.php
+Modified:
+   node/branches/payable/code/classes/sotf_User.class.php
+   node/branches/payable/code/classes/userdb_node.class.php
+   node/branches/payable/code/configs/eng.conf
+   node/branches/payable/code/share/db.sql
+   node/branches/payable/code/share/update.sql
+   node/branches/payable/code/templates/admin.htm
+   node/branches/payable/code/templates/editPermissions.htm
+   node/branches/payable/www/editNeighbour.php
+   node/branches/payable/www/editPermissions.php
+   node/branches/payable/www/init.inc.php
+   node/branches/payable/www/static/main.css
+Log:
+
+
+Added: node/branches/payable/code/classes/sotf_Group.class.php
+===================================================================
+--- node/branches/payable/code/classes/sotf_Group.class.php	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/code/classes/sotf_Group.class.php	2006-09-30 16:16:35 UTC (rev 584)
+@@ -0,0 +1,62 @@
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*-
++// $Id: sotf_User.class.php 548 2006-04-03 16:21:28Z buddhafly $
++
++/** 
++* This is a class for basic handling of users. Preferences and
++* playlists are handled in separate classes.
++*
++* @author Andras Micsik SZTAKI DSD <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">micsik at sztaki.hu</A>, Martin Schmidt <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">ptmschmidt at fh-stpoelten.ac.at</A>
++*/
++
++class sotf_Group extends sotf_Object {
++
++  function sotf_Group($id='', $data='') {
++          $this-&gt;sotf_Object('sotf_groups', $id, $data);
++  }
++
++  /** returns a list of all such objects: can be slow!!
++   * @method static listAll
++   */
++  function listAll() {
++          global $db;
++          $sql = &quot;SELECT g.*, count(u.id) as count FROM sotf_groups g LEFT JOIN sotf_user_groups u ON g.id=u.group_id GROUP BY g.name, g.id, g.comments ORDER BY g.name&quot;;
++          $res = $db-&gt;getAll($sql);
++          if(DB::isError($res))
++                  raiseError($res);
++          return $res;
++  }
++
++  /** 
++   * @method static getById
++   */
++  function getById($gid) {
++          global $db;
++          $gid = sotf_Utils::magicQuotes($gid);
++          $id = $db-&gt;getOne(&quot;SELECT id FROM sotf_groups WHERE id = '$gid'&quot;);
++          if(DB::isError($id))
++                  raiseError($id);
++          if($id)
++                  return new sotf_Group($id);
++          else
++                  return NULL;
++  }
++
++  /** 
++   * @method static getByName
++   */
++  function getByName($name) {
++          global $db;
++          $name = sotf_Utils::magicQuotes($name);
++          $id = $db-&gt;getOne(&quot;SELECT id FROM sotf_groups WHERE name = '$name'&quot;);
++          if(DB::isError($id))
++                  raiseError($id);
++          if($id)
++                  return new sotf_Group($id);
++          else
++                  return NULL;
++  }
++
++
++}
++
++?&gt;
+\ No newline at end of file
+
+Modified: node/branches/payable/code/classes/sotf_User.class.php
+===================================================================
+--- node/branches/payable/code/classes/sotf_User.class.php	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/code/classes/sotf_User.class.php	2006-09-30 16:16:35 UTC (rev 584)
+@@ -262,9 +262,10 @@
+ 	 *****************************************************************/
+ 	
+ 	/** Count all users. */
+-	function countUsers() {
++	function countUsers($pattern = '') {
+ 	  $storage = &amp;sotf_User::getStorageObject();
+-	  return $storage-&gt;userDbCount();
++    $pattern = sotf_Utils::magicQuotes($pattern);
++	  return $storage-&gt;userDbCount($pattern);
+ 	}
+ 	
+ 	/** Search for users. */
+@@ -280,5 +281,13 @@
+ 	  return $res;
+ 	}
+ 
++	function listUsers($start, $hitsPerPage, $pattern) {
++		global $userdb;
++		$storage = &amp;sotf_User::getStorageObject();
++		$pattern = sotf_Utils::magicQuotes($pattern);
++		$list = $storage-&gt;userDbList($start, $hitsPerPage, $pattern);
++    return $list;
++	}
++
+ }
+ ?&gt;
+\ No newline at end of file
+
+Modified: node/branches/payable/code/classes/userdb_node.class.php
+===================================================================
+--- node/branches/payable/code/classes/userdb_node.class.php	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/code/classes/userdb_node.class.php	2006-09-30 16:16:35 UTC (rev 584)
+@@ -121,8 +121,11 @@
+   }
+   
+   /** Counts all registered users */
+-  function userDbCount() {
+-    return $this-&gt;userdb-&gt;getOne(&quot;SELECT count(*) FROM sotf_users&quot;);  
++  function userDbCount($pattern = '') {
++    if($pattern)
++      return $this-&gt;userdb-&gt;getOne(&quot;SELECT count(*) FROM sotf_users WHERE username ~* '$pattern'&quot;);
++    else
++      return $this-&gt;userdb-&gt;getOne(&quot;SELECT count(*) FROM sotf_users&quot;);  
+   }
+   
+   /** Search for users. */
+@@ -139,6 +142,20 @@
+     }
+     return $res;
+   }
++
++  function userDbList($start, $hitsPerPage, $pattern) {
++    if($pattern)
++     $where = &quot;WHERE username ~* '$pattern'&quot;;
++    $sql = &quot;SELECT * FROM sotf_users $where ORDER BY username&quot;;
++    if(!$start) $start = 0;
++    $res = $this-&gt;userdb-&gt;limitQuery($sql, $start, $hitsPerPage);
++    if(DB::isError($res))
++            raiseError($res);
++    while (DB_OK === $res-&gt;fetchInto($item)) {
++            $list[] = $item;
++    }
++    return $list;
++  }
+   
+ }
+ 
+
+Modified: node/branches/payable/code/configs/eng.conf
+===================================================================
+--- node/branches/payable/code/configs/eng.conf	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/code/configs/eng.conf	2006-09-30 16:16:35 UTC (rev 584)
+@@ -66,12 +66,19 @@
+ Stations = Stations
+ Topics = Topics
+ 
++#Admin tabs &amp; general
++Network = Network &amp; General
++Users = Users
++Groups = Groups
++admin=Node administrator's console
++
+ #permissions
+ perm_admin = Administrator
+ perm_change = Change
+ perm_create = Create
+ perm_delete = Delete
+ perm_authorize = Authorize
++perm_listen = Listen
+ 
+ #this is needed for the XML-RPC server
+ comment_notification_subject=There was a comment on your radio show
+@@ -386,6 +393,8 @@
+ change_permissions = Change permissions
+ target=Target
+ user=User
++listen = Listen
++listen_expl = Listen to the content
+ admin = Owner
+ admin_expl = All the permissions below and more!
+ change = Change
+@@ -998,7 +1007,6 @@
+ save=Save
+ 
+ [admin]
+-admin=Node administrator's console
+ general_data = General data
+ save = Save
+ access_permissions = Administrators and permissions
+@@ -1062,3 +1070,26 @@
+ use_out = Send sync to this neighbour
+ save = Save
+ 
++[adminGroups]
++name=Name
++count=Members
++comments=Comments
++edit=Change
++delete=Delete
++add=Create new group
++
++[adminUsers]
++name=Name
++email=E-mail
++edit=Change
++delete=Delete
++Search= Search
++
++[editGroup]
++edit_group= Create/change group
++name=Name
++comments=Comments
++save=Save
++error_name_missing = The name must be given!
++error_name_in_use = A group with this name already exists
++
+
+Modified: node/branches/payable/code/share/db.sql
+===================================================================
+--- node/branches/payable/code/share/db.sql	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/code/share/db.sql	2006-09-30 16:16:35 UTC (rev 584)
+@@ -650,6 +650,8 @@
+ SELECT nextval('sotf_permissions_id_seq');
+ INSERT INTO &quot;sotf_permissions&quot; (&quot;id&quot;, &quot;permission&quot;) VALUES('6', 'authorize');
+ SELECT nextval('sotf_permissions_id_seq');
++INSERT INTO &quot;sotf_permissions&quot; (&quot;id&quot;, &quot;permission&quot;) VALUES('7', 'listen');
++SELECT nextval('sotf_permissions_id_seq');
+ 
+ -- collection of some useful sql statementsm no neeed to run these!
+ 
+
+Modified: node/branches/payable/code/share/update.sql
+===================================================================
+--- node/branches/payable/code/share/update.sql	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/code/share/update.sql	2006-09-30 16:16:35 UTC (rev 584)
+@@ -245,4 +245,27 @@
+        UPDATE sotf_media_files SET resolution_y_2 = CAST(resolution_y AS float);
+        ALTER TABLE sotf_media_files DROP COLUMN resolution_y;
+ 	   ALTER TABLE sotf_media_files RENAME COLUMN resolution_y_2 TO resolution_y;
+-       COMMIT;
+\ No newline at end of file
++       COMMIT;
++
++-- Changes for restricted and payable content
++-- 2006-09-30
++
++INSERT INTO &quot;sotf_permissions&quot; (&quot;id&quot;, &quot;permission&quot;) VALUES('7', 'listen');
++SELECT nextval('sotf_permissions_id_seq');
++
++CREATE TABLE &quot;sotf_groups&quot; (
++-- user groups for access permissions
++&quot;id&quot; serial PRIMARY KEY,	-- just an id
++&quot;name&quot; varchar(254) NOT NULL,	-- name of group
++&quot;comments&quot; text			-- comments
++);
++CREATE UNIQUE INDEX sotf_group_name ON sotf_groups (&quot;name&quot;);
++
++CREATE TABLE &quot;sotf_user_groups&quot; (
++-- stores editor-specific private settings for programmes
++&quot;id&quot; serial PRIMARY KEY,		-- just an id
++&quot;user_id&quot;  int,				-- id of user
++&quot;group_id&quot; int CONSTRAINT &quot;to_groups&quot; REFERENCES sotf_groups(id) ON DELETE CASCADE	-- id of group
++);
++CREATE UNIQUE INDEX sotf_user_groups_uniq ON sotf_user_groups (&quot;user_id&quot;, &quot;group_id&quot;);
++
+
+Modified: node/branches/payable/code/templates/admin.htm
+===================================================================
+--- node/branches/payable/code/templates/admin.htm	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/code/templates/admin.htm	2006-09-30 16:16:35 UTC (rev 584)
+@@ -1,7 +1,15 @@
+ 
+   &lt;h3&gt;{#admin#}&lt;/h3&gt;
++
+ {if $TTREE_UPD_MESS}{$TTREE_UPD_MESS}&lt;br&gt;&nbsp;&lt;br&gt;{/if}
+ {if hasPerm('node', 'change') }
++
++&lt;ul class=&quot;tabs&quot;&gt;
++&lt;li class=&quot;sel&quot;&gt;{#Network#}&lt;/li&gt;
++&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;adminUsers.php&quot;&gt;{#Users#}&lt;/a&gt;&lt;/li&gt;
++&lt;li class=&quot;last&quot;&gt;&lt;a href=&quot;adminGroups.php&quot;&gt;{#Groups#}&lt;/a&gt;&lt;/li&gt;
++&lt;/ul&gt;
++
+ &lt;a name=&quot;network&quot;&gt;&lt;/a&gt;
+   &lt;table class=&quot;tab&quot;&gt;
+     &lt;tr&gt; 
+
+Added: node/branches/payable/code/templates/adminGroups.htm
+===================================================================
+--- node/branches/payable/code/templates/adminGroups.htm	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/code/templates/adminGroups.htm	2006-09-30 16:16:35 UTC (rev 584)
+@@ -0,0 +1,49 @@
++
++  &lt;h3&gt;{#admin#}&lt;/h3&gt;
++
++&lt;ul class=&quot;tabs&quot;&gt;
++&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;admin.php&quot;&gt;{#Network#}&lt;/a&gt;&lt;/li&gt;
++&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;adminUsers.php&quot;&gt;{#Users#}&lt;/a&gt;&lt;/li&gt;
++&lt;li class=&quot;sel last&quot;&gt;{#Groups#}&lt;/li&gt;
++&lt;/ul&gt;
++
++  &lt;table class=&quot;tab&quot;&gt;
++    &lt;tr&gt; 
++      &lt;td nowrap class=&quot;tab&quot;&gt;{#Groups#}&lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++  &lt;table class=&quot;tabarea&quot;&gt;
++    &lt;tr&gt; 
++      &lt;td class=&quot;tabarea&quot;&gt;
++	&lt;table&gt;
++          &lt;tr class=&quot;listhead&quot;&gt;
++            &lt;th&gt;{#name#}&lt;/th&gt;
++            &lt;th&gt;{#count#}&lt;/th&gt;
++            &lt;th&gt;{#comments#}&lt;/th&gt;
++	    &lt;th&gt;&lt;/th&gt;
++          &lt;/tr&gt;
++          {cycle name=&quot;roles&quot; values=&quot;list1,list2&quot; print=false advance=false}
++          {foreach item=item from=$GROUPS}
++          &lt;tr class=&quot;{cycle name=roles}&quot;&gt;
++            &lt;td&gt;
++            	{$item.name}
++            &lt;/td&gt;
++	    &lt;td&gt;
++	    	{$item.count}
++	    &lt;/td&gt;
++            &lt;td&gt;
++		{$item.comments}
++            &lt;/td&gt;
++            &lt;td nowrap&gt;
++                &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#edit#}&quot; onClick=&quot;popup('editGroup.php?gid={$item.id}','EditGroup',350,400,false)&quot; /&gt;
++                &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#delete#}&quot; onClick=&quot;redir(this.form, 'adminGroups.php?del=1&amp;gid={$item.id}')&quot; /&gt;
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/foreach}
++        &lt;/table&gt;
++        &lt;p&gt;
++          &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#add#}&quot; onClick=&quot;popup('editGroup.php','AddGroup',400,400,false)&quot; /&gt;
++        &lt;/p&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
+
+Added: node/branches/payable/code/templates/adminUsers.htm
+===================================================================
+--- node/branches/payable/code/templates/adminUsers.htm	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/code/templates/adminUsers.htm	2006-09-30 16:16:35 UTC (rev 584)
+@@ -0,0 +1,56 @@
++
++  &lt;h3&gt;{#admin#}&lt;/h3&gt;
++
++&lt;ul class=&quot;tabs&quot;&gt;
++&lt;li class=&quot;&quot;&gt;&lt;a href=&quot;admin.php&quot;&gt;{#Network#}&lt;/a&gt;&lt;/li&gt;
++&lt;li class=&quot;sel&quot;&gt;{#Users#}&lt;/li&gt;
++&lt;li class=&quot;last&quot;&gt;&lt;a href=&quot;adminGroups.php&quot;&gt;{#Groups#}&lt;/a&gt;&lt;/li&gt;
++&lt;/ul&gt;
++&lt;form&gt;
++  &lt;table class=&quot;tab&quot;&gt;
++    &lt;tr&gt; 
++      &lt;td nowrap class=&quot;tab&quot;&gt;{#Users#}&lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++  &lt;table class=&quot;tabarea&quot;&gt;
++    &lt;tr&gt; 
++      &lt;td class=&quot;tabarea&quot;&gt;
++      	&lt;table width=&quot;100%&quot;&gt;
++      		&lt;tr class=&quot;listhead&quot;&gt;
++						&lt;td&gt;
++		          {#Search#}: &lt;input name=&quot;pattern&quot; value=&quot;{$PATTERN}&quot;&gt;
++						&lt;/td&gt;
++						&lt;td&gt;{include file=&quot;splitList.htm&quot;}&lt;/td&gt;
++					&lt;/tr&gt;
++				&lt;/table&gt;
++
++	&lt;table&gt;
++          &lt;tr class=&quot;listhead&quot;&gt;
++            &lt;th&gt;{#name#}&lt;/th&gt;
++            &lt;th&gt;{#email#}&lt;/th&gt;
++            &lt;th&gt;{#groups#}&lt;/th&gt;
++	    &lt;th&gt;&lt;/th&gt;
++          &lt;/tr&gt;
++          {cycle name=&quot;roles&quot; values=&quot;list1,list2&quot; print=false advance=false}
++          {foreach item=item from=$USERS}
++          &lt;tr class=&quot;{cycle name=roles}&quot;&gt;
++            &lt;td&gt;
++            	{$item.username}
++            &lt;/td&gt;
++	    &lt;td&gt;
++	    	{$item.email}
++	    &lt;/td&gt;
++            &lt;td&gt;
++		{$item.groups}
++            &lt;/td&gt;
++            &lt;td nowrap&gt;
++                &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#edit#}&quot; onClick=&quot;popup('editGroup.php?gid={$item.id}','EditGroup',350,400,false)&quot; /&gt;
++                &lt;input class=&quot;action&quot; type=&quot;button&quot; name=&quot;b1&quot; value=&quot;{#delete#}&quot; onClick=&quot;redir(this.form, 'adminGroups.php?del=1&amp;gid={$item.id}')&quot; /&gt;
++            &lt;/td&gt;
++          &lt;/tr&gt;
++          {/foreach}
++        &lt;/table&gt;
++      &lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/table&gt;
++&lt;/form&gt;
+\ No newline at end of file
+
+Added: node/branches/payable/code/templates/editGroup.htm
+===================================================================
+--- node/branches/payable/code/templates/editGroup.htm	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/code/templates/editGroup.htm	2006-09-30 16:16:35 UTC (rev 584)
+@@ -0,0 +1,31 @@
++
++  &lt;h3&gt;{#edit_group#}&lt;/h3&gt;
++  
++&lt;p&gt;&lt;font color=&quot;red&quot;&gt;{$ERROR}&lt;/font&gt;&lt;/p&gt;
++
++&lt;table class=&quot;tabarea&quot;&gt;
++&lt;tr&gt; 
++  &lt;td class=&quot;tabarea&quot;&gt; 
++        &lt;table width=&quot;100%&quot;&gt;
++          &lt;tr&gt;&lt;td&gt;
++              &lt;form method=&quot;post&quot;&gt;
++              	&lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;{$GROUP.id}&quot; /&gt;
++                &lt;table&gt;
++                  &lt;tr&gt;
++                    &lt;td nowrap&gt;{#name#}:&lt;/td&gt;
++                    &lt;td&gt;&lt;input name=&quot;name&quot; value=&quot;{$GROUP.name}&quot; /&gt;&lt;/td&gt;
++                  &lt;/tr&gt;
++                  &lt;tr&gt;
++                    &lt;td nowrap&gt;{#comments#}:&lt;/td&gt;
++                    &lt;td&gt;
++                    &lt;textarea name=&quot;comments&quot;&gt;{$GROUP.comments}&lt;/textarea&gt;
++                    &lt;/td&gt;
++                  &lt;/tr&gt;
++                &lt;/table&gt;
++                &lt;input type=&quot;submit&quot; name=&quot;save&quot; value=&quot;{#save#}&quot;&gt;
++              &lt;/form&gt;
++            &lt;/td&gt;&lt;/tr&gt;
++        &lt;/table&gt;
++  &lt;/td&gt;
++&lt;/tr&gt;
++&lt;/table&gt;
+
+Modified: node/branches/payable/code/templates/editPermissions.htm
+===================================================================
+--- node/branches/payable/code/templates/editPermissions.htm	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/code/templates/editPermissions.htm	2006-09-30 16:16:35 UTC (rev 584)
+@@ -71,6 +71,20 @@
+               &lt;table&gt;
+                 &lt;tr&gt;
+                   &lt;td&gt;
++                    &lt;input name=&quot;perm_listen&quot; type=&quot;checkbox&quot; {if in_array('listen', $PERMISSIONS) }CHECKED{/if} /&gt;
++                  &lt;/td&gt;
++                  &lt;td&gt;
++                    {#listen#} ({#listen_expl#})
++                  &lt;/td&gt;
++                &lt;/tr&gt;
++                &lt;tr height=&quot;10&quot;&gt;
++                  &lt;td&gt;
++                  &lt;/td&gt;
++                  &lt;td&gt;
++                  &lt;/td&gt;
++                &lt;/tr&gt;
++                &lt;tr&gt;
++                  &lt;td&gt;
+                     &lt;input name=&quot;perm_admin&quot; type=&quot;checkbox&quot; onClick=&quot;toggleAdmin()&quot; {if in_array('admin', $PERMISSIONS) }CHECKED{/if} /&gt;
+                   &lt;/td&gt;
+                   &lt;td&gt;
+
+Added: node/branches/payable/www/adminGroups.php
+===================================================================
+--- node/branches/payable/www/adminGroups.php	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/www/adminGroups.php	2006-09-30 16:16:35 UTC (rev 584)
+@@ -0,0 +1,32 @@
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++
++/*  
++ * $Id: admin.php 554 2006-04-12 10:37:20Z buddhafly $
++ * Author: Andr&#225;s Micsik
++ */
++
++require(&quot;init.inc.php&quot;);
++
++$smarty-&gt;assign('PAGETITLE',$page-&gt;getlocalized('AdminPage'));
++
++$page-&gt;forceLogin();
++
++//$page-&gt;errorURL = &quot;admin.php&quot;;
++
++checkPerm('node', 'change');
++
++if(sotf_Utils::getParameter('del')) {
++  $gid = sotf_Utils::getParameter('gid');
++  $group = sotf_Group::getById($gid);
++  $group-&gt;delete();
++  $page-&gt;redirect('adminGroups.php');
++  $page-&gt;logRequest();
++  exit;
++}
++
++$groups = sotf_Group::listAll();
++$smarty-&gt;assign('GROUPS',$groups);
++
++$page-&gt;send();
++
++?&gt;
+
+Added: node/branches/payable/www/adminUsers.php
+===================================================================
+--- node/branches/payable/www/adminUsers.php	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/www/adminUsers.php	2006-09-30 16:16:35 UTC (rev 584)
+@@ -0,0 +1,37 @@
++&lt;?php // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++
++/*  
++ * $Id: admin.php 554 2006-04-12 10:37:20Z buddhafly $
++ * Authors: Andr&#225;s Micsik 
++ */
++
++require(&quot;init.inc.php&quot;);
++$hitsPerPage = 50;
++
++$smarty-&gt;assign('PAGETITLE',$page-&gt;getlocalized('AdminPage'));
++
++$page-&gt;forceLogin();
++
++//$page-&gt;errorURL = &quot;admin.php&quot;;
++
++checkPerm('node', 'change');
++
++if(sotf_Utils::getParameter('del')) {
++  $uid = sotf_Utils::getParameter('uid');
++  $user = sotf_Group::getById($gid);
++  $group-&gt;delete();
++  $page-&gt;redirect('adminGroups.php');
++  $page-&gt;logRequest();
++  exit;
++}
++
++$pattern = sotf_Utils::getParameter('pattern');
++$count = sotf_User::countUsers($pattern);
++$limit = $page-&gt;splitList($count, $scriptUrl);
++$users = sotf_User::listUsers($limit[&quot;from&quot;] , $limit[&quot;maxresults&quot;], $pattern);
++$smarty-&gt;assign('USERS', $users);
++$smarty-&gt;assign('PATTERN', $pattern);
++
++$page-&gt;send();
++
++?&gt;
+
+Added: node/branches/payable/www/editGroup.php
+===================================================================
+--- node/branches/payable/www/editGroup.php	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/www/editGroup.php	2006-09-30 16:16:35 UTC (rev 584)
+@@ -0,0 +1,59 @@
++&lt;?php  // -*- tab-width: 3; indent-tabs-mode: 1; -*- 
++
++/*  
++ * $Id: editNeighbour.php 339 2003-12-03 08:39:25Z andras $
++ * Author: Andr&#225;s Micsik
++ */
++
++require(&quot;init.inc.php&quot;);
++
++$smarty-&gt;assign('PAGETITLE',$page-&gt;getlocalized('AdminPage'));
++
++$page-&gt;forceLogin();
++$page-&gt;popup = true;
++$page-&gt;errorURL = &quot;editGroup.php&quot;;
++
++checkPerm('node', &quot;change&quot;);
++
++$gid = sotf_Utils::getParameter('gid');
++if($gid)
++  $group = sotf_Group::getById($gid);
++else
++  $group = new sotf_Group();
++#	  raiseError(&quot;No such group: $gid&quot;);
++
++// save changes
++if(sotf_Utils::getParameter('save')) {
++  $oldName = $group-&gt;get('name');
++  $group-&gt;setWithTextParam('name', 'name');
++  $group-&gt;setWithTextParam('comments', 'comments');
++  $name = $group-&gt;get('name');
++  if(!$name)
++    $error = &quot;error_name_missing&quot;;
++  else {
++    $ex = sotf_Group::getByName($name);
++    if($ex and (!$gid or ($gid and $name != $oldName)))
++      $error = 'error_name_in_use';
++  }
++  if(!$error) {
++    if($gid) {
++      // updating
++      $group-&gt;update();
++    } else {
++      // creating      
++      $group-&gt;create();  
++    }
++    $page-&gt;redirect(&quot;closeAndRefresh.php&quot;);
++    exit;
++  } else {
++    $smarty-&gt;assign(&quot;ERROR&quot;, $page-&gt;getlocalized($error));
++  }
++}
++
++// generate output
++
++$smarty-&gt;assign('GROUP', $group-&gt;getAll());
++
++$page-&gt;sendPopup();
++
++?&gt;
+\ No newline at end of file
+
+Modified: node/branches/payable/www/editNeighbour.php
+===================================================================
+--- node/branches/payable/www/editNeighbour.php	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/www/editNeighbour.php	2006-09-30 16:16:35 UTC (rev 584)
+@@ -39,4 +39,6 @@
+   $smarty-&gt;assign('NODE',$node-&gt;getAll());
+ $smarty-&gt;assign('NEI', $nei-&gt;getAll());
+ 
+-$page-&gt;sendPopup();
+\ No newline at end of file
++$page-&gt;sendPopup();
++
++?&gt;
+\ No newline at end of file
+
+Modified: node/branches/payable/www/editPermissions.php
+===================================================================
+--- node/branches/payable/www/editPermissions.php	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/www/editPermissions.php	2006-09-30 16:16:35 UTC (rev 584)
+@@ -56,6 +56,7 @@
+ 	 } else {
+ 		if(in_array('admin', $userPerms))
+ 		  $permissions-&gt;delPermission($objectid, $userid, 'admin');
++		$perms['listen'] = sotf_Utils::getParameter('perm_listen');
+ 		$perms['create'] = sotf_Utils::getParameter('perm_create');
+ 		$perms['change'] = sotf_Utils::getParameter('perm_change');
+ 		//$perms['add_prog'] = sotf_Utils::getParameter('perm_add_prog');
+
+Modified: node/branches/payable/www/init.inc.php
+===================================================================
+--- node/branches/payable/www/init.inc.php	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/www/init.inc.php	2006-09-30 16:16:35 UTC (rev 584)
+@@ -113,6 +113,7 @@
+ require($config['classdir'] . '/sotf_Page.class.php');
+ require($config['classdir'] . '/sotf_Object.class.php');
+ require($config['classdir'] . '/sotf_Vars.class.php');
++require($config['classdir'] . '/sotf_Group.class.php');
+ require($config['classdir'] . '/sotf_Permission.class.php');
+ require($config['classdir'] . '/sotf_Repository.class.php');
+ require($config['classdir'] . '/sotf_Vocabularies.class.php');
+
+Modified: node/branches/payable/www/static/main.css
+===================================================================
+--- node/branches/payable/www/static/main.css	2006-09-30 10:38:34 UTC (rev 583)
++++ node/branches/payable/www/static/main.css	2006-09-30 16:16:35 UTC (rev 584)
+@@ -127,3 +127,33 @@
+  FONT-WEIGHT: bold; 
+ }
+ 
++ul.tabs {
++  margin: 0;
++  padding: 0;
++  font-size: 100%;
++  margin-bottom: 10px;
++}
++ul.tabs li a {
++  color: #fff;
++}
++ ul.tabs li a:hover {
++  text-decoration: none;
++  color: #eee;
++}
++ul.tabs li {
++  display: inline;
++  color: #fff;
++  background: #c3c3c3;
++  width: 18em;
++  font-size: 100%;
++  font-weight: bold;
++  margin: 1em 0 0 0;
++  padding: 0 0.5em;
++  border-right: 2px solid #fff;
++}
++ul.tabs li.sel {
++  background: #999;
++}
++ul.tabs li.last {
++  border: none;
++}
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000269.html">[Sotf-general] r583 - node/branches
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#271">[ date ]</a>
+              <a href="thread.html#271">[ thread ]</a>
+              <a href="subject.html#271">[ subject ]</a>
+              <a href="author.html#271">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

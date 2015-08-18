@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r593 - node/branches/payable/www
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r593%20-%20node/branches/payable/www&In-Reply-To=%3C200611091455.kA9Et2NX016606%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000287.html">
+   <LINK REL="Next"  HREF="000289.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r593 - node/branches/payable/www</H1>
+    <B>micsik at BerliOS</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r593%20-%20node/branches/payable/www&In-Reply-To=%3C200611091455.kA9Et2NX016606%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r593 - node/branches/payable/www">micsik at mail.berlios.de
+       </A><BR>
+    <I>Thu Nov  9 15:55:02 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000287.html">[Sotf-general] testing the new node
+</A></li>
+        <LI>Next message: <A HREF="000289.html">[Sotf-general] r594 - node/branches/payable/code/classes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#288">[ date ]</a>
+              <a href="thread.html#288">[ thread ]</a>
+              <a href="subject.html#288">[ subject ]</a>
+              <a href="author.html#288">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: micsik
+Date: 2006-11-09 15:55:01 +0100 (Thu, 09 Nov 2006)
+New Revision: 593
+
+Modified:
+   node/branches/payable/www/adminProgStats.php
+   node/branches/payable/www/adminTopProgs.php
+   node/branches/payable/www/adminTopUsers.php
+   node/branches/payable/www/adminUserStats.php
+Log:
+
+
+Modified: node/branches/payable/www/adminProgStats.php
+===================================================================
+--- node/branches/payable/www/adminProgStats.php	2006-11-06 09:55:16 UTC (rev 592)
++++ node/branches/payable/www/adminProgStats.php	2006-11-09 14:55:01 UTC (rev 593)
+@@ -17,6 +17,9 @@
+ 
+ $progId = sotf_Utils::getParameter('id');
+ $prog = &amp;$repository-&gt;getObject($progId);
++if(!$prog)
++  raiseError(&quot;no_such_object&quot;, $id);
++
+ $smarty-&gt;assign(&quot;PRG&quot;, $prog-&gt;getAll());
+ 
+ $actionsToCount = &quot;'listens','downloads'&quot;;
+
+Modified: node/branches/payable/www/adminTopProgs.php
+===================================================================
+--- node/branches/payable/www/adminTopProgs.php	2006-11-06 09:55:16 UTC (rev 592)
++++ node/branches/payable/www/adminTopProgs.php	2006-11-09 14:55:01 UTC (rev 593)
+@@ -15,13 +15,14 @@
+ 
+ checkPerm('node', 'change');
+ 
+-$count = sotf_Programme::countAll();
++$actionsToCount = &quot;'listens','downloads'&quot;;
+ 
++$sql = &quot;SELECT p.id, p.title, s.id AS station_id, s.name AS station_name, count(distinct h.user_id) as count FROM sotf_programmes p, sotf_stations s, sotf_user_history h WHERE p.station_id=s.id AND p.id=h.object_id AND h.action IN ($actionsToCount) GROUP BY p.id, p.title, s.id, s.name ORDER BY count DESC&quot;;
++
++$count = $db-&gt;getOne(&quot;SELECT COUNT(*) FROM ($sql) s&quot;);
++
+ $limit = $page-&gt;splitList($count, $scriptUrl);
+ 
+-$actionsToCount = &quot;'listens','downloads'&quot;;
+-
+-$sql = &quot;SELECT p.id, p.title, s.id AS station_id, s.name AS station_name, count(distinct h.user_id) as count FROM sotf_programmes p, sotf_stations s, sotf_user_history h WHERE p.station_id=s.id AND p.id=h.object_id AND h.action IN ($actionsToCount) GROUP BY p.id, p.title, s.id, s.name ORDER BY count DESC&quot;;
+ $res =	$db-&gt;limitQuery($sql, $limit[&quot;from&quot;] , $limit[&quot;maxresults&quot;]);
+ if(DB::isError($res))
+   raiseError($res);
+
+Modified: node/branches/payable/www/adminTopUsers.php
+===================================================================
+--- node/branches/payable/www/adminTopUsers.php	2006-11-06 09:55:16 UTC (rev 592)
++++ node/branches/payable/www/adminTopUsers.php	2006-11-09 14:55:01 UTC (rev 593)
+@@ -15,13 +15,13 @@
+ 
+ checkPerm('node', 'change');
+ 
+-$count = sotf_Programme::countAll();
++$actionsToCount = &quot;'listens','downloads'&quot;;
+ 
++$sql = &quot;SELECT u.id, u.username, d.contact_person, count(distinct h.object_id) as count FROM sotf_users u LEFT JOIN sotf_user_data d ON d.user_id=u.id, sotf_user_history h WHERE u.id=h.user_id AND h.action IN ($actionsToCount) GROUP BY u.id, u.username, d.contact_person ORDER BY count DESC&quot;;
++
++$count = $db-&gt;getOne(&quot;SELECT COUNT(*) FROM ($sql) s&quot;);
+ $limit = $page-&gt;splitList($count, $scriptUrl);
+ 
+-$actionsToCount = &quot;'listens','downloads'&quot;;
+-
+-$sql = &quot;SELECT u.id, u.username, d.contact_person, count(distinct h.object_id) as count FROM sotf_users u LEFT JOIN sotf_user_data d ON d.user_id=u.id, sotf_user_history h WHERE u.id=h.user_id AND h.action IN ($actionsToCount) GROUP BY u.id, u.username, d.contact_person ORDER BY count DESC&quot;;
+ $res =	$db-&gt;limitQuery($sql, $limit[&quot;from&quot;] , $limit[&quot;maxresults&quot;]);
+ if(DB::isError($res))
+   raiseError($res);
+
+Modified: node/branches/payable/www/adminUserStats.php
+===================================================================
+--- node/branches/payable/www/adminUserStats.php	2006-11-06 09:55:16 UTC (rev 592)
++++ node/branches/payable/www/adminUserStats.php	2006-11-09 14:55:01 UTC (rev 593)
+@@ -17,12 +17,15 @@
+ 
+ $userId = sotf_Utils::getParameter('id');
+ $user = new sotf_User($userId);
++if(!$user)
++  raiseError(&quot;no_such_object&quot;, $userId);
++
+ $smarty-&gt;assign(&quot;USER&quot;, $user);
+ $smarty-&gt;assign(&quot;UDATA&quot;, sotf_UserData::getSmartyData($userId));
+ 
+ $actionsToCount = &quot;'listens','downloads'&quot;;
+ 
+-$sql = &quot;SELECT DISTINCT p.id, p.title, s.id AS station_id, s.name AS station_name FROM sotf_programmes p, sotf_stations s, sotf_user_history h WHERE p.station_id=s.id AND p.id=h.object_id AND h.action IN ($actionsToCount) ORDER BY p.title&quot;;
++$sql = &quot;SELECT DISTINCT p.id, p.title, s.id AS station_id, s.name AS station_name FROM sotf_programmes p, sotf_stations s, sotf_user_history h WHERE p.station_id=s.id AND p.id=h.object_id AND h.user_id='$userId' AND h.action IN ($actionsToCount) ORDER BY p.title&quot;;
+ $res = $db-&gt;query($sql);
+ if(DB::isError($res))
+   raiseError($res);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000287.html">[Sotf-general] testing the new node
+</A></li>
+	<LI>Next message: <A HREF="000289.html">[Sotf-general] r594 - node/branches/payable/code/classes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#288">[ date ]</a>
+              <a href="thread.html#288">[ thread ]</a>
+              <a href="subject.html#288">[ subject ]</a>
+              <a href="author.html#288">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

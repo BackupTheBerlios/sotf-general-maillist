@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] r571 - node/branches/video_test/www
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r571%20-%20node/branches/video_test/www&In-Reply-To=%3C200605151010.k4FAAKeR029450%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000210.html">
+   <LINK REL="Next"  HREF="000212.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] r571 - node/branches/video_test/www</H1>
+    <B>buddhafly at berlios.de</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20r571%20-%20node/branches/video_test/www&In-Reply-To=%3C200605151010.k4FAAKeR029450%40sheep.berlios.de%3E"
+       TITLE="[Sotf-general] r571 - node/branches/video_test/www">buddhafly at berlios.de
+       </A><BR>
+    <I>Mon May 15 12:10:20 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000210.html">[Sotf-general] the streamonthefly wikipedia entry...
+</A></li>
+        <LI>Next message: <A HREF="000212.html">[Sotf-general] r572 - node/trunk/www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#211">[ date ]</a>
+              <a href="thread.html#211">[ thread ]</a>
+              <a href="subject.html#211">[ subject ]</a>
+              <a href="author.html#211">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: buddhafly
+Date: 2006-05-15 12:10:19 +0200 (Mon, 15 May 2006)
+New Revision: 571
+
+Modified:
+   node/branches/video_test/www/convert.php
+   node/branches/video_test/www/editMeta.php
+Log:
+bugs fixed:
+while converting audio on video node
+while writing id3 tags
+
+
+Modified: node/branches/video_test/www/convert.php
+===================================================================
+--- node/branches/video_test/www/convert.php	2006-05-12 13:14:01 UTC (rev 570)
++++ node/branches/video_test/www/convert.php	2006-05-15 10:10:19 UTC (rev 571)
+@@ -237,30 +237,51 @@
+ 
+ if($all) {
+   $targets = $checker-&gt;convertAll($obj-&gt;id);
+-
+-  foreach($targets as $target) {
+-  	 if(!$checker-&gt;fileOK($target)) {
+-	 	$file_errors++;
+-		continue;
+-	 }
+-	 
++  if($videoconv){
++	  foreach($targets as $target) {
++		 if(!$checker-&gt;fileOK($target)) {
++			$file_errors++;
++			continue;
++		 }
++		 
++		 if($jingle) {
++			$obj-&gt;setJingle($target);
++		 } else{
++			$obj-&gt;setAudio($target);
++		 }
++	   }
++   }
++   else{
++   foreach($targets as $target) {
+ 	 if($jingle) {
+ 		$obj-&gt;setJingle($target);
+-	 } else{
++	 } else {
+ 		$obj-&gt;setAudio($target);
+ 	 }
+   }
+ 
++   }
++
+ } else {
+   $target = $checker-&gt;convert($obj-&gt;id, $index);
+-  if($checker-&gt;fileOK($target)){
+-	  if($jingle) {
+-		 $obj-&gt;setJingle($target);
+-	  } else{
+-		 $obj-&gt;setAudio($target);
+-	  }
+-   }
+-   else $file_errors++;
++  if($videoconv){
++	  if($checker-&gt;fileOK($target)){
++		  if($jingle) {
++			 $obj-&gt;setJingle($target);
++		  } else{
++			 $obj-&gt;setAudio($target);
++		  }
++	   }
++	   else $file_errors++;
++	}
++	else{
++		if($jingle) {
++	 $obj-&gt;setJingle($target);
++  } else {
++	 $obj-&gt;setAudio($target);
++  }
++	
++	}  
+ }
+ 
+ 
+
+Modified: node/branches/video_test/www/editMeta.php
+===================================================================
+--- node/branches/video_test/www/editMeta.php	2006-05-12 13:14:01 UTC (rev 570)
++++ node/branches/video_test/www/editMeta.php	2006-05-15 10:10:19 UTC (rev 571)
+@@ -165,7 +165,7 @@
+ 
+ 			$TaggingFormat = 'UTF-8';
+ 			
+-			require($config['getid3dir'].'/write.php');
++			require_once($config['getid3dir'].'/write.php');
+ 			$tagwriter = new getid3_writetags;
+ 			$tagwriter-&gt;filename       = $file;
+ 			$tagwriter-&gt;tagformats     = array('id3v1', 'id3v2.3', 'ape');
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000210.html">[Sotf-general] the streamonthefly wikipedia entry...
+</A></li>
+	<LI>Next message: <A HREF="000212.html">[Sotf-general] r572 - node/trunk/www
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#211">[ date ]</a>
+              <a href="thread.html#211">[ thread ]</a>
+              <a href="subject.html#211">[ subject ]</a>
+              <a href="author.html#211">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

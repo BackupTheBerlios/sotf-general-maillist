@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] bug report
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20bug%20report&In-Reply-To=%3C4463530B.6030203%40orange.or.at%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000195.html">
+   <LINK REL="Next"  HREF="000196.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] bug report</H1>
+    <B>herbert gnauer</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20bug%20report&In-Reply-To=%3C4463530B.6030203%40orange.or.at%3E"
+       TITLE="[Sotf-general] bug report">hg at orange.or.at
+       </A><BR>
+    <I>Thu May 11 17:06:51 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000195.html">[Sotf-general] r567 - in node/branches/video_test: code/templates www
+</A></li>
+        <LI>Next message: <A HREF="000196.html">[Sotf-general] the waiting is over - happy sotf video node testing!!!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#198">[ date ]</a>
+              <a href="thread.html#198">[ thread ]</a>
+              <a href="subject.html#198">[ subject ]</a>
+              <a href="author.html#198">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi everyone,
+
+sorry for delay, i was quite busy. here is the bug report from o94 
+update installation. only 2.a) 'problems with handling of audiofiles' is 
+a really serious prob and should be fixed as soon as possible.
+
+best
+herbert
+
+
+
+===========================
+1. PROBLEMS ON INSTALLATION
+===========================
+
+a) damaged file in SVN
+----------------------
+www/static/close.png was damaged after check out - 1 byte missing
+
+b) unnecessary new lines in files from SVN
+------------------------------------------
+some files have got lots of unnecessary new lines. this prohibites use 
+of diff and makes it very difficult to find out, what's been changed at 
+all. because we're using several files in modified versions this is 
+essential to us, we have to find out the differences everytime updating 
+the node.
+
+==================
+2. PROBLEMS ON USE
+==================
+
+a) urgent problems with handling of audiofiles
+----------------------------------------------
+since the update encoding of other audio formats mostly doesn't work. we 
+have troubles on converting other formats with lots of uploaded audio 
+files (mp3 as well as ogg encoded by different soundeditors/encoders) - 
+for example see <A HREF="http://sendungsarchiv.o94.at/get.php?id=094pr507">http://sendungsarchiv.o94.at/get.php?id=094pr507</A>
+
+it's no more only the well known problem with mp3-files encoded by 
+audacity/lame under linux (not being recognized as audio-files or 
+producing error 'length parameter must be greater 0' in the editor's 
+console. annoyingly same combination audacity/lame run under windows 
+makes no troubles at all). after running toolame on affected files 
+manually the problem is fixed. the reason for that phaenomen is not 
+exactly known, but it is definitely related to getid3.
+
+i remember some work has to be done before a newer version of getid3 may 
+be implemented, does anyone know what's exactly to do in that matter? is 
+there any hope for an upcoming solution?
+
+b) reload of origin browser window (editmeta &amp; co)
+--------------------------------------------------
+on adding topics to a broadcast or editors to a serie (means any 
+operation which opens a second browser window for the menue) the reload 
+of the origin window sometimes doesn't work. so people don't see the 
+changes immediately and may get confused. on closing the menue-window 
+the origin window is reloaded properly everytime.
+
+c) editmeta - save all the data above
+-------------------------------------
+on adding a new broadcast it should be impossible to leave the main 
+section without saving. at this point users can loose access to an 
+uploaded broadcast. if a new broadcast is not saved it may not appear in 
+editor's console anymore, sometimes we faced this problem.
+
+d) remove from series
+---------------------
+remove from series (editmeta) is not a correct description of this 
+button's effect. broadcast is not only removed from serie but also from 
+any further access by editor (if not station admin at least). either 
+this should be named 'delete broadcast' or the audiofile should be 
+accessible in editor's menue again.
+
+e) status un/published
+----------------------
+on changing the status un/published (editor's console) the colour is not 
+changed anymore until manualy reload of the page (or next visit). this 
+seems to be rather a minor prob.
+
+f) search
+---------
+search for ratings still this does not work (same situation as before). 
+for better understandability we would also suggest to change the order 
+of fields as to see at <A HREF="http://sendungsarchiv.o94.at/advsearch.php">http://sendungsarchiv.o94.at/advsearch.php</A>
+
+
+==============
+3. SUGGESTIONS
+==============
+
+a) chooseable languages
+-----------------------
+list of chooseable languages should be completed. there are are some 
+language missing in the dropdown of metadata menue, for instance asiatic 
+and arabic ones.
+
+b) help
+-------
+the help (linked in the public menubar) is a help for admins. regular 
+visitors may be frightened. the version found at 
+<A HREF="http://medienarchiv.fh-stpoelten.ac.at/help/index.eng.html#index">http://medienarchiv.fh-stpoelten.ac.at/help/index.eng.html#index</A> shows 
+quite specialy elaborated pictures inbound... ;)
+
+
+
+-- 
+
+
+HERBERT GNAUER
+Systemadministration, IT
+
+ORANGE 94.0
+Verein Freies Radio Wien
+A-1200 Wien Klosterneuburger Stra&#223;e 1
+
+TEL +43 - 1 319 09 99 - 12
+FAX +43 - 1 319 09 99 - 14
+E-MAIL <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">hg at o94.at</A>
+WEB o94.at
+UKW 94.0
+UPC 92.7 Telekabel
+WAP wap.o94.at
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000195.html">[Sotf-general] r567 - in node/branches/video_test: code/templates www
+</A></li>
+	<LI>Next message: <A HREF="000196.html">[Sotf-general] the waiting is over - happy sotf video node testing!!!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#198">[ date ]</a>
+              <a href="thread.html#198">[ thread ]</a>
+              <a href="subject.html#198">[ subject ]</a>
+              <a href="author.html#198">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>

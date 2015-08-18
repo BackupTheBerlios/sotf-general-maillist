@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sotf-general] Release Note: New Topic Tree
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sotf-general/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20Release%20Note%3A%20New%20Topic%20Tree&In-Reply-To=%3C443A5030.1090503%40dsd.sztaki.hu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000127.html">
+   <LINK REL="Next"  HREF="000149.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sotf-general] Release Note: New Topic Tree</H1>
+    <B>Micsik Andr&#225;s</B> 
+    <A HREF="mailto:sotf-general%40lists.berlios.de?Subject=Re%3A%20%5BSotf-general%5D%20Release%20Note%3A%20New%20Topic%20Tree&In-Reply-To=%3C443A5030.1090503%40dsd.sztaki.hu%3E"
+       TITLE="[Sotf-general] Release Note: New Topic Tree">micsik at dsd.sztaki.hu
+       </A><BR>
+    <I>Mon Apr 10 14:31:44 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000127.html">[Sotf-general] Release Note: New Topic Tree
+</A></li>
+        <LI>Next message: <A HREF="000149.html">[Sotf-general] Release Note: New Topic Tree
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#142">[ date ]</a>
+              <a href="thread.html#142">[ thread ]</a>
+              <a href="subject.html#142">[ subject ]</a>
+              <a href="author.html#142">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I had a more careful thought on this, and I DO NOT RECOMMEND to change topic 
+trees as it is now. Sorry for saying it now, but there are some dangers in it:
+
+- sotf_node_objects table is untouched by the update process: each 
+synchronised object has an entry in this table. As Martin directly 
+adds/deletes objects using SQL commands, the node_objects table should be 
+manually edited as well: additions and deletions should be done. Or, by 
+using the save() method of sotf_NodeObject class this can be done 
+automatically (see sotf_Vocabularies::importTopicTree)
+
+- The change in the topic tree makes a change &quot;without history&quot;: the old 
+tree disappears, it is replaced by the new one. What happens when an 
+existing node installed some years before (e.g. the Belgian RadioSwap) 
+accidentally joins the network? big chaos!
+
+My suggestion is:
+
+1.a. either insert the modified tree as a completely new tree and make it 
+the default,
+1.b. or insert it with change_stamp=1 and create the proper sotf_deletion 
+objects for deleted topics
+
+In both cases if some node with the old tree joins the network, the old tree 
+will not overwrite the new one.
+
+2. Use/extend the sotf_Vocabularies class to import the updated tree 
+(instead of raw SQL), because it takes care of some things under the hood...
+(or create the necessary changes for the sotf_node_objects table, which will 
+be hard)
+
+Or there might be some simpler solution, which I did not notice...
+
+Andras
+
+
+
+
+
+Martin Schmidt wrote:
+&gt;<i> Hello everybody,
+</I>&gt;<i> 
+</I>&gt;<i> i have just committed the simplified topic tree i worked out in Jan/Feb 
+</I>&gt;<i> to SVN.
+</I>&gt;<i> 
+</I>&gt;<i> In the admin section, there is now a link &quot;Update topic tree&quot;. A click 
+</I>&gt;<i> on it runs the script in admin.php, which
+</I>&gt;<i> - replaces the old topic tree
+</I>&gt;<i> - maps all programmes' topic id's to the accordant new ones
+</I>&gt;<i> - checks for possible duplicate topic entries (e.g. a programme with the 
+</I>&gt;<i> old topics &quot;handball&quot; and &quot;football&quot; cannot have the new topic &quot;sport&quot; 
+</I>&gt;<i> twice, as sotf_prog_topics does only allow unique entries).
+</I>&gt;<i> 
+</I>&gt;<i> The topictree_sotf_*.txt-files in code/share have also been updated in 
+</I>&gt;<i> all four languages (thx andras!), so newly installed nodes will have 
+</I>&gt;<i> automatically the new topic tree.
+</I>&gt;<i> 
+</I>&gt;<i> It would be best if the running nodes switch to the new tree 
+</I>&gt;<i> approximately simultaneous. So there will be no conflicting topic id's 
+</I>&gt;<i> when syncs are done. But maybe, there is also another solution for it i 
+</I>&gt;<i> might not have thought about...?
+</I>&gt;<i> 
+</I>&gt;<i> Greetings,
+</I>&gt;<i> Martin
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sotf-general mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sotf-general">Sotf-general at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/sotf-general">http://lists.berlios.de/mailman/listinfo/sotf-general</A>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000127.html">[Sotf-general] Release Note: New Topic Tree
+</A></li>
+	<LI>Next message: <A HREF="000149.html">[Sotf-general] Release Note: New Topic Tree
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#142">[ date ]</a>
+              <a href="thread.html#142">[ thread ]</a>
+              <a href="subject.html#142">[ subject ]</a>
+              <a href="author.html#142">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sotf-general">More information about the Sotf-general
+mailing list</a><br>
+</body></html>
